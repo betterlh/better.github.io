@@ -96,32 +96,24 @@
 
 
 
-  <meta name="description" content="变量预定义变量预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）•    $GLOBALS — PHP中可所有的全局变量•    $_SERVER — 服务器和执行环境信息•    $_GET — 获取所有表单以get方式提交的数据•    $_POST — post提交的数据都会保存在此•    $_FILES — 用户上传的文件信息•    $_REQUES">
+  <meta name="description" content="流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写) 控制分类：1.顺序2.分支 if{}else{}  if{}elseif{}lese{} switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行1.条件一定时一个具体的值2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP基础01-变量与常量">
-<meta property="og:url" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/index.html">
+<meta property="og:title" content="PHP基础04-流程控制">
+<meta property="og:url" content="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="变量预定义变量预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）•    $GLOBALS — PHP中可所有的全局变量•    $_SERVER — 服务器和执行环境信息•    $_GET — 获取所有表单以get方式提交的数据•    $_POST — post提交的数据都会保存在此•    $_FILES — 用户上传的文件信息•    $_REQUES">
+<meta property="og:description" content="流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写) 控制分类：1.顺序2.分支 if{}else{}  if{}elseif{}lese{} switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行1.条件一定时一个具体的值2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/值传递方式.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/引用传递.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/常量定义.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/特殊常量定义.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/常量访问.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/系统常量.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/魔术常量.png">
-<meta property="og:updated_time" content="2019-01-26T12:19:46.497Z">
+<meta property="og:updated_time" content="2019-01-28T06:45:15.343Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP基础01-变量与常量">
-<meta name="twitter:description" content="变量预定义变量预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）•    $GLOBALS — PHP中可所有的全局变量•    $_SERVER — 服务器和执行环境信息•    $_GET — 获取所有表单以get方式提交的数据•    $_POST — post提交的数据都会保存在此•    $_FILES — 用户上传的文件信息•    $_REQUES">
-<meta name="twitter:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/值传递方式.png">
+<meta name="twitter:title" content="PHP基础04-流程控制">
+<meta name="twitter:description" content="流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写) 控制分类：1.顺序2.分支 if{}else{}  if{}elseif{}lese{} switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行1.条件一定时一个具体的值2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch">
 
 
 
 
 
 
-  <link rel="canonical" href="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/">
+  <link rel="canonical" href="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/">
 
 
 
@@ -131,7 +123,7 @@
   };
 </script>
 
-  <title>PHP基础01-变量与常量 | Hexo</title>
+  <title>PHP基础04-流程控制 | Hexo</title>
   
 
 
@@ -364,7 +356,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lh">
@@ -381,7 +373,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PHP基础01-变量与常量
+          <h1 class="post-title" itemprop="name headline">PHP基础04-流程控制
 
               
             
@@ -407,12 +399,24 @@
                 
               
 
-              <time title="Post created: 2019-01-26 15:42:18 / Updated at: 20:19:46" itemprop="dateCreated datePublished" datetime="2019-01-26T15:42:18+08:00">2019-01-26</time>
+              <time title="Post created: 2019-01-27 20:05:03" itemprop="dateCreated datePublished" datetime="2019-01-27T20:05:03+08:00">2019-01-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-01-28 14:45:15" itemprop="dateModified" datetime="2019-01-28T14:45:15+08:00">2019-01-28</time>
               
             
           </span>
@@ -463,26 +467,19 @@
       
 
       
-        <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h2><p>预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）<br>•    $GLOBALS — PHP中可所有的全局变量<br>•    $_SERVER — 服务器和执行环境信息<br>•    $_GET — 获取所有表单以get方式提交的数据<br>•    $_POST — post提交的数据都会保存在此<br>•    $_FILES — 用户上传的文件信息<br>•    $_REQUEST — get和post提交的都会保存<br>•    $_SESSION — session绘画数据<br>•    $_ENV — 环境信息<br>•    $_COOKIE —cookie会话数据</p>
-<h2 id="可变变量："><a href="#可变变量：" class="headerlink" title="可变变量："></a>可变变量：</h2><p>如果一个变量保存的值刚好是另外一个变量的名字，那么可以直接通过访问一个变量得到另外一个变量的值 在变量前面再多一个$符号<br>例如：$a=’b’ $b=’b’ 则 $$a=’b’</p>
-<h1 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h1><p>在内存中，通常有以下几个分区：<br>栈区：程序可以操作的内存部分（不存数据，运行程序代码），少但是快<br>代码段：存储程序的内存部分（不执行）<br>数据段：存储普通数据（全局区和静态区）<br>堆区：存储复杂数据，大但是效率低</p>
-<h1 id="变量传值-值传递-："><a href="#变量传值-值传递-：" class="headerlink" title="变量传值(值传递)："></a>变量传值(值传递)：</h1><p>将一个变量赋值给另外一个变量：变量传值<br><img src="/2019/01/26/PHP基础01-变量与常量/值传递方式.png" alt=""></p>
-<h1 id="引用传递"><a href="#引用传递" class="headerlink" title="引用传递"></a>引用传递</h1><p><img src="/2019/01/26/PHP基础01-变量与常量/引用传递.png" alt=""></p>
-<h1 id="常量："><a href="#常量：" class="headerlink" title="常量："></a>常量：</h1><p>常量与变量一样：用来保存数据<br>常量基本概念：<br>  常量：const/constant，是一种在程序运行当中，不可改变的量（数据）<br>常量一旦定义，通常数据不可改变（用户级别）<br>在PHP中常量有两种定义方式（5.3之后才有两种）</p>
-<ol>
-<li>使用定义常量的函数：define（‘常量名‘，常量值，【】）</li>
-<li>5.3之后才有的：const常量名=值<br><img src="/2019/01/26/PHP基础01-变量与常量/常量定义.png" alt=""><h2 id="常量命名规则"><a href="#常量命名规则" class="headerlink" title="常量命名规则"></a>常量命名规则</h2>1.常量不使用$符号，一旦使用系统就会认为是变量<br>2.常量的名字组成由字母，数字。下划线组成，不能以数字开头<br>3.常量的名字通常是以大写字母为主，<br>4.常量命名的规则比变量要松散，可以使用一些特殊字符，该方式只能使用define定义<br><img src="/2019/01/26/PHP基础01-变量与常量/特殊常量定义.png" alt=""><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2>define和const定义的常量是有区别的：在于访问权限区别<br>定义常量通常不区分大小写，但是可以区分，可以参考define函数的第三个函数<br>bool define( string $name, mixed $value[, bool $case_insensitive = false] )<br>name：常量名。<br>value：常量的值；在 PHP 5 中，value 必须是标量( integer、 float、string、boolean、NULL）在 PHP 7 中还允许是个 array 的值。<br>case_insensitive<br>如果设置为 TRUE，该常量则大小写不敏感。默认是大小写敏感的。比如， CONSTANT 和 Constant 代表了不同的值。</li>
+        <p>流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写)</p>
+<h1 id="控制分类："><a href="#控制分类：" class="headerlink" title="控制分类："></a>控制分类：</h1><h2 id="1-顺序"><a href="#1-顺序" class="headerlink" title="1.顺序"></a>1.顺序</h2><h2 id="2-分支"><a href="#2-分支" class="headerlink" title="2.分支"></a>2.分支</h2><ul>
+<li>if{}else{}  if{}elseif{}lese{}</li>
+<li>switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行<br>1.条件一定时一个具体的值<br>2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch 并希望 continue 到外层循环中的下一轮循环，用 continue 2。<br>3.case 表达式可以是任何求值为简单类型的表达式，即整型或浮点数以及字符串。不能用数组或对象，除非它们被解除引用成为简单类型。</li>
+</ul>
+<h2 id="3-循环"><a href="#3-循环" class="headerlink" title="3.循环"></a>3.循环</h2><ol>
+<li>for循环 通过条件、起始和终止判断执行</li>
+<li>while循环  通过判断条件终止</li>
+<li>do-while 跟while差不多</li>
+<li>foreach：针对数组</li>
 </ol>
-<h2 id="常量使用形式：必须赋值"><a href="#常量使用形式：必须赋值" class="headerlink" title="常量使用形式：必须赋值"></a>常量使用形式：必须赋值</h2><p>有的时候还需要使用另外一种形式来访问（针对的是特殊名字的常量）<br><img src="/2019/01/26/PHP基础01-变量与常量/常量访问.png" alt=""></p>
-<h2 id="系统常量"><a href="#系统常量" class="headerlink" title="系统常量"></a>系统常量</h2><p>例如：<br>PHP_VERSION:PHP版本号<br>PHP_INT_SIZE:整形大小<br>PHP_INT_MAX:整形能表示的最大值（PHP中整形是允许出现负数：带符号）</p>
-<p><img src="/2019/01/26/PHP基础01-变量与常量/系统常量.png" alt=""></p>
-<p>特殊常量(魔术常量)他们由双下划线开始+常量名+双下划线结束，这种常量称之为系统魔术常量；魔术常量的值通常会跟着环境变化，但是用户改变不了</p>
-<p><strong>DIR</strong>：当前被执行的脚本所在电脑的绝对路径<br><strong>FILE</strong>：当前被执行的脚本所在电脑的绝对路径（带自己文件夹的名字）<br><strong>LINE</strong>：当前所属的行数<br><img src="/2019/01/26/PHP基础01-变量与常量/魔术常量.png" alt=""><br><strong>NAMESPACE</strong>：当前所属的命名空间<br><strong>CLASS</strong>：当前所属的类<br><strong>METHOD</strong>当前所属的方法</p>
-<h1 id="变量和常量的使用："><a href="#变量和常量的使用：" class="headerlink" title="变量和常量的使用："></a>变量和常量的使用：</h1><ol>
-<li>凡是数据会可能变化的，那么肯定是用变量</li>
-<li>数据不一定会变的，可以使用常量或者变量（变量居多）</li>
-<li>数据不允许被修改的，一定用常量</li>
-</ol>
+<h1 id="循环控制-continue，-break"><a href="#循环控制-continue，-break" class="headerlink" title="循环控制  continue， break"></a>循环控制  continue， break</h1><p><center><strong>其中内部循环也可以控制到外部循环，就是通过使用层级参数</strong></center><br>Contine2 当前自己循环后面内部不再执行，同时外部循环体也不再执行，重新来过。<br>Break2  当前自己循环结束，同时外部也结束（如果还有外部不受影响）</p>
+<h1 id="程控制替代语法"><a href="#程控制替代语法" class="headerlink" title="程控制替代语法"></a>程控制替代语法</h1><p>流程控制普代语法：分支和循环的替代语法<br>{使用：替代<br>}使用end+对应的其他标记替代<br>如if（）{}替代为 if():end if</p>
 
       
     </div>
@@ -513,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/26/markdown/" rel="next" title="markdown">
-                <i class="fa fa-chevron-left"></i> markdown
+              <a href="/2019/01/27/PHP基础03-运算符/" rel="next" title="PHP基础03-运算符">
+                <i class="fa fa-chevron-left"></i> PHP基础03-运算符
               </a>
             
           </div>
@@ -523,8 +520,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/26/markdown/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/29/PHP基础05-函数/" rel="prev" title="PHP基础05-函数">
+                PHP基础05-函数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -650,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预定义变量"><span class="nav-number">1.1.</span> <span class="nav-text">预定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变变量："><span class="nav-number">1.2.</span> <span class="nav-text">可变变量：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充："><span class="nav-number">2.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量传值-值传递-："><span class="nav-number">3.</span> <span class="nav-text">变量传值(值传递)：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用传递"><span class="nav-number">4.</span> <span class="nav-text">引用传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常量："><span class="nav-number">5.</span> <span class="nav-text">常量：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量命名规则"><span class="nav-number">5.1.</span> <span class="nav-text">常量命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细节"><span class="nav-number">5.2.</span> <span class="nav-text">细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量使用形式：必须赋值"><span class="nav-number">5.3.</span> <span class="nav-text">常量使用形式：必须赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统常量"><span class="nav-number">5.4.</span> <span class="nav-text">系统常量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量和常量的使用："><span class="nav-number">6.</span> <span class="nav-text">变量和常量的使用：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#控制分类："><span class="nav-number">1.</span> <span class="nav-text">控制分类：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-顺序"><span class="nav-number">1.1.</span> <span class="nav-text">1.顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-分支"><span class="nav-number">1.2.</span> <span class="nav-text">2.分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-循环"><span class="nav-number">1.3.</span> <span class="nav-text">3.循环</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环控制-continue，-break"><span class="nav-number">2.</span> <span class="nav-text">循环控制  continue， break</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程控制替代语法"><span class="nav-number">3.</span> <span class="nav-text">程控制替代语法</span></a></li></ol></div>
             
 
           </div>

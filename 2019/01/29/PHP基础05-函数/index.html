@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="函数的基本概念函数：function，是一种语法结构，将实现某一种功能的代码块（多行代码）分装到一个结构中，从而实现代码的重复利用（复用） 函数定义语法函数有几个对应的关键点：function关键字、函数值、参数（形参和实参），函数体和返回值基本语法如下：function 函数名（参数）{        //函数体        //返回值：return结果}定义函数的目的：是为了实现代码的重复利">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP基础05-函数">
+<meta property="og:url" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="函数的基本概念函数：function，是一种语法结构，将实现某一种功能的代码块（多行代码）分装到一个结构中，从而实现代码的重复利用（复用） 函数定义语法函数有几个对应的关键点：function关键字、函数值、参数（形参和实参），函数体和返回值基本语法如下：function 函数名（参数）{        //函数体        //返回值：return结果}定义函数的目的：是为了实现代码的重复利">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/函数定义.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/函数使用.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/函数调用.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/参数详解.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/默认值.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/参数传递.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/传值2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/返回.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/作用域.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/作用域2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/静态.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/静态.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/可变.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/匿名.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/匿名2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/闭包.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/闭包2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/输出函数.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/时间函数.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/时间函数2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/时间函数3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/有关函数的函数.png">
+<meta property="og:updated_time" content="2019-01-29T07:16:50.250Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP基础05-函数">
+<meta name="twitter:description" content="函数的基本概念函数：function，是一种语法结构，将实现某一种功能的代码块（多行代码）分装到一个结构中，从而实现代码的重复利用（复用） 函数定义语法函数有几个对应的关键点：function关键字、函数值、参数（形参和实参），函数体和返回值基本语法如下：function 函数名（参数）{        //函数体        //返回值：return结果}定义函数的目的：是为了实现代码的重复利">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/01/29/PHP基础05-函数/函数定义.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/01/29/PHP基础05-函数/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PHP基础05-函数 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础05-函数/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP基础05-函数
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-29 13:05:27 / Updated at: 15:16:50" itemprop="dateCreated datePublished" datetime="2019-01-29T13:05:27+08:00">2019-01-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="函数的基本概念"><a href="#函数的基本概念" class="headerlink" title="函数的基本概念"></a>函数的基本概念</h1><p>函数：function，是一种语法结构，将实现某一种功能的代码块（多行代码）分装到一个结构中，从而实现代码的重复利用（复用）</p>
+<h1 id="函数定义语法"><a href="#函数定义语法" class="headerlink" title="函数定义语法"></a>函数定义语法</h1><p>函数有几个对应的关键点：function关键字、函数值、参数（形参和实参），函数体和返回值<br>基本语法如下：<br>function 函数名（参数）{<br>        //函数体<br>        //返回值：return结果<br>}<br>定义函数的目的：是为了实现代码的重复利用，一个功能一个函数<br><img src="/2019/01/29/PHP基础05-函数/函数定义.png" alt=""></p>
+<h1 id="函数的使用："><a href="#函数的使用：" class="headerlink" title="函数的使用："></a>函数的使用：</h1><p>通过访问函数的名字+（）<br>//如果函数在定义的过程中有参数，那么在调用的时候必须传入对应的参数<br><img src="/2019/01/29/PHP基础05-函数/函数使用.png" alt=""></p>
+<h1 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h1><p>函数是一种结构不会自动执行，只有调用才会执行<br>函数是在代码执行阶段，碰到函数名字的时候才会调用，不是在编译阶段<br>函数调用的特点：只要系统在内存中能够找到对应的函数，就可以执行（）函数的调用可以在函数定义之前<br><img src="/2019/01/29/PHP基础05-函数/函数调用.png" alt=""></p>
+<h1 id="函数执行的内存分析"><a href="#函数执行的内存分析" class="headerlink" title="函数执行的内存分析"></a>函数执行的内存分析</h1><ol>
+<li>读取代码进入代码段（编译：将代码编译字节码存储到内存）</li>
+<li>根据代码逐行执行，（上图代码中先调用函数再执行不会报错：调用的时候已经能在内存中找到这个函数）</li>
+</ol>
+<p>以上原因：编译和执行是分开的（先编译后执行）</p>
+<h1 id="函数命名规范"><a href="#函数命名规范" class="headerlink" title="函数命名规范"></a>函数命名规范</h1><p>命名规范：由字母、数字、下划线组成，但是不能以数字开头<br>函数作为一种常用的结构，一般遵循以下规则：函数通常名字代表着函数的功能，而有些功能会比较复杂，可能一个单词不足以表示，需要多个组合</p>
+<ol>
+<li>驼峰法：除了左边第一个单词外，后面所有的单词首字母大写：showParentInfo（）</li>
+<li>下划线法：单词之间通过下划线连接，单词都是小写show_parent_info（）</li>
+</ol>
+<p>函数名字：在一个脚本周期中，不允许出现同名函数（通常在一个系统不会使用同名函数）</p>
+<h1 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h1><p>函数的参数分为两种：形参和实参</p>
+<h2 id="形参"><a href="#形参" class="headerlink" title="形参"></a>形参</h2><p>形式参数，不具有实际意义的参数，是在函数定义时使用的参数</p>
+<h2 id="实参"><a href="#实参" class="headerlink" title="实参"></a>实参</h2><p>实际参数，具有实际数据意义的参数，是在函数调用的时候使用的参数<br>形参是实参的载体，实参在调用时通常是需要传入到函数内部参与计算（运算）,那么需要在函数内部去找到实际数据所在的位置，才能找到数据本身：需要实际调用的时候，将数据与实参形式传递给形参，给形参赋值，从而使得函数内部可以用到外部数据<br><img src="/2019/01/29/PHP基础05-函数/参数详解.png" alt=""><br>注意：<br>1.在PHP中允许实参多于形参（个数）函数内部不用而已，不会报错<br>2.在PHP中理论上形参个数没有限制（实际开发不会太多）<br>3.实参不能少于形参</p>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>默认值：defeat value，指的是形参的默认值，在函数定义的时候，就给形参进行一个初始赋值：如果实际调用传入的参数（实参）没有提供，那么形参的值就使用初始赋值来进入函数内部参与运算<br><img src="/2019/01/29/PHP基础05-函数/默认值.png" alt=""><br>注意是值传递，num1的值不变</p>
+<p>通常默认值是用在一些，一定会有某个数据参与，但是可能是某个我们知道的值<br>注意事项：<br>1.默认值的定义是放在最后的（多个），不能左边形参有默认值但是右边没有<br>2.函数外部定义的变量名字与函数定义的形参名字冲突（同名）是没有任何关联关系的<br>3.如果多个函数使用同样的形参名字也不冲突<br><br></p>
+<h1 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h1><ol>
+<li>值传递<br>实参在调用时会将值赋值给形参，那么实际上使用的方式是简单的值传递，将实参（数据或者变量或者常量或者其他表达式）的结果（值）取出赋值给形参：形参与外部实际传入的参数本身没有任何关联关系</li>
+<li>引用传递<br>有的时候，希望在函数内部拿到的外部数据，能在函数内部改变，函数才会在调用的时候去主动获取外部数据的内存地址。以上这种定义形式参数的方式叫做引用传值<br>基本定义语法<br>function函数名（形参1,&amp;形参2）{<pre><code>//函数名
+</code></pre>}<br>在调用的时候，必须给引用传值的参数位置传入实际参数，而且参数本身必须是变量。（变量才有指向的数据的内存地址）</li>
+</ol>
+<p><br><br><img src="/2019/01/29/PHP基础05-函数/参数传递.png" alt=""><br>对比发现$num1使用的是值传递（在函数调用后本身的值没有变化，只是在函数内部发生）  $num2用了取地址，是引用传递，函数内部的参数取到了$num2的地址，函数内部$num2值发生变化，外部也会发生变化<br><br><br>引用传值注意事项：<br>在传入实参的时候必须传入变量<br><img src="/2019/01/29/PHP基础05-函数/传值2.png" alt=""></p>
+<p><center>系统提示<br>致命错误：只有变量能够引用传递&lt; /center&gt;<br><br><br>函数返回值<br>PHP中函数都有返回值，默认返回NULL<br><img src="/2019/01/29/PHP基础05-函数/返回.png" alt=""><br>return关键字：</center></p>
+<ol>
+<li>return在函数内部存在的价值：返回当前函数的结果，当前函数运行结束</li>
+<li>函数还可以在文件中直接使用（不在函数里面）：代表文件将结果return后面跟的内容，转交给包含当前文件的位置，并终止后面的代码（通常在系统配置文件中使用较多）</li>
+</ol>
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><h2 id="作用域：变量（常量）能够被访问的区域"><a href="#作用域：变量（常量）能够被访问的区域" class="headerlink" title="作用域：变量（常量）能够被访问的区域"></a>作用域：变量（常量）能够被访问的区域</h2><ol>
+<li>变量可以在普通代码中定义</li>
+<li>变量也可以在函数内部定义<br>在php中作用域严格来说分为两种;但是PHP内部划定一一些在严格意义之外的一种，所有总共算3种</li>
+<li>全局变量：就是用户普通定义的变量（函数外部定义）<br>所全局空间：在PHP中只允许在全局空间使用：理论上函数内部不可访问<br>脚本周期：直到脚本运行结束（最后一行代码）</li>
+<li>局部变量：就是在函数内部定义的变量<br>所属当前函数空间：在PHP中只允许在当前函数自己内部使用<br>函数周期：函数执行结束（函数是在栈区中开辟独立内存空间运行）</li>
+<li>超全局变量：系统定义的变量（预定义变量：$_SERVER、$_POST等）<br>所超全局空间：没有访问限制（函数内外均可访问）<br><br><br><img src="/2019/01/29/PHP基础05-函数/作用域.png" alt=""><br><center>让局部访问全局（一般不使用）的办法</center><br>如果想函数内部是使用外部变量，除了$GLOBALS之外，通过参数传值（如果要统一值，还可以使用引用传值）</li>
+</ol>
+<p>在PHP中还有一种方式，能够实现全局访问局部，同时局部也可以访问全局：global关键字</p>
+<h2 id="global关键字："><a href="#global关键字：" class="headerlink" title="global关键字："></a>global关键字：</h2><p>是一种在函数里面定义变量的一种方式</p>
+<ol>
+<li>如果使用global定义的变量名在外部存在（全局变量），那么系统在函数内部定义的变量直接指向外部全局变量所指向的内存空间（同一个变量）</li>
+<li>如果使用global定义的变量名在外部不存在（全局变量），系统会自动在全局空间（外部）定义一个与局部变量同名的全局变量<br><img src="/2019/01/29/PHP基础05-函数/作用域2.png" alt=""><br>本质的形式：在函数的内部和外部，对一个同名变量（全局和局部）使用同一块内存地址保存数据，从而实现共同拥有。<br><br><br>基本语法<br>global 变量名；//不能赋值<br>变量名=值   //修改<br>虽然以上方式可以实现局部与全局的互访，但是通常不会这么用。一般如果会存在特殊使用，也会使用参数的形式来访问。（还可以使用常量：define定义的）</li>
+</ol>
+<h1 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h1><p>静态变量：static，是在函数内部定义的变量，使用static关键字修饰，用来实现跨函数共享数据的变量：函数运行结束后所有的局部变量会清空，如果重新运行一下函数，所有的局部变量又会重新初始化<br>function 函数名（）<br>{<br>    static $变量名=值  //通常会在定义的时候就赋值<br>}<br>静态变量的作用是为了跨函数共享数据（同一个函数被多次调用）<br><img src="/2019/01/29/PHP基础05-函数/静态.png" alt=""><br><br><br>静态变量的使用</p>
+<ol>
+<li>为了统计：当前函数被调用的次数（有没有替换方法）</li>
+<li>为了统筹函数多次调用得到的不同结果（递归思想）</li>
+</ol>
+<p><img src="/2019/01/29/PHP基础05-函数/静态.png" alt=""></p>
+<h1 id="可变函数"><a href="#可变函数" class="headerlink" title="可变函数"></a>可变函数</h1><p>可变函数：当前有一个变量所保存的值，刚好是一个函数的名字你，那么就可以使用变量+（）来充当函数名使用<br><br><br>定义：<br>$变量 = ‘display’<br>function display（）{<br>}<br>可变函数在系统使用的过程中还是比较多的，尤其是使用很多系统函数的时候：需要用户在外部定义一个自定义函数，但是是需要传入到系统函数内部使用。</p>
+<p><img src="/2019/01/29/PHP基础05-函数/可变.png" alt=""></p>
+<h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><p>基本概念<br>匿名函数：没有名字的函数<br>基本语法：<br>变量名=function（）{<br>    函数体<br>}<br><img src="/2019/01/29/PHP基础05-函数/匿名.png" alt=""><br><br><br>变量保存匿名函数，本质得到的是一个对象（closure）<br><img src="/2019/01/29/PHP基础05-函数/匿名2.png" alt=""></p>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><p>闭包closure，一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）<br>简单理解：函数内部有一些局部变量（要执行的代码块）在执行之后没有被释放，是因为在函数内部还有对应的函数在引用（函数的内部函数：通常用匿名函数）<br><img src="/2019/01/29/PHP基础05-函数/闭包.png" alt=""><br>证明：函数的局部变量在函数使用完之后没有被释放？</p>
+<ol>
+<li>使用内部匿名函数</li>
+<li>匿名函数使用局部变量：use</li>
+<li>匿名函数被返回给外部使用<br><img src="/2019/01/29/PHP基础05-函数/闭包2.png" alt=""></li>
+</ol>
+<h1 id="伪类型"><a href="#伪类型" class="headerlink" title="伪类型"></a>伪类型</h1><p>伪类型：假类型，实际在PHP中不存在的类型，通过伪类型可以帮助程序员去更好的查看操作手册从而更方便学习<br>伪类型主要有两种：在三大类八小类之外<br>mixed：混合的，可以是多种PHP中的数据类型<br>number：数值的，可以是任意数值类型（整形和浮点型）</p>
+<h1 id="常用系统函数"><a href="#常用系统函数" class="headerlink" title="常用系统函数"></a>常用系统函数</h1><h2 id="有关输出的函数"><a href="#有关输出的函数" class="headerlink" title="有关输出的函数"></a>有关输出的函数</h2><p>print:类似于echo输出提供的内容，本质是一种结构（不是函数，）返回1，可以不需要使用括号<br>print_r：类似于var_dump，但是比var_dump简单，不会输出数据的类型，只会输出值（数组打印比较多）<br> <img src="/2019/01/29/PHP基础05-函数/输出函数.png" alt=""><br>注意图中的1是print返回的1被echo输出的</p>
+<h2 id="有关时间的函数："><a href="#有关时间的函数：" class="headerlink" title="有关时间的函数："></a>有关时间的函数：</h2><p>1.date ( string $format [, int $timestamp ] )<br>返回将整数 timestamp 按照给定的格式字串而产生的字符串。如果没有给出时间戳则使用本地当前时间。换句话说，timestamp 是可选的，默认值为 time()。<br>按照指定格式对对应的时间(从1970年格林威治时间开始计算的时间)，如果没有指定特定的时间戳，那么就是默认解释当前时间戳<br>time（）获取当前时间对应的时间戳<br><br><br>其中的参数format<br><img src="/2019/01/29/PHP基础05-函数/时间函数.png" alt=""></p>
+<p>2.microtime（）获取微妙级别的时间戳mixed microtime ([ bool $get_as_float ] )<br>microtime() 当前 Unix 时间戳以及微秒数。本函数仅在支持 gettimeofday() 系统调用的操作系统下可用。<br>如果调用时不带可选参数，本函数以 “msec sec” 的格式返回一个字符串，其中 sec 是自 Unix 纪元（0:00:00 January 1, 1970 GMT）起到现在的秒数，msec 是微秒部分。字符串的两部分都是以秒为单位返回的。<br>如果给出了 get_as_float 参数并且其值等价于 TRUE，microtime() 将返回一个浮点数。</p>
+<p><img src="/2019/01/29/PHP基础05-函数/时间函数2.png" alt=""><br>3.strtotime（）：按照规定格式的字符串转换为时间戳（将任何字符串的日期时间描述解析为 Unix 时间戳）<br><img src="/2019/01/29/PHP基础05-函数/时间函数3.png" alt=""></p>
+<h2 id="有关数学的函数"><a href="#有关数学的函数" class="headerlink" title="有关数学的函数"></a>有关数学的函数</h2><p>max()<br>min()<br>rand()得到一个指定区间的随机数（整数）<br>mt_rand：与rand一眼，只是底层结构不一样，效率比rand高（建议使用）<br>round()四舍五入<br>cell（）向上取整<br>floor()<br>pow():求指定数字的指定制数次结构，例如pow(2,8)=256<br>abs 求绝对值<br>sqrt 求平方</p>
+<h2 id="有关函数的函数"><a href="#有关函数的函数" class="headerlink" title="有关函数的函数"></a>有关函数的函数</h2><p>function_exists()判断指定的函数名字是否在内存中存在（帮助用户不去使用一个不存在的函数，让代码安全性更高）<br>func_get_arg()在自定义函数中去获取指定数值对应的参数<br>func_get_args()在自定义函数中去获取所有的参数（数组）<br>func_num_args():获取当前自定义函数的参数数量</p>
+<p><img src="/2019/01/29/PHP基础05-函数/有关函数的函数.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/27/PHP基础04-流程控制/" rel="next" title="PHP基础04-流程控制">
+                <i class="fa fa-chevron-left"></i> PHP基础04-流程控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/PHP基础06-错误处理相关/" rel="prev" title="PHP基础06-错误处理相关（简）">
+                PHP基础06-错误处理相关（简） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数的基本概念"><span class="nav-number">1.</span> <span class="nav-text">函数的基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数定义语法"><span class="nav-number">2.</span> <span class="nav-text">函数定义语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数的使用："><span class="nav-number">3.</span> <span class="nav-text">函数的使用：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数调用"><span class="nav-number">4.</span> <span class="nav-text">函数调用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数执行的内存分析"><span class="nav-number">5.</span> <span class="nav-text">函数执行的内存分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数命名规范"><span class="nav-number">6.</span> <span class="nav-text">函数命名规范</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数详解"><span class="nav-number">7.</span> <span class="nav-text">参数详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#形参"><span class="nav-number">7.1.</span> <span class="nav-text">形参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实参"><span class="nav-number">7.2.</span> <span class="nav-text">实参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认值"><span class="nav-number">7.3.</span> <span class="nav-text">默认值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数传递"><span class="nav-number">8.</span> <span class="nav-text">参数传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域"><span class="nav-number">9.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域：变量（常量）能够被访问的区域"><span class="nav-number">9.1.</span> <span class="nav-text">作用域：变量（常量）能够被访问的区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#global关键字："><span class="nav-number">9.2.</span> <span class="nav-text">global关键字：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#静态变量"><span class="nav-number">10.</span> <span class="nav-text">静态变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可变函数"><span class="nav-number">11.</span> <span class="nav-text">可变函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匿名函数"><span class="nav-number">12.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#闭包"><span class="nav-number">13.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#伪类型"><span class="nav-number">14.</span> <span class="nav-text">伪类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用系统函数"><span class="nav-number">15.</span> <span class="nav-text">常用系统函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有关输出的函数"><span class="nav-number">15.1.</span> <span class="nav-text">有关输出的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有关时间的函数："><span class="nav-number">15.2.</span> <span class="nav-text">有关时间的函数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有关数学的函数"><span class="nav-number">15.3.</span> <span class="nav-text">有关数学的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有关函数的函数"><span class="nav-number">15.4.</span> <span class="nav-text">有关函数的函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

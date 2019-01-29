@@ -96,32 +96,31 @@
 
 
 
-  <meta name="description" content="变量预定义变量预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）•    $GLOBALS — PHP中可所有的全局变量•    $_SERVER — 服务器和执行环境信息•    $_GET — 获取所有表单以get方式提交的数据•    $_POST — post提交的数据都会保存在此•    $_FILES — 用户上传的文件信息•    $_REQUES">
+  <meta name="description" content="PHP数组遍历（大致整理出三种）  foreach遍历语法基本语法如下：foreach ($arr as $value)statement！ 或者： foreach ($arr as $key =&amp;gt; $value)statement//通过 $下标 访问元素的下标，通过 $值 访问元素的值通常：如果是关联数组（字母下标），就需要下标，如果是数字下标就直接访问值 在进行数据存储定义的时候，通">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP基础01-变量与常量">
-<meta property="og:url" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/index.html">
+<meta property="og:title" content="PHP基础08-数组遍历">
+<meta property="og:url" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="变量预定义变量预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）•    $GLOBALS — PHP中可所有的全局变量•    $_SERVER — 服务器和执行环境信息•    $_GET — 获取所有表单以get方式提交的数据•    $_POST — post提交的数据都会保存在此•    $_FILES — 用户上传的文件信息•    $_REQUES">
+<meta property="og:description" content="PHP数组遍历（大致整理出三种）  foreach遍历语法基本语法如下：foreach ($arr as $value)statement！ 或者： foreach ($arr as $key =&amp;gt; $value)statement//通过 $下标 访问元素的下标，通过 $值 访问元素的值通常：如果是关联数组（字母下标），就需要下标，如果是数字下标就直接访问值 在进行数据存储定义的时候，通">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/值传递方式.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/引用传递.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/常量定义.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/特殊常量定义.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/常量访问.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/系统常量.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/魔术常量.png">
-<meta property="og:updated_time" content="2019-01-26T12:19:46.497Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/foreach2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/foreach3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/for.jpg">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/遍历1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/遍历2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/遍历3.png">
+<meta property="og:updated_time" content="2019-01-29T13:52:22.264Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP基础01-变量与常量">
-<meta name="twitter:description" content="变量预定义变量预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）•    $GLOBALS — PHP中可所有的全局变量•    $_SERVER — 服务器和执行环境信息•    $_GET — 获取所有表单以get方式提交的数据•    $_POST — post提交的数据都会保存在此•    $_FILES — 用户上传的文件信息•    $_REQUES">
-<meta name="twitter:image" content="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/值传递方式.png">
+<meta name="twitter:title" content="PHP基础08-数组遍历">
+<meta name="twitter:description" content="PHP数组遍历（大致整理出三种）  foreach遍历语法基本语法如下：foreach ($arr as $value)statement！ 或者： foreach ($arr as $key =&amp;gt; $value)statement//通过 $下标 访问元素的下标，通过 $值 访问元素的值通常：如果是关联数组（字母下标），就需要下标，如果是数字下标就直接访问值 在进行数据存储定义的时候，通">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/foreach2.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/">
+  <link rel="canonical" href="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/">
 
 
 
@@ -131,7 +130,7 @@
   };
 </script>
 
-  <title>PHP基础01-变量与常量 | Hexo</title>
+  <title>PHP基础08-数组遍历 | Hexo</title>
   
 
 
@@ -364,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/26/PHP基础01-变量与常量/">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础09-数组遍历/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lh">
@@ -381,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PHP基础01-变量与常量
+          <h1 class="post-title" itemprop="name headline">PHP基础08-数组遍历
 
               
             
@@ -407,7 +406,7 @@
                 
               
 
-              <time title="Post created: 2019-01-26 15:42:18 / Updated at: 20:19:46" itemprop="dateCreated datePublished" datetime="2019-01-26T15:42:18+08:00">2019-01-26</time>
+              <time title="Post created: 2019-01-29 16:42:39 / Updated at: 21:52:22" itemprop="dateCreated datePublished" datetime="2019-01-29T16:42:39+08:00">2019-01-29</time>
             
 
             
@@ -463,26 +462,19 @@
       
 
       
-        <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h2><p>预定义变量：提前定义的变量，系统定义的变量，存储许多需要用到的数据（预定义变量是数组）<br>•    $GLOBALS — PHP中可所有的全局变量<br>•    $_SERVER — 服务器和执行环境信息<br>•    $_GET — 获取所有表单以get方式提交的数据<br>•    $_POST — post提交的数据都会保存在此<br>•    $_FILES — 用户上传的文件信息<br>•    $_REQUEST — get和post提交的都会保存<br>•    $_SESSION — session绘画数据<br>•    $_ENV — 环境信息<br>•    $_COOKIE —cookie会话数据</p>
-<h2 id="可变变量："><a href="#可变变量：" class="headerlink" title="可变变量："></a>可变变量：</h2><p>如果一个变量保存的值刚好是另外一个变量的名字，那么可以直接通过访问一个变量得到另外一个变量的值 在变量前面再多一个$符号<br>例如：$a=’b’ $b=’b’ 则 $$a=’b’</p>
-<h1 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h1><p>在内存中，通常有以下几个分区：<br>栈区：程序可以操作的内存部分（不存数据，运行程序代码），少但是快<br>代码段：存储程序的内存部分（不执行）<br>数据段：存储普通数据（全局区和静态区）<br>堆区：存储复杂数据，大但是效率低</p>
-<h1 id="变量传值-值传递-："><a href="#变量传值-值传递-：" class="headerlink" title="变量传值(值传递)："></a>变量传值(值传递)：</h1><p>将一个变量赋值给另外一个变量：变量传值<br><img src="/2019/01/26/PHP基础01-变量与常量/值传递方式.png" alt=""></p>
-<h1 id="引用传递"><a href="#引用传递" class="headerlink" title="引用传递"></a>引用传递</h1><p><img src="/2019/01/26/PHP基础01-变量与常量/引用传递.png" alt=""></p>
-<h1 id="常量："><a href="#常量：" class="headerlink" title="常量："></a>常量：</h1><p>常量与变量一样：用来保存数据<br>常量基本概念：<br>  常量：const/constant，是一种在程序运行当中，不可改变的量（数据）<br>常量一旦定义，通常数据不可改变（用户级别）<br>在PHP中常量有两种定义方式（5.3之后才有两种）</p>
+        <center><div style="font-size:20px;"><br><strong> PHP数组遍历</strong><br>（大致整理出三种）<br></div><br></center>
+
+<h1 id="foreach遍历语法"><a href="#foreach遍历语法" class="headerlink" title="foreach遍历语法"></a>foreach遍历语法</h1><h2 id="基本语法如下："><a href="#基本语法如下：" class="headerlink" title="基本语法如下："></a>基本语法如下：</h2><p>foreach ($arr as $value)<br>statement<br>！<a href="PHP基础08-数组遍历/foreach.png"></a><br> 或者：</p>
+<p>foreach ($arr as $key =&gt; $value)<br>statement<br><img src="/2019/01/29/PHP基础09-数组遍历/foreach2.png" alt=""><br>//通过 $下标 访问元素的下标，通过 $值 访问元素的值<br>通常：如果是关联数组（字母下标），就需要下标，如果是数字下标就直接访问值</p>
+<p>在进行数据存储定义的时候，通常二维数组不会两个维度的key下标为数字，一般是一维为数字（无意义），二维为字符串（数据库表字段），所有在进行遍历的时候通常是针对一维数组进行遍历，取得二维数组元素，然后二维数组元素通过下标去访问。<br><img src="/2019/01/29/PHP基础09-数组遍历/foreach3.png" alt=""><br><br></p>
+<h2 id="foreach遍历原理"><a href="#foreach遍历原理" class="headerlink" title="foreach遍历原理"></a>foreach遍历原理</h2><p>foreach遍历的原理：本质是数组的内部有一个指针，默认是指向数组元素的第一个元素，foreach就是利用指针去获取数据，同时移动指针。<br>1.foreach会重置指针：让指针指向第一个元素；<br>2.进入foreach循环：通过指针取得当前第一个元素，然后将下标取出放到对应的下标变量$key中（如果存在），将值取出来放到对应的值变量$value中；然后指针下移<br>3.进入循环内部（循环体）开始执行<br>4.重复2和3，直到在2的时候遇到指针取不到内容</p>
+<h1 id="for循环遍历数组"><a href="#for循环遍历数组" class="headerlink" title="for循环遍历数组"></a>for循环遍历数组</h1><p>for循环基于已知边界条件，有条件的变化</p>
 <ol>
-<li>使用定义常量的函数：define（‘常量名‘，常量值，【】）</li>
-<li>5.3之后才有的：const常量名=值<br><img src="/2019/01/26/PHP基础01-变量与常量/常量定义.png" alt=""><h2 id="常量命名规则"><a href="#常量命名规则" class="headerlink" title="常量命名规则"></a>常量命名规则</h2>1.常量不使用$符号，一旦使用系统就会认为是变量<br>2.常量的名字组成由字母，数字。下划线组成，不能以数字开头<br>3.常量的名字通常是以大写字母为主，<br>4.常量命名的规则比变量要松散，可以使用一些特殊字符，该方式只能使用define定义<br><img src="/2019/01/26/PHP基础01-变量与常量/特殊常量定义.png" alt=""><h2 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h2>define和const定义的常量是有区别的：在于访问权限区别<br>定义常量通常不区分大小写，但是可以区分，可以参考define函数的第三个函数<br>bool define( string $name, mixed $value[, bool $case_insensitive = false] )<br>name：常量名。<br>value：常量的值；在 PHP 5 中，value 必须是标量( integer、 float、string、boolean、NULL）在 PHP 7 中还允许是个 array 的值。<br>case_insensitive<br>如果设置为 TRUE，该常量则大小写不敏感。默认是大小写敏感的。比如， CONSTANT 和 Constant 代表了不同的值。</li>
+<li>获取数组长度：count（数组）得到数组元素的长度</li>
+<li>要求数组元素的下标是规律的数字<br><br><br>for+next也能完成遍历数组（可以是下标非规律数字的数组）<br>有这样一个数组：</li>
 </ol>
-<h2 id="常量使用形式：必须赋值"><a href="#常量使用形式：必须赋值" class="headerlink" title="常量使用形式：必须赋值"></a>常量使用形式：必须赋值</h2><p>有的时候还需要使用另外一种形式来访问（针对的是特殊名字的常量）<br><img src="/2019/01/26/PHP基础01-变量与常量/常量访问.png" alt=""></p>
-<h2 id="系统常量"><a href="#系统常量" class="headerlink" title="系统常量"></a>系统常量</h2><p>例如：<br>PHP_VERSION:PHP版本号<br>PHP_INT_SIZE:整形大小<br>PHP_INT_MAX:整形能表示的最大值（PHP中整形是允许出现负数：带符号）</p>
-<p><img src="/2019/01/26/PHP基础01-变量与常量/系统常量.png" alt=""></p>
-<p>特殊常量(魔术常量)他们由双下划线开始+常量名+双下划线结束，这种常量称之为系统魔术常量；魔术常量的值通常会跟着环境变化，但是用户改变不了</p>
-<p><strong>DIR</strong>：当前被执行的脚本所在电脑的绝对路径<br><strong>FILE</strong>：当前被执行的脚本所在电脑的绝对路径（带自己文件夹的名字）<br><strong>LINE</strong>：当前所属的行数<br><img src="/2019/01/26/PHP基础01-变量与常量/魔术常量.png" alt=""><br><strong>NAMESPACE</strong>：当前所属的命名空间<br><strong>CLASS</strong>：当前所属的类<br><strong>METHOD</strong>当前所属的方法</p>
-<h1 id="变量和常量的使用："><a href="#变量和常量的使用：" class="headerlink" title="变量和常量的使用："></a>变量和常量的使用：</h1><ol>
-<li>凡是数据会可能变化的，那么肯定是用变量</li>
-<li>数据不一定会变的，可以使用常量或者变量（变量居多）</li>
-<li>数据不允许被修改的，一定用常量</li>
-</ol>
+<p>$arr = array( 12, 5, ‘aa’=&gt;8, 6=&gt;10, ‘bb’=&gt; 3, 4);<br>不使用“foreach”，而是使用for循环，将他遍历输出每一项的下标和值！<br><img src="/2019/01/29/PHP基础09-数组遍历/for.jpg" alt=""></p>
+<h1 id="each和list"><a href="#each和list" class="headerlink" title="each和list"></a>each和list</h1><p>each函数：能从一个数组中获取当前那数组指针指向的元素的下标和值，拿到之后将数组指针下移，同时将拿到的元素下标和值以一个四个元素的数组返回：<br>    0-&gt;key 取得元素的下标值<br>    1-&gt;取得元素的值<br>    key-&gt;取得元素的下标值<br>    value-&gt;取得元素的值<br><img src="/2019/01/29/PHP基础09-数组遍历/遍历1.png" alt=""><br> <br><br>list函数使用：list是一种结构，不是一种函数（没有返回值），是list提供一对变量从一个数组中取得元素值，然后依次存放到对应变量当中（批量为变量赋值：值来源于数组）list必须从索引数组中去获取数据，而且必须从0开始<br><img src="/2019/01/29/PHP基础09-数组遍历/遍历2.png" alt=""><br>each和list配合：each返回的数组中必定有下标0和1分别表示下标和值<br><img src="/2019/01/29/PHP基础09-数组遍历/遍历3.png" alt=""></p>
 
       
     </div>
@@ -513,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/26/markdown/" rel="next" title="markdown">
-                <i class="fa fa-chevron-left"></i> markdown
+              <a href="/2019/01/29/PHP基础08-数组及其相关函数/" rel="next" title="PHP基础08-数组及其相关函数">
+                <i class="fa fa-chevron-left"></i> PHP基础08-数组及其相关函数
               </a>
             
           </div>
@@ -522,10 +514,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/26/markdown/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -650,7 +638,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#变量"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预定义变量"><span class="nav-number">1.1.</span> <span class="nav-text">预定义变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变变量："><span class="nav-number">1.2.</span> <span class="nav-text">可变变量：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充："><span class="nav-number">2.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量传值-值传递-："><span class="nav-number">3.</span> <span class="nav-text">变量传值(值传递)：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用传递"><span class="nav-number">4.</span> <span class="nav-text">引用传递</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常量："><span class="nav-number">5.</span> <span class="nav-text">常量：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量命名规则"><span class="nav-number">5.1.</span> <span class="nav-text">常量命名规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细节"><span class="nav-number">5.2.</span> <span class="nav-text">细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量使用形式：必须赋值"><span class="nav-number">5.3.</span> <span class="nav-text">常量使用形式：必须赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统常量"><span class="nav-number">5.4.</span> <span class="nav-text">系统常量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量和常量的使用："><span class="nav-number">6.</span> <span class="nav-text">变量和常量的使用：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#foreach遍历语法"><span class="nav-number">1.</span> <span class="nav-text">foreach遍历语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法如下："><span class="nav-number">1.1.</span> <span class="nav-text">基本语法如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#foreach遍历原理"><span class="nav-number">1.2.</span> <span class="nav-text">foreach遍历原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#for循环遍历数组"><span class="nav-number">2.</span> <span class="nav-text">for循环遍历数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#each和list"><span class="nav-number">3.</span> <span class="nav-text">each和list</span></a></li></ol></div>
             
 
           </div>

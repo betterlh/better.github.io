@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数组数组：arrary，数据的组合，指将一组数据（多个）存储到一个指定的容器中，用变量指向该容器，然后可以通过变量一次性得到该容器的所有数据 数组定义语法在PHP中系统提供多种定义数组的方式array(  key =&amp;gt;  value , … )  使用array关键字：最常用的$变量=array{元素1，元素2，…}//默认0开始 可以使用中括号来包裹数据(用 [] 替代 array()。)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP基础08-数组及其相关函数">
+<meta property="og:url" content="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数组数组：arrary，数据的组合，指将一组数据（多个）存储到一个指定的容器中，用变量指向该容器，然后可以通过变量一次性得到该容器的所有数据 数组定义语法在PHP中系统提供多种定义数组的方式array(  key =&amp;gt;  value , … )  使用array关键字：最常用的$变量=array{元素1，元素2，…}//默认0开始 可以使用中括号来包裹数据(用 [] 替代 array()。)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/函数1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/函数2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/函数3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/栈1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/栈2.png">
+<meta property="og:updated_time" content="2019-01-29T13:43:46.513Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP基础08-数组及其相关函数">
+<meta name="twitter:description" content="数组数组：arrary，数据的组合，指将一组数据（多个）存储到一个指定的容器中，用变量指向该容器，然后可以通过变量一次性得到该容器的所有数据 数组定义语法在PHP中系统提供多种定义数组的方式array(  key =&amp;gt;  value , … )  使用array关键字：最常用的$变量=array{元素1，元素2，…}//默认0开始 可以使用中括号来包裹数据(用 [] 替代 array()。)">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/函数1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PHP基础08-数组及其相关函数 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP基础08-数组及其相关函数
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-29 16:42:31 / Updated at: 21:43:46" itemprop="dateCreated datePublished" datetime="2019-01-29T16:42:31+08:00">2019-01-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组：arrary，数据的组合，指将一组数据（多个）存储到一个指定的容器中，用变量指向该容器，然后可以通过变量一次性得到该容器的所有数据</p>
+<h2 id="数组定义语法"><a href="#数组定义语法" class="headerlink" title="数组定义语法"></a>数组定义语法</h2><p>在PHP中系统提供多种定义数组的方式<br>array(  key =&gt;  value , … )</p>
+<ol>
+<li>使用array关键字：最常用的$变量=array{元素1，元素2，…}//默认0开始</li>
+<li>可以使用中括号来包裹数据(用 [] 替代 array()。)：$变量=[元素1，元素2，…]</li>
+<li>隐形定义数组：<br>$变量[]=值   //如果对给出的值没有指定键名，则取当前最大的整数索引值，而新的                     键名将是该值加一。<br>$变量[下标key]=值  // 键（key）可是是一个整数 integer 或字符串string</li>
+</ol>
+<h2 id="PHP数组特点"><a href="#PHP数组特点" class="headerlink" title="PHP数组特点"></a>PHP数组特点</h2><ol>
+<li>可以整数下标或者字符串下标<br>如果数组下标都为整数：索引数组<br>如果数组下标都为字符串：关联数组</li>
+<li>不同下标可以混合存在，混合数组</li>
+<li>数组元素的顺序以放入顺序为准，跟下标无关</li>
+<li>数组下标的自增长性</li>
+<li>特殊值下标的自动转换<ul>
+<li>包含有合法整型值的字符串会被转换为整型。例如键名 “8” 实际会被储存为 8。但是 “08” 则不会强制转换，因为其不是一个合法的十进制数值。 </li>
+<li>浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8。 </li>
+<li>布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0。 </li>
+<li>Null 会被转换为空字符串，即键名 null 实际会被储存为 “”。 </li>
+<li>数组和对象不能被用为键名。坚持这么做会导致警告：Illegal offset type。</li>
+</ul>
+</li>
+<li>PHP中数组元素没有长度类型</li>
+<li>PHP中的数组是很大的数据，所有存储位置是堆区，为当前数组分配一快连续的内存。</li>
+<li>如果在数组定义中多个单元都使用了同一个键名，则只使用了最后一个，之前的都被覆盖</li>
+</ol>
+<h1 id="数组的相关函数"><a href="#数组的相关函数" class="headerlink" title="数组的相关函数"></a>数组的相关函数</h1><h2 id="排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较"><a href="#排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较" class="headerlink" title="排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较"></a>排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较</h2><p>sort {}顺序排序（下标重排）<br>    sort ( array &amp;$array [, int $sort_flags = SORT_REGULAR ] ) 直接对数组操作，返回值为boole（true或false）<br>    参数:</p>
+<ul>
+<li>array:要排序的数组。 </li>
+<li>sort_flags: 可选的第二个参数 sort_flags 可以用以下值改变排序的行为： <pre><code>排序类型标记： 
+    •    SORT_REGULAR - 正常比较单元（不改变类型） 
+    •    SORT_NUMERIC - 单元被作为数字来比较 
+    •    SORT_STRING - 单元被作为字符串来比较 
+    •    SORT_LOCALE_STRING - 根据当前的区域（locale）设置来把单元当作字符串比较，可以用 setlocale() 来改变。 
+    •    SORT_NATURAL - 和 natsort() 类似对每个单元以&quot;自然的顺序&quot;对字符串进行排序。 PHP 5.4.0 中新增的。 
+    •    SORT_FLAG_CASE - 能够与 SORT_STRING 或 SORT_NATURAL 合并（OR 位运算），不区分大小写排序字符串。 
+</code></pre>rsort()：逆序排序<br>asort()顺序    //数组的索引保持和单元的关联<br>arsort()逆序<br>ksort()顺序排序：按照键名（下标）排序  //保留键名到数据的关联<br>krsort()逆序<br>shuffle()随机打乱数组元素，不保留对应关系</li>
+</ul>
+<h2 id="指针函数："><a href="#指针函数：" class="headerlink" title="指针函数："></a>指针函数：</h2><p>reset() 重置指针，将内部指针倒回到第一个单元并返回第一个数组单元的值<br>end()重置指针,数组内部指针移动到最后一个单元并返回其值。<br>next()指针下移，它返回的是下一个数组单元的值<br>prev（）指针上移<br>current（）获取当前指针对应的值<br>key（）获取当前指针对应的下标<br>//注意：next和prve会移动指针，有可能导致指针移动都边界（离开数组），导致数组不能使用（通过next和prve不能回到正确的位置）只能通过end或者reset进行指针重置</p>
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><p>count(mixed $array_or_countable [, int $mode = COUNT_NORMAL ])<br>//如果可选的 mode 参数设为 COUNT_RECURSIVE（或 1），count() 将递归地对数组计数。对计算多维数组的所有单元尤其有用。<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/函数1.png" alt=""></p>
+<p>统计出数组里的所有元素的数量，或者对象里的东西。<br><br></p>
+<h3 id="array-push"><a href="#array-push" class="headerlink" title="array_push"></a>array_push</h3><p>array_push(array &amp;$array , mixed $value1 [, mixed $… ])<br>将一个或多个单元压入数组的末尾（入栈）</p>
+<h3 id="array-pop"><a href="#array-pop" class="headerlink" title="array_pop"></a>array_pop</h3><p>弹出并返回 array 数组的最后一个单元（被弹出去的），并将数组 array 的度减一。 （出栈）<br> //Note: 使用此函数后会重置（reset()）array 指针。</p>
+<h3 id="array-shift"><a href="#array-shift" class="headerlink" title="array_shift"></a>array_shift</h3><p>array_shift(array &amp;$array)<br>将 array 的第一个单元移出并作为结果返回，将 array 的长度减一并将所有其它单元向前移动一位。所有的数字键名将改为从零开始计数，文字键名将不变。<br>//Note: 使用此函数后会重置（reset()）array 指针。</p>
+<h3 id="array-unshift"><a href="#array-unshift" class="headerlink" title="array_unshift"></a>array_unshift</h3><p>array_unshift(array &amp;$array , mixed $value1 [, mixed $… ])<br>将传入的单元插入到 array 数组的开头。注意单元是作为整体被插入的，因此传入单元将保持同样的顺序。所有的数值键名将修改为从零开始重新计数，所有的文字键名保持不变。</p>
+<h3 id="array-reverse"><a href="#array-reverse" class="headerlink" title="array_reverse"></a>array_reverse</h3><p>array_reverse(array $array [, bool $preserve_keys = false ])数组元素反过来<br>preserve_keys如果设置为 TRUE 会保留数字的键（保留键值对关系）。 非数字的键则不受这个设置的影响，总是会被保留（键值对关系总会被保存）。 </p>
+<h3 id="in-array"><a href="#in-array" class="headerlink" title="in_ array"></a>in_ array</h3><p>in_ array(mixed $needle , array $haystack [, bool $strict = FALSE)<br>判断一个元素在数组中是否存在<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/函数2.png" alt=""></p>
+<h3 id="array-keys"><a href="#array-keys" class="headerlink" title="array_keys"></a>array_keys</h3><p>array_keys(array $array [, mixed $search_value = null [, bool $strict = false ]])获取一个数组的所有下标，返回一个索引数组</p>
+<ul>
+<li>search_value<br>如果指定了这个参数，只有包含这些值的键才会返回。 </li>
+<li>strict<br>判断在搜索的时候是否该使用严格的比较（===）（区别100和“100”）<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/函数3.png" alt=""></li>
+</ul>
+<h3 id="array-values"><a href="#array-values" class="headerlink" title="array_values"></a>array_values</h3><p>array_values(array $array)获取一个数组的所有值，返回一个索引数组</p>
+<h1 id="php模拟数据结构"><a href="#php模拟数据结构" class="headerlink" title="php模拟数据结构"></a>php模拟数据结构</h1><p>栈：压栈，先进去后出来（FILO）<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/栈1.png" alt=""><br>队列：排队，先进先出（FIFO）<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/栈2.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/29/PHP基础07-字符串/" rel="next" title="PHP基础07-字符串">
+                <i class="fa fa-chevron-left"></i> PHP基础07-字符串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/PHP基础09-数组遍历/" rel="prev" title="PHP基础08-数组遍历">
+                PHP基础08-数组遍历 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组定义语法"><span class="nav-number">1.1.</span> <span class="nav-text">数组定义语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP数组特点"><span class="nav-number">1.2.</span> <span class="nav-text">PHP数组特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组的相关函数"><span class="nav-number">2.</span> <span class="nav-text">数组的相关函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较"><span class="nav-number">2.1.</span> <span class="nav-text">排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针函数："><span class="nav-number">2.2.</span> <span class="nav-text">指针函数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他函数"><span class="nav-number">2.3.</span> <span class="nav-text">其他函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#array-push"><span class="nav-number">2.3.1.</span> <span class="nav-text">array_push</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-pop"><span class="nav-number">2.3.2.</span> <span class="nav-text">array_pop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-shift"><span class="nav-number">2.3.3.</span> <span class="nav-text">array_shift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-unshift"><span class="nav-number">2.3.4.</span> <span class="nav-text">array_unshift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-reverse"><span class="nav-number">2.3.5.</span> <span class="nav-text">array_reverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-array"><span class="nav-number">2.3.6.</span> <span class="nav-text">in_ array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-keys"><span class="nav-number">2.3.7.</span> <span class="nav-text">array_keys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-values"><span class="nav-number">2.3.8.</span> <span class="nav-text">array_values</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php模拟数据结构"><span class="nav-number">3.</span> <span class="nav-text">php模拟数据结构</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

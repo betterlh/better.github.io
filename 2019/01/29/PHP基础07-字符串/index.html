@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="字符串  字符串定义语法 单引号字符串 双引号字符串比较适合定义那些比较短（不超过一行）或者没有结构要求的字符串，如果有结构要求或者内容超过一行，可以使用以下两种结构定义 nowdoc字符串：没有单引号的单引号字符串$str=&amp;lt;&amp;lt;&amp;lt;’边界符’字符串内容边界符 heredoc字符串：没有双引号的双引号字符串$str=&amp;lt;&amp;lt;&amp;lt;边界符字符串内容边界符  结构不会发生变化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP基础07-字符串">
+<meta property="og:url" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="字符串  字符串定义语法 单引号字符串 双引号字符串比较适合定义那些比较短（不超过一行）或者没有结构要求的字符串，如果有结构要求或者内容超过一行，可以使用以下两种结构定义 nowdoc字符串：没有单引号的单引号字符串$str=&amp;lt;&amp;lt;&amp;lt;’边界符’字符串内容边界符 heredoc字符串：没有双引号的双引号字符串$str=&amp;lt;&amp;lt;&amp;lt;边界符字符串内容边界符  结构不会发生变化">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/定义1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/定义2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/结构化定义.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/转义1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/转义2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/转义3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/长度1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/长度2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/长度3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/相关函数1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/相关函数2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/相关函数3.png">
+<meta property="og:updated_time" content="2019-01-29T08:44:05.858Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP基础07-字符串">
+<meta name="twitter:description" content="字符串  字符串定义语法 单引号字符串 双引号字符串比较适合定义那些比较短（不超过一行）或者没有结构要求的字符串，如果有结构要求或者内容超过一行，可以使用以下两种结构定义 nowdoc字符串：没有单引号的单引号字符串$str=&amp;lt;&amp;lt;&amp;lt;’边界符’字符串内容边界符 heredoc字符串：没有双引号的双引号字符串$str=&amp;lt;&amp;lt;&amp;lt;边界符字符串内容边界符  结构不会发生变化">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/定义1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>PHP基础07-字符串 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP基础07-字符串
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-29 15:43:54 / Updated at: 16:44:05" itemprop="dateCreated datePublished" datetime="2019-01-29T15:43:54+08:00">2019-01-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong><div style="font-size:40px;"><center>字符串</center> </div></strong></p>
+<h1 id="字符串定义语法"><a href="#字符串定义语法" class="headerlink" title="字符串定义语法"></a>字符串定义语法</h1><ol>
+<li>单引号字符串</li>
+<li>双引号字符串<br><br><br><strong>比较适合定义那些比较短（不超过一行）或者没有结构要求的字符串，<br>如果有结构要求或者内容超过一行，可以使用以下两种结构定义</strong></li>
+<li>nowdoc字符串：没有单引号的单引号字符串<br>$str=&lt;&lt;&lt;’边界符’<br>字符串内容<br>边界符</li>
+<li>heredoc字符串：没有双引号的双引号字符串<br>$str=&lt;&lt;&lt;边界符<br>字符串内容<br>边界符</li>
+</ol>
+<p><img src="/2019/01/29/PHP基础07-字符串/定义1.png" alt=""><br><img src="/2019/01/29/PHP基础07-字符串/定义2.png" alt=""><br>结构不会发生变化<br><br></p>
+<h1 id="结构化定义字符串变量的规则"><a href="#结构化定义字符串变量的规则" class="headerlink" title="结构化定义字符串变量的规则"></a>结构化定义字符串变量的规则</h1><ul>
+<li>结构化定义字符串对应的边界符有条件：</li>
+</ul>
+<ol>
+<li>上边界符后面不能有任何内容（包括注释，空格）</li>
+<li>下边界符必须顶格：最左边</li>
+<li>下边界符同样后面只能跟分号，不能跟任何内容</li>
+</ol>
+<ul>
+<li>结构化定义字符串的内部（边界符之间）的所有内容都是字符串本身<br><img src="/2019/01/29/PHP基础07-字符串/结构化定义.png" alt=""></li>
+</ul>
+<h1 id="字符串转义"><a href="#字符串转义" class="headerlink" title="字符串转义"></a>字符串转义</h1><p>转义的含义：在计算机通用协议中，有一些特定的方式定义的字母，系统会特定处理；通常这种方式都是使用反斜杠+字母（单词）的特性<br>\r    \n:回车换行<br>PHP在识别转义字符的时候也是使用同样的模式：反斜杠+字母<br>在PHP中系统常用的转义符号<br>\’  在单引号字符串中显示单引号<br>\”在双引号字符串中显示双引号<br>\r代表回车（理论上回到当前行的首位置）<br>\n代表新一行<br>\t 类似TAB键，输出四个空格<br>\$ 在PHP中使用$符号作为变量符号，因此需要特定识别<br>单引号与双引号区别：</p>
+<ol>
+<li>单引号中能识别\‘（因为在单引号中出现没有转义的’会有误解，发生错误），而双引号仅不能识别\’（因为在双引号中‘能正确使用不会有误解）<br><img src="/2019/01/29/PHP基础07-字符串/转义1.png" alt=""><br><center>因为单引号中$没有变量意义，所以/$ 原样输出</center><br><center>因为双引号中$有变量意义，所以能识别/$转义成没有意义的$输出</center><br><br></li>
+<li>双引号中因为能够识别$符号，所以双引号中可以解析变量，而单引号不可以。（故）<br><img src="/2019/01/29/PHP基础07-字符串/转义2.png" alt=""></li>
+</ol>
+<p><strong>双引号中变量识别的规则</strong></p>
+<ol>
+<li>变量本身能与后面的内容区分：应该保证变量的独立性，不要让系统难以区分，给变量加上一组大括号</li>
+<li>使用变量专业标识符（区分）<br><img src="/2019/01/29/PHP基础07-字符串/转义3.png" alt=""></li>
+</ol>
+<h1 id="字符串转义-1"><a href="#字符串转义-1" class="headerlink" title="字符串转义"></a>字符串转义</h1><h1 id="字符串长度问题"><a href="#字符串长度问题" class="headerlink" title="字符串长度问题"></a>字符串长度问题</h1><ol>
+<li>基本函数strlen（）：得到字符串的长度（字节为单位）<br><img src="/2019/01/29/PHP基础07-字符串/长度1.png" alt=""></li>
+<li>多字节字符串的长度问题：包含中文的长度</li>
+<li>多字节字符串扩展模块：mbstring扩展（mb：Multi Byte）<br>首先需要加载PHP的mbstring扩展<br><img src="/2019/01/29/PHP基础07-字符串/长度2.png" alt=""> </li>
+</ol>
+<p>可以使用mb扩展带来很多函数<br>mb_string扩展针对的是一些关于字符统计<br><br><br>strlen（）只是针对标准交换码ASCII，mbstring针对不同的字符集<br><img src="/2019/01/29/PHP基础07-字符串/长度3.png" alt=""></p>
+<h1 id="字符串相关函数"><a href="#字符串相关函数" class="headerlink" title="字符串相关函数"></a>字符串相关函数</h1><h2 id="转化函数：implode-explode-str-split"><a href="#转化函数：implode-explode-str-split" class="headerlink" title="转化函数：implode(),explode(),str_split"></a>转化函数：implode(),explode(),str_split</h2><p>implode(连接方式，数组)将数组中的元素按照某个规则连接成一个字符串<br>explode(分割字符，目标字符串)将字符串按照某个格式进行分割，变成数组<br>str_split(字符串，字符长度)：按照指定长度拆分字符串得到数组</p>
+<h2 id="截取函数-trim-ltrim-rtrim"><a href="#截取函数-trim-ltrim-rtrim" class="headerlink" title="截取函数 trim(),ltrim(),rtrim()"></a>截取函数 trim(),ltrim(),rtrim()</h2><p>trim（str，【去除的内容】）本身默认去除两边的空格（中间不行），但是也可以指定要去除的内容,是按指定的内容循环去除两边的内容，碰到一个不是目标字符为止<br>ltrim() 去除左边的   rtrim（）去除右边的</p>
+<h2 id="截取函数"><a href="#截取函数" class="headerlink" title="截取函数"></a>截取函数</h2><p>substr(字符串，起始位置从0开始，【长度】)：指定位置开始截取字符串，可以截取指定长度（不指定表示到最后）<br>strstr（字符串，匹配字符）：从指定字符开始截取，到最后（strrchr() - 查找指定字符在字符串中的最后一次出现，可以用来取文件后缀名：利用.）</p>
+<p><img src="/2019/01/29/PHP基础07-字符串/相关函数1.png" alt=""></p>
+<center>该函数区分大小写。如果想要不区分大小写，请使用 stristr()</center>
+
+<h2 id="大小转换函数"><a href="#大小转换函数" class="headerlink" title="大小转换函数"></a>大小转换函数</h2><p>strtolower — 将字符串转化为小写<br>strtoupper 将字符串转化为大写<br>Ucfirst（）首字母大写<br><img src="/2019/01/29/PHP基础07-字符串/相关函数2.png" alt=""><br>ucwords() - 将字符串中每个单词的首字母转换为大写</p>
+<h2 id="查找函数"><a href="#查找函数" class="headerlink" title="查找函数"></a>查找函数</h2><p>strpos（字符串，指定字符，起始位置）查找首次出现的位置</p>
+<ul>
+<li>起始位置如果是负数，搜索会从字符串结尾指定字符数开始。</li>
+<li>同时注意字符串位置是从0开始，而不是从1开始的。 如果没找到 needle，将返回 FALSE。 </li>
+</ul>
+<h2 id="替换函数"><a href="#替换函数" class="headerlink" title="替换函数"></a>替换函数</h2><p>str_replace(匹配目标，替换的内容，字符串):将目标字符串中部分字符串进行替换<br>str_ireplace — str_replace() 的忽略大小写版本</p>
+<h2 id="格式化函数"><a href="#格式化函数" class="headerlink" title="格式化函数"></a>格式化函数</h2><p>printf（） / sprintf（输出字符串有占位符，若干占位符）<br><img src="/2019/01/29/PHP基础07-字符串/相关函数3.png" alt=""></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>str_repeat(字符串，次数)<br>重复一个字符串（必须大于等于 0。如果 multiplier 被设置为 0，函数返回空字符串）<br>str_shuffle()随机打乱字符串</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/29/PHP基础06-错误处理相关/" rel="next" title="PHP基础06-错误处理相关（简）">
+                <i class="fa fa-chevron-left"></i> PHP基础06-错误处理相关（简）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/PHP基础08-数组及其相关函数/" rel="prev" title="PHP基础08-数组及其相关函数">
+                PHP基础08-数组及其相关函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串定义语法"><span class="nav-number">1.</span> <span class="nav-text">字符串定义语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构化定义字符串变量的规则"><span class="nav-number">2.</span> <span class="nav-text">结构化定义字符串变量的规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串转义"><span class="nav-number">3.</span> <span class="nav-text">字符串转义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串转义-1"><span class="nav-number">4.</span> <span class="nav-text">字符串转义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串长度问题"><span class="nav-number">5.</span> <span class="nav-text">字符串长度问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串相关函数"><span class="nav-number">6.</span> <span class="nav-text">字符串相关函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#转化函数：implode-explode-str-split"><span class="nav-number">6.1.</span> <span class="nav-text">转化函数：implode(),explode(),str_split</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#截取函数-trim-ltrim-rtrim"><span class="nav-number">6.2.</span> <span class="nav-text">截取函数 trim(),ltrim(),rtrim()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#截取函数"><span class="nav-number">6.3.</span> <span class="nav-text">截取函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大小转换函数"><span class="nav-number">6.4.</span> <span class="nav-text">大小转换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找函数"><span class="nav-number">6.5.</span> <span class="nav-text">查找函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换函数"><span class="nav-number">6.6.</span> <span class="nav-text">替换函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化函数"><span class="nav-number">6.7.</span> <span class="nav-text">格式化函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">6.8.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
