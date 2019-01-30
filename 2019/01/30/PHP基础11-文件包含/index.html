@@ -96,24 +96,34 @@
 
 
 
-  <meta name="description" content="流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写) 控制分类：1.顺序2.分支 if{}else{}  if{}elseif{}lese{} switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行1.条件一定时一个具体的值2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch">
+  <meta name="description" content="文件包含原理 文件加载原理php代码的执行流程 读取代码文件（PHP程序） 编译：将PHP代码转换成字节码（生成opcode） zendengine来解析opcode，按照字节码去进行逻辑运算 转换成对应的html代码文件加载原理 在文件加载（include或者require）的时候，系统会自动的将被包含文件中的代码相当于嵌入到当前文件中 加载位置：在哪加载，对应的文件中的代码嵌入的位置，就是对应">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP基础04-流程控制">
-<meta property="og:url" content="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/index.html">
+<meta property="og:title" content="PHP基础11-文件包含">
+<meta property="og:url" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写) 控制分类：1.顺序2.分支 if{}else{}  if{}elseif{}lese{} switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行1.条件一定时一个具体的值2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch">
+<meta property="og:description" content="文件包含原理 文件加载原理php代码的执行流程 读取代码文件（PHP程序） 编译：将PHP代码转换成字节码（生成opcode） zendengine来解析opcode，按照字节码去进行逻辑运算 转换成对应的html代码文件加载原理 在文件加载（include或者require）的时候，系统会自动的将被包含文件中的代码相当于嵌入到当前文件中 加载位置：在哪加载，对应的文件中的代码嵌入的位置，就是对应">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-28T06:45:15.343Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/文件1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/文件2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/文件3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/文件4.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/绝对.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/相对.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/嵌套1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/嵌套2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/嵌套3.png">
+<meta property="og:updated_time" content="2019-01-30T00:07:47.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP基础04-流程控制">
-<meta name="twitter:description" content="流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写) 控制分类：1.顺序2.分支 if{}else{}  if{}elseif{}lese{} switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行1.条件一定时一个具体的值2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch">
+<meta name="twitter:title" content="PHP基础11-文件包含">
+<meta name="twitter:description" content="文件包含原理 文件加载原理php代码的执行流程 读取代码文件（PHP程序） 编译：将PHP代码转换成字节码（生成opcode） zendengine来解析opcode，按照字节码去进行逻辑运算 转换成对应的html代码文件加载原理 在文件加载（include或者require）的时候，系统会自动的将被包含文件中的代码相当于嵌入到当前文件中 加载位置：在哪加载，对应的文件中的代码嵌入的位置，就是对应">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/文件1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/">
+  <link rel="canonical" href="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/">
 
 
 
@@ -123,7 +133,7 @@
   };
 </script>
 
-  <title>PHP基础04-流程控制 | Hexo</title>
+  <title>PHP基础11-文件包含 | Hexo</title>
   
 
 
@@ -356,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lh">
@@ -373,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PHP基础04-流程控制
+          <h1 class="post-title" itemprop="name headline">PHP基础11-文件包含
 
               
             
@@ -399,24 +409,12 @@
                 
               
 
-              <time title="Post created: 2019-01-27 20:05:03" itemprop="dateCreated datePublished" datetime="2019-01-27T20:05:03+08:00">2019-01-27</time>
+              <time title="Post created: 2019-01-30 07:52:54 / Updated at: 08:07:47" itemprop="dateCreated datePublished" datetime="2019-01-30T07:52:54+08:00">2019-01-30</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-01-28 14:45:15" itemprop="dateModified" datetime="2019-01-28T14:45:15+08:00">2019-01-28</time>
               
             
           </span>
@@ -467,19 +465,25 @@
       
 
       
-        <p>流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写)</p>
-<h1 id="控制分类："><a href="#控制分类：" class="headerlink" title="控制分类："></a>控制分类：</h1><h2 id="1-顺序"><a href="#1-顺序" class="headerlink" title="1.顺序"></a>1.顺序</h2><h2 id="2-分支"><a href="#2-分支" class="headerlink" title="2.分支"></a>2.分支</h2><ul>
-<li>if{}else{}  if{}elseif{}lese{}</li>
-<li>switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行<br>1.条件一定时一个具体的值<br>2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch 并希望 continue 到外层循环中的下一轮循环，用 continue 2。<br>3.case 表达式可以是任何求值为简单类型的表达式，即整型或浮点数以及字符串。不能用数组或对象，除非它们被解除引用成为简单类型。</li>
-</ul>
-<h2 id="3-循环"><a href="#3-循环" class="headerlink" title="3.循环"></a>3.循环</h2><ol>
-<li>for循环 通过条件、起始和终止判断执行</li>
-<li>while循环  通过判断条件终止</li>
-<li>do-while 跟while差不多</li>
-<li>foreach：针对数组</li>
+        <p>文件包含原理</p>
+<h1 id="文件加载原理"><a href="#文件加载原理" class="headerlink" title="文件加载原理"></a>文件加载原理</h1><h2 id="php代码的执行流程"><a href="#php代码的执行流程" class="headerlink" title="php代码的执行流程"></a>php代码的执行流程</h2><ol>
+<li>读取代码文件（PHP程序）</li>
+<li>编译：将PHP代码转换成字节码（生成opcode）</li>
+<li>zendengine来解析opcode，按照字节码去进行逻辑运算</li>
+<li>转换成对应的html代码<h2 id="文件加载原理-1"><a href="#文件加载原理-1" class="headerlink" title="文件加载原理"></a>文件加载原理</h2></li>
+<li>在文件加载（include或者require）的时候，系统会自动的将被包含文件中的代码相当于嵌入到当前文件中</li>
+<li>加载位置：在哪加载，对应的文件中的代码嵌入的位置，就是对应的include的位置</li>
+<li>在PHP中被包含的文件是单独进行编译的</li>
 </ol>
-<h1 id="循环控制-continue，-break"><a href="#循环控制-continue，-break" class="headerlink" title="循环控制  continue， break"></a>循环控制  continue， break</h1><p><center><strong>其中内部循环也可以控制到外部循环，就是通过使用层级参数</strong></center><br>Contine2 当前自己循环后面内部不再执行，同时外部循环体也不再执行，重新来过。<br>Break2  当前自己循环结束，同时外部也结束（如果还有外部不受影响）</p>
-<h1 id="程控制替代语法"><a href="#程控制替代语法" class="headerlink" title="程控制替代语法"></a>程控制替代语法</h1><p>流程控制普代语法：分支和循环的替代语法<br>{使用：替代<br>}使用end+对应的其他标记替代<br>如if（）{}替代为 if():end if</p>
+<p><strong>php文件在编译的过程中如果出现了语法错误，那么会失败（不会执行）但是如果被包含文件有错误的时候，系统会在执行到include这条语句的才会报错</strong></p>
+<h2 id="include和include-once的区别-require和require-once的区别相同）"><a href="#include和include-once的区别-require和require-once的区别相同）" class="headerlink" title="include和include_once的区别(require和require_once的区别相同）"></a>include和include_once的区别(require和require_once的区别相同）</h2><p>include 系统碰到一次，执行一次；如果对同一个文件进行多次加载，那么系统会执行多次<br><img src="/2019/01/30/PHP基础11-文件包含/文件1.png" alt=""><br>//系统提示常量重名<br><br><br>include_once 系统碰到多次也只会执行一次，如果文件已被包含过，则不在执行<br><img src="/2019/01/30/PHP基础11-文件包含/文件2.png" alt=""><br>系统发现已经被包含过，故不执行包含文件，没有报错</p>
+<h2 id="require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样"><a href="#require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样" class="headerlink" title="require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样"></a>require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样</h2><p>include的错误级别较轻，不会影响后面代码的执行<br><img src="/2019/01/30/PHP基础11-文件包含/文件3.png" alt=""><br><br><br>reqire的错误级别较高，会影响后面代码的执行<br><img src="/2019/01/30/PHP基础11-文件包含/文件4.png" alt=""></p>
+<h2 id="文件加载路径"><a href="#文件加载路径" class="headerlink" title="文件加载路径"></a>文件加载路径</h2><p>文件在加载的时候需要指定文件路径才能保证PHP正确的找到对应的文件<br>文件的加载路径包含两大类</p>
+<h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><ol>
+<li>从磁盘的根路径开始（本地绝对路径）<br>windows：盘符（如C）:/路径/PHP文件<br>linux：/路径/PHP文件</li>
+<li>从网站的跟目录开始（网络绝对路径）<br>/：相对于网站主机名字对应的路径<br>localhost/index.php-&gt;假设E:/server/apache/htdocs/index.php<br><img src="/2019/01/30/PHP基础11-文件包含/绝对.png" alt=""><h3 id="相对路径：从当前文件所在的目录开始的路径"><a href="#相对路径：从当前文件所在的目录开始的路径" class="headerlink" title="相对路径：从当前文件所在的目录开始的路径"></a>相对路径：从当前文件所在的目录开始的路径</h3>.或者./都表示当前文件夹<br>../表示上级目录（当前文件夹的上一层文件夹）<br><img src="/2019/01/30/PHP基础11-文件包含/相对.png" alt=""><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3>1.绝对路径相对效率偏低，但是相对安全（路径不会出问题）<br>2.相对路径相对效率高些，但是容易出错（相对路径会发生改变）</li>
+</ol>
+<h2 id="文件嵌套包含"><a href="#文件嵌套包含" class="headerlink" title="文件嵌套包含"></a>文件嵌套包含</h2><p>文件嵌套包含：一个文件包含另外一个文件，同时被包含文件又包含了另一个文件<br><img src="/2019/01/30/PHP基础11-文件包含/嵌套1.png" alt=""><br><br><br>嵌套包含的时候容易出现相对路径出错的问题：相对路径会因为文件的包含而改变（./或者../）：windows下，每一个文件夹都有.和 ..的文件夹<br><img src="/2019/01/30/PHP基础11-文件包含/嵌套2.png" alt=""><br><br><br>如果去掉./  就不会出错<br><img src="/2019/01/30/PHP基础11-文件包含/嵌套3.png" alt=""></p>
 
       
     </div>
@@ -510,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/27/PHP基础03-运算符/" rel="next" title="PHP基础03-运算符">
-                <i class="fa fa-chevron-left"></i> PHP基础03-运算符
+              <a href="/2019/01/30/PHP基础10-数组排序/" rel="next" title="PHP基础10-数组排序与查找（简）">
+                <i class="fa fa-chevron-left"></i> PHP基础10-数组排序与查找（简）
               </a>
             
           </div>
@@ -519,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/29/PHP基础05-函数/" rel="prev" title="PHP基础05-函数">
-                PHP基础05-函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -647,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#控制分类："><span class="nav-number">1.</span> <span class="nav-text">控制分类：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-顺序"><span class="nav-number">1.1.</span> <span class="nav-text">1.顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-分支"><span class="nav-number">1.2.</span> <span class="nav-text">2.分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-循环"><span class="nav-number">1.3.</span> <span class="nav-text">3.循环</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环控制-continue，-break"><span class="nav-number">2.</span> <span class="nav-text">循环控制  continue， break</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程控制替代语法"><span class="nav-number">3.</span> <span class="nav-text">程控制替代语法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件加载原理"><span class="nav-number">1.</span> <span class="nav-text">文件加载原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#php代码的执行流程"><span class="nav-number">1.1.</span> <span class="nav-text">php代码的执行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件加载原理-1"><span class="nav-number">1.2.</span> <span class="nav-text">文件加载原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#include和include-once的区别-require和require-once的区别相同）"><span class="nav-number">1.3.</span> <span class="nav-text">include和include_once的区别(require和require_once的区别相同）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样"><span class="nav-number">1.4.</span> <span class="nav-text">require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件加载路径"><span class="nav-number">1.5.</span> <span class="nav-text">文件加载路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#绝对路径"><span class="nav-number">1.5.1.</span> <span class="nav-text">绝对路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相对路径：从当前文件所在的目录开始的路径"><span class="nav-number">1.5.2.</span> <span class="nav-text">相对路径：从当前文件所在的目录开始的路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对比"><span class="nav-number">1.5.3.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件嵌套包含"><span class="nav-number">1.6.</span> <span class="nav-text">文件嵌套包含</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/相关函数1.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/相关函数2.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/相关函数3.png">
-<meta property="og:updated_time" content="2019-01-29T08:44:05.858Z">
+<meta property="og:updated_time" content="2019-01-29T23:53:54.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP基础07-字符串">
 <meta name="twitter:description" content="字符串  字符串定义语法 单引号字符串 双引号字符串比较适合定义那些比较短（不超过一行）或者没有结构要求的字符串，如果有结构要求或者内容超过一行，可以使用以下两种结构定义 nowdoc字符串：没有单引号的单引号字符串$str=&amp;lt;&amp;lt;&amp;lt;’边界符’字符串内容边界符 heredoc字符串：没有双引号的双引号字符串$str=&amp;lt;&amp;lt;&amp;lt;边界符字符串内容边界符  结构不会发生变化">
@@ -412,12 +412,24 @@
                 
               
 
-              <time title="Post created: 2019-01-29 15:43:54 / Updated at: 16:44:05" itemprop="dateCreated datePublished" datetime="2019-01-29T15:43:54+08:00">2019-01-29</time>
+              <time title="Post created: 2019-01-29 15:43:54" itemprop="dateCreated datePublished" datetime="2019-01-29T15:43:54+08:00">2019-01-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-01-30 07:53:54" itemprop="dateModified" datetime="2019-01-30T07:53:54+08:00">2019-01-30</time>
               
             
           </span>
@@ -487,7 +499,7 @@
 <ul>
 <li>结构化定义字符串的内部（边界符之间）的所有内容都是字符串本身<br><img src="/2019/01/29/PHP基础07-字符串/结构化定义.png" alt=""></li>
 </ul>
-<h1 id="字符串转义"><a href="#字符串转义" class="headerlink" title="字符串转义"></a>字符串转义</h1><p>转义的含义：在计算机通用协议中，有一些特定的方式定义的字母，系统会特定处理；通常这种方式都是使用反斜杠+字母（单词）的特性<br>\r    \n:回车换行<br>PHP在识别转义字符的时候也是使用同样的模式：反斜杠+字母<br>在PHP中系统常用的转义符号<br>\’  在单引号字符串中显示单引号<br>\”在双引号字符串中显示双引号<br>\r代表回车（理论上回到当前行的首位置）<br>\n代表新一行<br>\t 类似TAB键，输出四个空格<br>\$ 在PHP中使用$符号作为变量符号，因此需要特定识别<br>单引号与双引号区别：</p>
+<h1 id="字符串转义"><a href="#字符串转义" class="headerlink" title="字符串转义"></a>字符串转义</h1><p>转义的含义：在计算机通用协议中，有一些特定的方式定义的字母，系统会特定处理；通常这种方式都是使用反斜杠+字母（单词）的特性<br>\r    \n:回车换行<br>PHP在识别转义字符的时候也是使用同样的模式：反斜杠+字母<br>在PHP中系统常用的转义符号<br>\’  在单引号字符串中显示单引号<br>\”在双引号字符串中显示双引号<br>\r代表回车（理论上回到当前行的首位置）<br>\n代表新一行          （\r与\n配合就可以表示换行）<br>\t 类似TAB键，输出四个空格<br>\$ 在PHP中使用$符号作为变量符号，因此需要特定识别<br>单引号与双引号区别：</p>
 <ol>
 <li>单引号中能识别\‘（因为在单引号中出现没有转义的’会有误解，发生错误），而双引号仅不能识别\’（因为在双引号中‘能正确使用不会有误解）<br><img src="/2019/01/29/PHP基础07-字符串/转义1.png" alt=""><br><center>因为单引号中$没有变量意义，所以/$ 原样输出</center><br><center>因为双引号中$有变量意义，所以能识别/$转义成没有意义的$输出</center><br><br></li>
 <li>双引号中因为能够识别$符号，所以双引号中可以解析变量，而单引号不可以。（故）<br><img src="/2019/01/29/PHP基础07-字符串/转义2.png" alt=""></li>
@@ -630,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
