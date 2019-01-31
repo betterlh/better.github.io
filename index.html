@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>A propos</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
         
@@ -353,6 +353,211 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/30/mysql01-相关基本概念/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/30/mysql01-相关基本概念/" class="post-title-link" itemprop="url">mysql01-相关基本概念</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-30 20:19:58 / Updated at: 20:49:57" itemprop="dateCreated datePublished" datetime="2019-01-30T20:19:58+08:00">2019-01-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数据库分类"><a href="#数据库分类" class="headerlink" title="数据库分类"></a>数据库分类</h1><h2 id="网络数据库"><a href="#网络数据库" class="headerlink" title="网络数据库"></a>网络数据库</h2><h2 id="层级数据库"><a href="#层级数据库" class="headerlink" title="层级数据库"></a>层级数据库</h2><p><strong>有且只有一个根节点</strong></p>
+<h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><p><strong>是建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据中的数据。</strong><br>数据库的另外一种区分方式：基于存储介质<br>存储介质：磁盘和内存</p>
+<p>关系型数据库：存储在磁盘中</p>
+<p>非关系型数据库，存储在内存中</p>
+<h1 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h1><p>基本概念：<br>关系数据库，是建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据库中的数据。现实世界中的各种实体以及实体之间的各种联系均用关系模型来表示。关系模型是由埃德加·科德于1970年首先提出的，并配合“科德十二定律”。现如今虽然对此模型有一些批评意见，但它还是数据存储的传统标准。标准数据查询语言SQL就是一种基于关系数据库的语言，这种语言执行对关系数据库中数据的检索和操作。 关系模型由关系数据结构、关系操作集合、关系完整性约束三部分组成</p>
+<ul>
+<li>关系数据结构：<br>指的是数据以什么方式来存储是一种二维表的形式存储<br>本质：二维表</li>
+<li>关系操作集合：<br>如何来关联和管理对应的存储数据，sql指令</li>
+<li><p>关系完整性约束：<br>数据内部有对应的关联关系，以及数据与数据之间也有对应的关联关系<br>表内约束：对应的具体列表只能放对应的数据（不能乱放）<br>表间约束：自然界各实体都是有着对应的关联关系（外键）</p>
+</li>
+<li><p>典型关系数据库<br>小型关系型数据库Microsoft Access，sqlite<br>中型关系型数据库 Microsoft SQL serve，MySQL<br>大型关系数据库 Oracle、DB2</p>
+</li>
+</ul>
+<h1 id="sql介绍"><a href="#sql介绍" class="headerlink" title="sql介绍"></a>sql介绍</h1><p>结构化查询语言(Structured Query Language)简称SQL(发音：/ˈes kjuː ˈel/ “S-Q-L”)，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件的扩展名。</p>
+<p>sql就是专门为关系型数据库而设计出来的</p>
+<h3 id="一：数据查询语言（DQL-Data-Query-Language）："><a href="#一：数据查询语言（DQL-Data-Query-Language）：" class="headerlink" title="一：数据查询语言（DQL:Data Query Language）："></a>一：数据查询语言（DQL:Data Query Language）：</h3><p>其语句，也称为“数据检索语句”，用以从表中获得数据，确定数据怎样在应用程序给出。保留字SELECT是DQL（也是所有SQL）用得最多的动词，其他DQL常用的保留字有WHERE，ORDER BY，GROUP BY和HAVING。这些DQL保留字常与其他类型的SQL语句一起使用。</p>
+<p>专门用于查询数据，代表指令为select/show</p>
+<h3 id="二：数据操作语言（DML：Data-Manipulation-Language）："><a href="#二：数据操作语言（DML：Data-Manipulation-Language）：" class="headerlink" title="二：数据操作语言（DML：Data Manipulation Language）："></a>二：数据操作语言（DML：Data Manipulation Language）：</h3><p>其语句包括动词INSERT，UPDATE和DELETE。它们分别用于添加，修改和删除表中的行。也称为动作查询语言。<br>专门用于写数据：代表指令为insert，update和delete</p>
+<h3 id="三：事务处理语言（TPL）："><a href="#三：事务处理语言（TPL）：" class="headerlink" title="三：事务处理语言（TPL）："></a>三：事务处理语言（TPL）：</h3><p>它的语句能确保被DML语句影响的表的所有行及时得以更新。TPL语句包括BEGIN TRANSACTION，COMMIT和ROLLBACK。<br>（不是所有的关系型数据库都提供事务安全处理）<br>专门用于事务安全处理，transaction</p>
+<h3 id="四：数据控制语言（DCL）："><a href="#四：数据控制语言（DCL）：" class="headerlink" title="四：数据控制语言（DCL）："></a>四：数据控制语言（DCL）：</h3><p>它的语句通过GRANT或REVOKE获得许可，确定单个用户和用户组对数据库对象的访问。某些RDBMS可用GRANT或REVOKE控制对表单个列的访问。<br>专门用于权限管理，代表指令为grant和revoke</p>
+<h3 id="五：数据定义语言（DDL）："><a href="#五：数据定义语言（DDL）：" class="headerlink" title="五：数据定义语言（DDL）："></a>五：数据定义语言（DDL）：</h3><p>其语句包括动词CREATE和DROP。在数据库中创建新表或删除表（CREAT TABLE 或 DROP TABLE）；为表加入索引等。DDL包括许多与人数据库目录中获得数据有关的保留字。它也是动作查询的一部分。<br>它是专门用于结构管理：代表指令 create和drop（alter）</p>
+<h3 id="六：指针控制语言（CCL）："><a href="#六：指针控制语言（CCL）：" class="headerlink" title="六：指针控制语言（CCL）："></a>六：指针控制语言（CCL）：</h3><p>它的语句，像DECLARE CURSOR，FETCH INTO和UPDATE WHERE CURRENT用于对一个或多个表单独行的操作</p>
+<h2 id="mysql是一个关系型数据库管理系统"><a href="#mysql是一个关系型数据库管理系统" class="headerlink" title="mysql是一个关系型数据库管理系统"></a>mysql是一个关系型数据库管理系统</h2><p>1.是一种开源免费的数据库产品<br>2.mysql对PHP的支持是最好的（wamp或者lamp）<br>MySQL中用到的操作指令就是sql’指令</p>
+<h2 id="m"><a href="#m" class="headerlink" title="m"></a>m</h2><p>mysql服务端的架构<br>mysql服务端架构有以下几层构成</p>
+<ol>
+<li>数据库管理系统（最外层）：DBMS，专门管理服务器端的所有内容</li>
+<li>数据库（第二层）：DB，专门用于存储数据的仓库（可以有很多个）</li>
+<li>二维表（第三层）：table，专门用于存储具体实体的数据</li>
+<li>字段（第四层）：filed，具体存储某种类型的数据（实际存储单元）<br>数据库中常用的几个关键字<br>row：行<br>column：列（filed）<br>ysql是一种C/S结构，客户端和服务器<br>服务器对应的软件：mysqld.exe<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2>命令行方式<br>通过windows下打开cmd控制器，然后使用命令进行管理<br>net.start服务：开启服务<br>net stop mysql：关闭服务<br>前提是：在安装mysql 的时候将mysql添加到windows的服务去了<br>方式1进入服务</li>
+</ol>
+<p><img src="/2019/01/30/mysql01-相关基本概念/服务.png" alt=""><br><br><br>方式2进入服务：通过命令行：services.msc<br><img src="/2019/01/30/mysql01-相关基本概念/服务2.png" alt=""><br>通过服务对mysql服务器进行管理</p>
+<h2 id="登入和提出mysql系统"><a href="#登入和提出mysql系统" class="headerlink" title="登入和提出mysql系统"></a>登入和提出mysql系统</h2><p>通过客户端（mysql.exe）与服务器进行连接认证，就可以进行操作<br>通常，服务端与客户端不在同一台大电脑上</p>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>1.找到mysql（通过cmd控制台：如果在安装的时候指定了mysql.exe所在的路径为环境变量就可以直接访问；如果没有，那么就必须进入到mysql所在的安装目录底下的bin）<br>2.输入对应的服务器地址：-h :host   -h[IP地址/域名]<br>3.输入服务器中mysql监听的端口：-P（大写）：post  -P：3306<br>4.提供输入用户名：-u：username   -u：root<br>5.输入密码：-p（小写）：password  -p：root</p>
+<h3 id="连接认证基本语法："><a href="#连接认证基本语法：" class="headerlink" title="连接认证基本语法："></a>连接认证基本语法：</h3><p>mysql.exe/mysql （空格） -h主机地址 （空格） -P端口 （空格） -u用户吗 （空格）-p 密码<br><img src="/2019/01/30/mysql01-相关基本概念/连接1.png" alt=""></p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ol>
+<li>通常端口都可以默认：mysql监听的端口通常都是3306</li>
+<li>密码的输入可以先输入-p，直接换行，然后再以密文方式输入密码<br><img src="/2019/01/30/mysql01-相关基本概念/连接2.png" alt=""></li>
+</ol>
+<h2 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h2><p>断开与服务器的连接：通常mysql提供的服务器数量有限，一旦客户端用完，建议就应该断开连接</p>
+<p>建议方式：使用sql提供的指令<br>exit；  //exit带封号<br>\q<br><img src="/2019/01/30/mysql01-相关基本概念/退出.png" alt=""><br>quit</p>
+<h1 id="mysql服务端的架构"><a href="#mysql服务端的架构" class="headerlink" title="mysql服务端的架构"></a>mysql服务端的架构</h1><h2 id="mysql服务端架构有以下几层构成"><a href="#mysql服务端架构有以下几层构成" class="headerlink" title="mysql服务端架构有以下几层构成"></a>mysql服务端架构有以下几层构成</h2><ol>
+<li>数据库管理系统（最外层）：DBMS，专门管理服务器端的所有内容</li>
+<li>数据库（第二层）：DB，专门用于存储数据的仓库（可以有很多个）</li>
+<li>二维表（第三层）：table，专门用于存储具体实体的数据</li>
+<li>字段（第四层）：filed，具体存储某种类型的数据（实际存储单元）<h2 id="数据库中常用的几个关键字"><a href="#数据库中常用的几个关键字" class="headerlink" title="数据库中常用的几个关键字"></a>数据库中常用的几个关键字</h2>row：行<br>column：列（filed）</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -391,7 +596,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -417,7 +622,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -569,7 +774,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -595,7 +800,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -735,7 +940,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -773,7 +978,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -919,7 +1124,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -945,7 +1150,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1130,7 +1335,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -1168,7 +1373,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1351,7 +1556,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -1377,7 +1582,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1538,7 +1743,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -1564,7 +1769,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1764,7 +1969,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -1802,7 +2007,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1948,7 +2153,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -1974,7 +2179,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -2085,208 +2290,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/26/PHP基础02-数据类型/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/26/PHP基础02-数据类型/" class="post-title-link" itemprop="url">PHP基础02-数据类型</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-01-26 20:21:39" itemprop="dateCreated datePublished" datetime="2019-01-26T20:21:39+08:00">2019-01-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-01-27 15:55:02" itemprop="dateModified" datetime="2019-01-27T15:55:02+08:00">2019-01-27</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>数据类型<br>在PHP中指的是存储的数据本身的类型，而不是变量的类型。PHP是一种弱类型语言，变量本身没有数据类型</p>
-<h2 id="三大类八小类："><a href="#三大类八小类：" class="headerlink" title="三大类八小类："></a>三大类八小类：</h2><h3 id="简单（基本）数据类型：4个小类"><a href="#简单（基本）数据类型：4个小类" class="headerlink" title="简单（基本）数据类型：4个小类"></a>简单（基本）数据类型：4个小类</h3><p>整型：int/integer，系统分配4个字节存储，表示整数类型（存的下的话）<br>浮动型float/double ，系统分配8个字节存储，标识小数或者整形存不下的整数<br>字符串型：string ，系统根据实际长度分配，表示字符串（引号）<br>布尔类型bool/boolea，表示布尔类型，只有两个值： true 和 false</p>
-<h3 id="复合数据类型：2个小类"><a href="#复合数据类型：2个小类" class="headerlink" title="复合数据类型：2个小类"></a>复合数据类型：2个小类</h3><p>对象类型 objet，存放对象（面向对象）<br>数组类型：array一次性存放多个数据</p>
-<h3 id="特殊数据类型：2个小类"><a href="#特殊数据类型：2个小类" class="headerlink" title="特殊数据类型：2个小类"></a>特殊数据类型：2个小类</h3><p>资源类型：resource，存放资源数据（PHP外部数据，如数据库，文件）<br>空类型：NULL，只有一个值就是NULL（不能运算0</p>
-<h2 id="整形类型"><a href="#整形类型" class="headerlink" title="整形类型"></a>整形类型</h2><h3 id="整数类型：保存整数数值（范围限制），4个字节存储数据，最大就是32位，42亿多，但是在PHP中默认是有符号类型（区分正负数）"><a href="#整数类型：保存整数数值（范围限制），4个字节存储数据，最大就是32位，42亿多，但是在PHP中默认是有符号类型（区分正负数）" class="headerlink" title="整数类型：保存整数数值（范围限制），4个字节存储数据，最大就是32位，42亿多，但是在PHP中默认是有符号类型（区分正负数）"></a>整数类型：保存整数数值（范围限制），4个字节存储数据，最大就是32位，42亿多，但是在PHP中默认是有符号类型（区分正负数）</h3><p>在PHP中提供了四种整形的定义方式：十进制定义，二进制定义，八进制，和十六进制定义。    （PHP默认输出为十进制）<br><img src="/2019/01/26/PHP基础02-数据类型/整形.png" alt=""><br>$a=120     //十进制<br>$a=0b110   //二进制<br>$a=0120  //八进制<br>$a=0x120  //十六进制</p>
-<h3 id="进制转换函数（参考）："><a href="#进制转换函数（参考）：" class="headerlink" title="进制转换函数（参考）："></a>进制转换函数（参考）：</h3><p>string decbin ( int $number )十进制转二进制<br>string decoct ( int $number )十进制转八进制<br>string dechex ( int $number )十进制转十六进制<br>同理反过来也可以使用<br>number bindec ( string $binary_string )二进制转十进制<br>string bin2hex ( string $str )二进制准啊十六进制<br>等等…<br><img src="/2019/01/26/PHP基础02-数据类型/进制转换.png" alt=""></p>
-<h2 id="浮点类型"><a href="#浮点类型" class="headerlink" title="浮点类型"></a>浮点类型</h2><p>浮点型：小数类型以及超过整型所能存储范围的整数(不保证精度)，精度范围大概在15个有效数字左右  （整型超过最大存储值时变成浮点型）</p>
-<h3 id="浮点型定义有两种方式"><a href="#浮点型定义有两种方式" class="headerlink" title="浮点型定义有两种方式"></a>浮点型定义有两种方式</h3><p>$f=1.23<br>$f=1.23e10  //其中e表示底数10<br><img src="/2019/01/26/PHP基础02-数据类型/浮点1.png" alt=""></p>
-<h3 id="浮点数不宜做精确判断："><a href="#浮点数不宜做精确判断：" class="headerlink" title="浮点数不宜做精确判断："></a>浮点数不宜做精确判断：</h3><p>浮动数保存的数据不够精确，而且在计算机中凡是小数基本上存的都不精确<br><img src="/2019/01/26/PHP基础02-数据类型/浮点2.png" alt=""></p>
-<h3 id="为何浮点数能表示更大的的数据"><a href="#为何浮点数能表示更大的的数据" class="headerlink" title="为何浮点数能表示更大的的数据"></a>为何浮点数能表示更大的的数据</h3><p><img src="/2019/01/26/PHP基础02-数据类型/浮点3.png" alt=""></p>
-<h2 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h2><p>两个值true 和false通常用于做判断<br><img src="/2019/01/26/PHP基础02-数据类型/布尔.png" alt=""></p>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h3 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h3><p>1自动转换：系统根据需求自己判定，自己转换（用的比较多，效率比较低）<br>2强制（手动）转换：在变量之前增加一个括号（），在里面写上对应的类型：int/float……其中NULL类型用到unset（）<br>在转换过程中，用的比较多的是转布尔类型（判断）和转数值类型（算术运算）<br><img src="/2019/01/26/PHP基础02-数据类型/类型转换方式.png" alt=""></p>
-<h3 id="其他类型转布尔："><a href="#其他类型转布尔：" class="headerlink" title="其他类型转布尔："></a>其他类型转布尔：</h3><p>true或者false（少）<br><img src="/2019/01/26/PHP基础02-数据类型/类型转换.png" alt=""></p>
-<h3 id="其他类型转数值："><a href="#其他类型转数值：" class="headerlink" title="其他类型转数值："></a>其他类型转数值：</h3><ol>
-<li>布尔true为1，false为0</li>
-<li>字符串转数值的规则</li>
-</ol>
-<ul>
-<li>以字母开头的字符串，永远为0</li>
-<li>以数字开头的字符串，取到碰到字符串为止<br>（不会同时包含两个小数点）</li>
-</ul>
-<h2 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断;"></a>类型判断;</h2><p>通过一组类型判断函数，来判断变量，最终返回这个变量所保存数据的数据类型（相同结果为true，不同为false），<br>是一组以is_开头后面跟类型名字的函数：is_xxx（函数名）<br> <strong> bool类型不能用echo来查看（无法判断true指的是字符串还是布尔类型），可以使用var_dump结构查看  var_dump()</strong><br><img src="/2019/01/26/PHP基础02-数据类型/类型判断.png" alt=""></p>
-<h2 id="获取以及设定数据（变量）的类型"><a href="#获取以及设定数据（变量）的类型" class="headerlink" title="获取以及设定数据（变量）的类型"></a>获取以及设定数据（变量）的类型</h2><p>还有一组函数可以用来获取以及设定数据（变量）的类型<br>Gettype（变量名）：获取类型，得到的是该类型对应的字符串<br>Settype（变量名，类型）：设定数据类型：与强制转换不同</p>
-<ol>
-<li><p>强制转换：（类型）变量名，是对数据值赋值的内容进行处理(不会处理实际存储的内容)<br><img src="/2019/01/26/PHP基础02-数据类型/获取类型1.png" alt=""><br>可以看到$a实际存储没有改变</p>
-</li>
-<li><p>Settype会改变实际存储的内容<br><img src="/2019/01/26/PHP基础02-数据类型/获取类型2.png" alt=""> 如下图可以看到$b的已经被转换成string类型（改变了实际存储的内容）<br><img src="/2019/01/26/PHP基础02-数据类型/获取类型3.png" alt=""></p>
-</li>
-</ol>
-<h2 id="为空判断"><a href="#为空判断" class="headerlink" title="为空判断"></a>为空判断</h2><h3 id="bool-empty-mixed-var"><a href="#bool-empty-mixed-var" class="headerlink" title="bool empty ( mixed $var )"></a>bool empty ( mixed $var )</h3><p>判断一个变量是否被认为是空的。当一个变量并不存在，或者它的值等同于FALSE，那么它会被认为不存在。如果变量不存在的话，empty()并不会产生警告。</p>
-<h3 id="bool-isset-mixed-var-mixed-…"><a href="#bool-isset-mixed-var-mixed-…" class="headerlink" title="bool isset ( mixed $var [, mixed $… ] )"></a>bool isset ( mixed $var [, mixed $… ] )</h3><p>检测变量是否设置，并且不是 NULL。<br>如果已经使用 unset() 释放了一个变量之后，它将不再是 isset()。若使用 isset() 测试一个被设置成 NULL 的变量，将返回 FALSE。同时要注意的是一个 NULL 字节（”\0”）并不等同于 PHP 的 NULL 常数。<br><img src="/2019/01/26/PHP基础02-数据类型/为空判断.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2334,8 +2337,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -2351,8 +2354,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -2404,7 +2409,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -2412,7 +2417,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 
