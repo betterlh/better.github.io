@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Accueil</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>A propos</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
 
   </li>
         
@@ -353,6 +353,606 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础05-函数/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/29/PHP基础05-函数/" class="post-title-link" itemprop="url">PHP基础05-函数</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-29 13:05:27 / Updated at: 15:16:50" itemprop="dateCreated datePublished" datetime="2019-01-29T13:05:27+08:00">2019-01-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="函数的基本概念"><a href="#函数的基本概念" class="headerlink" title="函数的基本概念"></a>函数的基本概念</h1><p>函数：function，是一种语法结构，将实现某一种功能的代码块（多行代码）分装到一个结构中，从而实现代码的重复利用（复用）</p>
+<h1 id="函数定义语法"><a href="#函数定义语法" class="headerlink" title="函数定义语法"></a>函数定义语法</h1><p>函数有几个对应的关键点：function关键字、函数值、参数（形参和实参），函数体和返回值<br>基本语法如下：<br>function 函数名（参数）{<br>        //函数体<br>        //返回值：return结果<br>}<br>定义函数的目的：是为了实现代码的重复利用，一个功能一个函数<br><img src="/2019/01/29/PHP基础05-函数/函数定义.png" alt=""></p>
+<h1 id="函数的使用："><a href="#函数的使用：" class="headerlink" title="函数的使用："></a>函数的使用：</h1><p>通过访问函数的名字+（）<br>//如果函数在定义的过程中有参数，那么在调用的时候必须传入对应的参数<br><img src="/2019/01/29/PHP基础05-函数/函数使用.png" alt=""></p>
+<h1 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h1><p>函数是一种结构不会自动执行，只有调用才会执行<br>函数是在代码执行阶段，碰到函数名字的时候才会调用，不是在编译阶段<br>函数调用的特点：只要系统在内存中能够找到对应的函数，就可以执行（）函数的调用可以在函数定义之前<br><img src="/2019/01/29/PHP基础05-函数/函数调用.png" alt=""></p>
+<h1 id="函数执行的内存分析"><a href="#函数执行的内存分析" class="headerlink" title="函数执行的内存分析"></a>函数执行的内存分析</h1><ol>
+<li>读取代码进入代码段（编译：将代码编译字节码存储到内存）</li>
+<li>根据代码逐行执行，（上图代码中先调用函数再执行不会报错：调用的时候已经能在内存中找到这个函数）</li>
+</ol>
+<p>以上原因：编译和执行是分开的（先编译后执行）</p>
+<h1 id="函数命名规范"><a href="#函数命名规范" class="headerlink" title="函数命名规范"></a>函数命名规范</h1><p>命名规范：由字母、数字、下划线组成，但是不能以数字开头<br>函数作为一种常用的结构，一般遵循以下规则：函数通常名字代表着函数的功能，而有些功能会比较复杂，可能一个单词不足以表示，需要多个组合</p>
+<ol>
+<li>驼峰法：除了左边第一个单词外，后面所有的单词首字母大写：showParentInfo（）</li>
+<li>下划线法：单词之间通过下划线连接，单词都是小写show_parent_info（）</li>
+</ol>
+<p>函数名字：在一个脚本周期中，不允许出现同名函数（通常在一个系统不会使用同名函数）</p>
+<h1 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h1><p>函数的参数分为两种：形参和实参</p>
+<h2 id="形参"><a href="#形参" class="headerlink" title="形参"></a>形参</h2><p>形式参数，不具有实际意义的参数，是在函数定义时使用的参数</p>
+<h2 id="实参"><a href="#实参" class="headerlink" title="实参"></a>实参</h2><p>实际参数，具有实际数据意义的参数，是在函数调用的时候使用的参数<br>形参是实参的载体，实参在调用时通常是需要传入到函数内部参与计算（运算）,那么需要在函数内部去找到实际数据所在的位置，才能找到数据本身：需要实际调用的时候，将数据与实参形式传递给形参，给形参赋值，从而使得函数内部可以用到外部数据<br><img src="/2019/01/29/PHP基础05-函数/参数详解.png" alt=""><br>注意：<br>1.在PHP中允许实参多于形参（个数）函数内部不用而已，不会报错<br>2.在PHP中理论上形参个数没有限制（实际开发不会太多）<br>3.实参不能少于形参</p>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>默认值：defeat value，指的是形参的默认值，在函数定义的时候，就给形参进行一个初始赋值：如果实际调用传入的参数（实参）没有提供，那么形参的值就使用初始赋值来进入函数内部参与运算<br><img src="/2019/01/29/PHP基础05-函数/默认值.png" alt=""><br>注意是值传递，num1的值不变</p>
+<p>通常默认值是用在一些，一定会有某个数据参与，但是可能是某个我们知道的值<br>注意事项：<br>1.默认值的定义是放在最后的（多个），不能左边形参有默认值但是右边没有<br>2.函数外部定义的变量名字与函数定义的形参名字冲突（同名）是没有任何关联关系的<br>3.如果多个函数使用同样的形参名字也不冲突<br><br></p>
+<h1 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h1><ol>
+<li>值传递<br>实参在调用时会将值赋值给形参，那么实际上使用的方式是简单的值传递，将实参（数据或者变量或者常量或者其他表达式）的结果（值）取出赋值给形参：形参与外部实际传入的参数本身没有任何关联关系</li>
+<li>引用传递<br>有的时候，希望在函数内部拿到的外部数据，能在函数内部改变，函数才会在调用的时候去主动获取外部数据的内存地址。以上这种定义形式参数的方式叫做引用传值<br>基本定义语法<br>function函数名（形参1,&amp;形参2）{<pre><code>//函数名
+</code></pre>}<br>在调用的时候，必须给引用传值的参数位置传入实际参数，而且参数本身必须是变量。（变量才有指向的数据的内存地址）</li>
+</ol>
+<p><br><br><img src="/2019/01/29/PHP基础05-函数/参数传递.png" alt=""><br>对比发现$num1使用的是值传递（在函数调用后本身的值没有变化，只是在函数内部发生）  $num2用了取地址，是引用传递，函数内部的参数取到了$num2的地址，函数内部$num2值发生变化，外部也会发生变化<br><br><br>引用传值注意事项：<br>在传入实参的时候必须传入变量<br><img src="/2019/01/29/PHP基础05-函数/传值2.png" alt=""></p>
+<p><center>系统提示<br>致命错误：只有变量能够引用传递&lt; /center&gt;<br><br><br>函数返回值<br>PHP中函数都有返回值，默认返回NULL<br><img src="/2019/01/29/PHP基础05-函数/返回.png" alt=""><br>return关键字：</center></p>
+<ol>
+<li>return在函数内部存在的价值：返回当前函数的结果，当前函数运行结束</li>
+<li>函数还可以在文件中直接使用（不在函数里面）：代表文件将结果return后面跟的内容，转交给包含当前文件的位置，并终止后面的代码（通常在系统配置文件中使用较多）</li>
+</ol>
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><h2 id="作用域：变量（常量）能够被访问的区域"><a href="#作用域：变量（常量）能够被访问的区域" class="headerlink" title="作用域：变量（常量）能够被访问的区域"></a>作用域：变量（常量）能够被访问的区域</h2><ol>
+<li>变量可以在普通代码中定义</li>
+<li>变量也可以在函数内部定义<br>在php中作用域严格来说分为两种;但是PHP内部划定一一些在严格意义之外的一种，所有总共算3种</li>
+<li>全局变量：就是用户普通定义的变量（函数外部定义）<br>所全局空间：在PHP中只允许在全局空间使用：理论上函数内部不可访问<br>脚本周期：直到脚本运行结束（最后一行代码）</li>
+<li>局部变量：就是在函数内部定义的变量<br>所属当前函数空间：在PHP中只允许在当前函数自己内部使用<br>函数周期：函数执行结束（函数是在栈区中开辟独立内存空间运行）</li>
+<li>超全局变量：系统定义的变量（预定义变量：$_SERVER、$_POST等）<br>所超全局空间：没有访问限制（函数内外均可访问）<br><br><br><img src="/2019/01/29/PHP基础05-函数/作用域.png" alt=""><br><center>让局部访问全局（一般不使用）的办法</center><br>如果想函数内部是使用外部变量，除了$GLOBALS之外，通过参数传值（如果要统一值，还可以使用引用传值）</li>
+</ol>
+<p>在PHP中还有一种方式，能够实现全局访问局部，同时局部也可以访问全局：global关键字</p>
+<h2 id="global关键字："><a href="#global关键字：" class="headerlink" title="global关键字："></a>global关键字：</h2><p>是一种在函数里面定义变量的一种方式</p>
+<ol>
+<li>如果使用global定义的变量名在外部存在（全局变量），那么系统在函数内部定义的变量直接指向外部全局变量所指向的内存空间（同一个变量）</li>
+<li>如果使用global定义的变量名在外部不存在（全局变量），系统会自动在全局空间（外部）定义一个与局部变量同名的全局变量<br><img src="/2019/01/29/PHP基础05-函数/作用域2.png" alt=""><br>本质的形式：在函数的内部和外部，对一个同名变量（全局和局部）使用同一块内存地址保存数据，从而实现共同拥有。<br><br><br>基本语法<br>global 变量名；//不能赋值<br>变量名=值   //修改<br>虽然以上方式可以实现局部与全局的互访，但是通常不会这么用。一般如果会存在特殊使用，也会使用参数的形式来访问。（还可以使用常量：define定义的）</li>
+</ol>
+<h1 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h1><p>静态变量：static，是在函数内部定义的变量，使用static关键字修饰，用来实现跨函数共享数据的变量：函数运行结束后所有的局部变量会清空，如果重新运行一下函数，所有的局部变量又会重新初始化<br>function 函数名（）<br>{<br>    static $变量名=值  //通常会在定义的时候就赋值<br>}<br>静态变量的作用是为了跨函数共享数据（同一个函数被多次调用）<br><img src="/2019/01/29/PHP基础05-函数/静态.png" alt=""><br><br><br>静态变量的使用</p>
+<ol>
+<li>为了统计：当前函数被调用的次数（有没有替换方法）</li>
+<li>为了统筹函数多次调用得到的不同结果（递归思想）</li>
+</ol>
+<p><img src="/2019/01/29/PHP基础05-函数/静态.png" alt=""></p>
+<h1 id="可变函数"><a href="#可变函数" class="headerlink" title="可变函数"></a>可变函数</h1><p>可变函数：当前有一个变量所保存的值，刚好是一个函数的名字你，那么就可以使用变量+（）来充当函数名使用<br><br><br>定义：<br>$变量 = ‘display’<br>function display（）{<br>}<br>可变函数在系统使用的过程中还是比较多的，尤其是使用很多系统函数的时候：需要用户在外部定义一个自定义函数，但是是需要传入到系统函数内部使用。</p>
+<p><img src="/2019/01/29/PHP基础05-函数/可变.png" alt=""></p>
+<h1 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h1><p>基本概念<br>匿名函数：没有名字的函数<br>基本语法：<br>变量名=function（）{<br>    函数体<br>}<br><img src="/2019/01/29/PHP基础05-函数/匿名.png" alt=""><br><br><br>变量保存匿名函数，本质得到的是一个对象（closure）<br><img src="/2019/01/29/PHP基础05-函数/匿名2.png" alt=""></p>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><p>闭包closure，一词来源于以下两者的结合：要执行的代码块（由于自由变量被包含在代码块中，这些自由变量以及它们引用的对象没有被释放）和为自由变量提供绑定的计算环境（作用域）<br>简单理解：函数内部有一些局部变量（要执行的代码块）在执行之后没有被释放，是因为在函数内部还有对应的函数在引用（函数的内部函数：通常用匿名函数）<br><img src="/2019/01/29/PHP基础05-函数/闭包.png" alt=""><br>证明：函数的局部变量在函数使用完之后没有被释放？</p>
+<ol>
+<li>使用内部匿名函数</li>
+<li>匿名函数使用局部变量：use</li>
+<li>匿名函数被返回给外部使用<br><img src="/2019/01/29/PHP基础05-函数/闭包2.png" alt=""></li>
+</ol>
+<h1 id="伪类型"><a href="#伪类型" class="headerlink" title="伪类型"></a>伪类型</h1><p>伪类型：假类型，实际在PHP中不存在的类型，通过伪类型可以帮助程序员去更好的查看操作手册从而更方便学习<br>伪类型主要有两种：在三大类八小类之外<br>mixed：混合的，可以是多种PHP中的数据类型<br>number：数值的，可以是任意数值类型（整形和浮点型）</p>
+<h1 id="常用系统函数"><a href="#常用系统函数" class="headerlink" title="常用系统函数"></a>常用系统函数</h1><h2 id="有关输出的函数"><a href="#有关输出的函数" class="headerlink" title="有关输出的函数"></a>有关输出的函数</h2><p>print:类似于echo输出提供的内容，本质是一种结构（不是函数，）返回1，可以不需要使用括号<br>print_r：类似于var_dump，但是比var_dump简单，不会输出数据的类型，只会输出值（数组打印比较多）<br> <img src="/2019/01/29/PHP基础05-函数/输出函数.png" alt=""><br>注意图中的1是print返回的1被echo输出的</p>
+<h2 id="有关时间的函数："><a href="#有关时间的函数：" class="headerlink" title="有关时间的函数："></a>有关时间的函数：</h2><p>1.date ( string $format [, int $timestamp ] )<br>返回将整数 timestamp 按照给定的格式字串而产生的字符串。如果没有给出时间戳则使用本地当前时间。换句话说，timestamp 是可选的，默认值为 time()。<br>按照指定格式对对应的时间(从1970年格林威治时间开始计算的时间)，如果没有指定特定的时间戳，那么就是默认解释当前时间戳<br>time（）获取当前时间对应的时间戳<br><br><br>其中的参数format<br><img src="/2019/01/29/PHP基础05-函数/时间函数.png" alt=""></p>
+<p>2.microtime（）获取微妙级别的时间戳mixed microtime ([ bool $get_as_float ] )<br>microtime() 当前 Unix 时间戳以及微秒数。本函数仅在支持 gettimeofday() 系统调用的操作系统下可用。<br>如果调用时不带可选参数，本函数以 “msec sec” 的格式返回一个字符串，其中 sec 是自 Unix 纪元（0:00:00 January 1, 1970 GMT）起到现在的秒数，msec 是微秒部分。字符串的两部分都是以秒为单位返回的。<br>如果给出了 get_as_float 参数并且其值等价于 TRUE，microtime() 将返回一个浮点数。</p>
+<p><img src="/2019/01/29/PHP基础05-函数/时间函数2.png" alt=""><br>3.strtotime（）：按照规定格式的字符串转换为时间戳（将任何字符串的日期时间描述解析为 Unix 时间戳）<br><img src="/2019/01/29/PHP基础05-函数/时间函数3.png" alt=""></p>
+<h2 id="有关数学的函数"><a href="#有关数学的函数" class="headerlink" title="有关数学的函数"></a>有关数学的函数</h2><p>max()<br>min()<br>rand()得到一个指定区间的随机数（整数）<br>mt_rand：与rand一眼，只是底层结构不一样，效率比rand高（建议使用）<br>round()四舍五入<br>cell（）向上取整<br>floor()<br>pow():求指定数字的指定制数次结构，例如pow(2,8)=256<br>abs 求绝对值<br>sqrt 求平方</p>
+<h2 id="有关函数的函数"><a href="#有关函数的函数" class="headerlink" title="有关函数的函数"></a>有关函数的函数</h2><p>function_exists()判断指定的函数名字是否在内存中存在（帮助用户不去使用一个不存在的函数，让代码安全性更高）<br>func_get_arg()在自定义函数中去获取指定数值对应的参数<br>func_get_args()在自定义函数中去获取所有的参数（数组）<br>func_num_args():获取当前自定义函数的参数数量</p>
+<p><img src="/2019/01/29/PHP基础05-函数/有关函数的函数.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/27/PHP基础04-流程控制/" class="post-title-link" itemprop="url">PHP基础04-流程控制</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-27 20:05:03" itemprop="dateCreated datePublished" datetime="2019-01-27T20:05:03+08:00">2019-01-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-01-28 14:45:15" itemprop="dateModified" datetime="2019-01-28T14:45:15+08:00">2019-01-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写)</p>
+<h1 id="控制分类："><a href="#控制分类：" class="headerlink" title="控制分类："></a>控制分类：</h1><h2 id="1-顺序"><a href="#1-顺序" class="headerlink" title="1.顺序"></a>1.顺序</h2><h2 id="2-分支"><a href="#2-分支" class="headerlink" title="2.分支"></a>2.分支</h2><ul>
+<li>if{}else{}  if{}elseif{}lese{}</li>
+<li>switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行<br>1.条件一定时一个具体的值<br>2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch 并希望 continue 到外层循环中的下一轮循环，用 continue 2。<br>3.case 表达式可以是任何求值为简单类型的表达式，即整型或浮点数以及字符串。不能用数组或对象，除非它们被解除引用成为简单类型。</li>
+</ul>
+<h2 id="3-循环"><a href="#3-循环" class="headerlink" title="3.循环"></a>3.循环</h2><ol>
+<li>for循环 通过条件、起始和终止判断执行</li>
+<li>while循环  通过判断条件终止</li>
+<li>do-while 跟while差不多</li>
+<li>foreach：针对数组</li>
+</ol>
+<h1 id="循环控制-continue，-break"><a href="#循环控制-continue，-break" class="headerlink" title="循环控制  continue， break"></a>循环控制  continue， break</h1><p><center><strong>其中内部循环也可以控制到外部循环，就是通过使用层级参数</strong></center><br>Contine2 当前自己循环后面内部不再执行，同时外部循环体也不再执行，重新来过。<br>Break2  当前自己循环结束，同时外部也结束（如果还有外部不受影响）</p>
+<h1 id="程控制替代语法"><a href="#程控制替代语法" class="headerlink" title="程控制替代语法"></a>程控制替代语法</h1><p>流程控制普代语法：分支和循环的替代语法<br>{使用：替代<br>}使用end+对应的其他标记替代<br>如if（）{}替代为 if():end if</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础03-运算符/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/27/PHP基础03-运算符/" class="post-title-link" itemprop="url">PHP基础03-运算符</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-27 17:19:53 / Updated at: 19:35:52" itemprop="dateCreated datePublished" datetime="2019-01-27T17:19:53+08:00">2019-01-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="运算符：十种"><a href="#运算符：十种" class="headerlink" title="运算符：十种"></a><center><strong>运算符：十种</strong></center></h1><h2 id="赋值运算：（从右往左运算）"><a href="#赋值运算：（从右往左运算）" class="headerlink" title="赋值运算：（从右往左运算）"></a>赋值运算：（从右往左运算）</h2><p>表示将右边的结果（可以是变量，数据，常量，其他运算出来的结果）保存到内存的某个位置，然后将位置的内存地址赋值给左侧的变量（常量）</p>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>+相加<br>-减<br>*乘<br>/ 表示两个数相除<br>%取余（模）运算，两个数相除（整数），保留余数<br>注意用到除法时，除数不能为0<br><img src="/2019/01/27/PHP基础03-运算符/算术.png" alt=""></p>
+<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><p>如同它们名称所暗示的，允许对两个值进行比较。还可以参考 PHP 类型比较表看不同类型相互比较的例子。<br>比较运算符<br>例子    名称    结果<br>$a == $b    等于    TRUE，如果类型转换后 $a 等于 $b。<br>$a === $b    全等    TRUE，如果 $a 等于 $b，并且它们的类型也相同。<br>$a != $b    不等    TRUE，如果类型转换后 $a 不等于 $b。<br>$a &lt;&gt; $b    不等    TRUE，如果类型转换后 $a 不等于 $b。<br>$a !== $b    不全等    TRUE，如果 $a 不等于 $b，或者它们的类型不同。<br>$a &lt; $b        小与TRUE，如果 $a 严格小于 $b。<br>$a &gt; $b        大于TRUE，如果 $a 严格大于 $b。<br>$a &lt;= $b    小于等于    TRUE，如果 $a 小于或者等于 $b。<br>$a &gt;= $b    大于等于    TRUE，如果 $a 大于或者等于 $b。<br>$a &lt;=&gt; $b    结合比较运算符    当$a小于、等于、大于than $b时 分别返回一个小于、等于、大于0的integer 值。 PHP7开始提供.<br>$a ?? $b ?? $c    NULL 合并操作符    从左往右第一个存在且不为 NULL 的操作数。如果都没有定义且不为 NULL，则返回 NULL。PHP7开始提供。<br><img src="/2019/01/27/PHP基础03-运算符/比较.png" alt=""><br>如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换为数值并且比较按照数值来进行。此规则也适用于 switch 语句。当用 === 或 !== 进行比较时则不进行类型转换，因为此时类型和数值都要比对。 </p>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>返回true或false<br>&amp;&amp;逻辑与：左边的条件与右边的条件同时成立（两边结果都为true）<br>||逻辑或：左边的条件或者右边的条件只要有一个满足即可<br>!逻辑非 对已有条件去翻，本身为true，取反结果就是false</p>
+<p>逻辑与和逻辑或为短路运算：如果由第一个表达式已经可以得出结果，那么就不会运行逻辑运算符后面的表达式</p>
+<h2 id="连接运算符："><a href="#连接运算符：" class="headerlink" title="连接运算符："></a>连接运算符：</h2><p>是PHP中将多个字符串拼接的一种符号<br>. 将两个字符串连接到一起<br>.=  复合运算，将左边的内容与右边的内容连接起来，然后重新赋值给左边变量<br><img src="/2019/01/27/PHP基础03-运算符/连接.png" alt=""></p>
+<h2 id="错误抑制符"><a href="#错误抑制符" class="headerlink" title="错误抑制符"></a>错误抑制符</h2><p>在PHP中有一些错误可以提前预知，但是这些错误可鞥无法避免，但是又希望报错给用户看，可以使用错误抑制符<br>@：在可能出错的表达式前面使用@符号即可<br>错误抑制符通常在生产环境（上线）会用到，在开发的时候不会用：系统本身最好没有任何错误<br><img src="/2019/01/27/PHP基础03-运算符/错误.png" alt=""><br>可以看到58行没有报错而57行报错了</p>
+<h2 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h2><p>三目运算：有三个表达式参与的运算（简单的分支结构缩写）<br>表达式1？表达式2：表达式3<br>运算：如果表达式1成立，那么执行表达式2，否则执行表达式3  </p>
+<ul>
+<li>可以复合运算，通常不用</li>
+<li>如果表达式比较复杂用括号包起来</li>
+</ul>
+<h2 id="自操作运算符"><a href="#自操作运算符" class="headerlink" title="自操作运算符"></a>自操作运算符</h2><p>自己操作自己的运算符：   ++  –</p>
+<ul>
+<li>++$a  前置：先自操作再把值给别人</li>
+<li>&amp;a++  后置：先把值给别人再自操作<br><img src="/2019/01/27/PHP基础03-运算符/自操作.png" alt=""><br>  注意到echo $a++ 时输出的a为2</li>
+<li>类似的有+=,-=,*=,/=,%=<br>  注意等号右边的整体性<br><img src="/2019/01/27/PHP基础03-运算符/自操作2.png" alt=""><h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2></li>
+</ul>
+<ul>
+<li><strong>计算机码 ：数值左边一位是符号位</strong><br><img src="/2019/01/27/PHP基础03-运算符/计算机码.png" alt=""></li>
+</ul>
+<p>位运算：去除计算机中最小的单位（位bit）进行运算</p>
+<ul>
+<li>&amp;按位与，两个为1结果为1</li>
+<li>|按位或 两个有一个1为1</li>
+<li>~按位非 取反</li>
+<li>^ 按位异或 相同为1不同为1</li>
+<li>&lt;&lt;按位左移，整个位向左移动以为，右边补0    （乘以2的操作）</li>
+<li>>&gt; 按位右移 整个位向右移动，左边补符号位  （除以2的操作，不完全正确，例如整数除以2会出现小数）<br>注意：<br>1.系统进行任何运算的时候都是使用补码<br>2.（运算结束后）显示的时候都是原码<br><img src="/2019/01/27/PHP基础03-运算符/按位与.png" alt=""><br>按位与<br><img src="/2019/01/27/PHP基础03-运算符/按位非.png" alt=""><br>按位非<br><img src="/2019/01/27/PHP基础03-运算符/按位右移.png" alt=""><br>按位右移<br><img src="/2019/01/27/PHP基础03-运算符/计算机码.png" alt=""></li>
+</ul>
+<h2 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a><center><strong>运算符的优先级</strong></center></h2><p>多种运算符同时存在的时候，如何结合运算（参见参考手册）<br><img src="/2019/01/27/PHP基础03-运算符/优先级.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/26/PHP基础02-数据类型/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -391,7 +991,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -429,7 +1029,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -575,7 +1175,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/26/markdown/" class="post-title-link" itemprop="url">Non titré</a>
+                <a href="/2019/01/26/markdown/" class="post-title-link" itemprop="url">Unbenannt</a>
               
             
           </h1>
@@ -593,7 +1193,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1816,7 +2416,7 @@ categories: markdown</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1842,7 +2442,7 @@ categories: markdown</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1995,7 +2595,7 @@ categories: markdown</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2021,7 +2621,7 @@ categories: markdown</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a></span>
@@ -2169,8 +2769,8 @@ categories: markdown</p>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
-                    <span class="site-state-item-name">articles</span>
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -2189,7 +2789,7 @@ categories: markdown</p>
                       
                     
                     <span class="site-state-item-count">3</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -2241,7 +2841,7 @@ categories: markdown</p>
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -2249,7 +2849,7 @@ categories: markdown</p>
 
 
 
-  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 

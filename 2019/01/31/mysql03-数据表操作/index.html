@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数据表操作创建数据库普通创建表基本语法：create table 表名（字段名 字段类型 【字段属性】, 字段名 字段类型 【字段属性】，…表选项） 以上错误说明：表必须放到对应的数据库下有两种方式可以将表挂入到指定的数据库下  数控表名字前面加上数据库名字，用“.”连接即可：数据库.数据表 在创建数据表之前先进入到某个具体的数据库即可：use数据库名字  表选项：与数据库选项类似engine：存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql03-数据表操作">
+<meta property="og:url" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据表操作创建数据库普通创建表基本语法：create table 表名（字段名 字段类型 【字段属性】, 字段名 字段类型 【字段属性】，…表选项） 以上错误说明：表必须放到对应的数据库下有两种方式可以将表挂入到指定的数据库下  数控表名字前面加上数据库名字，用“.”连接即可：数据库.数据表 在创建数据表之前先进入到某个具体的数据库即可：use数据库名字  表选项：与数据库选项类似engine：存">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/创建1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/创建2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/创建3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/创建4.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/创建5.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/显示1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/显示2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/显示3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/显示4.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/结构1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/显示创建.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/显示创建2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/表属性.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/表名.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/新增.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/新增2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/改名.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/字段.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/删除.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/删除表结构.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/删除表结构2.png">
+<meta property="og:updated_time" content="2019-01-31T10:57:19.544Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql03-数据表操作">
+<meta name="twitter:description" content="数据表操作创建数据库普通创建表基本语法：create table 表名（字段名 字段类型 【字段属性】, 字段名 字段类型 【字段属性】，…表选项） 以上错误说明：表必须放到对应的数据库下有两种方式可以将表挂入到指定的数据库下  数控表名字前面加上数据库名字，用“.”连接即可：数据库.数据表 在创建数据表之前先进入到某个具体的数据库即可：use数据库名字  表选项：与数据库选项类似engine：存">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/创建1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mysql03-数据表操作 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql03-数据表操作
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-31 17:30:32 / Updated at: 18:57:19" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据表操作"><a href="#数据表操作" class="headerlink" title="数据表操作"></a>数据表操作</h1><h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><h3 id="普通创建表"><a href="#普通创建表" class="headerlink" title="普通创建表"></a>普通创建表</h3><p>基本语法：create table 表名（字段名 字段类型 【字段属性】, 字段名 字段类型 【字段属性】，…表选项）<br><img src="/2019/01/31/mysql03-数据表操作/创建1.png" alt=""></p>
+<p><center>以上错误说明：表必须放到对应的数据库下</center><br><br><br>有两种方式可以将表挂入到指定的数据库下</p>
+<ol>
+<li>数控表名字前面加上数据库名字，用“.”连接即可：数据库.数据表<br><img src="/2019/01/31/mysql03-数据表操作/创建2.png" alt=""><br><br></li>
+<li>在创建数据表之前先进入到某个具体的数据库即可：use数据库名字<br><img src="/2019/01/31/mysql03-数据表操作/创建3.png" alt=""></li>
+</ol>
+<p><br><br>表选项：与数据库选项类似<br>engine：存储引擎，mysql提供的具体存储的方式，默认有一个innodb（5.5以前默认myisam）<br>charset：字符集，只对当前自己表有效（级别比数据库高）<br>collate：校队集<br><img src="/2019/01/31/mysql03-数据表操作/创建4.png" alt=""></p>
+<h3 id="复制已有表机构"><a href="#复制已有表机构" class="headerlink" title="复制已有表机构"></a>复制已有表机构</h3><p>从已经存在 表赋值一份（只复制结构：如果表中有数sue据不复制）<br>基本语法：create table 新表名 like 表名  //只要使用数据库.表名，就可以在任意数据库下访问其他数据库表名<br><img src="/2019/01/31/mysql03-数据表操作/创建5.png" alt=""></p>
+<h2 id="显示数据表"><a href="#显示数据表" class="headerlink" title="显示数据表"></a>显示数据表</h2><p>每当一张数据创建，那么就会在对应的数据库下创建一些文件（与存储引擎有关）<br><img src="/2019/01/31/mysql03-数据表操作/显示1.png" alt=""><br>注意：这个结构文件来自于innodb存储引擎，innodb存储引擎所有的存储在外部的ibdata文件中<br><img src="/2019/01/31/mysql03-数据表操作/显示2.png" alt=""></p>
+<h2 id="显示所有表"><a href="#显示所有表" class="headerlink" title="显示所有表"></a>显示所有表</h2><p>基本语法 ： show tables<br><img src="/2019/01/31/mysql03-数据表操作/显示3.png" alt=""></p>
+<h2 id="匹配显示表"><a href="#匹配显示表" class="headerlink" title="匹配显示表"></a>匹配显示表</h2><p>基本语法： show tables like ‘匹配模式‘；<br><img src="/2019/01/31/mysql03-数据表操作/显示4.png" alt=""></p>
+<h2 id="显示表结构"><a href="#显示表结构" class="headerlink" title="显示表结构"></a>显示表结构</h2><p>本质含义：显示表中所包含的字段信息（名字，类型，属性等）<br>describe表名<br>desc表名<br>show columns from 表名<br><img src="/2019/01/31/mysql03-数据表操作/结构1.png" alt=""></p>
+<h2 id="显示表创建语句"><a href="#显示表创建语句" class="headerlink" title="显示表创建语句"></a>显示表创建语句</h2><p>查看数据表创建时的语句：此语句看到的结果已经不是用户之前自己输入的。<br>基本语法：show create table 表名<br><img src="/2019/01/31/mysql03-数据表操作/显示创建.png" alt=""><br><br><br>语句结束符<br>；与\g所表示的效果是一样的，都是字段在上排横着，下面跟对应的数据<br>\G 字段在左侧竖着，数据在右侧横着<br><img src="/2019/01/31/mysql03-数据表操作/显示创建2.png" alt=""></p>
+<h2 id="设置表属性"><a href="#设置表属性" class="headerlink" title="设置表属性"></a>设置表属性</h2><p>表属性值得就是表的选项：engine charset和collage<br>基本语法 alter table 表名 表选项【=】值<br><img src="/2019/01/31/mysql03-数据表操作/表属性.png" alt=""><br><br><br>注意：如果数据库已经确定了，里面有很多数据了，不要轻易修改表选项（字符集影响不大）</p>
+<h2 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h2><p>数据库中数据表名字通常由前缀：取数据库的前两个字母加上 下划线</p>
+<h3 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h3><p>rename table 旧表名 to 新表名<br><img src="/2019/01/31/mysql03-数据表操作/表名.png" alt=""></p>
+<h3 id="修改表选项"><a href="#修改表选项" class="headerlink" title="修改表选项"></a>修改表选项</h3><p>alter table 表名 表选项【=】值<br>（与设置表属性相同）</p>
+<h3 id="新增字段"><a href="#新增字段" class="headerlink" title="新增字段"></a>新增字段</h3><p>alter table 表名 add 【column】  新字段名 列类型【列属性】【位置first/after字段名】<br><img src="/2019/01/31/mysql03-数据表操作/新增.png" alt=""><br><br><br>字段位置：字段想要存放的位置<br>first：在某某之前（最前面），第一个字段<br>after 字段名：放在某个具体的字段之后<br><img src="/2019/01/31/mysql03-数据表操作/新增2.png" alt=""></p>
+<h3 id="修改字段名"><a href="#修改字段名" class="headerlink" title="修改字段名"></a>修改字段名</h3><p>alter table 表名 change 旧字段名 新字段名 字段类型【列属性】【新位置】<br><img src="/2019/01/31/mysql03-数据表操作/改名.png" alt=""></p>
+<h3 id="修改字段类型（以及属性）"><a href="#修改字段类型（以及属性）" class="headerlink" title="修改字段类型（以及属性）"></a>修改字段类型（以及属性）</h3><p>alter table 表名 modify 字段名 新类型 【新属性】【新位置】<br><img src="/2019/01/31/mysql03-数据表操作/字段.png" alt=""> </p>
+<h3 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h3><p>alter table 表名 drop 字段名<br><img src="/2019/01/31/mysql03-数据表操作/删除.png" alt=""></p>
+<h2 id="删除表结构"><a href="#删除表结构" class="headerlink" title="删除表结构"></a>删除表结构</h2><p>基础语法：drop table 表名【，表名2…】<br><img src="/2019/01/31/mysql03-数据表操作/删除表结构.png" alt=""></p>
+<p>可以同时删除多个表（对数据库不能这么操作）<br><img src="/2019/01/31/mysql03-数据表操作/删除表结构2.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/31/mysql02-数据库基本操作/" rel="next" title="mysql02-数据库基本操作">
+                <i class="fa fa-chevron-left"></i> mysql02-数据库基本操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/31/mysql02-数据库基本操作/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据表操作"><span class="nav-number">1.</span> <span class="nav-text">数据表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.1.</span> <span class="nav-text">创建数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通创建表"><span class="nav-number">1.1.1.</span> <span class="nav-text">普通创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制已有表机构"><span class="nav-number">1.1.2.</span> <span class="nav-text">复制已有表机构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示数据表"><span class="nav-number">1.2.</span> <span class="nav-text">显示数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示所有表"><span class="nav-number">1.3.</span> <span class="nav-text">显示所有表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配显示表"><span class="nav-number">1.4.</span> <span class="nav-text">匹配显示表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示表结构"><span class="nav-number">1.5.</span> <span class="nav-text">显示表结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示表创建语句"><span class="nav-number">1.6.</span> <span class="nav-text">显示表创建语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置表属性"><span class="nav-number">1.7.</span> <span class="nav-text">设置表属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改表结构"><span class="nav-number">1.8.</span> <span class="nav-text">修改表结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表名"><span class="nav-number">1.8.1.</span> <span class="nav-text">修改表名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表选项"><span class="nav-number">1.8.2.</span> <span class="nav-text">修改表选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增字段"><span class="nav-number">1.8.3.</span> <span class="nav-text">新增字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字段名"><span class="nav-number">1.8.4.</span> <span class="nav-text">修改字段名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改字段类型（以及属性）"><span class="nav-number">1.8.5.</span> <span class="nav-text">修改字段类型（以及属性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除字段"><span class="nav-number">1.8.6.</span> <span class="nav-text">删除字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除表结构"><span class="nav-number">1.9.</span> <span class="nav-text">删除表结构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
