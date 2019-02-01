@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="列类型整数类型tinyint迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255 smallint小整形，系统采用两个字节来保存的整形：能表示0-65535之间 mediumint中整形，采用三个字节来保存数据 int整形（标准整形），采用4个字节来保存数据 bigint大整形，采用八个字节来保存数据  创建数据表 插入合理数据     插入错误数据（超出对应的数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql06-类列表之整数型">
+<meta property="og:url" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="列类型整数类型tinyint迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255 smallint小整形，系统采用两个字节来保存的整形：能表示0-65535之间 mediumint中整形，采用三个字节来保存数据 int整形（标准整形），采用4个字节来保存数据 bigint大整形，采用八个字节来保存数据  创建数据表 插入合理数据     插入错误数据（超出对应的数据">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/无符号.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示4.png">
+<meta property="og:updated_time" content="2019-02-01T11:51:39.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql06-类列表之整数型">
+<meta name="twitter:description" content="列类型整数类型tinyint迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255 smallint小整形，系统采用两个字节来保存的整形：能表示0-65535之间 mediumint中整形，采用三个字节来保存数据 int整形（标准整形），采用4个字节来保存数据 bigint大整形，采用八个字节来保存数据  创建数据表 插入合理数据     插入错误数据（超出对应的数据">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mysql06-类列表之整数型 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql06-类列表之整数型
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-01 17:25:33 / Updated at: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="列类型"><a href="#列类型" class="headerlink" title="列类型"></a>列类型</h1><h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><h3 id="tinyint"><a href="#tinyint" class="headerlink" title="tinyint"></a>tinyint</h3><p>迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255</p>
+<h3 id="smallint"><a href="#smallint" class="headerlink" title="smallint"></a>smallint</h3><p>小整形，系统采用两个字节来保存的整形：能表示0-65535之间</p>
+<h3 id="mediumint"><a href="#mediumint" class="headerlink" title="mediumint"></a>mediumint</h3><p>中整形，采用三个字节来保存数据</p>
+<h3 id="int"><a href="#int" class="headerlink" title="int"></a>int</h3><p>整形（标准整形），采用4个字节来保存数据</p>
+<h3 id="bigint"><a href="#bigint" class="headerlink" title="bigint"></a>bigint</h3><p>大整形，采用八个字节来保存数据</p>
+<ol>
+<li>创建数据表<br><img src="/2019/02/01/mysql06-类列表之整数型/1.png" alt=""></li>
+<li>插入合理数据</li>
+</ol>
+<p><img src="/2019/02/01/mysql06-类列表之整数型/2.png" alt=""> </p>
+<ol start="3">
+<li>插入错误数据（超出对应的数据范围）<br><img src="/2019/02/01/mysql06-类列表之整数型/3.png" alt=""> </li>
+<li>错误原因：并不是说tinyint没有这么大的空间，而是因为mysql默认地为整形增加负数 实际区间为： -128~127<br><br><br>实际应用中应该根据对应的数据的范围来选定对应的整形类型，通常使用的比较多的是tinyint和int</li>
+</ol>
+<h3 id="无符号标识设定"><a href="#无符号标识设定" class="headerlink" title="无符号标识设定"></a>无符号标识设定</h3><p>无符号表示存储的数据在当前字段中，没有负数（只有正数，区间为0-255）<br>基本语法：在类型之后，加上一个unsigned<br><img src="/2019/02/01/mysql06-类列表之整数型/无符号.png" alt=""></p>
+<h2 id="显示长度"><a href="#显示长度" class="headerlink" title="显示长度"></a>显示长度</h2><p>显示长度：指数据（整形）在数据显示的时候，到底可以显示多长位</p>
+<p>tinyint（3）：表示最长可以显示3位，unsigned说明只能是正数，0-255永远不会超过3位<br>tinyint（4）：表示最长可以显示4位，-128~127</p>
+<p>显示长度只是代表了数据是否可以到达指定的长度，但是不会自动满足到指定长度；如果想要数据显示的时候，保持最高位（显示长度），那么还需要给字段增加一个 zerofill属性才可以</p>
+<p>zerofill：从左侧开始填充0（左侧不会改变数值大小），所以负数的时候就不能使用zerofill，一旦使用zerofill就相当于确定该字段位unsigned<br><img src="/2019/02/01/mysql06-类列表之整数型/显示1.png" alt=""><br>数据显示的时候，zerofill会在左侧填充0到指定位，如果不足3位，那么填充到3位，如果本身已经够了或者超出，就不再填充</p>
+<p><img src="/2019/02/01/mysql06-类列表之整数型/显示2.png" alt=""><br>显示长度可以自己设定，超出长度但是不超出范围，不会影响，只会对不够显示长度的进行补充（显示长度）</p>
+<p>例如我们使用<br><img src="/2019/02/01/mysql06-类列表之整数型/显示3.png" alt=""><br>查看结果<br><img src="/2019/02/01/mysql06-类列表之整数型/显示4.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/01/mysql05-字符集及其设置/" rel="next" title="mysql05-字符集及其设置">
+                <i class="fa fa-chevron-left"></i> mysql05-字符集及其设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/01/mysql07-类列表之小数型/" rel="prev" title="mysql07-类列表之小数型">
+                mysql07-类列表之小数型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#列类型"><span class="nav-number">1.</span> <span class="nav-text">列类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整数类型"><span class="nav-number">1.1.</span> <span class="nav-text">整数类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tinyint"><span class="nav-number">1.1.1.</span> <span class="nav-text">tinyint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#smallint"><span class="nav-number">1.1.2.</span> <span class="nav-text">smallint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mediumint"><span class="nav-number">1.1.3.</span> <span class="nav-text">mediumint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int"><span class="nav-number">1.1.4.</span> <span class="nav-text">int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bigint"><span class="nav-number">1.1.5.</span> <span class="nav-text">bigint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无符号标识设定"><span class="nav-number">1.1.6.</span> <span class="nav-text">无符号标识设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示长度"><span class="nav-number">1.2.</span> <span class="nav-text">显示长度</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
