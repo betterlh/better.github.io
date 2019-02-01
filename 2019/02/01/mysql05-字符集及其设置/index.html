@@ -96,31 +96,34 @@
 
 
 
-  <meta name="description" content="错误处理 错误处理：指的是系统（用户）在对某些错误代码进行执行的时候，发现有错误，就会通过错误处理的形式告知程序员 错误分类 语法错误：用户书写的代码不复合PHP规范，语法错误会导致代码在编译过程中不通过，所以代码不会执行（parse error） 运行时错误：代码编译通过，但是代码在执行的过程中会出现一些条件不满足导致的错误（runtime error） 逻辑错误：程序员在写代码的时候不够规范，">
+  <meta name="description" content="字符集字符编码概念字符是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。在计算机中所看到的任何内容都是字符构成的。字符编码是计算机针对各种符号，在计算机中的一种二进制存储代号 字符集概念字符(Character)是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。字符集(Character set)是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同，常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP基础06-错误处理相关（简）">
-<meta property="og:url" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/index.html">
+<meta property="og:title" content="mysql05-字符集及其设置">
+<meta property="og:url" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="错误处理 错误处理：指的是系统（用户）在对某些错误代码进行执行的时候，发现有错误，就会通过错误处理的形式告知程序员 错误分类 语法错误：用户书写的代码不复合PHP规范，语法错误会导致代码在编译过程中不通过，所以代码不会执行（parse error） 运行时错误：代码编译通过，但是代码在执行的过程中会出现一些条件不满足导致的错误（runtime error） 逻辑错误：程序员在写代码的时候不够规范，">
+<meta property="og:description" content="字符集字符编码概念字符是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。在计算机中所看到的任何内容都是字符构成的。字符编码是计算机针对各种符号，在计算机中的一种二进制存储代号 字符集概念字符(Character)是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。字符集(Character set)是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同，常">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/错误触发.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/日志功能.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/指定路径.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/自定义错误.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/代码1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/代码2.png">
-<meta property="og:updated_time" content="2019-01-29T07:44:27.761Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/4.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/5.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/6.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/7.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/8.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/9.png">
+<meta property="og:updated_time" content="2019-02-01T07:06:56.710Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP基础06-错误处理相关（简）">
-<meta name="twitter:description" content="错误处理 错误处理：指的是系统（用户）在对某些错误代码进行执行的时候，发现有错误，就会通过错误处理的形式告知程序员 错误分类 语法错误：用户书写的代码不复合PHP规范，语法错误会导致代码在编译过程中不通过，所以代码不会执行（parse error） 运行时错误：代码编译通过，但是代码在执行的过程中会出现一些条件不满足导致的错误（runtime error） 逻辑错误：程序员在写代码的时候不够规范，">
-<meta name="twitter:image" content="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/错误触发.png">
+<meta name="twitter:title" content="mysql05-字符集及其设置">
+<meta name="twitter:description" content="字符集字符编码概念字符是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。在计算机中所看到的任何内容都是字符构成的。字符编码是计算机针对各种符号，在计算机中的一种二进制存储代号 字符集概念字符(Character)是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。字符集(Character set)是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同，常">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/">
+  <link rel="canonical" href="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/">
 
 
 
@@ -130,7 +133,7 @@
   };
 </script>
 
-  <title>PHP基础06-错误处理相关（简） | Hexo</title>
+  <title>mysql05-字符集及其设置 | Hexo</title>
   
 
 
@@ -363,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lh">
@@ -380,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PHP基础06-错误处理相关（简）
+          <h1 class="post-title" itemprop="name headline">mysql05-字符集及其设置
 
               
             
@@ -406,7 +409,7 @@
                 
               
 
-              <time title="Created: 2019-01-29 15:27:33 / Modified: 15:44:27" itemprop="dateCreated datePublished" datetime="2019-01-29T15:27:33+08:00">2019-01-29</time>
+              <time title="Created: 2019-02-01 14:53:36 / Modified: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
             
 
             
@@ -428,7 +431,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
 
                 
                 
@@ -462,34 +465,21 @@
       
 
       
-        <p><strong><div style="font-size:40px;"><center>错误处理</center> </div><br>错误处理：指的是系统（用户）在对某些错误代码进行执行的时候，发现有错误，就会通过错误处理的形式告知程序员</strong></p>
-<h1 id="错误分类"><a href="#错误分类" class="headerlink" title="错误分类"></a>错误分类</h1><ol>
-<li>语法错误：用户书写的代码不复合PHP规范，语法错误会导致代码在编译过程中不通过，所以代码不会执行（parse error）</li>
-<li>运行时错误：代码编译通过，但是代码在执行的过程中会出现一些条件不满足导致的错误（runtime error）</li>
-<li>逻辑错误：程序员在写代码的时候不够规范，出现了一些逻辑性的错误，导致代码正常执行，但是得不到想要的结果</li>
+        <h1 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h1><h2 id="字符编码概念"><a href="#字符编码概念" class="headerlink" title="字符编码概念"></a>字符编码概念</h2><p>字符是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。<br>在计算机中所看到的任何内容都是字符构成的。<br>字符编码是计算机针对各种符号，在计算机中的一种二进制存储代号</p>
+<h2 id="字符集概念"><a href="#字符集概念" class="headerlink" title="字符集概念"></a>字符集概念</h2><p>字符(Character)是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。字符集(Character set)是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同，常见字符集名称：<strong>ASCII字符集</strong>、<strong>GB2312字符集</strong>、BIG5字符集、 GB18030字符集、<strong>Unicode字符集</strong>等。计算机要准确的处理各种字符集文字，就需要进行字符编码，以便计算机能够识别和存储各种文字。中文文字数目大，而且还分为简体中文和繁体中文两种不同书写规则的文字，而计算机最初是按英语单字节字符设计的，因此，对中文字符进行编码，是中文信息交流的技术基础。</p>
+<h2 id="设置客户端所有字符集"><a href="#设置客户端所有字符集" class="headerlink" title="设置客户端所有字符集"></a>设置客户端所有字符集</h2><p>如果直接通过cmd下的mysql.exe进行中文数据插入，那么可能会出错<br><img src="/2019/02/01/mysql05-字符集及其设置/1.png" alt=""></p>
+<h3 id="出错原因-："><a href="#出错原因-：" class="headerlink" title="出错原因 ："></a>出错原因 ：</h3><ol>
+<li>用户是通过mysql.exe来操作mysqld.exe</li>
+<li>真正的sql执行是mysqld.exe来执行</li>
+<li>mysql.exe将数据传入mysqld.exe的时候，没有告知其对应的符号规则（字符集），而mysql也没有能力自己判断，就会使用自己默认的（字符集）<br><br></li>
 </ol>
-<h1 id="错误代号"><a href="#错误代号" class="headerlink" title="错误代号"></a>错误代号</h1><p>所有看到的错误代码在PHP中都定义成了系统 常量（可以直接使用）<br>1.系统错误<br>E_PARSE：编译错误，代码不会执行<br>E_ERROR：fatal error，致命错误，会导致代码不能正确继续执行（出错的位置断掉）<br>E_WARNING：warning，警告错误，不会影响代码执行，但是可能得到意想不到的结果<br>E_NOTIE：notice，通知错误，不会影响代码执行<br>2.用户错误：<br>E_USER_ERROR ，E_USER_WARNING，E_USER_NOTICE<br>用户在使用自定义错误触发的时候，会使用到的错误代号（系统不会用到）</p>
-<ol start="4">
-<li>其他：E_ALL，代表着所有错误（通常在进行错误控制的时候用比较多，）建议在开发过程中（开发环境）使用<br>所有E开头的错误常量(代号)其实都是由一个字节存储，然后每一种错误占据一个对应的位，如果想进行一些错误的控制，可以使用位运算进行操作<br>排除通知级别notice：E_ALL&amp;~E_NOTICE<br>只要警告和通知： E_WARNING|E_NOTICE</li>
-</ol>
-<h1 id="错误触发"><a href="#错误触发" class="headerlink" title="错误触发"></a>错误触发</h1><p>程序运行时触发：系统自动根据错误发生后，对比对应的错误信息，输出给用户：主要针对代码的语法错误和运行时错误<br>人为触发：知道某些逻辑可能会出错，从而使用对应的判断代码来触发响应的错误提示。trigger_error（错误提示）：<br>可以通过第二个参数进行严格性控制    （是否在往下运行）<br><img src="/2019/01/29/PHP基础06-错误处理相关/错误触发.png" alt=""><br><br></p>
-<h1 id="错误显示设置：哪些错误该显示，以及该如何显示"><a href="#错误显示设置：哪些错误该显示，以及该如何显示" class="headerlink" title="错误显示设置：哪些错误该显示，以及该如何显示"></a>错误显示设置：哪些错误该显示，以及该如何显示</h1><p>在PHP中，有两种方式来设置当前脚本的错误处理<br>1.在PHP配置文件：全局配置：php.ini文件<br>display_errors:是否显示错误<br>error_reporting:显示什么级别的错误<br>2可以在运行的PHP脚本中设置(在脚本中定义的配置级别比配置文件高，通常在开发中都会在代码中去进行控制和配置)<br>error_reporting()设置对应的错误显示级别<br>ini_set(‘配置文件中的配置项’，配置值)<br>    ini_set(‘error_reporting’,E_ALL);<br>    ini_set(‘display_errors’,1);</p>
-<h1 id="错误日志设置"><a href="#错误日志设置" class="headerlink" title="错误日志设置"></a>错误日志设置</h1><p>在实际生产环境中，不会直接让错误赤裸裸的展示给用户</p>
-<ol>
-<li>不友好</li>
-<li>不安全：错误会暴露网站很多信息（路劲，文件名）</li>
-</ol>
-<p>所以生产环境中，一般不显示错误（错误也比较少），但是不可能避免会出现错误（测试的时候不会发现所有的问题）这个时候不希望看到，但是又希望捕捉到可以让后台程序员去修改：需要保存到日志文件中，需要在PHP配置文件中或者代码中（ini_set）设置对应的error_logo</p>
-<ol>
-<li>开启日志功能<br><img src="/2019/01/29/PHP基础06-错误处理相关/日志功能.png" alt=""></li>
-<li>指定路径<br><img src="/2019/01/29/PHP基础06-错误处理相关/指定路径.png" alt=""><h1 id="自定义错误处理"><a href="#自定义错误处理" class="headerlink" title="自定义错误处理"></a>自定义错误处理</h1>最简单的错误处理：trigger_error（）但是该函数不会阻止系统报错<br>php系统提供了一种用户处理错误的机制：用户自定义错误处理函数，然后将该函数增加到系统错误处理的句柄中，然后系统会在碰到错误之后，使用用户定义的错误函数。</li>
-<li>如何将用户定义的函数放到系统中？set_error_handler()</li>
-<li>自定义错误处理函数，系统有要求<br><img src="/2019/01/29/PHP基础06-错误处理相关/自定义错误.png" alt=""></li>
-</ol>
-<p>代码实现:</p>
-<ol>
-<li>自定义错误函数，注意参数<br><img src="/2019/01/29/PHP基础06-错误处理相关/代码1.png" alt=""><br>2.注册自定义函数，修改错误处理机制<br><img src="/2019/01/29/PHP基础06-错误处理相关/代码2.png" alt=""></li>
-</ol>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>mysql.exe客户端在进行数据操作之前将自己所使用的字符集告诉mysqld<br>cmd下的mysql.exe默认都只有一个字符集：GBK<br><img src="/2019/02/01/mysql05-字符集及其设置/2.png" alt=""><br>mysql如何告知mysql.exe对应的字符集类型为gbk？<br>快捷方式：set name 字符集<br>让mysql.exe告知mysqld.exe自己的字符集规则<br><img src="/2019/02/01/mysql05-字符集及其设置/3.png" alt=""></p>
+<p>重新进行数据插入：中文（GBK）<br><img src="/2019/02/01/mysql05-字符集及其设置/4.png" alt=""><br><br></p>
+<h3 id="深层原理：客户端，服务器，连接层"><a href="#深层原理：客户端，服务器，连接层" class="headerlink" title="深层原理：客户端，服务器，连接层"></a>深层原理：客户端，服务器，连接层</h3><p>mysql.exe与mysqld.exe之间的处理关系一共分为三层<br>客户端传入数据给服务器：client:character_set_client<br>服务器返回数据给客户端：server:character_set_results<br>客户端与服务器之间的连接：connection: character_set_connection</p>
+<p>set names字符集的本质就是一次性打通三层关系的字符集，变得一致</p>
+<p>在系统中有三个变量来记录着这三个关系对应的字符集：<br>show variable like ‘char actor_set%’<br><img src="/2019/02/01/mysql05-字符集及其设置/5.png" alt=""><br>查看一个新的客户端的对应的字符集关系<br><img src="/2019/02/01/mysql05-字符集及其设置/6.png" alt=""><br>对比如图</p>
+<p>修改服务器端变量的值<br>set 变量名=值<br><img src="/2019/02/01/mysql05-字符集及其设置/7.png" alt=""><br><br><br>我们可以发现插入可以完成，输出时乱码<br><img src="/2019/02/01/mysql05-字符集及其设置/8.png" alt=""><br><br><br>此时，修改结果字符集为gdk<br><img src="/2019/02/01/mysql05-字符集及其设置/9.png" alt=""><br>发现已经能正确识别中文<br><br><br>connection只是为了更方便客户端进行字符集转换而设</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><div style="font-size: 20px;text-align: center;">总结</div></h3><p>set names gbk<br>等价于<br>set character_set_client = gbk   //为了让服务器识别客户端发来的数据<br>set character_set_connection = gbk   //更好的帮助客户端与服务端之间进行字符集转换<br>set character_set_results= gbk      //为了告诉客户端服务器所有的返回的数据字符集</p>
 
       
     </div>
@@ -520,8 +510,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/29/PHP基础05-函数/" rel="next" title="PHP基础05-函数">
-                <i class="fa fa-chevron-left"></i> PHP基础05-函数
+              <a href="/2019/02/01/mysql04-数据操作/" rel="next" title="mysql04-数据操作">
+                <i class="fa fa-chevron-left"></i> mysql04-数据操作
               </a>
             
           </div>
@@ -529,10 +519,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/29/PHP基础07-字符串/" rel="prev" title="PHP基础07-字符串">
-                PHP基础07-字符串 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -659,7 +645,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#错误分类"><span class="nav-number">1.</span> <span class="nav-text">错误分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误代号"><span class="nav-number">2.</span> <span class="nav-text">错误代号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误触发"><span class="nav-number">3.</span> <span class="nav-text">错误触发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误显示设置：哪些错误该显示，以及该如何显示"><span class="nav-number">4.</span> <span class="nav-text">错误显示设置：哪些错误该显示，以及该如何显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误日志设置"><span class="nav-number">5.</span> <span class="nav-text">错误日志设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义错误处理"><span class="nav-number">6.</span> <span class="nav-text">自定义错误处理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字符集"><span class="nav-number">1.</span> <span class="nav-text">字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符编码概念"><span class="nav-number">1.1.</span> <span class="nav-text">字符编码概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符集概念"><span class="nav-number">1.2.</span> <span class="nav-text">字符集概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置客户端所有字符集"><span class="nav-number">1.3.</span> <span class="nav-text">设置客户端所有字符集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#出错原因-："><span class="nav-number">1.3.1.</span> <span class="nav-text">出错原因 ：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.3.2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深层原理：客户端，服务器，连接层"><span class="nav-number">1.3.3.</span> <span class="nav-text">深层原理：客户端，服务器，连接层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.3.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
