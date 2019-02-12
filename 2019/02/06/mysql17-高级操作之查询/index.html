@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="查询数据完整查询指令select select选项 字段列表 from 数据源 where 条件 group by 分组 having 条件俺 order by 排序 limit 限制 select选项：系统如何对待查询得到的结果all：默认的，表示保存所有的记录 distinct：去重，去除重复的记录，只保留一条（所有字段都相同） 字段列表：有的时候需要从多张表获取数据，在获取数据的时候，可能存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql17-高级操作之查询">
+<meta property="og:url" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="查询数据完整查询指令select select选项 字段列表 from 数据源 where 条件 group by 分组 having 条件俺 order by 排序 limit 限制 select选项：系统如何对待查询得到的结果all：默认的，表示保存所有的记录 distinct：去重，去除重复的记录，只保留一条（所有字段都相同） 字段列表：有的时候需要从多张表获取数据，在获取数据的时候，可能存">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/from.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/f2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/f3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/group1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/group2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/group3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/group4.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/group5.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/group6.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/group7.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/having1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/having2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/order1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/order2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/limit1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/limit2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/limit3.png">
+<meta property="og:updated_time" content="2019-02-06T14:42:04.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql17-高级操作之查询">
+<meta name="twitter:description" content="查询数据完整查询指令select select选项 字段列表 from 数据源 where 条件 group by 分组 having 条件俺 order by 排序 limit 限制 select选项：系统如何对待查询得到的结果all：默认的，表示保存所有的记录 distinct：去重，去除重复的记录，只保留一条（所有字段都相同） 字段列表：有的时候需要从多张表获取数据，在获取数据的时候，可能存">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mysql17-高级操作之查询 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql17-高级操作之查询
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-06 20:37:33 / Updated at: 22:42:04" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:33+08:00">2019-02-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h1><p>完整查询指令<br>select select选项 字段列表 from 数据源 where 条件 group by 分组 having 条件俺 order by 排序 limit 限制</p>
+<p>select选项：系统如何对待查询得到的结果<br>all：默认的，表示保存所有的记录<br><img src="/2019/02/06/mysql17-高级操作之查询/1.png" alt=""></p>
+<p>distinct：去重，去除重复的记录，只保留一条（所有字段都相同）<br><img src="/2019/02/06/mysql17-高级操作之查询/2.png" alt=""></p>
+<p>字段列表：有的时候需要从多张表获取数据，在获取数据的时候，可能存在不同表中有同名的字段，需要将同名的字段命名成不同名的：  别名 alias</p>
+<p>基本语法 字段列表【as 】别名<br>一个字段可以取两个别名<br><img src="/2019/02/06/mysql17-高级操作之查询/3.png" alt=""><br>如图，显示两个别名</p>
+<h2 id="from数据源"><a href="#from数据源" class="headerlink" title="from数据源"></a>from数据源</h2><p>from是为前面的查询提供数据：数据源只要是一个复合二维表结构的数据即可。</p>
+<h3 id="单表数据"><a href="#单表数据" class="headerlink" title="单表数据"></a>单表数据</h3><p>from 表名<br><img src="/2019/02/06/mysql17-高级操作之查询/from.png" alt=""></p>
+<h3 id="多变数据"><a href="#多变数据" class="headerlink" title="多变数据"></a>多变数据</h3><p>从多张表获取数据：基本语法：from 表1，表2，。。。<br><img src="/2019/02/06/mysql17-高级操作之查询/f2.png" alt=""><br>结果：两张表的记录数相乘，字段数拼接<br>本质：从第一张表去除一条记录，取拼凑第二张表的所有记录，保留所有结果<br>在数学上有一个专业的说法：笛卡儿积，这个结果除了给数据库造成压力，没有其他意义：应该尽量避免出现笛卡儿积</p>
+<h3 id="动态数据"><a href="#动态数据" class="headerlink" title="动态数据"></a>动态数据</h3><p>from 后面跟的数据，不是一个实体表，而是一个从表中查询出来得到的二维结果表（子查询）<br>基本语法：from （select 字段列表 from 表名）as 别名；<br><img src="/2019/02/06/mysql17-高级操作之查询/f3.png" alt=""></p>
+<h2 id="where子句"><a href="#where子句" class="headerlink" title="where子句"></a>where子句</h2><p>where 字句：用来从数据表获取数据的时候，然后进行条件筛选</p>
+<p>数据获取原理：针对表去对应的磁盘处获取所有的记录（一条条获取），where的作用就是在拿到一条结果就开始进行判断，判断是否符合条件，如果符合条件就保存下来，如果不符合直接舍弃(不放到内存中)</p>
+<p>where是通过运算符进行结果比较来判断数据</p>
+<h2 id="group-by-子句"><a href="#group-by-子句" class="headerlink" title="group by 子句"></a>group by 子句</h2><p>group by 表示分组的含义：根据指定的字段s，将数据进行分组：分组的目标是为了分组统计</p>
+<h3 id="分组统计："><a href="#分组统计：" class="headerlink" title="分组统计："></a>分组统计：</h3><p>基本语法：group by 字段名<br><img src="/2019/02/06/mysql17-高级操作之查询/group1.png" alt=""><br>group by 是为了分组后进行数据统计的，如果只是想看数据显示，那么group by 没什么意义：group by 将数据按照指定的字段分组之后，只会保留每组的第一条记录</p>
+<div style="font-size: 20px;">利用统计函数（聚合函数 ）：</div>
+
+<p>count（）:统计每组中的数量，如果统计的目标是字段，那么不统计为空NULL字段，如果为* 代表统计记录<br>avg（）：求平均值<br>sum（）：求和<br>max（）：求最大值<br>min（）：求最小值<br><img src="/2019/02/06/mysql17-高级操作之查询/group2.png" alt=""><br>如果不加group表示在全表范围下统计<br><br><br>group_concat()：为了将分组中指定的字段进行合并（拼接）<br><img src="/2019/02/06/mysql17-高级操作之查询/group3.png" alt=""> </p>
+<h3 id="多分组"><a href="#多分组" class="headerlink" title="多分组"></a>多分组</h3><p>将数据按照某个字段进行分组之后，对已经分组的数据进行再次分组</p>
+<p>基本语法：group by字段1，字段2    // 先按照字段1进行排序，之后将结果再按照字段2进行排序，依次类推<br><img src="/2019/02/06/mysql17-高级操作之查询/group4.png" alt=""></p>
+<h3 id="分组排序"><a href="#分组排序" class="headerlink" title="分组排序"></a>分组排序</h3><p>mysql中分组默认有排序的意义：按照分组字段进行排序，默认是升序<br>基本语法 group by 字段【asc或者desc】， 字段【asc或者desc】<br><img src="/2019/02/06/mysql17-高级操作之查询/group5.png" alt=""></p>
+<h3 id="回溯统计"><a href="#回溯统计" class="headerlink" title="回溯统计"></a>回溯统计</h3><p>当分组进行多分组之后，往上统计的过程中，需要进行层层上报，将这种层层上报统计的过程称之为回溯统计：每一次分组向上统计的过程都会产生一次新的统计数据，而且当前数据对应的分组字段为NULL</p>
+<p>基本语法：group by 字段 [asc或者desc] with rollup<br><img src="/2019/02/06/mysql17-高级操作之查询/group6.png" alt=""></p>
+<p>多分组回溯统计<br><img src="/2019/02/06/mysql17-高级操作之查询/group7.png" alt=""></p>
+<h2 id="having子句"><a href="#having子句" class="headerlink" title="having子句"></a>having子句</h2><p>having 的本质和where一样，是用来进行数据条件筛选<br>1.having是在group by 子句之后：可以针对分组数据进行统计筛选，但是where不行<br>查询班级人数大于四个的班级</p>
+<p>where不能使用聚合函数：聚合函数是用在group by分组的时候，此时where已经运行完毕。where是从表中取数据，别名是在数据进入到内存之后才有的<br><img src="/2019/02/06/mysql17-高级操作之查询/having1.png" alt=""> </p>
+<p><hr><br>having在group by 分组之后，可以使用聚合函数或者字段别名<br><img src="/2019/02/06/mysql17-高级操作之查询/having2.png" alt=""> </p>
+<p>强调：having是在group by之后，group by 是在where之后，where的时候表示将数据从磁盘拿到内存，where之后的所有操作都是内存操作</p>
+<h2 id="order-by-子句"><a href="#order-by-子句" class="headerlink" title="order by 子句"></a>order by 子句</h2><p>order by排序：根据校对规则对数据进行排序<br>基本语法：order by 字段【asc或者desc】   默认asc升序<br><img src="/2019/02/06/mysql17-高级操作之查询/order1.png" alt="">  </p>
+<p>order by可以像group by 一样进行多字段排序：先按照第一个字段进行排序，然后再按照第二个字段进行排序。<br>基本语法：order by 字段1 规则1，字段2 规则2；<br><img src="/2019/02/06/mysql17-高级操作之查询/order2.png" alt=""> </p>
+<h2 id="limit-子句"><a href="#limit-子句" class="headerlink" title="limit 子句"></a>limit 子句</h2><p>limit限制子句：主要是用来限制记录数量获取</p>
+<h3 id="记录数限制"><a href="#记录数限制" class="headerlink" title="记录数限制"></a>记录数限制</h3><p>纯粹的限制获取数量：从第一条到指定的数量，<br>基本语法：limit 数量<br><img src="/2019/02/06/mysql17-高级操作之查询/limit1.png" alt=""> </p>
+<p>limit通常再查询的时候如果限定为1条记录的时候，使用的比较多：有时候获取多条记录并不能解决业务问题，但是会增加服务器的压力</p>
+<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><p>利用limit来限制获取指定区间的数据<br>基本语法  limit offset，length；   //offset偏移量：从哪里开始，length就是具体的获取多少条记录<br>MySQL中记录的数量从0开始，limit 0，2表示获取前两条记录<br><img src="/2019/02/06/mysql17-高级操作之查询/limit2.png" alt=""> </p>
+<p>注意：limit 后面的length表示最多获取对应数量，但是如果不够，系统不会强求<br><img src="/2019/02/06/mysql17-高级操作之查询/limit3.png" alt=""> </p>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><p>count（）:统计每组中的数量，如果统计的目标是字段，那么不统计为空NULL字段，如果为* 代表统计记录<br>avg（）：求平均值<br>sum（）：求和<br>max（）：求最大值<br>min（）：求最小值<br>在上面group by子句中已有介绍，不再赘述</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/06/mysql16-高级操作之新增、更新、删除/" rel="next" title="mysql16-高级操作之新增、更新、删除">
+                <i class="fa fa-chevron-left"></i> mysql16-高级操作之新增、更新、删除
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/06/mysql18-高级操作之查询中的运算符/" rel="prev" title="mysql18-高级操作之查询中的运算符">
+                mysql18-高级操作之查询中的运算符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查询数据"><span class="nav-number">1.</span> <span class="nav-text">查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#from数据源"><span class="nav-number">1.1.</span> <span class="nav-text">from数据源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单表数据"><span class="nav-number">1.1.1.</span> <span class="nav-text">单表数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多变数据"><span class="nav-number">1.1.2.</span> <span class="nav-text">多变数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态数据"><span class="nav-number">1.1.3.</span> <span class="nav-text">动态数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where子句"><span class="nav-number">1.2.</span> <span class="nav-text">where子句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group-by-子句"><span class="nav-number">1.3.</span> <span class="nav-text">group by 子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分组统计："><span class="nav-number">1.3.1.</span> <span class="nav-text">分组统计：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多分组"><span class="nav-number">1.3.2.</span> <span class="nav-text">多分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组排序"><span class="nav-number">1.3.3.</span> <span class="nav-text">分组排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯统计"><span class="nav-number">1.3.4.</span> <span class="nav-text">回溯统计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#having子句"><span class="nav-number">1.4.</span> <span class="nav-text">having子句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order-by-子句"><span class="nav-number">1.5.</span> <span class="nav-text">order by 子句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limit-子句"><span class="nav-number">1.6.</span> <span class="nav-text">limit 子句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#记录数限制"><span class="nav-number">1.6.1.</span> <span class="nav-text">记录数限制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分页"><span class="nav-number">1.6.2.</span> <span class="nav-text">分页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合函数"><span class="nav-number">1.7.</span> <span class="nav-text">聚合函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

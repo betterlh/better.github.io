@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="高级操作–查询中的运算符算术运算符 + - * / % 基本算术预算：通常不再条件中使用，而是用于结果运算（select字段中） 比较运算符 , &amp;gt;=, &amp;lt;, &amp;lt;=, =, &amp;lt;&amp;gt;（不等于）通常是用来在条件中进行限定结果=：在mysql中，没有对应的==比较符号，就是用=进行相等判断&amp;lt;=&amp;gt; ：相等比较  特殊应用:就是在字段结果中进行比较运算注：mysql中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql18-高级操作之查询中的运算符">
+<meta property="og:url" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="高级操作–查询中的运算符算术运算符 + - * / % 基本算术预算：通常不再条件中使用，而是用于结果运算（select字段中） 比较运算符 , &amp;gt;=, &amp;lt;, &amp;lt;=, =, &amp;lt;&amp;gt;（不等于）通常是用来在条件中进行限定结果=：在mysql中，没有对应的==比较符号，就是用=进行相等判断&amp;lt;=&amp;gt; ：相等比较  特殊应用:就是在字段结果中进行比较运算注：mysql中">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/4.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/5.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/6.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/7.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/in.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/is.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/like.png">
+<meta property="og:updated_time" content="2019-02-07T03:19:55.094Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql18-高级操作之查询中的运算符">
+<meta name="twitter:description" content="高级操作–查询中的运算符算术运算符 + - * / % 基本算术预算：通常不再条件中使用，而是用于结果运算（select字段中） 比较运算符 , &amp;gt;=, &amp;lt;, &amp;lt;=, =, &amp;lt;&amp;gt;（不等于）通常是用来在条件中进行限定结果=：在mysql中，没有对应的==比较符号，就是用=进行相等判断&amp;lt;=&amp;gt; ：相等比较  特殊应用:就是在字段结果中进行比较运算注：mysql中">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mysql18-高级操作之查询中的运算符 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql18-高级操作之查询中的运算符
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-06 20:37:52" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:52+08:00">2019-02-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-07 11:19:55" itemprop="dateModified" datetime="2019-02-07T11:19:55+08:00">2019-02-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="高级操作–查询中的运算符"><a href="#高级操作–查询中的运算符" class="headerlink" title="高级操作–查询中的运算符"></a>高级操作–查询中的运算符</h1><p>算术运算符</p>
+<pre><code>+ - * / %
+</code></pre><p>基本算术预算：通常不再条件中使用，而是用于结果运算（select字段中）<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/1.png" alt=""></p>
+<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><blockquote>
+<p>, &gt;=, &lt;, &lt;=, =, &lt;&gt;（不等于）<br>通常是用来在条件中进行限定结果<br>=：在mysql中，没有对应的==比较符号，就是用=进行相等判断<br>&lt;=&gt; ：相等比较<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/2.png" alt=""></p>
+</blockquote>
+<p>特殊应用:就是在字段结果中进行比较运算<br>注：mysql中没有规定select必须有数据表<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/3.png" alt=""></p>
+<p>在条件判断的时候，还会有对应的比较运算符：计算区间<br>between 条件1 and 条件2<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/4.png" alt=""></p>
+<p>between中条件1必须小于条件2，反过来不可以<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/5.png" alt=""></p>
+<p>逻辑运算符</p>
+<p>and、or、not<br>and：逻辑与<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/6.png" alt=""></p>
+<p>or：逻辑或<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/7.png" alt=""><br> <br></p>
+<p>not：逻辑非</p>
+<h2 id="in预算符"><a href="#in预算符" class="headerlink" title="in预算符"></a>in预算符</h2><p>in：在什么里面，是用来代替=，当结果不是一个值，而是一个结果集的时候<br>基本语法： in（结果1，结果2，。。。）只要当前条件在结果集中出现过 ，就成立<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/in.png" alt=""></p>
+<h2 id="is运算符"><a href="#is运算符" class="headerlink" title="is运算符"></a>is运算符</h2><p>is是专门用来判断字段是否为NULL的运算符<br>基本语法：is null/is not null<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/is.png" alt=""></p>
+<h2 id="like运算符"><a href="#like运算符" class="headerlink" title="like运算符"></a>like运算符</h2><p>like运算符：是用来进行模糊匹配的（匹配字符串）<br>基本语法：like‘匹配模式’</p>
+<p>匹配模式中，有两种占位符<br>_：匹配对应的单个字符<br>%:匹配多个字符<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/like.png" alt=""></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/06/mysql17-高级操作之查询/" rel="next" title="mysql17-高级操作之查询">
+                <i class="fa fa-chevron-left"></i> mysql17-高级操作之查询
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/07/mysql19-联合查询/" rel="prev" title="mysql19-联合查询">
+                mysql19-联合查询 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#高级操作–查询中的运算符"><span class="nav-number">1.</span> <span class="nav-text">高级操作–查询中的运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#比较运算符"><span class="nav-number">1.1.</span> <span class="nav-text">比较运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#in预算符"><span class="nav-number">1.2.</span> <span class="nav-text">in预算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is运算符"><span class="nav-number">1.3.</span> <span class="nav-text">is运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#like运算符"><span class="nav-number">1.4.</span> <span class="nav-text">like运算符</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
