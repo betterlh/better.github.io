@@ -353,6 +353,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/27/PHP基础04-流程控制/" class="post-title-link" itemprop="url">PHP基础04-流程控制</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-27 20:05:03" itemprop="dateCreated datePublished" datetime="2019-01-27T20:05:03+08:00">2019-01-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-01-28 14:45:15" itemprop="dateModified" datetime="2019-01-28T14:45:15+08:00">2019-01-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写)</p>
+<h1 id="控制分类："><a href="#控制分类：" class="headerlink" title="控制分类："></a>控制分类：</h1><h2 id="1-顺序"><a href="#1-顺序" class="headerlink" title="1.顺序"></a>1.顺序</h2><h2 id="2-分支"><a href="#2-分支" class="headerlink" title="2.分支"></a>2.分支</h2><ul>
+<li>if{}else{}  if{}elseif{}lese{}</li>
+<li>switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行<br>1.条件一定时一个具体的值<br>2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch 并希望 continue 到外层循环中的下一轮循环，用 continue 2。<br>3.case 表达式可以是任何求值为简单类型的表达式，即整型或浮点数以及字符串。不能用数组或对象，除非它们被解除引用成为简单类型。</li>
+</ul>
+<h2 id="3-循环"><a href="#3-循环" class="headerlink" title="3.循环"></a>3.循环</h2><ol>
+<li>for循环 通过条件、起始和终止判断执行</li>
+<li>while循环  通过判断条件终止</li>
+<li>do-while 跟while差不多</li>
+<li>foreach：针对数组</li>
+</ol>
+<h1 id="循环控制-continue，-break"><a href="#循环控制-continue，-break" class="headerlink" title="循环控制  continue， break"></a>循环控制  continue， break</h1><p><center><strong>其中内部循环也可以控制到外部循环，就是通过使用层级参数</strong></center><br>Contine2 当前自己循环后面内部不再执行，同时外部循环体也不再执行，重新来过。<br>Break2  当前自己循环结束，同时外部也结束（如果还有外部不受影响）</p>
+<h1 id="程控制替代语法"><a href="#程控制替代语法" class="headerlink" title="程控制替代语法"></a>程控制替代语法</h1><p>流程控制普代语法：分支和循环的替代语法<br>{使用：替代<br>}使用end+对应的其他标记替代<br>如if（）{}替代为 if():end if</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础03-运算符/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2359,7 +2543,7 @@ categories: markdown</p>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

@@ -353,6 +353,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/31/mysql03-数据表操作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/31/mysql03-数据表操作/" class="post-title-link" itemprop="url">mysql03-数据表操作</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-31 17:30:32" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-01 14:53:49" itemprop="dateModified" datetime="2019-02-01T14:53:49+08:00">2019-02-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数据表操作"><a href="#数据表操作" class="headerlink" title="数据表操作"></a>数据表操作</h1><h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><h3 id="普通创建表"><a href="#普通创建表" class="headerlink" title="普通创建表"></a>普通创建表</h3><p>基本语法：create table 表名（字段名 字段类型 【字段属性】, 字段名 字段类型 【字段属性】，…表选项）<br><img src="/2019/01/31/mysql03-数据表操作/创建1.png" alt=""></p>
+<p><center>以上错误说明：表必须放到对应的数据库下</center><br><br><br>有两种方式可以将表挂入到指定的数据库下</p>
+<ol>
+<li>数控表名字前面加上数据库名字，用“.”连接即可：数据库.数据表<br><img src="/2019/01/31/mysql03-数据表操作/创建2.png" alt=""><br><br></li>
+<li>在创建数据表之前先进入到某个具体的数据库即可：use数据库名字<br><img src="/2019/01/31/mysql03-数据表操作/创建3.png" alt=""></li>
+</ol>
+<p><br><br>表选项：与数据库选项类似<br>engine：存储引擎，mysql提供的具体存储的方式，默认有一个innodb（5.5以前默认myisam）<br>charset：字符集，只对当前自己表有效（级别比数据库高）<br>collate：校队集<br><img src="/2019/01/31/mysql03-数据表操作/创建4.png" alt=""></p>
+<h3 id="复制已有表机构"><a href="#复制已有表机构" class="headerlink" title="复制已有表机构"></a>复制已有表机构</h3><p>从已经存在 表赋值一份（只复制结构：如果表中有数sue据不复制）<br>基本语法：create table 新表名 like 表名  //只要使用数据库.表名，就可以在任意数据库下访问其他数据库表名<br><img src="/2019/01/31/mysql03-数据表操作/创建5.png" alt=""></p>
+<h2 id="显示数据表"><a href="#显示数据表" class="headerlink" title="显示数据表"></a>显示数据表</h2><p>每当一张数据创建，那么就会在对应的数据库下创建一些文件（与存储引擎有关）<br><img src="/2019/01/31/mysql03-数据表操作/显示1.png" alt=""><br>注意：这个结构文件来自于innodb存储引擎，innodb存储引擎所有的存储在外部的ibdata文件中<br><img src="/2019/01/31/mysql03-数据表操作/显示2.png" alt=""></p>
+<h2 id="显示所有表"><a href="#显示所有表" class="headerlink" title="显示所有表"></a>显示所有表</h2><p>基本语法 ： show tables<br><img src="/2019/01/31/mysql03-数据表操作/显示3.png" alt=""></p>
+<h2 id="匹配显示表"><a href="#匹配显示表" class="headerlink" title="匹配显示表"></a>匹配显示表</h2><p>基本语法： show tables like ‘匹配模式‘；<br><img src="/2019/01/31/mysql03-数据表操作/显示4.png" alt=""></p>
+<h2 id="显示表结构"><a href="#显示表结构" class="headerlink" title="显示表结构"></a>显示表结构</h2><p>本质含义：显示表中所包含的字段信息（名字，类型，属性等）<br>describe表名<br>desc表名<br>show columns from 表名<br><img src="/2019/01/31/mysql03-数据表操作/结构1.png" alt=""></p>
+<h2 id="显示表创建语句"><a href="#显示表创建语句" class="headerlink" title="显示表创建语句"></a>显示表创建语句</h2><p>查看数据表创建时的语句：此语句看到的结果已经不是用户之前自己输入的。<br>基本语法：show create table 表名<br><img src="/2019/01/31/mysql03-数据表操作/显示创建.png" alt=""><br><br><br>语句结束符<br>；与\g所表示的效果是一样的，都是字段在上排横着，下面跟对应的数据<br>\G 字段在左侧竖着，数据在右侧横着<br><img src="/2019/01/31/mysql03-数据表操作/显示创建2.png" alt=""></p>
+<h2 id="设置表属性"><a href="#设置表属性" class="headerlink" title="设置表属性"></a>设置表属性</h2><p>表属性值得就是表的选项：engine charset和collage<br>基本语法 alter table 表名 表选项【=】值<br><img src="/2019/01/31/mysql03-数据表操作/表属性.png" alt=""><br><br><br>注意：如果数据库已经确定了，里面有很多数据了，不要轻易修改表选项（字符集影响不大）</p>
+<h2 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h2><p>数据库中数据表名字通常由前缀：取数据库的前两个字母加上 下划线</p>
+<h3 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h3><p>rename table 旧表名 to 新表名<br><img src="/2019/01/31/mysql03-数据表操作/表名.png" alt=""></p>
+<h3 id="修改表选项"><a href="#修改表选项" class="headerlink" title="修改表选项"></a>修改表选项</h3><p>alter table 表名 表选项【=】值<br>（与设置表属性相同）</p>
+<h3 id="新增字段"><a href="#新增字段" class="headerlink" title="新增字段"></a>新增字段</h3><p>alter table 表名 add 【column】  新字段名 列类型【列属性】【位置first/after字段名】<br><img src="/2019/01/31/mysql03-数据表操作/新增.png" alt=""><br><br><br>字段位置：字段想要存放的位置<br>first：在某某之前（最前面），第一个字段<br>after 字段名：放在某个具体的字段之后<br><img src="/2019/01/31/mysql03-数据表操作/新增2.png" alt=""></p>
+<h3 id="修改字段名"><a href="#修改字段名" class="headerlink" title="修改字段名"></a>修改字段名</h3><p>alter table 表名 change 旧字段名 新字段名 字段类型【列属性】【新位置】<br><img src="/2019/01/31/mysql03-数据表操作/改名.png" alt=""></p>
+<h3 id="修改字段类型（以及属性）"><a href="#修改字段类型（以及属性）" class="headerlink" title="修改字段类型（以及属性）"></a>修改字段类型（以及属性）</h3><p>alter table 表名 modify 字段名 新类型 【新属性】【新位置】<br><img src="/2019/01/31/mysql03-数据表操作/字段.png" alt=""> </p>
+<h3 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h3><p>alter table 表名 drop 字段名<br><img src="/2019/01/31/mysql03-数据表操作/删除.png" alt=""></p>
+<h2 id="删除表结构"><a href="#删除表结构" class="headerlink" title="删除表结构"></a>删除表结构</h2><p>基础语法：drop table 表名【，表名2…】<br><img src="/2019/01/31/mysql03-数据表操作/删除表结构.png" alt=""></p>
+<p>可以同时删除多个表（对数据库不能这么操作）<br><img src="/2019/01/31/mysql03-数据表操作/删除表结构2.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/31/mysql02-数据库基本操作/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2098,190 +2292,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础04-流程控制/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/27/PHP基础04-流程控制/" class="post-title-link" itemprop="url">PHP基础04-流程控制</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-01-27 20:05:03" itemprop="dateCreated datePublished" datetime="2019-01-27T20:05:03+08:00">2019-01-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-01-28 14:45:15" itemprop="dateModified" datetime="2019-01-28T14:45:15+08:00">2019-01-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>流程控制(由于和别的语法中很多类似，故省略很多相似地方，简写)</p>
-<h1 id="控制分类："><a href="#控制分类：" class="headerlink" title="控制分类："></a>控制分类：</h1><h2 id="1-顺序"><a href="#1-顺序" class="headerlink" title="1.顺序"></a>1.顺序</h2><h2 id="2-分支"><a href="#2-分支" class="headerlink" title="2.分支"></a>2.分支</h2><ul>
-<li>if{}else{}  if{}elseif{}lese{}</li>
-<li>switch有一组情形存在：通过一个条件通常由多个值，但是每一个值都会有对应不同的代码要执行<br>1.条件一定时一个具体的值<br>2.注意和其它语言不同，continue 语句作用到 switch 上的作用类似于 break。如果在循环中有一个 switch 并希望 continue 到外层循环中的下一轮循环，用 continue 2。<br>3.case 表达式可以是任何求值为简单类型的表达式，即整型或浮点数以及字符串。不能用数组或对象，除非它们被解除引用成为简单类型。</li>
-</ul>
-<h2 id="3-循环"><a href="#3-循环" class="headerlink" title="3.循环"></a>3.循环</h2><ol>
-<li>for循环 通过条件、起始和终止判断执行</li>
-<li>while循环  通过判断条件终止</li>
-<li>do-while 跟while差不多</li>
-<li>foreach：针对数组</li>
-</ol>
-<h1 id="循环控制-continue，-break"><a href="#循环控制-continue，-break" class="headerlink" title="循环控制  continue， break"></a>循环控制  continue， break</h1><p><center><strong>其中内部循环也可以控制到外部循环，就是通过使用层级参数</strong></center><br>Contine2 当前自己循环后面内部不再执行，同时外部循环体也不再执行，重新来过。<br>Break2  当前自己循环结束，同时外部也结束（如果还有外部不受影响）</p>
-<h1 id="程控制替代语法"><a href="#程控制替代语法" class="headerlink" title="程控制替代语法"></a>程控制替代语法</h1><p>流程控制普代语法：分支和循环的替代语法<br>{使用：替代<br>}使用end+对应的其他标记替代<br>如if（）{}替代为 if():end if</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2329,7 +2339,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

@@ -353,6 +353,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/12/mysql22-整库数据备份与还原/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/12/mysql22-整库数据备份与还原/" class="post-title-link" itemprop="url">mysql22-整库数据备份与还原</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-12 19:20:59 / Updated at: 19:50:53" itemprop="dateCreated datePublished" datetime="2019-02-12T19:20:59+08:00">2019-02-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="整库数据备份与还原"><a href="#整库数据备份与还原" class="headerlink" title="整库数据备份与还原"></a>整库数据备份与还原</h1><p>整库数据备份也叫SQL数据备份：备份的结果都是SQL指令</p>
+<p>在mysql中提供了一个专门用于备份sql的客户端：mysqldump.exe<br><img src="/2019/02/12/mysql22-整库数据备份与还原/1.png" alt=""></p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>SQL备份是一种mysql非常常见的备份与还原方式，SQL备份不只是备份数据，还备份对应的SQL指令（包含数据与表结构）：即便是数据库遭到毁灭性的破坏（数据库被删），那么利用sql备份依然可以实现数据还原</p>
+<p>sql备份因为需要备份结构，因此产生的备份文件特别大，因此不适合特大型数据备份，也不适合数据变化频繁型数据库备份</p>
+<h2 id="应用方案"><a href="#应用方案" class="headerlink" title="应用方案"></a>应用方案</h2><h2 id="SQL备份"><a href="#SQL备份" class="headerlink" title="SQL备份"></a>SQL备份</h2><p>sql备份用到的是专门的备份客户端，因此还没与数据库服务器进行连接</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>mysqldump/mysqldump.exe   -hPup 数据库名字【表1   【表2。。。】】 &gt;备份文件地址<br>注：</p>
+<ul>
+<li>此时在windowsCMD环境下，而不是在sql，所以不需要语法的分号。</li>
+<li>-h，-P可省略</li>
+</ul>
+<p>备份可以有三种方式</p>
+<ol>
+<li>整库备份（只需要提供数据库名字）<br><img src="/2019/02/12/mysql22-整库数据备份与还原/2.png" alt=""></li>
+<li>单表备份：数据库后面跟一张表</li>
+<li>多表备份：数据库后跟多张表<br><img src="/2019/02/12/mysql22-整库数据备份与还原/3.png" alt=""></li>
+</ol>
+<p>查看备份的成果<br><img src="/2019/02/12/mysql22-整库数据备份与还原/4.png" alt=""></p>
+<p>查看备份文件中的具体内容<br><img src="/2019/02/12/mysql22-整库数据备份与还原/5.png" alt=""></p>
+<h2 id="数据还原"><a href="#数据还原" class="headerlink" title="数据还原"></a>数据还原</h2><p>mysql提供了多种方式来实现：两种<br>mysqldump备份的数据中没有关于数据库本身的操作，都是针对表级别的擦欧总：当进行数据（sql还原），必须指定数据库</p>
+<h3 id="利用mysql-exe客户端"><a href="#利用mysql-exe客户端" class="headerlink" title="利用mysql.exe客户端"></a>利用mysql.exe客户端</h3><ol>
+<li>利用mysql.exe客户端：没有登录之前，可以直接用改客户端进行数据还原<br>mysql.exe-hPup数据库 &lt;文件位置<br><img src="/2019/02/12/mysql22-整库数据备份与还原/6.png" alt=""><h3 id="导入SQL指令"><a href="#导入SQL指令" class="headerlink" title="导入SQL指令"></a>导入SQL指令</h3></li>
+<li><p>在sql指令，提供了一种导入SQL指令的方式<br>source   SQL 文件位置；  //必须先进入对应的数据库<br><img src="/2019/02/12/mysql22-整库数据备份与还原/7.png" alt=""></p>
+</li>
+<li><p>人为操作：打开备份文件，复制所以SQL指令，然后到mysql.exe客户端中粘贴执行（不推荐）类似第二种</p>
+</li>
+</ol>
+<h2 id="本机动手操作："><a href="#本机动手操作：" class="headerlink" title="本机动手操作："></a>本机动手操作：</h2><pre><code>D:\php\PHPTutorial\MySQL\binmysqldump.exe -uroot -proot mydatabase &gt;C:\Users\华\Desktop\my\mydatabase.sql//CMD命令备份
+</code></pre><p><br><br><code>drop database mydatabase;//sql指令删除了数据库mydatabase</code><br><br><br><img src="/2019/02/12/mysql22-整库数据备份与还原/1.png" alt=""><br>开始还原：<br><img src="/2019/02/12/mysql22-整库数据备份与还原/8.png" alt=""><br>    create database mydatabase; //sql指令先创建数据库<br><br><br>    D:\php\PHPTutorial\MySQL\bin\mysql.exe -uroot -proot mydatabase &lt; C:\Users\华\Desktop\my\mydatabase.sql     //cmd命令行下还原<br><img src="/2019/02/12/mysql22-整库数据备份与还原/9.png" alt=""><br>还原成功</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/12/mysql21-子查询/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2031,181 +2218,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql12-类属性之主键/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/02/mysql12-类属性之主键/" class="post-title-link" itemprop="url">mysql12-类属性之主键</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-02 21:14:11 / Updated at: 21:38:24" itemprop="dateCreated datePublished" datetime="2019-02-02T21:14:11+08:00">2019-02-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="列属性主键"><a href="#列属性主键" class="headerlink" title="列属性主键"></a>列属性主键</h1><p>顾名思义:主要的键，primary key，在一张表中，有且只有一个字段，里面的值具有唯一性</p>
-<h2 id="创建主键"><a href="#创建主键" class="headerlink" title="创建主键"></a>创建主键</h2><p>###随表创建<br>系统提供了两种增加主键的方式：</p>
-<ol>
-<li>方案1：直接在需要当作主键的字段之后，增加primary key属性来确定主键</li>
-<li>方案2：在所有字段之后增加primary key选项：primary key（字段信息）<br><img src="/2019/02/02/mysql12-类属性之主键/创建1.png" alt=""><h3 id="表后增加"><a href="#表后增加" class="headerlink" title="表后增加"></a>表后增加</h3>基本语法：alter table 表名 add primary key（字段）<br><img src="/2019/02/02/mysql12-类属性之主键/创建2.png" alt=""></li>
-</ol>
-<h2 id="查看主键"><a href="#查看主键" class="headerlink" title="查看主键"></a>查看主键</h2><h3 id="方案1：查看表结构"><a href="#方案1：查看表结构" class="headerlink" title="方案1：查看表结构"></a>方案1：查看表结构</h3><p><img src="/2019/02/02/mysql12-类属性之主键/查看1.png" alt=""></p>
-<h3 id="方案2：查看表的创建语句"><a href="#方案2：查看表的创建语句" class="headerlink" title="方案2：查看表的创建语句"></a>方案2：查看表的创建语句</h3><p><img src="/2019/02/02/mysql12-类属性之主键/查看2.png" alt=""></p>
-<h2 id="删除主键"><a href="#删除主键" class="headerlink" title="删除主键"></a>删除主键</h2><p>基本语法：alter table 表名 drop primary key<br><img src="/2019/02/02/mysql12-类属性之主键/删除.png" alt=""></p>
-<h2 id="复合主键"><a href="#复合主键" class="headerlink" title="复合主键"></a>复合主键</h2><p>案例：有一张学生选修课表，一个学生可以选修多个选修课，一个选修课也可以由多个学生来选，但是一个学生在一个选修课中只有一个成绩<br><img src="/2019/02/02/mysql12-类属性之主键/复合.png" alt=""></p>
-<h2 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h2><p>主键一旦增加，那么对对应的字段由数据要求</p>
-<ol>
-<li>当前字段对对应的数据不能为空</li>
-<li>当前字段对应的数据不能由任何重复 </li>
-</ol>
-<h2 id="主键分类"><a href="#主键分类" class="headerlink" title="主键分类"></a>主键分类</h2><p>主键分类采用的是主键所对应的字段的业务意义分类<br>业务主键：主键所在的字段，具有业务意义（学生ID，课程ID<br>逻辑主键：自然增加的整型（应用广泛，唯一性）<br><img src="/2019/02/02/mysql12-类属性之主键/约束.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2253,7 +2265,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
