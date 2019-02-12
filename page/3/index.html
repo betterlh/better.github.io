@@ -353,6 +353,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/31/mysql02-数据库基本操作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">mysql02-数据库基本操作</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-01-31 17:30:06 / Updated at: 17:42:46" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:06+08:00">2019-01-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a>数据库基本操作</h1><p>数据库是数据存储的最外层（最大单元）</p>
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>基本语法：creat database数据库名字[库选项]<br><img src="/2019/01/31/mysql02-数据库基本操作/创建1.png" alt=""><br>库选项：数据库的相关属性<br>字符集：charset字符集，代表着当前数据库下的所有表存储的数据默认指定的字符集（如果当前不指定，那么采用DBMS默认的）<br>校对集：collate校对集<br>例如：  create database数据库名字 charset 字符集名称<br><img src="/2019/01/31/mysql02-数据库基本操作/创建2.png" alt=""></p>
+<h2 id="显示数据库"><a href="#显示数据库" class="headerlink" title="显示数据库"></a>显示数据库</h2><p>每当用户通过sql指令创建一个数据库，那么系统就会产生一个对应的存储数据的文件夹（data）<br><img src="/2019/01/31/mysql02-数据库基本操作/show1.png" alt=""></p>
+<p>其实每一个数据库文件夹下面都有一个opt文件，保存的是对应的数据库选项<br><img src="/2019/01/31/mysql02-数据库基本操作/show2.png" alt=""></p>
+<h3 id="显示全部"><a href="#显示全部" class="headerlink" title="显示全部"></a>显示全部</h3><p>基本语法 ：show databases</p>
+<p><img src="/2019/01/31/mysql02-数据库基本操作/显示1.png" alt=""></p>
+<h3 id="显示部分"><a href="#显示部分" class="headerlink" title="显示部分"></a>显示部分</h3><p>基本语法：show database like ‘匹配模式’<br>_:匹配当前位置单个字符<br>%:匹配指定位置多个字符<br>例：<br>获取以my开头的全部数据库：‘my%’<br>获取以m开头，后面第一个字母不确定，最后为database的数据库‘m_database’<br>获取以database结尾的数据库： ‘%database’<br><img src="/2019/01/31/mysql02-数据库基本操作/显示2.png" alt=""></p>
+<h3 id="显示数据库创建语句"><a href="#显示数据库创建语句" class="headerlink" title="显示数据库创建语句"></a>显示数据库创建语句</h3><p>基本语法：show create databases 名字<br><img src="/2019/01/31/mysql02-数据库基本操作/显示创建.png" alt=""></p>
+<h2 id="选择数据库"><a href="#选择数据库" class="headerlink" title="选择数据库"></a>选择数据库</h2><p>为什么要选择数据库？因为数据存储到数据表，表存在数据下。如果要操作数据，那么必须进入到对应的数据库才行<br>基本语法：use 数据库名字；<br><img src="/2019/01/31/mysql02-数据库基本操作/use.png" alt=""></p>
+<h2 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h2><p>修改数据库字符集（库选项）：字符集和校队集<br>基本语法：alter<br><img src="/2019/01/31/mysql02-数据库基本操作/alter1.png" alt=""><br>一旦修改成功那么对应的opt文件中就会体现<br><img src="/2019/01/31/mysql02-数据库基本操作/alter2.png" alt=""><br>是否可以修改数据库名字？mysql 5.5之前是可以修改的：rename命令；但是5.5之后就不可以。</p>
+<h2 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h2><p>基本语法：drop database 数据库名字<br><img src="/2019/01/31/mysql02-数据库基本操作/删除.png" alt=""><br><br><br>删除时，一定要注意安全操作<br>删除数据库之后：对应的文件夹会被删除（opt文件也会被删除）<br><img src="/2019/01/31/mysql02-数据库基本操作/删除2.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/30/mysql01-相关基本概念/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2112,196 +2282,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/27/PHP基础03-运算符/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/27/PHP基础03-运算符/" class="post-title-link" itemprop="url">PHP基础03-运算符</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-01-27 17:19:53 / Updated at: 19:35:52" itemprop="dateCreated datePublished" datetime="2019-01-27T17:19:53+08:00">2019-01-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="运算符：十种"><a href="#运算符：十种" class="headerlink" title="运算符：十种"></a><center><strong>运算符：十种</strong></center></h1><h2 id="赋值运算：（从右往左运算）"><a href="#赋值运算：（从右往左运算）" class="headerlink" title="赋值运算：（从右往左运算）"></a>赋值运算：（从右往左运算）</h2><p>表示将右边的结果（可以是变量，数据，常量，其他运算出来的结果）保存到内存的某个位置，然后将位置的内存地址赋值给左侧的变量（常量）</p>
-<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>+相加<br>-减<br>*乘<br>/ 表示两个数相除<br>%取余（模）运算，两个数相除（整数），保留余数<br>注意用到除法时，除数不能为0<br><img src="/2019/01/27/PHP基础03-运算符/算术.png" alt=""></p>
-<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><p>如同它们名称所暗示的，允许对两个值进行比较。还可以参考 PHP 类型比较表看不同类型相互比较的例子。<br>比较运算符<br>例子    名称    结果<br>$a == $b    等于    TRUE，如果类型转换后 $a 等于 $b。<br>$a === $b    全等    TRUE，如果 $a 等于 $b，并且它们的类型也相同。<br>$a != $b    不等    TRUE，如果类型转换后 $a 不等于 $b。<br>$a &lt;&gt; $b    不等    TRUE，如果类型转换后 $a 不等于 $b。<br>$a !== $b    不全等    TRUE，如果 $a 不等于 $b，或者它们的类型不同。<br>$a &lt; $b        小与TRUE，如果 $a 严格小于 $b。<br>$a &gt; $b        大于TRUE，如果 $a 严格大于 $b。<br>$a &lt;= $b    小于等于    TRUE，如果 $a 小于或者等于 $b。<br>$a &gt;= $b    大于等于    TRUE，如果 $a 大于或者等于 $b。<br>$a &lt;=&gt; $b    结合比较运算符    当$a小于、等于、大于than $b时 分别返回一个小于、等于、大于0的integer 值。 PHP7开始提供.<br>$a ?? $b ?? $c    NULL 合并操作符    从左往右第一个存在且不为 NULL 的操作数。如果都没有定义且不为 NULL，则返回 NULL。PHP7开始提供。<br><img src="/2019/01/27/PHP基础03-运算符/比较.png" alt=""><br>如果比较一个数字和字符串或者比较涉及到数字内容的字符串，则字符串会被转换为数值并且比较按照数值来进行。此规则也适用于 switch 语句。当用 === 或 !== 进行比较时则不进行类型转换，因为此时类型和数值都要比对。 </p>
-<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>返回true或false<br>&amp;&amp;逻辑与：左边的条件与右边的条件同时成立（两边结果都为true）<br>||逻辑或：左边的条件或者右边的条件只要有一个满足即可<br>!逻辑非 对已有条件去翻，本身为true，取反结果就是false</p>
-<p>逻辑与和逻辑或为短路运算：如果由第一个表达式已经可以得出结果，那么就不会运行逻辑运算符后面的表达式</p>
-<h2 id="连接运算符："><a href="#连接运算符：" class="headerlink" title="连接运算符："></a>连接运算符：</h2><p>是PHP中将多个字符串拼接的一种符号<br>. 将两个字符串连接到一起<br>.=  复合运算，将左边的内容与右边的内容连接起来，然后重新赋值给左边变量<br><img src="/2019/01/27/PHP基础03-运算符/连接.png" alt=""></p>
-<h2 id="错误抑制符"><a href="#错误抑制符" class="headerlink" title="错误抑制符"></a>错误抑制符</h2><p>在PHP中有一些错误可以提前预知，但是这些错误可鞥无法避免，但是又希望报错给用户看，可以使用错误抑制符<br>@：在可能出错的表达式前面使用@符号即可<br>错误抑制符通常在生产环境（上线）会用到，在开发的时候不会用：系统本身最好没有任何错误<br><img src="/2019/01/27/PHP基础03-运算符/错误.png" alt=""><br>可以看到58行没有报错而57行报错了</p>
-<h2 id="三目运算符"><a href="#三目运算符" class="headerlink" title="三目运算符"></a>三目运算符</h2><p>三目运算：有三个表达式参与的运算（简单的分支结构缩写）<br>表达式1？表达式2：表达式3<br>运算：如果表达式1成立，那么执行表达式2，否则执行表达式3  </p>
-<ul>
-<li>可以复合运算，通常不用</li>
-<li>如果表达式比较复杂用括号包起来</li>
-</ul>
-<h2 id="自操作运算符"><a href="#自操作运算符" class="headerlink" title="自操作运算符"></a>自操作运算符</h2><p>自己操作自己的运算符：   ++  –</p>
-<ul>
-<li>++$a  前置：先自操作再把值给别人</li>
-<li>&amp;a++  后置：先把值给别人再自操作<br><img src="/2019/01/27/PHP基础03-运算符/自操作.png" alt=""><br>  注意到echo $a++ 时输出的a为2</li>
-<li>类似的有+=,-=,*=,/=,%=<br>  注意等号右边的整体性<br><img src="/2019/01/27/PHP基础03-运算符/自操作2.png" alt=""><h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2></li>
-</ul>
-<ul>
-<li><strong>计算机码 ：数值左边一位是符号位</strong><br><img src="/2019/01/27/PHP基础03-运算符/计算机码.png" alt=""></li>
-</ul>
-<p>位运算：去除计算机中最小的单位（位bit）进行运算</p>
-<ul>
-<li>&amp;按位与，两个为1结果为1</li>
-<li>|按位或 两个有一个1为1</li>
-<li>~按位非 取反</li>
-<li>^ 按位异或 相同为1不同为1</li>
-<li>&lt;&lt;按位左移，整个位向左移动以为，右边补0    （乘以2的操作）</li>
-<li>>&gt; 按位右移 整个位向右移动，左边补符号位  （除以2的操作，不完全正确，例如整数除以2会出现小数）<br>注意：<br>1.系统进行任何运算的时候都是使用补码<br>2.（运算结束后）显示的时候都是原码<br><img src="/2019/01/27/PHP基础03-运算符/按位与.png" alt=""><br>按位与<br><img src="/2019/01/27/PHP基础03-运算符/按位非.png" alt=""><br>按位非<br><img src="/2019/01/27/PHP基础03-运算符/按位右移.png" alt=""><br>按位右移<br><img src="/2019/01/27/PHP基础03-运算符/计算机码.png" alt=""></li>
-</ul>
-<h2 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a><center><strong>运算符的优先级</strong></center></h2><p>多种运算符同时存在的时候，如何结合运算（参见参考手册）<br><img src="/2019/01/27/PHP基础03-运算符/优先级.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2349,7 +2329,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

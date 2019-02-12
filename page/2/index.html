@@ -353,6 +353,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql11-类属性之简单属性/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/02/mysql11-类属性之简单属性/" class="post-title-link" itemprop="url">mysql11-类属性之简单属性</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-02 21:13:49 / Updated at: 21:19:37" itemprop="dateCreated datePublished" datetime="2019-02-02T21:13:49+08:00">2019-02-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="列属性"><a href="#列属性" class="headerlink" title="列属性"></a>列属性</h1><p>列属性又称之为字段属性：在mysql中一共有6个属性，null，默认值，列描述，主键，唯一值和自动增长</p>
+<h2 id="null属性"><a href="#null属性" class="headerlink" title="null属性"></a>null属性</h2><p>null属性：代表字段位空<br><img src="/2019/02/02/mysql11-类属性之简单属性/1.png" alt=""><br>如果对应的值为yes表示该字段可以为null<br>注意：</p>
+<ol>
+<li>在设计表的时候，尽量不要让数据为空</li>
+<li>mysql的记录长度为65535个字节，如果一个表中有字段允许为null，那么系统就会设计保留一个字节来存储NULL，最终有效存储长度为65534个字节</li>
+</ol>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>default：默认值，当字段被设计的时候，如果允许默认条件下，用户不进行数据的插入，那么就可以使用事先准备好的数据来填充：通常填充的是NULL<br><img src="/2019/02/02/mysql11-类属性之简单属性/2.png" alt=""></p>
+<p>测试：不给当前字段提供数据值<br><img src="/2019/02/02/mysql11-类属性之简单属性/3.png" alt=""><br>default关键字的另外一层使用：显式的告知字段使用默认值，在进行数据插入的时候，对字段值直接使用default<br><img src="/2019/02/02/mysql11-类属性之简单属性/4.png" alt=""> </p>
+<h2 id="列描述"><a href="#列描述" class="headerlink" title="列描述"></a>列描述</h2><p>列描述：comment：是专门用于给开发人员进行维护的一个注释说明</p>
+<p>基本语法：comment‘字段描述’；<br><img src="/2019/02/02/mysql11-类属性之简单属性/5.png" alt=""></p>
+<p><br><br>查看comment：必须通过查看创建表语句<br><img src="/2019/02/02/mysql11-类属性之简单属性/6.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql10-类列表之mysql记录长度（varchar长度）/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3001,176 +3171,6 @@ _:匹配当前位置单个字符<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/31/mysql02-数据库基本操作/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">mysql02-数据库基本操作</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-01-31 17:30:06 / Updated at: 17:42:46" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:06+08:00">2019-01-31</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a>数据库基本操作</h1><p>数据库是数据存储的最外层（最大单元）</p>
-<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>基本语法：creat database数据库名字[库选项]<br><img src="/2019/01/31/mysql02-数据库基本操作/创建1.png" alt=""><br>库选项：数据库的相关属性<br>字符集：charset字符集，代表着当前数据库下的所有表存储的数据默认指定的字符集（如果当前不指定，那么采用DBMS默认的）<br>校对集：collate校对集<br>例如：  create database数据库名字 charset 字符集名称<br><img src="/2019/01/31/mysql02-数据库基本操作/创建2.png" alt=""></p>
-<h2 id="显示数据库"><a href="#显示数据库" class="headerlink" title="显示数据库"></a>显示数据库</h2><p>每当用户通过sql指令创建一个数据库，那么系统就会产生一个对应的存储数据的文件夹（data）<br><img src="/2019/01/31/mysql02-数据库基本操作/show1.png" alt=""></p>
-<p>其实每一个数据库文件夹下面都有一个opt文件，保存的是对应的数据库选项<br><img src="/2019/01/31/mysql02-数据库基本操作/show2.png" alt=""></p>
-<h3 id="显示全部"><a href="#显示全部" class="headerlink" title="显示全部"></a>显示全部</h3><p>基本语法 ：show databases</p>
-<p><img src="/2019/01/31/mysql02-数据库基本操作/显示1.png" alt=""></p>
-<h3 id="显示部分"><a href="#显示部分" class="headerlink" title="显示部分"></a>显示部分</h3><p>基本语法：show database like ‘匹配模式’<br>_:匹配当前位置单个字符<br>%:匹配指定位置多个字符<br>例：<br>获取以my开头的全部数据库：‘my%’<br>获取以m开头，后面第一个字母不确定，最后为database的数据库‘m_database’<br>获取以database结尾的数据库： ‘%database’<br><img src="/2019/01/31/mysql02-数据库基本操作/显示2.png" alt=""></p>
-<h3 id="显示数据库创建语句"><a href="#显示数据库创建语句" class="headerlink" title="显示数据库创建语句"></a>显示数据库创建语句</h3><p>基本语法：show create databases 名字<br><img src="/2019/01/31/mysql02-数据库基本操作/显示创建.png" alt=""></p>
-<h2 id="选择数据库"><a href="#选择数据库" class="headerlink" title="选择数据库"></a>选择数据库</h2><p>为什么要选择数据库？因为数据存储到数据表，表存在数据下。如果要操作数据，那么必须进入到对应的数据库才行<br>基本语法：use 数据库名字；<br><img src="/2019/01/31/mysql02-数据库基本操作/use.png" alt=""></p>
-<h2 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h2><p>修改数据库字符集（库选项）：字符集和校队集<br>基本语法：alter<br><img src="/2019/01/31/mysql02-数据库基本操作/alter1.png" alt=""><br>一旦修改成功那么对应的opt文件中就会体现<br><img src="/2019/01/31/mysql02-数据库基本操作/alter2.png" alt=""><br>是否可以修改数据库名字？mysql 5.5之前是可以修改的：rename命令；但是5.5之后就不可以。</p>
-<h2 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h2><p>基本语法：drop database 数据库名字<br><img src="/2019/01/31/mysql02-数据库基本操作/删除.png" alt=""><br><br><br>删除时，一定要注意安全操作<br>删除数据库之后：对应的文件夹会被删除（opt文件也会被删除）<br><img src="/2019/01/31/mysql02-数据库基本操作/删除2.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3218,7 +3218,7 @@ _:匹配当前位置单个字符<br>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

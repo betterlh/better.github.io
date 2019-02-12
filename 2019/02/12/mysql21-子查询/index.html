@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="子查询子查询与主查询子查询概念子查询：sub query子查询是一种常用计算机语言SELECT—SQL语言中嵌套查询下层的程序模块。当一个查询是另一个查询的条件时，称之为子查询子查询：指在一条select语句中，嵌入了另外一条select语句，那么被嵌入的select语句称之为子查询语句 主查询概念主查询：主要的查询对象，第一条select语句，确定的用户所有获取的数据目标（数据源）已经要具体得到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql21-子查询">
+<meta property="og:url" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="子查询子查询与主查询子查询概念子查询：sub query子查询是一种常用计算机语言SELECT—SQL语言中嵌套查询下层的程序模块。当一个查询是另一个查询的条件时，称之为子查询子查询：指在一条select语句中，嵌入了另外一条select语句，那么被嵌入的select语句称之为子查询语句 主查询概念主查询：主要的查询对象，第一条select语句，确定的用户所有获取的数据目标（数据源）已经要具体得到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/列1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/列2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/行1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/表1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/exists.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/any1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/any2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/all.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/all2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/all3.png">
+<meta property="og:updated_time" content="2019-02-12T08:31:14.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql21-子查询">
+<meta name="twitter:description" content="子查询子查询与主查询子查询概念子查询：sub query子查询是一种常用计算机语言SELECT—SQL语言中嵌套查询下层的程序模块。当一个查询是另一个查询的条件时，称之为子查询子查询：指在一条select语句中，嵌入了另外一条select语句，那么被嵌入的select语句称之为子查询语句 主查询概念主查询：主要的查询对象，第一条select语句，确定的用户所有获取的数据目标（数据源）已经要具体得到">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/02/12/mysql21-子查询/列1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/02/12/mysql21-子查询/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>mysql21-子查询 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/12/mysql21-子查询/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql21-子查询
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-12 16:14:39 / Updated at: 16:31:14" itemprop="dateCreated datePublished" datetime="2019-02-12T16:14:39+08:00">2019-02-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h1><h2 id="子查询与主查询"><a href="#子查询与主查询" class="headerlink" title="子查询与主查询"></a>子查询与主查询</h2><h3 id="子查询概念"><a href="#子查询概念" class="headerlink" title="子查询概念"></a>子查询概念</h3><p>子查询：sub query<br>子查询是一种常用计算机语言SELECT—SQL语言中嵌套查询下层的程序模块。当一个查询是另一个查询的条件时，称之为子查询<br>子查询：指在一条select语句中，嵌入了另外一条select语句，那么被嵌入的select语句称之为子查询语句</p>
+<h3 id="主查询概念"><a href="#主查询概念" class="headerlink" title="主查询概念"></a>主查询概念</h3><p>主查询：主要的查询对象，第一条select语句，确定的用户所有获取的数据目标（数据源）已经要具体得到的字段信息。</p>
+<h3 id="子查询和主查询的关系"><a href="#子查询和主查询的关系" class="headerlink" title="子查询和主查询的关系"></a>子查询和主查询的关系</h3><ol>
+<li>子查询是嵌入到主查询中的</li>
+<li>子查询的辅助查询:要么作为条件，要么作为数据源</li>
+<li>子查询其实可以独立存在：是一条完整的select语句</li>
+</ol>
+<h2 id="子查询分类"><a href="#子查询分类" class="headerlink" title="子查询分类"></a>子查询分类</h2><h3 id="按功能分"><a href="#按功能分" class="headerlink" title="按功能分"></a>按功能分</h3><p>标量子查询：子查询返回的结果是一个数据（一行一列）<br>列子查询：返回的结果是一列（一列多行）<br>行子查询：返回的结果是一行（一行多列）<br>表子查询：返回的结果是多行多列（多行多列）<br>exist子查询：返回的结果是1或者0（类似布尔操作）</p>
+<h3 id="按位置分"><a href="#按位置分" class="headerlink" title="按位置分"></a>按位置分</h3><p>where子查询：子查询出现的位置在where条件中</p>
+<p>from子查询：子查询出现的位置在from数据源中（作数据源）</p>
+<h2 id="标量子查询："><a href="#标量子查询：" class="headerlink" title="标量子查询："></a>标量子查询：</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>子查询返回的结果是一个数据（一行一列）</p>
+<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><p>基本语法：select * from 数据源 where 条件判断 =/&lt; &gt; (select 字段名 from 数据源 where条件判断)   //子查询得到的结果只有一个值</p>
+<h2 id="列子查询"><a href="#列子查询" class="headerlink" title="列子查询"></a>列子查询</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>子查询得到的结果是一列数据（一列多行）</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>基本语法<br>主查询 where 条件 in（列子查询）；<br><img src="/2019/02/12/mysql21-子查询/列1.png" alt=""><br><img src="/2019/02/12/mysql21-子查询/列2.png" alt=""></p>
+<h2 id="行子查询"><a href="#行子查询" class="headerlink" title="行子查询"></a>行子查询</h2><h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><p>子查询返回的结果是一行多列</p>
+<h3 id="行元素"><a href="#行元素" class="headerlink" title="行元素"></a>行元素</h3><p>行元素：字段元素是指一个字段对应的值，行元素对应的就是多个字段：多个字段合起来作为一个元素参与运算，把这种情况称之为行元素。</p>
+<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><p>基本语法：<br>主查询 where 条件【（构造一个行元素）】=（行子查询）<br><img src="/2019/02/12/mysql21-子查询/行1.png" alt=""><br>该语句实现了返回身高和年龄最高的学生的信息</p>
+<h3 id="为什么不能用-having-语句："><a href="#为什么不能用-having-语句：" class="headerlink" title="为什么不能用  having 语句："></a>为什么不能用  having 语句：</h3><p>select *from my_student having stu_age=max(stu_age) and stu_height=max(stu_height);<br>原因分析：</p>
+<ol>
+<li>having是在group by之后:使用having代表着前面的group by执行力一次（聚合函数使用）</li>
+<li>group by一旦执行：结果就是只返回一行记录：第一行</li>
+</ol>
+<h3 id="总结：已经学过三个子查询：常见的三个子查询"><a href="#总结：已经学过三个子查询：常见的三个子查询" class="headerlink" title="总结：已经学过三个子查询：常见的三个子查询"></a>总结：已经学过三个子查询：常见的三个子查询</h3><p>标量子查询、列子查询和行子查询：都属于where子查询</p>
+<h2 id="表子查询"><a href="#表子查询" class="headerlink" title="表子查询"></a>表子查询</h2><h3 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h3><p>表子查询：返回的结果是多行多列，表子查询与行子查询非常相似，只是行子查询需要产生行元素，而表子查询没有。</p>
+<p>行子查询是用于where条件判断：where子查询<br>表子查询是用于from数据源：from子查询</p>
+<h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><p>基本语法<br>select 字段表 from （表子查询）as 表名【where】【group by】【limit】<br><img src="/2019/02/12/mysql21-子查询/表1.png" alt=""></p>
+<p>为什么要有as 别名。因为from 后面必须跟着表名，不能没有名字。同时别名也方便后面语句的操作</p>
+<h2 id="exists子查询"><a href="#exists子查询" class="headerlink" title="exists子查询"></a>exists子查询</h2><h3 id="概念-4"><a href="#概念-4" class="headerlink" title="概念"></a>概念</h3><p>exists子查询：查询返回的结果只有0或者1，1戴白哦成立，0代表不成立</p>
+<h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><p>基本语法：where exists（查询语句）；   //exists就是根据拆线呢得到的结果进行判断：如果结果存在那么返回1，否则返回0</p>
+<p>where 1：永远为真<br><img src="/2019/02/12/mysql21-子查询/exists.png" alt=""></p>
+<h2 id="子查询中特定关键字的使用"><a href="#子查询中特定关键字的使用" class="headerlink" title="子查询中特定关键字的使用"></a>子查询中特定关键字的使用</h2><h3 id="in"><a href="#in" class="headerlink" title="in"></a>in</h3><p>主查询 where 条件 in （列子查询）</p>
+<h3 id="any"><a href="#any" class="headerlink" title="any"></a>any</h3><p>任意一个<br>=any（列子查询）：条件在查询结果中有任意一个匹配即可，等价于in<br><img src="/2019/02/12/mysql21-子查询/any1.png" alt=""><br>&lt;&gt;any（列子查询）：条件在查询结果中只要不等于其中一个即为true（<strong>即不全等</strong>）<br><img src="/2019/02/12/mysql21-子查询/any2.png" alt=""><br>例如：<br>1 =any（1，2，3）====true<br>1 &lt;&gt;any（1，2，3）====true</p>
+<h3 id="some"><a href="#some" class="headerlink" title="some"></a>some</h3><p>与any完全一样：在国外some与any的正面含义一致，但是否定就大不相同：not any与not some含义不同<br>开发者为了让对应的使用者不要在语法上纠结：重新设计了some</p>
+<h3 id="all"><a href="#all" class="headerlink" title="all"></a>all</h3><p>全部：等于里面的全部<br>=all（列子查询）：表示等于里面的所有<br>&lt;&gt;all（列子查询）：不等于其中所有<br><img src="/2019/02/12/mysql21-子查询/all.png" alt=""></p>
+<p>由于my_class中班级存在3与my_student的班级1和2都不相同，于是修改语句：<br><img src="/2019/02/12/mysql21-子查询/all2.png" alt=""></p>
+<p>如果对应的匹配字段有NULL，那么不参与匹配<br><img src="/2019/02/12/mysql21-子查询/all3.png" alt=""> </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/12/mysql20-连接查询/" rel="next" title="mysql20-连接查询">
+                <i class="fa fa-chevron-left"></i> mysql20-连接查询
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#子查询"><span class="nav-number">1.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#子查询与主查询"><span class="nav-number">1.1.</span> <span class="nav-text">子查询与主查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询概念"><span class="nav-number">1.1.1.</span> <span class="nav-text">子查询概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主查询概念"><span class="nav-number">1.1.2.</span> <span class="nav-text">主查询概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询和主查询的关系"><span class="nav-number">1.1.3.</span> <span class="nav-text">子查询和主查询的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子查询分类"><span class="nav-number">1.2.</span> <span class="nav-text">子查询分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按功能分"><span class="nav-number">1.2.1.</span> <span class="nav-text">按功能分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位置分"><span class="nav-number">1.2.2.</span> <span class="nav-text">按位置分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标量子查询："><span class="nav-number">1.3.</span> <span class="nav-text">标量子查询：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法："><span class="nav-number">1.3.2.</span> <span class="nav-text">语法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列子查询"><span class="nav-number">1.4.</span> <span class="nav-text">列子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">1.4.2.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行子查询"><span class="nav-number">1.5.</span> <span class="nav-text">行子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念-2"><span class="nav-number">1.5.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行元素"><span class="nav-number">1.5.2.</span> <span class="nav-text">行元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-1"><span class="nav-number">1.5.3.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么不能用-having-语句："><span class="nav-number">1.5.4.</span> <span class="nav-text">为什么不能用  having 语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结：已经学过三个子查询：常见的三个子查询"><span class="nav-number">1.5.5.</span> <span class="nav-text">总结：已经学过三个子查询：常见的三个子查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表子查询"><span class="nav-number">1.6.</span> <span class="nav-text">表子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念-3"><span class="nav-number">1.6.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-2"><span class="nav-number">1.6.2.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exists子查询"><span class="nav-number">1.7.</span> <span class="nav-text">exists子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念-4"><span class="nav-number">1.7.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法-3"><span class="nav-number">1.7.2.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子查询中特定关键字的使用"><span class="nav-number">1.8.</span> <span class="nav-text">子查询中特定关键字的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#in"><span class="nav-number">1.8.1.</span> <span class="nav-text">in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#any"><span class="nav-number">1.8.2.</span> <span class="nav-text">any</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#some"><span class="nav-number">1.8.3.</span> <span class="nav-text">some</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all"><span class="nav-number">1.8.4.</span> <span class="nav-text">all</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
