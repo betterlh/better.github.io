@@ -353,6 +353,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/15/PHP基础12-cookie与session/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/15/PHP基础12-cookie与session/" class="post-title-link" itemprop="url">PHP基础12-cookie与session</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-15 22:10:33 / Updated at: 22:39:48" itemprop="dateCreated datePublished" datetime="2019-02-15T22:10:33+08:00">2019-02-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <center><strong style="font-size: 30px;">会话控制</strong></center>
+
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Cookie是用来将网站的资料记录在客户端的技术，这种技术让Web服务器能将一些资料，存放于客户端（用户的电脑）之中。 比如：当通过验证,成功登录网站后，在”网页一“的PHP脚本中，会把这个用户有关的信息，设置到客户端电脑的Cookie中，当再次访问同一个网站中的其他脚本时，就会自动携带Cookie中的数据一起访问，在服务器中的每个脚本中都可以接受Cookie中的数据，不需要每访问一个页面就重新输入一次登录者的信息。<br>Cookies最典型的应用是判定注册用户是否已经登录网站，用户可能会得到提示，是否在下一次进入此网站时保留用户信息以便简化登录手续，这些都是Cookies的功用。另一个重要应用场合是“购物车”之类处理。用户可能会在一段时间内在同一家网站的不同页面中选择不同的商品，这些信息都会写入Cookies，以便在最后付款时提取信息。</p>
+<h2 id="使用和禁用Cookie"><a href="#使用和禁用Cookie" class="headerlink" title="使用和禁用Cookie"></a>使用和禁用Cookie</h2><p>用户可以改变浏览器的设置，以使用或者禁用Cookies。<br>微软Internet Explorer<br>工具 &gt; Internet选项 &gt; 隐私页<br>调节滑块或者点击“高级”，进行设置.<br>Mozilla Firefox<br>工具&gt;选项&gt;隐私<br>（注： 在Linux版本中，是如下操作：编辑 &gt; 首选项 &gt; 隐私 ， 而Mac则是：Firefox &gt; 属性 &gt; 隐私）<br>查看源网页<br>查看源网页 [5]<br>设置Cookies选项<br>设定阻止/允许的各个域内Cookie<br>查看Cookies管理窗口，检查现存Cookie信息，选择删除或者阻止它们<br><img src="/2019/02/15/PHP基础12-cookie与session/1.png" alt=""><br><strong>由于用户可能会禁用cookie那么使用替代方案：URL参数</strong></p>
+<h2 id="Cookie操作："><a href="#Cookie操作：" class="headerlink" title="Cookie操作："></a>Cookie操作：</h2><p>1.向客户端电脑中设置Cookie<br>   setcookie ();<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">var_dump(uniqid(rand(<span class="number">1000</span>,<span class="number">9999</span>)));<span class="comment">//设置cookie产生的随机数</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.在服务器端上读取Cookie的内容<br>   $_COOKIE<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">'Content-type:text/html;charset=utf-8'</span>);</span><br><span class="line">var_dump($_COOKIE);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>3.将多维数组应用于Cookie中<br>   setcookie(“member[name]”,’孙胜利’);<br>   setcookie(“member[email]”,<a href="mailto:&#39;1205429372@qq.com" target="_blank" rel="noopener">&#39;1205429372@qq.com</a>‘);<br>一维数组：将所以cookie都直接保存在cookie数组下<br>使用二维数组，这样就能使多个cookie保存在cookie数组里的一个数组元素中<br><img src="/2019/02/15/PHP基础12-cookie与session/c1.png" alt=""><br>之所以还有上面的两个cookie是因为有效期还没过，我们删除之前的记录后：<br><img src="/2019/02/15/PHP基础12-cookie与session/c2.png" alt=""><br>4.删除Cookie<br>   setcookie(“member”,’’,time()-1);<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">foreach</span> ($_COOKIE[<span class="string">'member'</span>] <span class="keyword">as</span> $key=&gt;$val)&#123;</span><br><span class="line">    var_dump(setcookie(<span class="string">"member[&#123;$key&#125;]"</span>,<span class="string">''</span>,time()<span class="number">-3600</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注意点：使用setcookie删除cookie的时候，需要与当初设置cookie时的参数一致</p>
+<h1 id="session"><a href="#session" class="headerlink" title="session"></a>session</h1><p>Session技术与Cookie相似，都是用来存储使用者的相关资料，但是最大的不同之处在于Cookie是将资料存储在客户端电脑中，而Session则是将数据存放于服务器上。把保存的资料比喻成超市里面的会员卡，Cookie技术就相当于需要用户自己保存会员卡，每次去超市必须要持有会员卡才能代表自己的身份，那么Session技术就相当于会员卡由超市方保存，每次来超市的时候只需要报出会员卡的卡号(我们可以称为Session ID,客户端的cookie中只需要保存Session ID)即可！</p>
+<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><p>1.开启session<br>   session_start();//开启一个会话，或者返回已经存在的会话<br>2.使用session存储数据<br>   session_start();<br>   $_SESSION[‘username’]=’sunshengli’;<br>   $_SESSION[‘email’]<a href="mailto:=&#39;1205429372@qq.com" target="_blank" rel="noopener">=&#39;1205429372@qq.com</a>‘;<br>3.注销变量与销毁session<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line">session_start();<span class="comment">//打开要销毁的会话！</span></span><br><span class="line">session_unset();<span class="comment">//Free all session variables   释放所有的会话变量</span></span><br><span class="line">session_destroy();<span class="comment">//销毁一个会话中的全部数据</span></span><br><span class="line">setcookie(session_name(),<span class="string">''</span>,time()<span class="number">-3600</span>,<span class="string">'/'</span>);<span class="comment">//销毁保存在客户端的卡号（session id）</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：<br>如果此时我们不写第四个path参数即代码为：<br>setcookie(session_name(),’’,time()-3600)<br>此时我们查看session和cookie的销毁情况如下:<br><img src="/2019/02/15/PHP基础12-cookie与session/s1.png" alt=""><br>注意到cookie没有被删掉<br>原因：<br>PHP手册中setcookie里面的第四个参数：<br>path<br>Cookie 有效的服务器路径。 设置成 ‘/‘ 时，Cookie 对整个域名 domain 有效。 如果设置成 ‘/foo/‘， Cookie 仅仅对 domain 中 /foo/ 目录及其子目录有效（比如 /foo/bar/）。 默认值是设置 Cookie 时的当前目录。<br>而使用session时传的cookie位置是”/“<br><img src="/2019/02/15/PHP基础12-cookie与session/s2.png" alt=""><br>我们可以发现路径不一致，因此没有销毁对应的cookie<br>当我们设置好path参数后，成功删除客户端里的cookie<br><img src="/2019/02/15/PHP基础12-cookie与session/s3.png" alt=""><br>结论：<br>在销毁保存在客户端的时cookie时，要保证和当初设置的参数（path）一致。</p>
+<p>在新的php中想获取session时，要先使用session_start();返回已经存在的会话。否则获取不到session</p>
+<h1 id="cookie与session"><a href="#cookie与session" class="headerlink" title="cookie与session"></a>cookie与session</h1><p>1&gt;联系：Session在客户端也需要保存一个标识，所以就要借助Cookie,session是通过cookie来工作的session和cookie之间是通过$_COOKIE[‘PHPSESSID’]来联系的，通过$_COOKIE[‘PHPSESSID’]可以知道session的id，从而获取到其他的信息。<br>2&gt;区别：Cookie机制采用的是在客户端(浏览器)保持状态的方案，而session机制采用的是在服务器端保持状态的方案</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/14/PHP正则表达式（续）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2256,193 +2428,6 @@ preg_split -- 用正则表达式分割字符串
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/03/mysql15-表关系/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/03/mysql15-表关系/" class="post-title-link" itemprop="url">mysql15-表关系</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-03 20:13:39" itemprop="dateCreated datePublished" datetime="2019-02-03T20:13:39+08:00">2019-02-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-02-05 11:31:27" itemprop="dateModified" datetime="2019-02-05T11:31:27+08:00">2019-02-05</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>表关系</p>
-<p>表关系：表与表之间（实体）有什么样的关系，每种关系应该如何设计表结构</p>
-<h2 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h2><p>一张表中的一条记录与另外一张表中最多有一条明确的关系，通常，此设计方案保证两张表中使用相同的主键即可<br>表的使用过程中：常用的信息会经常去查询，而不常用的信息会偶尔才会用到</p>
-<p>解决方案：将两张表拆分，常见的放一张表，不常见的放一张表<br><img src="/2019/02/03/mysql15-表关系/1.png" alt=""> </p>
-<h2 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h2><p>一对多，通常也叫多对一的关系。通常一对多的关系设计的方案，在“多”关系的表中去维护一个字段，这个字段是“一”关系的主键</p>
-<p><img src="/2019/02/03/mysql15-表关系/2.png" alt=""> </p>
-<h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><p>多对多：一张表中的一条记录在另外一张表中可以匹配到多条记录，反过来也一样</p>
-<p>多对多的关系如果按照多对一的关系维护：就会出现一个字段中有多个其他表的主键，在访问的时候就会带来不便</p>
-<p>既然通过两张表自己增加字段解决问题，那么就通过第三表来解决。</p>
-<p>从中间设计一张表：维护两张表对应的联系，每一种联系都包含</p>
-<p>例如：师生关系</p>
-<ol>
-<li>一个老师教过多个班级的学生</li>
-<li>一个学生听过多个老师讲的课</li>
-</ol>
-<p><img src="/2019/02/03/mysql15-表关系/3.png" alt=""><br>多对多解决方案：增加一个中间表，让中间表与对应的其他表形成两个多对一的关系：多对一的解决方案是在“多”表中增加“一”表对应的主键字段</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2490,7 +2475,7 @@ preg_split -- 用正则表达式分割字符串
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
