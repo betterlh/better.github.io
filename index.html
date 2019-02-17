@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
         
@@ -353,6 +353,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/17/PHP基础13-类与对象/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/17/PHP基础13-类与对象/" class="post-title-link" itemprop="url">PHP基础13-类与对象</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-17 22:05:53 / Modified: 22:23:12" itemprop="dateCreated datePublished" datetime="2019-02-17T22:05:53+08:00">2019-02-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <center>面向对象</center>
+
+<p>引入例子 ：女娲 人身蛇尾 ， 用女娲造人引出类和实例 ： 女娲造人前先 思考 人的形象 然后再造人<br>所以 ：人的形象是抽象的，用来说明人的特点；而每一个人都是具体的，且符合人的形象</p>
+<p>类 ：所有对象共同点的一个抽象！（就是一个 制造说明书）<br>对象 ：就是根据说明书制造出来的具体对象</p>
+<p>类中有什么？ 属性（比如人：身高，体重，姓名）<br>能干什么？功能（说活，吃饭）<br>用 变量 和 函数 分别模拟 属性 和 功能<br>面向对象中 ，方法即是函数 ； 属性即是变量 ，只是面相对象中一般说方法和属性</p>
+<h2 id="类的命名空间"><a href="#类的命名空间" class="headerlink" title="类的命名空间"></a>类的命名空间</h2><p>不同PHP文件有同名的类，可以使用类的命名空间<br><img src="/2019/02/17/PHP基础13-类与对象/空间1.png" alt=""><br><img src="/2019/02/17/PHP基础13-类与对象/空间2.png" alt=""></p>
+<h2 id="如何创建对象"><a href="#如何创建对象" class="headerlink" title="如何创建对象"></a>如何创建对象</h2><p>new 类名（）；//直接产生一个对象并返回该对象。也可以不加括号（new 类名：）<br>$a = new 类名（）； //那么a对象就包含 类中声明的所有属性（类似关联数组）<br>成员属性<br>成员属性可以是基本数据类型（整数，小数，字符，布尔），也可以是复合数据类型（数组，对象）</p>
+<h2 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h2><p>要调用对应的属性值可以 $a -&gt; name (name不用$)；要调用对应的方法 $a -&gt; say()</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>语法就是法律； 规范 就是 道德</p>
+<ul>
+<li>（1）属性的初始化 不能是表达式 如 ： $a = 1+3 ;  java中是允许的</li>
+<li>（2）同一个域内(比如一个类中)，函数不能重复定义（即是名字不能一样）</li>
+<li>（3）在一个类里面，如果要调用系统同名的自定义函数，需要用$this，否则调用系统函数 ； 此外一个类里面 一个函数调用 不是他内部的变量或者它调用其他函数也要加 $this</li>
+</ul>
+<h2 id="方法的参数形式和传递方式"><a href="#方法的参数形式和传递方式" class="headerlink" title="方法的参数形式和传递方式"></a>方法的参数形式和传递方式</h2><p>方法的参数可以是基本数据类型、数组和类对象。<br>基本数据类型：值参传递<br>数组：值参传递<br>类对象：引用传递</p>
+<h2 id="类的构造方法"><a href="#类的构造方法" class="headerlink" title="类的构造方法"></a>类的构造方法</h2><p>__construct() , 注意前面是两个下划线 ； 当new对象（产生对象），自动调用 ； 构造函数不能被重载即是不能再有同名的</p>
+<p>例1：<br>class Person{<br>public $name;<br>public $sex;<br>public $age;<br>function __construct($name,$sex,$age){<br>echo “我是构造函数<br>“;<br>$this-&gt;name=$name;<br>$this-&gt;sex=$sex;<br>$this-&gt;age=$age;<br>}<br>范例：2<br><img src="/2019/02/17/PHP基础13-类与对象/构造1.png" alt=""><br><img src="/2019/02/17/PHP基础13-类与对象/构造2.png" alt=""></p>
+<p>因为构造函数有两个参数，且构造函数会自动调用，所以用new创建对象时，要给对象传入相应的参数。构造函数实现了将传进的参数赋值给类的属性，因此最终调用getnames（）函数时会输出传入的名字。<br>//注意：</p>
+<h2 id="this绑定"><a href="#this绑定" class="headerlink" title="this绑定"></a>this绑定</h2><p>当一个对象调用一个它对应类的方法时，该方法执行之前先完成一个绑定，即是用<br>$this绑定到调用此方法的对象（这样才能在方法内对这个对象的属性进行操纵），因为方法内如果想访问调用者（即是对象）的属性必须用$this；否则则理解为方法内部的一个局部变量<br><img src="/2019/02/17/PHP基础13-类与对象/this.png" alt=""><br>Java中不一样，函数不需要this也能访问方法外的变量</p>
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>当对象脱离其作用域时（例如对象所在的函数已调用完毕），系统自动执行析构函数。应在退出前在析构函数中用释放内存。<br>析构函数__destruct 析构函数没有任何参数</p>
+<h3 id="如何销毁对象-："><a href="#如何销毁对象-：" class="headerlink" title="如何销毁对象 ："></a>如何销毁对象 ：</h3><p>1、显式销毁，unset（），直接赋值为null或者其他值<br>2、执行完最后一行代码时自动销毁（如果之前已经销毁，则不再销毁）<br><img src="/2019/02/17/PHP基础13-类与对象/销毁.png" alt=""></p>
+<h3 id="对变量指向销毁问题"><a href="#对变量指向销毁问题" class="headerlink" title="对变量指向销毁问题"></a>对变量指向销毁问题</h3><p>$a = new People(); //创建一个对象（new People()），并把使用权给变量$a（$a是一个变量名，指向这个对象）<br>$a = $b = $c ;  //3个变量都指向内存中的同一个对象<br><img src="/2019/02/17/PHP基础13-类与对象/销毁2.png" alt=""><br>unset（$a）;//unset，即是销毁对象(object)，但有其他变量$b等仍然指向对象，那么该对象将不能被销毁，但是$a为null不再指向这个对象</p>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>不需要创建实例对象，直接使用<br>一般当某个属性或者方法 是所有对象固有的（即是不改变），则声明为静态属性，节省内存，随时类名调用；无论函数调用多少次,只初始化第一次.，如 static $a = 1;<br>调用：<br>类名：：变量名/方法</p>
+<h2 id="self-parent的用法-（-域运算符号-）"><a href="#self-parent的用法-（-域运算符号-）" class="headerlink" title="self, parent的用法  （::(域运算符号)）"></a>self, parent的用法  （::(域运算符号)）</h2><p>self:指向类本身，也就是self是不指向任何已经实例化的对象 ，self使用来指向类中的静态属性或者方法<br>self::$staticProperty<br>self::staticMothed;</p>
+<p>parent: 指向父类的指针，一般我们使用parent来调用父类的构造函数。</p>
+<p>在引入自身的静态属性/静态方法，以及父类的方法时,可以用到.<br>parent::$staticProperty<br>parent::Mothed;<br><img src="/2019/02/17/PHP基础13-类与对象/p.png" alt=""></p>
+<p>★应该选择this还是parent<br><img src="/2019/02/17/PHP基础13-类与对象/1.png" alt=""><br><img src="/2019/02/17/PHP基础13-类与对象/2.png" alt=""></p>
+<h2 id="访问权限"><a href="#访问权限" class="headerlink" title="访问权限"></a>访问权限</h2><p>public 公共的（公共修饰符） 类内部与类外部都可以访问的<br>private 私有的（私有修饰符） 只能在类内部访问<br>protected 受保护的（保护成员修饰符） 子类可以访问 类外部不可以访问</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/15/PHP基础12-cookie与session/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -391,14 +578,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-15 22:10:33 / Updated at: 22:39:48" itemprop="dateCreated datePublished" datetime="2019-02-15T22:10:33+08:00">2019-02-15</time>
+              <time title="Created: 2019-02-15 22:10:33 / Modified: 22:39:48" itemprop="dateCreated datePublished" datetime="2019-02-15T22:10:33+08:00">2019-02-15</time>
             
 
             
@@ -417,7 +604,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -563,14 +750,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-14 19:52:46 / Updated at: 23:46:42" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:46+08:00">2019-02-14</time>
+              <time title="Created: 2019-02-14 19:52:46 / Modified: 23:46:42" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:46+08:00">2019-02-14</time>
             
 
             
@@ -589,7 +776,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP正则表达式/" itemprop="url" rel="index"><span itemprop="name">PHP正则表达式</span></a></span>
@@ -872,14 +1059,14 @@ sql语句：^(select|drop|delete|create|update|insert).*$
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-14 19:52:34 / Updated at: 21:05:40" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:34+08:00">2019-02-14</time>
+              <time title="Created: 2019-02-14 19:52:34 / Modified: 21:05:40" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:34+08:00">2019-02-14</time>
             
 
             
@@ -898,7 +1085,7 @@ sql语句：^(select|drop|delete|create|update|insert).*$
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP正则表达式/" itemprop="url" rel="index"><span itemprop="name">PHP正则表达式</span></a></span>
@@ -1151,14 +1338,14 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-12 19:20:59 / Updated at: 19:50:53" itemprop="dateCreated datePublished" datetime="2019-02-12T19:20:59+08:00">2019-02-12</time>
+              <time title="Created: 2019-02-12 19:20:59 / Modified: 19:50:53" itemprop="dateCreated datePublished" datetime="2019-02-12T19:20:59+08:00">2019-02-12</time>
             
 
             
@@ -1177,7 +1364,7 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1338,14 +1525,14 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-12 16:14:39 / Updated at: 16:31:14" itemprop="dateCreated datePublished" datetime="2019-02-12T16:14:39+08:00">2019-02-12</time>
+              <time title="Created: 2019-02-12 16:14:39 / Modified: 16:31:14" itemprop="dateCreated datePublished" datetime="2019-02-12T16:14:39+08:00">2019-02-12</time>
             
 
             
@@ -1364,7 +1551,7 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1533,14 +1720,14 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-12 09:38:24 / Updated at: 09:51:15" itemprop="dateCreated datePublished" datetime="2019-02-12T09:38:24+08:00">2019-02-12</time>
+              <time title="Created: 2019-02-12 09:38:24 / Modified: 09:51:15" itemprop="dateCreated datePublished" datetime="2019-02-12T09:38:24+08:00">2019-02-12</time>
             
 
             
@@ -1559,7 +1746,7 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1735,14 +1922,14 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-07 22:36:49" itemprop="dateCreated datePublished" datetime="2019-02-07T22:36:49+08:00">2019-02-07</time>
+              <time title="Created: 2019-02-07 22:36:49" itemprop="dateCreated datePublished" datetime="2019-02-07T22:36:49+08:00">2019-02-07</time>
             
 
             
@@ -1759,7 +1946,7 @@ preg_split -- 用正则表达式分割字符串
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-08 21:30:04" itemprop="dateModified" datetime="2019-02-08T21:30:04+08:00">2019-02-08</time>
+                <time title="Modified: 2019-02-08 21:30:04" itemprop="dateModified" datetime="2019-02-08T21:30:04+08:00">2019-02-08</time>
               
             
           </span>
@@ -1773,7 +1960,7 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1917,14 +2104,14 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-06 20:37:52" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:52+08:00">2019-02-06</time>
+              <time title="Created: 2019-02-06 20:37:52" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:52+08:00">2019-02-06</time>
             
 
             
@@ -1941,7 +2128,7 @@ preg_split -- 用正则表达式分割字符串
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-07 11:19:55" itemprop="dateModified" datetime="2019-02-07T11:19:55+08:00">2019-02-07</time>
+                <time title="Modified: 2019-02-07 11:19:55" itemprop="dateModified" datetime="2019-02-07T11:19:55+08:00">2019-02-07</time>
               
             
           </span>
@@ -1955,7 +2142,7 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2105,14 +2292,14 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-06 20:37:33 / Updated at: 22:42:04" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:33+08:00">2019-02-06</time>
+              <time title="Created: 2019-02-06 20:37:33 / Modified: 22:42:04" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:33+08:00">2019-02-06</time>
             
 
             
@@ -2131,7 +2318,7 @@ preg_split -- 用正则表达式分割字符串
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2246,188 +2433,6 @@ preg_split -- 用正则表达式分割字符串
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/06/mysql16-高级操作之新增、更新、删除/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/06/mysql16-高级操作之新增、更新、删除/" class="post-title-link" itemprop="url">mysql16-高级操作之新增、更新、删除</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-06 20:37:19 / Updated at: 20:51:35" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:19+08:00">2019-02-06</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="新增数据"><a href="#新增数据" class="headerlink" title="新增数据"></a>新增数据</h1><h2 id="多数据插入"><a href="#多数据插入" class="headerlink" title="多数据插入"></a>多数据插入</h2><p>只要写一次insert指令，但是可以直接插入多条记录<br>基本语法：insert into 表名[（字段列表）]values （值列表），（值列表）…;<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/增1.png" alt=""></p>
-<h2 id="主键冲突"><a href="#主键冲突" class="headerlink" title="主键冲突"></a>主键冲突</h2><p>主键冲突：在有的表中，使用的是业务主键（字段有业务含义比如学生ID），但是往往在进行数据插入的时候，又不确定数据表中是否已经存在对应的主键<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/增2.png" alt=""></p>
-<h2 id="主键冲突的解决方案"><a href="#主键冲突的解决方案" class="headerlink" title="主键冲突的解决方案"></a>主键冲突的解决方案</h2><ol>
-<li>主键冲突更新<br>类似插入数据语法，如果插入的过程中主键冲突，那么采用更新方法。<br>insert into 表名[（字段列表）]values （值列表） on duplicate key update 字段=新值<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/增3.png" alt=""></li>
-<li>主键冲突替换<br>当主键冲突之后，干掉原来的数据，重新插入进去<br>replace into [(字段列表)]values （值列表）；<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/增4.png" alt=""><h2 id="蠕虫复制"><a href="#蠕虫复制" class="headerlink" title="蠕虫复制"></a>蠕虫复制</h2>蠕虫复制：一分为二，成倍的增加。从已有的数据中获取数据，并且将获取的数据插入到数据表中。<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/增5.png" alt=""><br>基本语法<br>insert into 表名 【（字段列表）】select */字段表名 from 表名</li>
-</ol>
-<p>注意：</p>
-<ol>
-<li>蠕虫复制的确通常是重复数据，没有太大业务意义：可以在短期内快速增加表的数据量，从而可以测试表的压力，还可以通过大量数据来测试表的效率（索引）</li>
-<li>蠕虫复制虽好，但是要注意主键冲突。</li>
-<li>配合 复制已有表机构语句 就可以完成表的复制<br>复制已有表机构语句：从已经存在 表赋值一份（只复制结构：如果表中有数据不复制）create table 新表名 like 表名 //只要使用数据库.表名，就可以在任意数据库下访问其他数据库表</li>
-</ol>
-<h1 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h1><ol>
-<li>在更新数据的时候，特别要注意：通常一定是跟随条件更新的<br>update 表名 set 字段名 =新值 where 判断条件</li>
-</ol>
-<p>如果没有条件，是全表更新数据。但是可以使用limit来显示更新的数量；<br>update 表名 set 字段名=新值【where 判断条件】limit 数量</p>
-<p>例如：改变4个a变成e<br>update my_simple set name=’e’ where name=’a’ limit 4<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/更.png" alt=""></p>
-<h1 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h1><ol>
-<li>删除数据的时候尽量不要全部删除，应该使用where进行判定</li>
-<li>删除的时候可以使用limit来限制要删除的具体数量</li>
-</ol>
-<p>delete删除数据的时候无法重置auto_increment<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/删1.png" alt=""></p>
-<p>mysql有一个能够重置表选项中的自增长的语法<br>truncate 表名；等价于  -&gt;drop -&gt;create<br><img src="/2019/02/06/mysql16-高级操作之新增、更新、删除/删2.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2475,8 +2480,8 @@ preg_split -- 用正则表达式分割字符串
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -2497,7 +2502,7 @@ preg_split -- 用正则表达式分割字符串
                       
                     
                     <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -2549,7 +2554,7 @@ preg_split -- 用正则表达式分割字符串
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 

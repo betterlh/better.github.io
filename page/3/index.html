@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>About</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
 
   </li>
         
@@ -353,6 +353,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/01/mysql06-类列表之整数型/" class="post-title-link" itemprop="url">mysql06-类列表之整数型</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-01 17:25:33 / Modified: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="列类型"><a href="#列类型" class="headerlink" title="列类型"></a>列类型</h1><h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><h3 id="tinyint"><a href="#tinyint" class="headerlink" title="tinyint"></a>tinyint</h3><p>迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255</p>
+<h3 id="smallint"><a href="#smallint" class="headerlink" title="smallint"></a>smallint</h3><p>小整形，系统采用两个字节来保存的整形：能表示0-65535之间</p>
+<h3 id="mediumint"><a href="#mediumint" class="headerlink" title="mediumint"></a>mediumint</h3><p>中整形，采用三个字节来保存数据</p>
+<h3 id="int"><a href="#int" class="headerlink" title="int"></a>int</h3><p>整形（标准整形），采用4个字节来保存数据</p>
+<h3 id="bigint"><a href="#bigint" class="headerlink" title="bigint"></a>bigint</h3><p>大整形，采用八个字节来保存数据</p>
+<ol>
+<li>创建数据表<br><img src="/2019/02/01/mysql06-类列表之整数型/1.png" alt=""></li>
+<li>插入合理数据</li>
+</ol>
+<p><img src="/2019/02/01/mysql06-类列表之整数型/2.png" alt=""> </p>
+<ol start="3">
+<li>插入错误数据（超出对应的数据范围）<br><img src="/2019/02/01/mysql06-类列表之整数型/3.png" alt=""> </li>
+<li>错误原因：并不是说tinyint没有这么大的空间，而是因为mysql默认地为整形增加负数 实际区间为： -128~127<br><br><br>实际应用中应该根据对应的数据的范围来选定对应的整形类型，通常使用的比较多的是tinyint和int</li>
+</ol>
+<h3 id="无符号标识设定"><a href="#无符号标识设定" class="headerlink" title="无符号标识设定"></a>无符号标识设定</h3><p>无符号表示存储的数据在当前字段中，没有负数（只有正数，区间为0-255）<br>基本语法：在类型之后，加上一个unsigned<br><img src="/2019/02/01/mysql06-类列表之整数型/无符号.png" alt=""></p>
+<h2 id="显示长度"><a href="#显示长度" class="headerlink" title="显示长度"></a>显示长度</h2><p>显示长度：指数据（整形）在数据显示的时候，到底可以显示多长位</p>
+<p>tinyint（3）：表示最长可以显示3位，unsigned说明只能是正数，0-255永远不会超过3位<br>tinyint（4）：表示最长可以显示4位，-128~127</p>
+<p>显示长度只是代表了数据是否可以到达指定的长度，但是不会自动满足到指定长度；如果想要数据显示的时候，保持最高位（显示长度），那么还需要给字段增加一个 zerofill属性才可以</p>
+<p>zerofill：从左侧开始填充0（左侧不会改变数值大小），所以负数的时候就不能使用zerofill，一旦使用zerofill就相当于确定该字段位unsigned<br><img src="/2019/02/01/mysql06-类列表之整数型/显示1.png" alt=""><br>数据显示的时候，zerofill会在左侧填充0到指定位，如果不足3位，那么填充到3位，如果本身已经够了或者超出，就不再填充</p>
+<p><img src="/2019/02/01/mysql06-类列表之整数型/显示2.png" alt=""><br>显示长度可以自己设定，超出长度但是不超出范围，不会影响，只会对不够显示长度的进行补充（显示长度）</p>
+<p>例如我们使用<br><img src="/2019/02/01/mysql06-类列表之整数型/显示3.png" alt=""><br>查看结果<br><img src="/2019/02/01/mysql06-类列表之整数型/显示4.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -391,14 +571,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 14:53:36 / Updated at: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
+              <time title="Created: 2019-02-01 14:53:36 / Modified: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
             
 
             
@@ -417,7 +597,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -565,14 +745,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 12:49:56 / Updated at: 12:58:18" itemprop="dateCreated datePublished" datetime="2019-02-01T12:49:56+08:00">2019-02-01</time>
+              <time title="Created: 2019-02-01 12:49:56 / Modified: 12:58:18" itemprop="dateCreated datePublished" datetime="2019-02-01T12:49:56+08:00">2019-02-01</time>
             
 
             
@@ -591,7 +771,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -714,7 +894,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">Unbenannt</a>
+                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -732,14 +912,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-31 17:38:26 / Updated at: 17:38:54" itemprop="dateCreated datePublished" datetime="2019-01-31T17:38:26+08:00">2019-01-31</time>
+              <time title="Created: 2019-01-31 17:38:26 / Modified: 17:38:54" itemprop="dateCreated datePublished" datetime="2019-01-31T17:38:26+08:00">2019-01-31</time>
             
 
             
@@ -1939,14 +2119,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-31 17:30:32" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
+              <time title="Created: 2019-01-31 17:30:32" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
             
 
             
@@ -1963,7 +2143,7 @@ _:匹配当前位置单个字符<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-01 14:53:49" itemprop="dateModified" datetime="2019-02-01T14:53:49+08:00">2019-02-01</time>
+                <time title="Modified: 2019-02-01 14:53:49" itemprop="dateModified" datetime="2019-02-01T14:53:49+08:00">2019-02-01</time>
               
             
           </span>
@@ -1977,7 +2157,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2133,14 +2313,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-31 17:30:06 / Updated at: 17:42:46" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:06+08:00">2019-01-31</time>
+              <time title="Created: 2019-01-31 17:30:06 / Modified: 17:42:46" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:06+08:00">2019-01-31</time>
             
 
             
@@ -2159,7 +2339,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2303,14 +2483,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-30 20:19:58" itemprop="dateCreated datePublished" datetime="2019-01-30T20:19:58+08:00">2019-01-30</time>
+              <time title="Created: 2019-01-30 20:19:58" itemprop="dateCreated datePublished" datetime="2019-01-30T20:19:58+08:00">2019-01-30</time>
             
 
             
@@ -2327,7 +2507,7 @@ _:匹配当前位置单个字符<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-01 12:48:43" itemprop="dateModified" datetime="2019-02-01T12:48:43+08:00">2019-02-01</time>
+                <time title="Modified: 2019-02-01 12:48:43" itemprop="dateModified" datetime="2019-02-01T12:48:43+08:00">2019-02-01</time>
               
             
           </span>
@@ -2341,7 +2521,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2520,14 +2700,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-30 07:52:54 / Updated at: 08:07:47" itemprop="dateCreated datePublished" datetime="2019-01-30T07:52:54+08:00">2019-01-30</time>
+              <time title="Created: 2019-01-30 07:52:54 / Modified: 08:07:47" itemprop="dateCreated datePublished" datetime="2019-01-30T07:52:54+08:00">2019-01-30</time>
             
 
             
@@ -2546,7 +2726,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -2698,14 +2878,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-30 07:52:36 / Updated at: 15:38:19" itemprop="dateCreated datePublished" datetime="2019-01-30T07:52:36+08:00">2019-01-30</time>
+              <time title="Created: 2019-01-30 07:52:36 / Modified: 15:38:19" itemprop="dateCreated datePublished" datetime="2019-01-30T07:52:36+08:00">2019-01-30</time>
             
 
             
@@ -2724,7 +2904,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -2864,14 +3044,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-29 16:42:39" itemprop="dateCreated datePublished" datetime="2019-01-29T16:42:39+08:00">2019-01-29</time>
+              <time title="Created: 2019-01-29 16:42:39" itemprop="dateCreated datePublished" datetime="2019-01-29T16:42:39+08:00">2019-01-29</time>
             
 
             
@@ -2888,7 +3068,7 @@ _:匹配当前位置单个字符<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-01-30 07:53:37" itemprop="dateModified" datetime="2019-01-30T07:53:37+08:00">2019-01-30</time>
+                <time title="Modified: 2019-01-30 07:53:37" itemprop="dateModified" datetime="2019-01-30T07:53:37+08:00">2019-01-30</time>
               
             
           </span>
@@ -2902,7 +3082,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -2995,217 +3175,6 @@ _:匹配当前位置单个字符<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础08-数组及其相关函数/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/29/PHP基础08-数组及其相关函数/" class="post-title-link" itemprop="url">PHP基础08-数组及其相关函数</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-01-29 16:42:31 / Updated at: 21:43:46" itemprop="dateCreated datePublished" datetime="2019-01-29T16:42:31+08:00">2019-01-29</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组：arrary，数据的组合，指将一组数据（多个）存储到一个指定的容器中，用变量指向该容器，然后可以通过变量一次性得到该容器的所有数据</p>
-<h2 id="数组定义语法"><a href="#数组定义语法" class="headerlink" title="数组定义语法"></a>数组定义语法</h2><p>在PHP中系统提供多种定义数组的方式<br>array(  key =&gt;  value , … )</p>
-<ol>
-<li>使用array关键字：最常用的$变量=array{元素1，元素2，…}//默认0开始</li>
-<li>可以使用中括号来包裹数据(用 [] 替代 array()。)：$变量=[元素1，元素2，…]</li>
-<li>隐形定义数组：<br>$变量[]=值   //如果对给出的值没有指定键名，则取当前最大的整数索引值，而新的                     键名将是该值加一。<br>$变量[下标key]=值  // 键（key）可是是一个整数 integer 或字符串string</li>
-</ol>
-<h2 id="PHP数组特点"><a href="#PHP数组特点" class="headerlink" title="PHP数组特点"></a>PHP数组特点</h2><ol>
-<li>可以整数下标或者字符串下标<br>如果数组下标都为整数：索引数组<br>如果数组下标都为字符串：关联数组</li>
-<li>不同下标可以混合存在，混合数组</li>
-<li>数组元素的顺序以放入顺序为准，跟下标无关</li>
-<li>数组下标的自增长性</li>
-<li>特殊值下标的自动转换<ul>
-<li>包含有合法整型值的字符串会被转换为整型。例如键名 “8” 实际会被储存为 8。但是 “08” 则不会强制转换，因为其不是一个合法的十进制数值。 </li>
-<li>浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8。 </li>
-<li>布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0。 </li>
-<li>Null 会被转换为空字符串，即键名 null 实际会被储存为 “”。 </li>
-<li>数组和对象不能被用为键名。坚持这么做会导致警告：Illegal offset type。</li>
-</ul>
-</li>
-<li>PHP中数组元素没有长度类型</li>
-<li>PHP中的数组是很大的数据，所有存储位置是堆区，为当前数组分配一快连续的内存。</li>
-<li>如果在数组定义中多个单元都使用了同一个键名，则只使用了最后一个，之前的都被覆盖</li>
-</ol>
-<h1 id="数组的相关函数"><a href="#数组的相关函数" class="headerlink" title="数组的相关函数"></a>数组的相关函数</h1><h2 id="排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较"><a href="#排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较" class="headerlink" title="排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较"></a>排序函数：对数组元素进行排序，都是按照ASCII，可以进行英文比较</h2><p>sort {}顺序排序（下标重排）<br>    sort ( array &amp;$array [, int $sort_flags = SORT_REGULAR ] ) 直接对数组操作，返回值为boole（true或false）<br>    参数:</p>
-<ul>
-<li>array:要排序的数组。 </li>
-<li>sort_flags: 可选的第二个参数 sort_flags 可以用以下值改变排序的行为： <pre><code>排序类型标记： 
-    •    SORT_REGULAR - 正常比较单元（不改变类型） 
-    •    SORT_NUMERIC - 单元被作为数字来比较 
-    •    SORT_STRING - 单元被作为字符串来比较 
-    •    SORT_LOCALE_STRING - 根据当前的区域（locale）设置来把单元当作字符串比较，可以用 setlocale() 来改变。 
-    •    SORT_NATURAL - 和 natsort() 类似对每个单元以&quot;自然的顺序&quot;对字符串进行排序。 PHP 5.4.0 中新增的。 
-    •    SORT_FLAG_CASE - 能够与 SORT_STRING 或 SORT_NATURAL 合并（OR 位运算），不区分大小写排序字符串。 
-</code></pre>rsort()：逆序排序<br>asort()顺序    //数组的索引保持和单元的关联<br>arsort()逆序<br>ksort()顺序排序：按照键名（下标）排序  //保留键名到数据的关联<br>krsort()逆序<br>shuffle()随机打乱数组元素，不保留对应关系</li>
-</ul>
-<h2 id="指针函数："><a href="#指针函数：" class="headerlink" title="指针函数："></a>指针函数：</h2><p>reset() 重置指针，将内部指针倒回到第一个单元并返回第一个数组单元的值<br>end()重置指针,数组内部指针移动到最后一个单元并返回其值。<br>next()指针下移，它返回的是下一个数组单元的值<br>prev（）指针上移<br>current（）获取当前指针对应的值<br>key（）获取当前指针对应的下标<br>//注意：next和prve会移动指针，有可能导致指针移动都边界（离开数组），导致数组不能使用（通过next和prve不能回到正确的位置）只能通过end或者reset进行指针重置</p>
-<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><p>count(mixed $array_or_countable [, int $mode = COUNT_NORMAL ])<br>//如果可选的 mode 参数设为 COUNT_RECURSIVE（或 1），count() 将递归地对数组计数。对计算多维数组的所有单元尤其有用。<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/函数1.png" alt=""></p>
-<p>统计出数组里的所有元素的数量，或者对象里的东西。<br><br></p>
-<h3 id="array-push"><a href="#array-push" class="headerlink" title="array_push"></a>array_push</h3><p>array_push(array &amp;$array , mixed $value1 [, mixed $… ])<br>将一个或多个单元压入数组的末尾（入栈）</p>
-<h3 id="array-pop"><a href="#array-pop" class="headerlink" title="array_pop"></a>array_pop</h3><p>弹出并返回 array 数组的最后一个单元（被弹出去的），并将数组 array 的度减一。 （出栈）<br> //Note: 使用此函数后会重置（reset()）array 指针。</p>
-<h3 id="array-shift"><a href="#array-shift" class="headerlink" title="array_shift"></a>array_shift</h3><p>array_shift(array &amp;$array)<br>将 array 的第一个单元移出并作为结果返回，将 array 的长度减一并将所有其它单元向前移动一位。所有的数字键名将改为从零开始计数，文字键名将不变。<br>//Note: 使用此函数后会重置（reset()）array 指针。</p>
-<h3 id="array-unshift"><a href="#array-unshift" class="headerlink" title="array_unshift"></a>array_unshift</h3><p>array_unshift(array &amp;$array , mixed $value1 [, mixed $… ])<br>将传入的单元插入到 array 数组的开头。注意单元是作为整体被插入的，因此传入单元将保持同样的顺序。所有的数值键名将修改为从零开始重新计数，所有的文字键名保持不变。</p>
-<h3 id="array-reverse"><a href="#array-reverse" class="headerlink" title="array_reverse"></a>array_reverse</h3><p>array_reverse(array $array [, bool $preserve_keys = false ])数组元素反过来<br>preserve_keys如果设置为 TRUE 会保留数字的键（保留键值对关系）。 非数字的键则不受这个设置的影响，总是会被保留（键值对关系总会被保存）。 </p>
-<h3 id="in-array"><a href="#in-array" class="headerlink" title="in_ array"></a>in_ array</h3><p>in_ array(mixed $needle , array $haystack [, bool $strict = FALSE)<br>判断一个元素在数组中是否存在<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/函数2.png" alt=""></p>
-<h3 id="array-keys"><a href="#array-keys" class="headerlink" title="array_keys"></a>array_keys</h3><p>array_keys(array $array [, mixed $search_value = null [, bool $strict = false ]])获取一个数组的所有下标，返回一个索引数组</p>
-<ul>
-<li>search_value<br>如果指定了这个参数，只有包含这些值的键才会返回。 </li>
-<li>strict<br>判断在搜索的时候是否该使用严格的比较（===）（区别100和“100”）<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/函数3.png" alt=""></li>
-</ul>
-<h3 id="array-values"><a href="#array-values" class="headerlink" title="array_values"></a>array_values</h3><p>array_values(array $array)获取一个数组的所有值，返回一个索引数组</p>
-<h1 id="php模拟数据结构"><a href="#php模拟数据结构" class="headerlink" title="php模拟数据结构"></a>php模拟数据结构</h1><p>栈：压栈，先进去后出来（FILO）<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/栈1.png" alt=""><br>队列：排队，先进先出（FIFO）<br><img src="/2019/01/29/PHP基础08-数组及其相关函数/栈2.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3253,8 +3222,8 @@ _:匹配当前位置单个字符<br>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -3275,7 +3244,7 @@ _:匹配当前位置单个字符<br>
                       
                     
                     <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -3327,7 +3296,7 @@ _:匹配当前位置单个字符<br>
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
