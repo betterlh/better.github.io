@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/02/17/PHP基础13-类与对象/p.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/17/PHP基础13-类与对象/1.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/17/PHP基础13-类与对象/2.png">
-<meta property="og:updated_time" content="2019-02-17T14:23:12.656Z">
+<meta property="og:updated_time" content="2019-02-18T00:59:00.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP基础13-类与对象">
 <meta name="twitter:description" content="面向对象  引入例子 ：女娲 人身蛇尾 ， 用女娲造人引出类和实例 ： 女娲造人前先 思考 人的形象 然后再造人所以 ：人的形象是抽象的，用来说明人的特点；而每一个人都是具体的，且符合人的形象 类 ：所有对象共同点的一个抽象！（就是一个 制造说明书）对象 ：就是根据说明书制造出来的具体对象 类中有什么？ 属性（比如人：身高，体重，姓名）能干什么？功能（说活，吃饭）用 变量 和 函数 分别模拟 属性">
@@ -230,7 +230,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -247,7 +247,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -281,7 +281,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -298,7 +298,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -403,19 +403,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-17 22:05:53 / Modified: 22:23:12" itemprop="dateCreated datePublished" datetime="2019-02-17T22:05:53+08:00">2019-02-17</time>
+              <time title="Post created: 2019-02-17 22:05:53" itemprop="dateCreated datePublished" datetime="2019-02-17T22:05:53+08:00">2019-02-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-18 08:59:00" itemprop="dateModified" datetime="2019-02-18T08:59:00+08:00">2019-02-18</time>
               
             
           </span>
@@ -429,7 +441,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -488,7 +500,7 @@
 <h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>当对象脱离其作用域时（例如对象所在的函数已调用完毕），系统自动执行析构函数。应在退出前在析构函数中用释放内存。<br>析构函数__destruct 析构函数没有任何参数</p>
 <h3 id="如何销毁对象-："><a href="#如何销毁对象-：" class="headerlink" title="如何销毁对象 ："></a>如何销毁对象 ：</h3><p>1、显式销毁，unset（），直接赋值为null或者其他值<br>2、执行完最后一行代码时自动销毁（如果之前已经销毁，则不再销毁）<br><img src="/2019/02/17/PHP基础13-类与对象/销毁.png" alt=""></p>
 <h3 id="对变量指向销毁问题"><a href="#对变量指向销毁问题" class="headerlink" title="对变量指向销毁问题"></a>对变量指向销毁问题</h3><p>$a = new People(); //创建一个对象（new People()），并把使用权给变量$a（$a是一个变量名，指向这个对象）<br>$a = $b = $c ;  //3个变量都指向内存中的同一个对象<br><img src="/2019/02/17/PHP基础13-类与对象/销毁2.png" alt=""><br>unset（$a）;//unset，即是销毁对象(object)，但有其他变量$b等仍然指向对象，那么该对象将不能被销毁，但是$a为null不再指向这个对象</p>
-<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>不需要创建实例对象，直接使用<br>一般当某个属性或者方法 是所有对象固有的（即是不改变），则声明为静态属性，节省内存，随时类名调用；无论函数调用多少次,只初始化第一次.，如 static $a = 1;<br>调用：<br>类名：：变量名/方法</p>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>不需要创建实例对象，直接使用<br>一般当某个属性或者方法 是所有对象固有的（即是不改变），则声明为静态属性，节省内存，随时类名调用；无论函数调用多少次,只初始化第一次.，如 static $a = 1;<br>调用：<br>类名：：变量名/方法   //类内部与类外部都可以访问的<br>self：：变量名/方法   //只能类内部使用</p>
 <h2 id="self-parent的用法-（-域运算符号-）"><a href="#self-parent的用法-（-域运算符号-）" class="headerlink" title="self, parent的用法  （::(域运算符号)）"></a>self, parent的用法  （::(域运算符号)）</h2><p>self:指向类本身，也就是self是不指向任何已经实例化的对象 ，self使用来指向类中的静态属性或者方法<br>self::$staticProperty<br>self::staticMothed;</p>
 <p>parent: 指向父类的指针，一般我们使用parent来调用父类的构造函数。</p>
 <p>在引入自身的静态属性/静态方法，以及父类的方法时,可以用到.<br>parent::$staticProperty<br>parent::Mothed;<br><img src="/2019/02/17/PHP基础13-类与对象/p.png" alt=""></p>
@@ -533,6 +545,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/18/Mysql 注入及sqli-labs 01/" rel="prev" title="1">
+                1 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -579,10 +595,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -602,8 +618,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">40</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -624,11 +640,24 @@
                       
                     
                     <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">Tags</span>
+                  
+                </div>
               
             </nav>
           
@@ -693,7 +722,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
