@@ -96,12 +96,12 @@
 
 
 
-  <meta name="description" content="注入步骤1：order by 猜测字段个数2：爆显示位根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）例 union select 1，2，3… 3查询数据库版本和当前数据库union联合查询（根据爆出的显示位在相应位置查询数据库版本和当前数据库）之后利用information_schema数据库爆相关信息 4：爆表select table_name from informa">
+  <meta name="description" content="注入步骤一个数据库当中有很多的数据表，数据表当中有很多的列，每一列当中存储着数据。我们注入的过程就是先拿到数据库名，在获取到当前数据库名下的数据表，再获取当前数据表下的列，最后获取数据。 1：order by 猜测字段个数2：爆显示位根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）例 union select 1，2，3… 3查询数据库版本和当前数据库union联合查询（根据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql 注入及sqli-labs 01">
 <meta property="og:url" content="http://betterlh.github.io/2019/02/18/Mysql 注入及sqli-labs 01/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="注入步骤1：order by 猜测字段个数2：爆显示位根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）例 union select 1，2，3… 3查询数据库版本和当前数据库union联合查询（根据爆出的显示位在相应位置查询数据库版本和当前数据库）之后利用information_schema数据库爆相关信息 4：爆表select table_name from informa">
+<meta property="og:description" content="注入步骤一个数据库当中有很多的数据表，数据表当中有很多的列，每一列当中存储着数据。我们注入的过程就是先拿到数据库名，在获取到当前数据库名下的数据表，再获取当前数据表下的列，最后获取数据。 1：order by 猜测字段个数2：爆显示位根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）例 union select 1，2，3… 3查询数据库版本和当前数据库union联合查询（根据">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/18/Mysql%20注入及sqli-labs%2001/步骤1.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/18/Mysql%20注入及sqli-labs%2001/步骤2.png">
@@ -121,10 +121,10 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/02/18/Mysql%20注入及sqli-labs%2001/联合1.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/18/Mysql%20注入及sqli-labs%2001/联合2.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/18/Mysql%20注入及sqli-labs%2001/联合3.png">
-<meta property="og:updated_time" content="2019-02-19T05:23:59.113Z">
+<meta property="og:updated_time" content="2019-02-19T11:38:47.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mysql 注入及sqli-labs 01">
-<meta name="twitter:description" content="注入步骤1：order by 猜测字段个数2：爆显示位根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）例 union select 1，2，3… 3查询数据库版本和当前数据库union联合查询（根据爆出的显示位在相应位置查询数据库版本和当前数据库）之后利用information_schema数据库爆相关信息 4：爆表select table_name from informa">
+<meta name="twitter:description" content="注入步骤一个数据库当中有很多的数据表，数据表当中有很多的列，每一列当中存储着数据。我们注入的过程就是先拿到数据库名，在获取到当前数据库名下的数据表，再获取当前数据表下的列，最后获取数据。 1：order by 猜测字段个数2：爆显示位根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）例 union select 1，2，3… 3查询数据库版本和当前数据库union联合查询（根据">
 <meta name="twitter:image" content="http://betterlh.github.io/2019/02/18/Mysql%20注入及sqli-labs%2001/步骤1.png">
 
 
@@ -238,7 +238,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Beranda</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -255,7 +255,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Tentang</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -289,7 +289,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategori</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -306,7 +306,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Arsip</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -411,7 +411,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-19 13:23:59" itemprop="dateModified" datetime="2019-02-19T13:23:59+08:00">2019-02-19</time>
+                <time title="Updated at: 2019-02-19 19:38:47" itemprop="dateModified" datetime="2019-02-19T19:38:47+08:00">2019-02-19</time>
               
             
           </span>
@@ -449,7 +449,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
@@ -486,7 +486,8 @@
       
 
       
-        <h1 id="注入步骤"><a href="#注入步骤" class="headerlink" title="注入步骤"></a>注入步骤</h1><h2 id="1：order-by-猜测字段个数"><a href="#1：order-by-猜测字段个数" class="headerlink" title="1：order by 猜测字段个数"></a>1：order by 猜测字段个数</h2><h2 id="2：爆显示位"><a href="#2：爆显示位" class="headerlink" title="2：爆显示位"></a>2：爆显示位</h2><p>根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）<br>例 union select 1，2，3…</p>
+        <h1 id="注入步骤"><a href="#注入步骤" class="headerlink" title="注入步骤"></a>注入步骤</h1><p>一个数据库当中有很多的数据表，数据表当中有<br>很多的列，每一列当中存储着数据。我们注入的过程就是先拿到数据库名，在获取到当前数<br>据库名下的数据表，再获取当前数据表下的列，最后获取数据。</p>
+<h2 id="1：order-by-猜测字段个数"><a href="#1：order-by-猜测字段个数" class="headerlink" title="1：order by 猜测字段个数"></a>1：order by 猜测字段个数</h2><h2 id="2：爆显示位"><a href="#2：爆显示位" class="headerlink" title="2：爆显示位"></a>2：爆显示位</h2><p>根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）<br>例 union select 1，2，3…</p>
 <h2 id="3查询数据库版本和当前数据库"><a href="#3查询数据库版本和当前数据库" class="headerlink" title="3查询数据库版本和当前数据库"></a>3查询数据库版本和当前数据库</h2><p>union联合查询（根据爆出的显示位在相应位置查询数据库版本和当前数据库）<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤1.png" alt=""><br>之后利用information_schema数据库爆相关信息<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤2.png" alt=""></p>
 <h2 id="4：爆表"><a href="#4：爆表" class="headerlink" title="4：爆表"></a>4：爆表</h2><p>select table_name from information_schema.tables where table_schema=’xxxxx’<br>根据爆出的数据库，爆出数据库下所有的表<br>例如：<br>union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=‘security‘–+<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤3.png" alt=""></p>
 <h2 id="5：爆列"><a href="#5：爆列" class="headerlink" title="5：爆列"></a>5：爆列</h2><p>Select column_name from information_schema.columns where table_name=’xxxxx’<br>根据爆出的表爆出所有列<br>例如：<br>Select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤4.png" alt=""></p>
@@ -553,6 +554,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/02/21/mysql注入之盲注及sqli-labs05/" rel="prev" title="mysql注入02及sqli-labs05">
+                mysql注入02及sqli-labs05 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -598,10 +603,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Daftar Isi
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Ikhtisar
+            Übersicht
           </li>
         </ul>
       
@@ -621,8 +626,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
-                    <span class="site-state-item-name">posting</span>
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -645,24 +650,11 @@
                       
                     
                     <span class="site-state-item-count">5</span>
-                    <span class="site-state-item-name">kategori</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                    
-                      
-                    
-                    <span class="site-state-item-count">0</span>
-                    <span class="site-state-item-name">tags</span>
-                  
-                </div>
               
             </nav>
           
@@ -727,7 +719,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -735,7 +727,7 @@
 
 
 
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 
