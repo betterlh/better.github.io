@@ -96,19 +96,19 @@
 
 
 
-  <meta name="description" content="HTTP协议简单解析及WEB请求过程http://www.blogjava.net/zjusuyong/articles/304788.htmlhttp字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、">
+  <meta name="description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但返回信息为空 205—">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http基础知识">
 <meta property="og:url" content="http://betterlh.github.io/2019/02/22/http基础知识/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="HTTP协议简单解析及WEB请求过程http://www.blogjava.net/zjusuyong/articles/304788.htmlhttp字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、">
+<meta property="og:description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但返回信息为空 205—">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-1.jpg">
 <meta property="og:image" content="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-2.jpg">
-<meta property="og:updated_time" content="2019-02-23T14:29:36.314Z">
+<meta property="og:updated_time" content="2019-02-23T14:31:14.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http基础知识">
-<meta name="twitter:description" content="HTTP协议简单解析及WEB请求过程http://www.blogjava.net/zjusuyong/articles/304788.htmlhttp字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、">
+<meta name="twitter:description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但返回信息为空 205—">
 <meta name="twitter:image" content="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-1.jpg">
 
 
@@ -222,7 +222,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Beranda</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
 
   </li>
         
@@ -239,7 +239,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Tentang</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>A propos</a>
 
   </li>
         
@@ -273,7 +273,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategori</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -290,7 +290,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Arsip</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
         
@@ -395,7 +395,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Posté le</span>
               
 
               
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-23 22:29:36" itemprop="dateModified" datetime="2019-02-23T22:29:36+08:00">2019-02-23</time>
+                <time title="Updated at: 2019-02-23 22:31:14" itemprop="dateModified" datetime="2019-02-23T22:31:14+08:00">2019-02-23</time>
               
             
           </span>
@@ -452,7 +452,7 @@
       
 
       
-        <p><a href="https://www.cnblogs.com/hggen/p/6264858.html" target="_blank" rel="noopener">HTTP协议简单解析及WEB请求过程</a><br><a href="http://www.blogjava.net/zjusuyong/articles/304788.html" target="_blank" rel="noopener">http://www.blogjava.net/zjusuyong/articles/304788.html</a><br><a href="https://blog.csdn.net/ynd_sg/article/details/82182951" target="_blank" rel="noopener">http字段总结</a></p>
+        <p><a href="https://www.cnblogs.com/hggen/p/6264858.html" target="_blank" rel="noopener">HTTP协议简单解析及WEB请求过程</a><br><a href="http://www.blogjava.net/zjusuyong/articles/304788.html" target="_blank" rel="noopener">http协议学习</a><br><a href="https://blog.csdn.net/ynd_sg/article/details/82182951" target="_blank" rel="noopener">http字段总结</a></p>
 <h1 id="http的状态响应码"><a href="#http的状态响应码" class="headerlink" title="http的状态响应码"></a>http的状态响应码</h1><h2 id="1-：请求收到，继续处理"><a href="#1-：请求收到，继续处理" class="headerlink" title="1**：请求收到，继续处理"></a>1**：请求收到，继续处理</h2><p>100——客户必须继续发出请求</p>
 <p>101——客户要求服务器根据请求转换HTTP协议版本</p>
 <h2 id="2-：操作成功收到，分析、接受"><a href="#2-：操作成功收到，分析、接受" class="headerlink" title="2**：操作成功收到，分析、接受"></a>2**：操作成功收到，分析、接受</h2><p>200——交易成功<br>201——提示知道新文件的URL</p>
@@ -626,10 +626,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Daftar Isi
+            Table Des Matières
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Ikhtisar
+            Ensemble
           </li>
         </ul>
       
@@ -650,7 +650,7 @@
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">45</span>
-                    <span class="site-state-item-name">posting</span>
+                    <span class="site-state-item-name">articles</span>
                   </a>
                 </div>
               
@@ -673,7 +673,7 @@
                       
                     
                     <span class="site-state-item-count">5</span>
-                    <span class="site-state-item-name">kategori</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -750,7 +750,7 @@
 
 
 
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 
