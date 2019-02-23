@@ -127,7 +127,7 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/02/14/PHP正则表达式/函数7.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/14/PHP正则表达式/函数8.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/14/PHP正则表达式/函数9.png">
-<meta property="og:updated_time" content="2019-02-14T13:05:40.897Z">
+<meta property="og:updated_time" content="2019-02-23T11:10:41.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP正则表达式">
 <meta name="twitter:description" content="一、    正则表达式介绍描述了一类字符串的特征，然后通过这个特征可以配合一些特定的函数，来完成对字符串更加复杂的一系列操作！        普通字符和特殊字符组成的一个字符串 1. 用途：匹配、查找、替换、分割  2. php提供了两套正则表达式函数库      （1）. Perl 兼容正则表达式函数（推荐使用）      （2）. POSIX 扩展正则表达式函数 二、语法规则表达式的格式： &amp;">
@@ -244,7 +244,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Beranda</a>
 
   </li>
         
@@ -261,7 +261,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Tentang</a>
 
   </li>
         
@@ -295,7 +295,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategori</a>
 
   </li>
         
@@ -312,7 +312,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Arsip</a>
 
   </li>
         
@@ -417,19 +417,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Diposting di</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-14 19:52:34 / Updated at: 21:05:40" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:34+08:00">2019-02-14</time>
+              <time title="Post created: 2019-02-14 19:52:34" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:34+08:00">2019-02-14</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-23 19:10:41" itemprop="dateModified" datetime="2019-02-23T19:10:41+08:00">2019-02-23</time>
               
             
           </span>
@@ -443,7 +455,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">Di</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP正则表达式/" itemprop="url" rel="index"><span itemprop="name">PHP正则表达式</span></a></span>
@@ -528,7 +540,7 @@ $  用在正则单元块的结尾处，表示必须以指定的结尾
 </code></pre><h3 id="（）的使用："><a href="#（）的使用：" class="headerlink" title="（）的使用："></a>（）的使用：</h3><p>如果使用对应的\\数字或$数字来代表圆括号部分所匹配到的内容，那么要注意匹配完整</p>
 <p>由于没用匹配到\\1对应的e，匹配失败<br><img src="/2019/02/14/PHP正则表达式/元1.png" alt=""><br>只有对应的内容都匹配到了才是匹配成功。array数组中分别保存了匹配的完整字符串，和（）所匹配到的字符<br><img src="/2019/02/14/PHP正则表达式/元2.png" alt=""></p>
 <p><br></p>
-<h3 id="常用组合（贪婪匹配问题）"><a href="#常用组合（贪婪匹配问题）" class="headerlink" title="常用组合（贪婪匹配问题）"></a>常用组合（贪婪匹配问题）</h3><p>.与{n}配合  中间有n个非空<br>.与<em>配合   默认是贪婪匹配（尽可能多的去匹配字符） 中间有任意个非空<br><img src="/2019/02/14/PHP正则表达式/元3.png" alt=""><br>.</em>?  可以解决贪婪匹配（表示最小匹配所有字符）<br><img src="/2019/02/14/PHP正则表达式/元4.png" alt=""><br>也可以使用模式修正符来解决：  m</p>
+<h3 id="常用组合（贪婪匹配问题）"><a href="#常用组合（贪婪匹配问题）" class="headerlink" title="常用组合（贪婪匹配问题）"></a>常用组合（贪婪匹配问题）</h3><p>.与{n}配合  中间有n个非空<br>.与*配合   默认是贪婪匹配（尽可能多的去匹配字符） 中间有任意个非空<br><img src="/2019/02/14/PHP正则表达式/元3.png" alt=""><br>.*?  可以解决贪婪匹配（表示最小匹配所有字符）<br><img src="/2019/02/14/PHP正则表达式/元4.png" alt=""><br>也可以使用模式修正符来解决：  m</p>
 <h2 id="3-普通转义字符"><a href="#3-普通转义字符" class="headerlink" title="3. 普通转义字符:"></a>3. 普通转义字符:</h2><p>\d    匹配一个数字；等价于[0-9]<br>\D    匹配除数字以外任何一个字符；等价于[^0-9]<br>\w    匹配一个英文字母、数字或下划线；等价于[0-9a-zA-Z_]<br>\W    匹配除英文字母、数字和下划线以外任何一个字符；等价于[^0-9a-zA-Z_]<br>\s    匹配一个空白字符；等价于[\f\n\r\t\v]<br>\S    匹配除空白字符以外任何一个字符；等价于[^\f\n\r\t\v]<br>\f    匹配一个换页符等价于 \x0c 或 \cL<br>\n    匹配一个换行符；等价于 \x0a 或 \cJ<br>\r    匹配一个回车符等价于\x0d 或 \cM<br>\t    匹配一个制表符；等价于 \x09\或\cl<br>\v    匹配一个垂直制表符；等价于\x0b或\ck<br>\oNN    匹配一个八进制数字<br>\xNN    匹配一个十六进制数字<br>\cC    匹配一个控制字符 </p>
 <h2 id="4-常见模式修正符"><a href="#4-常见模式修正符" class="headerlink" title="4. 常见模式修正符"></a>4. 常见模式修正符</h2><h3 id="常见四种"><a href="#常见四种" class="headerlink" title="常见四种"></a>常见四种</h3><pre><code>i    在和模式进行匹配时不区分大小写&quot;/[a-zA-Z]/&quot; &lt;==&gt;&quot;/[a-z]/i&quot; 
 m    多行匹配，如果目标字符串 中没有&quot;\n&quot;字符, 或者模式中没有出现^或$, 设置这个修饰符不产生任何影响
@@ -689,10 +701,10 @@ preg_split -- 用正则表达式分割字符串
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Daftar Isi
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Ikhtisar
           </li>
         </ul>
       
@@ -713,7 +725,7 @@ preg_split -- 用正则表达式分割字符串
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">45</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-name">posting</span>
                   </a>
                 </div>
               
@@ -736,7 +748,7 @@ preg_split -- 用正则表达式分割字符串
                       
                     
                     <span class="site-state-item-count">5</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">kategori</span>
                   </a>
                 </div>
               
@@ -805,7 +817,7 @@ preg_split -- 用正则表达式分割字符串
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -813,7 +825,7 @@ preg_split -- 用正则表达式分割字符串
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 
