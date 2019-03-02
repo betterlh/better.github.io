@@ -108,7 +108,21 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/占用某端口的程序3.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/占用某端口的程序4.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/输出重定向和输出追加重定向.PNG">
-<meta property="og:updated_time" content="2019-03-02T02:33:33.947Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/tree.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/tree2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/dir.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/dir2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/dir3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/info.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/echo.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/type.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/f.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/md.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/rd.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/rd2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/rd3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/27/windows命令应用/del.PNG">
+<meta property="og:updated_time" content="2019-03-02T11:34:55.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows命令应用">
 <meta name="twitter:description" content="如何用DOS命令查看占用某端口的程序及PID号输入命令“ netstat  -aon|findstr  “80” ”后按回车显示如下，可以看到占用80端口对应的程序的PID号为2320：根据PID号找到对应的程序：继续输入命令“tasklist|findstr “2448””，按回车后显示如下，可以看出2320对应的程序为360tray，这也说明该程序正在使用80端口： 若想80端口不被占用，则需">
@@ -225,7 +239,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -242,7 +256,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -276,7 +290,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -293,7 +307,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
         
@@ -398,14 +412,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-27 22:42:46" itemprop="dateCreated datePublished" datetime="2019-02-27T22:42:46+08:00">2019-02-27</time>
+              <time title="Created: 2019-02-27 22:42:46" itemprop="dateCreated datePublished" datetime="2019-02-27T22:42:46+08:00">2019-02-27</time>
             
 
             
@@ -422,7 +436,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-03-02 10:33:33" itemprop="dateModified" datetime="2019-03-02T10:33:33+08:00">2019-03-02</time>
+                <time title="Modified: 2019-03-02 19:34:55" itemprop="dateModified" datetime="2019-03-02T19:34:55+08:00">2019-03-02</time>
               
             
           </span>
@@ -436,7 +450,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
@@ -479,6 +493,25 @@
 <h1 id="Windows下如何用命令查看PID进程和杀掉该进程"><a href="#Windows下如何用命令查看PID进程和杀掉该进程" class="headerlink" title="Windows下如何用命令查看PID进程和杀掉该进程"></a>Windows下如何用命令查看PID进程和杀掉该进程</h1><p>1.提供查看PID进程的命令：<br>例如： tasklist|findstr “2396”</p>
 <p>taskkill /f /t /im tor.exe<br>例如： ntsd -c q -p pid 2396或者taskkill/pid 2396<br><img src="/2019/02/27/windows命令应用/占用某端口的程序3.png" alt=""><br>可以用taskkill命令直接结束，后面加/f，表示强制结束，不提示错误。<br><img src="/2019/02/27/windows命令应用/占用某端口的程序4.png" alt=""></p>
 <h1 id="输出重定向（-gt-）和输出追加重定向（-gt-gt-）"><a href="#输出重定向（-gt-）和输出追加重定向（-gt-gt-）" class="headerlink" title="输出重定向（&gt;）和输出追加重定向（&gt;&gt;）"></a>输出重定向（&gt;）和输出追加重定向（&gt;&gt;）</h1><p>echo &gt; 和 echo &gt;&gt;的区别  和Linux 一样<br><img src="/2019/02/27/windows命令应用/输出重定向和输出追加重定向.PNG" alt=""></p>
+<h1 id="windows获取文件夹下所有文件名的方法"><a href="#windows获取文件夹下所有文件名的方法" class="headerlink" title="windows获取文件夹下所有文件名的方法"></a>windows获取文件夹下所有文件名的方法</h1><p>方法一：tree命令</p>
+<p>TREE——显示磁盘目录结构命令</p>
+<p>功能：显示指定驱动器上所有目录路径和这些目录下的所有文件名。</p>
+<p>格式：TREE [盘符：][\目录] [/F] [/A]<br><img src="/2019/02/27/windows命令应用/tree.PNG" alt=""><br>　　使用说明：使用/F参数时显示所有目录及目录下的所有文件，省略时，只显示目录，不显示目录下的文件；</p>
+<p>　　使用/A参数时，不是用Ascii码大于127（NT为255）的字符显示，是用Ascii码小于128的字符显示。<br>还能通过&gt;  将结果保存在一个文本中而不是显示在命令窗口<br><img src="/2019/02/27/windows命令应用/tree2.PNG" alt=""><br>方法二：dir命令<br>/s 是指列出当前目录包含子目录下的所有文件</p>
+<p>/b 是仅列出文件名称，而日期、大小等其它信息则忽略<br><img src="/2019/02/27/windows命令应用/dir.PNG" alt=""><br>同样也可以使用&gt;将结果保存在一个文本中而不是显示在命令窗口<br><img src="/2019/02/27/windows命令应用/dir2.PNG" alt=""><br>dir D: /s/b &gt; E:/contents.xls   这样可以直接把D盘下的文件名都提取出来并创建contents.xls存放到E盘的根目录下。<br><img src="/2019/02/27/windows命令应用/dir3.PNG" alt=""></p>
+<h1 id="查看系统详细信息"><a href="#查看系统详细信息" class="headerlink" title="查看系统详细信息"></a>查看系统详细信息</h1><p>（包含已打补丁、开机运行时间等等）的命令<br>输入“systeminfo”命令，即可看到安装时间。<br><img src="/2019/02/27/windows命令应用/info.png" alt=""><br>运行时间也可以</p>
+<p>1、右键点击桌面底部任务栏，再点击“启动任务管理器”；</p>
+<p>2、在“任务管理器”窗口，点击“性能”选项卡；</p>
+<p>3、在“性能”界面，右下边便可以看见系统运行时间。</p>
+<h1 id="文件（夹）创建与删除"><a href="#文件（夹）创建与删除" class="headerlink" title="文件（夹）创建与删除"></a>文件（夹）创建与删除</h1><h2 id="文件创建"><a href="#文件创建" class="headerlink" title="文件创建"></a>文件创建</h2><p>一般创建空文件用 type  创建非空用echo</p>
+<h3 id="echo创建文件"><a href="#echo创建文件" class="headerlink" title="echo创建文件"></a>echo创建文件</h3><p><img src="/2019/02/27/windows命令应用/echo.PNG" alt=""></p>
+<h3 id="使用type创建一个文本"><a href="#使用type创建一个文本" class="headerlink" title="使用type创建一个文本"></a>使用type创建一个文本</h3><p><img src="/2019/02/27/windows命令应用/type.PNG" alt=""></p>
+<h3 id="使用fsutil-创建一个文件大小为3000比特的文本"><a href="#使用fsutil-创建一个文件大小为3000比特的文本" class="headerlink" title="使用fsutil 创建一个文件大小为3000比特的文本"></a>使用fsutil 创建一个文件大小为3000比特的文本</h3><p>fsutil file createNew D:\new.text\f.text 3000<br>此时为空文件<br>fsutil file createNew  dir D:/ &gt;D:\new.text\fsu.text 3000<br>此时文件内有固定的文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用法 : fsutil file createNew &lt;filename&gt; &lt;length&gt;</span><br><span class="line">例如 : fsutil file createNew C:\testfile.txt 1000</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/02/27/windows命令应用/f.PNG" alt=""></p>
+<h2 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h2><p>我们可以使用 md <foldername>或mkdir <foldername>命令来创建，其中md和mkdir都是建立新目录make directory的意思，完整命令是md [盘符:][路径]新目录名，<br>比如：md c:\test\myfolder<br><img src="/2019/02/27/windows命令应用/md.PNG" alt=""></foldername></foldername></p>
+<h2 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h2><p>使用rd或rmdir命令，完整命令rd /s /q [盘符:][路径]新目录名，因为rd只能删除空的文件夹，而如果其中有子文件或子文件夹的时候就会停下来<br><img src="/2019/02/27/windows命令应用/rd.PNG" alt=""><br>这时我们加上/s就可以直接删除，但是删除过程中会提示你是否确定删除<br><img src="/2019/02/27/windows命令应用/rd2.PNG" alt=""><br>对于懒癌患者我们有添加了/q，即quiet，安静模式；所以使用以上命令会完整删除你选中的整个文件夹<br><img src="/2019/02/27/windows命令应用/rd3.PNG" alt=""></p>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p><img src="/2019/02/27/windows命令应用/del.PNG" alt=""></p>
+<h1 id="创建用户，并设置密码"><a href="#创建用户，并设置密码" class="headerlink" title="创建用户，并设置密码"></a>创建用户，并设置密码</h1><p>创建一个backdoor用户，密码为backdoor123，命令是？<br>Net user backdoor backdoor123/add</p>
 
       
     </div>
@@ -518,6 +551,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/28/linux命令应用/" rel="prev" title="linux命令应用">
+                linux命令应用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -564,10 +601,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -587,8 +624,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -613,7 +650,7 @@
                       
                     
                     <span class="site-state-item-count">6</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -650,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何用DOS命令查看占用某端口的程序及PID号"><span class="nav-number">1.</span> <span class="nav-text">如何用DOS命令查看占用某端口的程序及PID号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows下如何用命令查看PID进程和杀掉该进程"><span class="nav-number">2.</span> <span class="nav-text">Windows下如何用命令查看PID进程和杀掉该进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输出重定向（-gt-）和输出追加重定向（-gt-gt-）"><span class="nav-number">3.</span> <span class="nav-text">输出重定向（&gt;）和输出追加重定向（&gt;&gt;）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何用DOS命令查看占用某端口的程序及PID号"><span class="nav-number">1.</span> <span class="nav-text">如何用DOS命令查看占用某端口的程序及PID号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows下如何用命令查看PID进程和杀掉该进程"><span class="nav-number">2.</span> <span class="nav-text">Windows下如何用命令查看PID进程和杀掉该进程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输出重定向（-gt-）和输出追加重定向（-gt-gt-）"><span class="nav-number">3.</span> <span class="nav-text">输出重定向（&gt;）和输出追加重定向（&gt;&gt;）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#windows获取文件夹下所有文件名的方法"><span class="nav-number">4.</span> <span class="nav-text">windows获取文件夹下所有文件名的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看系统详细信息"><span class="nav-number">5.</span> <span class="nav-text">查看系统详细信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件（夹）创建与删除"><span class="nav-number">6.</span> <span class="nav-text">文件（夹）创建与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件创建"><span class="nav-number">6.1.</span> <span class="nav-text">文件创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#echo创建文件"><span class="nav-number">6.1.1.</span> <span class="nav-text">echo创建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用type创建一个文本"><span class="nav-number">6.1.2.</span> <span class="nav-text">使用type创建一个文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用fsutil-创建一个文件大小为3000比特的文本"><span class="nav-number">6.1.3.</span> <span class="nav-text">使用fsutil 创建一个文件大小为3000比特的文本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建文件夹"><span class="nav-number">6.2.</span> <span class="nav-text">创建文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件夹"><span class="nav-number">6.3.</span> <span class="nav-text">删除文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件"><span class="nav-number">6.4.</span> <span class="nav-text">删除文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建用户，并设置密码"><span class="nav-number">7.</span> <span class="nav-text">创建用户，并设置密码</span></a></li></ol></div>
             
 
           </div>
@@ -682,7 +719,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
