@@ -96,20 +96,21 @@
 
 
 
-  <meta name="description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但返回信息为空 205—">
+  <meta name="description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结HTTP 头字段总结 http的状态响应码 1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http基础知识">
 <meta property="og:url" content="http://betterlh.github.io/2019/02/22/http基础知识/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但返回信息为空 205—">
+<meta property="og:description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结HTTP 头字段总结 http的状态响应码 1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/02/22/http基础知识/http基础知识/状态码.png">
 <meta property="og:image" content="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-1.jpg">
 <meta property="og:image" content="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-2.jpg">
-<meta property="og:updated_time" content="2019-02-23T14:31:14.523Z">
+<meta property="og:updated_time" content="2019-02-27T14:27:35.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http基础知识">
-<meta name="twitter:description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结 http的状态响应码1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但返回信息为空 205—">
-<meta name="twitter:image" content="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-1.jpg">
+<meta name="twitter:description" content="HTTP协议简单解析及WEB请求过程http协议学习http字段总结HTTP 头字段总结 http的状态响应码 1**：请求收到，继续处理100——客户必须继续发出请求 101——客户要求服务器根据请求转换HTTP协议版本 2**：操作成功收到，分析、接受200——交易成功201——提示知道新文件的URL 202——接受和处理、但处理未完成 203——返回信息不确定或不完整 204——请求收到，但">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/02/22/http基础知识/http基础知识/状态码.png">
 
 
 
@@ -419,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-23 22:31:14" itemprop="dateModified" datetime="2019-02-23T22:31:14+08:00">2019-02-23</time>
+                <time title="Updated at: 2019-02-27 22:27:35" itemprop="dateModified" datetime="2019-02-27T22:27:35+08:00">2019-02-27</time>
               
             
           </span>
@@ -452,8 +453,9 @@
       
 
       
-        <p><a href="https://www.cnblogs.com/hggen/p/6264858.html" target="_blank" rel="noopener">HTTP协议简单解析及WEB请求过程</a><br><a href="http://www.blogjava.net/zjusuyong/articles/304788.html" target="_blank" rel="noopener">http协议学习</a><br><a href="https://blog.csdn.net/ynd_sg/article/details/82182951" target="_blank" rel="noopener">http字段总结</a></p>
-<h1 id="http的状态响应码"><a href="#http的状态响应码" class="headerlink" title="http的状态响应码"></a>http的状态响应码</h1><h2 id="1-：请求收到，继续处理"><a href="#1-：请求收到，继续处理" class="headerlink" title="1**：请求收到，继续处理"></a>1**：请求收到，继续处理</h2><p>100——客户必须继续发出请求</p>
+        <p><a href="https://www.cnblogs.com/hggen/p/6264858.html" target="_blank" rel="noopener">HTTP协议简单解析及WEB请求过程</a><br><a href="http://www.blogjava.net/zjusuyong/articles/304788.html" target="_blank" rel="noopener">http协议学习</a><br><a href="https://blog.csdn.net/ynd_sg/article/details/82182951" target="_blank" rel="noopener">http字段总结</a><br><a href="https://www.cnblogs.com/laowenBlog/p/6096241.html" target="_blank" rel="noopener">HTTP 头字段总结</a></p>
+<h1 id="http的状态响应码"><a href="#http的状态响应码" class="headerlink" title="http的状态响应码"></a>http的状态响应码</h1><p><img src="http基础知识/状态码.png" alt=""></p>
+<h2 id="1-：请求收到，继续处理"><a href="#1-：请求收到，继续处理" class="headerlink" title="1**：请求收到，继续处理"></a>1**：请求收到，继续处理</h2><p>100——客户必须继续发出请求</p>
 <p>101——客户要求服务器根据请求转换HTTP协议版本</p>
 <h2 id="2-：操作成功收到，分析、接受"><a href="#2-：操作成功收到，分析、接受" class="headerlink" title="2**：操作成功收到，分析、接受"></a>2**：操作成功收到，分析、接受</h2><p>200——交易成功<br>201——提示知道新文件的URL</p>
 <p>202——接受和处理、但处理未完成</p>
@@ -676,7 +678,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
