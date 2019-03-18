@@ -96,37 +96,37 @@
 
 
 
-  <meta name="description" content="debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug功能：（常见的六个） R命令：查看、改变CPU寄存器的内容    D命令：查看内存中的内容  左边是内存地址 ，内存地址中的对应的内容 右边是ASCII编码 （数字符号，英语字母">
+  <meta name="description" content="title: 汇编-debug的基础指令date: 2019-03-18 15:20:08tags:categories: 汇编 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug功能：（常见的六个） R命令：查看、改变CPU寄">
 <meta property="og:type" content="article">
-<meta property="og:title" content="汇编-debug的基础指令">
+<meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug功能：（常见的六个） R命令：查看、改变CPU寄存器的内容    D命令：查看内存中的内容  左边是内存地址 ，内存地址中的对应的内容 右边是ASCII编码 （数字符号，英语字母">
+<meta property="og:description" content="title: 汇编-debug的基础指令date: 2019-03-18 15:20:08tags:categories: 汇编 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug功能：（常见的六个） R命令：查看、改变CPU寄">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/r1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/r2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/d1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/d2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/d3.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/u1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/u2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/a1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/a2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/t1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/t2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/e1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/e2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/e3.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/e4.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/e5.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/g1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/g2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/g3.jpg">
-<meta property="og:updated_time" content="2019-03-18T13:41:38.878Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/r1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/r2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/d1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/d2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/d3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/u1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/u2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/a1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/a2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/t1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/t2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/e1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/e2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/e3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/e4.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/e5.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/g1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/g2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/g3.jpg">
+<meta property="og:updated_time" content="2019-03-18T13:48:03.779Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="汇编-debug的基础指令">
-<meta name="twitter:description" content="debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug功能：（常见的六个） R命令：查看、改变CPU寄存器的内容    D命令：查看内存中的内容  左边是内存地址 ，内存地址中的对应的内容 右边是ASCII编码 （数字符号，英语字母">
-<meta name="twitter:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/blog/betterlh/source/_posts/汇编-debug的基础指令/r1.png">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="title: 汇编-debug的基础指令date: 2019-03-18 15:20:08tags:categories: 汇编 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug的使用： 可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。 debug功能：（常见的六个） R命令：查看、改变CPU寄">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/r1.png">
 
 
 
@@ -143,7 +143,7 @@
   };
 </script>
 
-  <title>汇编-debug的基础指令 | Hexo</title>
+  <title> | Hexo</title>
   
 
 
@@ -393,7 +393,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">汇编-debug的基础指令
+          <h1 class="post-title" itemprop="name headline">
 
               
             
@@ -419,7 +419,7 @@
                 
               
 
-              <time title="Post created: 2019-03-18 15:20:08 / Updated at: 21:41:38" itemprop="dateCreated datePublished" datetime="2019-03-18T15:20:08+08:00">2019-03-18</time>
+              <time title="Post created: 2019-03-18 15:20:08 / Updated at: 21:48:03" itemprop="dateCreated datePublished" datetime="2019-03-18T15:20:08+08:00">2019-03-18</time>
             
 
             
@@ -429,24 +429,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -475,40 +457,41 @@
       
 
       
-        <p>debug的使用：</p>
+        <p>title: 汇编-debug的基础指令<br>date: 2019-03-18 15:20:08<br>tags:<br>categories: 汇编</p>
+<p>debug的使用：</p>
 <p>可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。</p>
 <p>debug的使用：</p>
 <p>可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。</p>
 <p>debug功能：（常见的六个）</p>
 <p>R命令：查看、改变CPU寄存器的内容</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\r1.png" alt="r1"></p>
-<p> <img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\r2.png" alt="r2"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/r1.png" alt="r1"></p>
+<p> <img src="/2019/03/18/汇编-debug的基础指令/r2.png" alt="r2"></p>
 <p>D命令：查看内存中的内容</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\d1.png" alt="d1"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/d1.png" alt="d1"></p>
 <p>左边是内存地址 ，内存地址中的对应的内容 右边是ASCII编码 （数字符号，英语字母，标点符号）</p>
 <p>展示128个字节</p>
 <p>也可以使用下面的指令修改</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\d2.png" alt="d2"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/d2.png" alt="d2"></p>
 <p>使用d命令只当查看范围后，接着使用d命令，可列出后续的内容</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\d3.png" alt="d3"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/d3.png" alt="d3"></p>
 <p>U命令：将内存中的机器指令翻译成汇编指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\u1.png" alt="u1"></p>
-<p> <img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\u2.png" alt="u2"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/u1.png" alt="u1"></p>
+<p> <img src="/2019/03/18/汇编-debug的基础指令/u2.png" alt="u2"></p>
 <p>A指令：以汇编指令的格式在内存中写入一条机器指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\a1.png" alt="a1"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/a1.png" alt="a1"></p>
 <p>可以在指定位置写入</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\a2.png" alt="a2"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/a2.png" alt="a2"></p>
 <p>T指令：执行一条及其指令</p>
 <p>执行的位置是cs：ip指向的位置</p>
 <p>例如我们要执行 2000：0 位置的指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\t1.png" alt="t1"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/t1.png" alt="t1"></p>
 <p>之后就可以执行</p>
-<p> <img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\t2.png" alt="t2"></p>
+<p> <img src="/2019/03/18/汇编-debug的基础指令/t2.png" alt="t2"></p>
 <p>E命令：改写内存中的内容</p>
 <p>方式1：</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\e1.png" alt="e1"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e1.png" alt="e1"></p>
 <p>方式2：以提问式的方式</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\e2.png" alt="e2"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e2.png" alt="e2"></p>
 <ol>
 <li><p>输入e 2000：0 之后回车，将显示起始地址（图中为2000：0000）和第一个单元（2000：0000）的原始内容（B8），光标将会出现在“.”的后面，</p>
 </li>
@@ -520,29 +503,29 @@
 </li>
 </ol>
 <p>e指令还可以结合ASCLL码使用</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\e3.png" alt="e3"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e3.png" alt="e3"></p>
 <p>可以看到存到内存中的是字符对应的ASCLL码</p>
 <p>例如 0对应30H（十进制的48） a对应61H（十进制的97）A对应41H（十进制的65）</p>
 <p>小知识： 可以按住alt键打出ASCLL码指对应的符号  </p>
 <p>按住alt 输入48 松开 alt，就打出了0, 写65 可以输出对应A </p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\e4.png" alt="e4"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e4.png" alt="e4"></p>
 <p>我们还可以用e命令向内存中写入字符串</p>
 <p>使用e命令向内存中写入机器码，然后用u指令翻译成汇编指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\e5.png" alt="e5"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e5.png" alt="e5"></p>
 <p>补充：</p>
 <p>g命令与p命令</p>
 <p>G命令的使用方法是：G [=起始地址]  [断点地址]，意思是从起始地址开始执行到断点地址。如果不设置断点，则程序一直运行到中止指令才停止。</p>
 <p>例如：g 0012 表示将debug从当前的CS:IP指向的指令执行，一直到(IP)=0012h为止</p>
 <p>实例：</p>
 <p>在设置完内存数据并且输入完程序后运行这些汇编代码。在DEBUG中执行命令G=100，观看运行结果。</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\g1.png" alt="g1"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/g1.png" alt="g1"></p>
 <p>汇编程序运行后在屏幕上显示出“ABCD”四个字符。</p>
 <p>接下来在DEBUG中执行G=100 10B，意思是从地址CS：100开始，一直运行到CS：10B停止。观看运行结果。</p>
 <p>命令执行后，不但显示出字符串“ABCD”，而且列出当前寄存器和标志位的值。</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\g2.png" alt="g2"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/g2.png" alt="g2"></p>
 <p>g命令在loop中的使用：</p>
 <p>使用loop循环时，如果要运行到跳出循环执行后面的代码，（即不用一次次按t一步步执行循环到循环结束）可以先用u命令查看代码的偏移地址，在用g命令跳转到此偏移到此代码处，如下：</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/blog\betterlh\source\_posts\汇编-debug的基础指令\g3.jpg" alt="g3"></p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/g3.jpg" alt="g3"></p>
 <p>用u命令可以看到循环的命令后的地址位于0b40:000B，所以要跳出循环就用 g 000B 即可</p>
 <p>p指令</p>
 <p>使用p指令，debug就会自动重复执行循环中的指令，直到（cx）=0为止</p>
