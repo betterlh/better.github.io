@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="大方向 用bx，si指向data 用bp，di指向table 想过一次循环（cx=21）完成 1年的所有数据，发现有难度，data段的数据要不断跳到不同的一堆数据中去。之后改成一次循环（cx=21）只完成一类数据。 如此就需要4段 代码完成（在一个代码段中） 每一小段通过21次循环，完成一个21年的一类数据（eg：完成21个年份；完成21年各个年份的收入…） ~~~asm1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编-实验：寻址方式在结构化数据访问中的应用">
+<meta property="og:url" content="http://betterlh.github.io/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="大方向 用bx，si指向data 用bp，di指向table 想过一次循环（cx=21）完成 1年的所有数据，发现有难度，data段的数据要不断跳到不同的一堆数据中去。之后改成一次循环（cx=21）只完成一类数据。 如此就需要4段 代码完成（在一个代码段中） 每一小段通过21次循环，完成一个21年的一类数据（eg：完成21个年份；完成21年各个年份的收入…） ~~~asm1234567891011">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-23T12:12:56.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编-实验：寻址方式在结构化数据访问中的应用">
+<meta name="twitter:description" content="大方向 用bx，si指向data 用bp，di指向table 想过一次循环（cx=21）完成 1年的所有数据，发现有难度，data段的数据要不断跳到不同的一堆数据中去。之后改成一次循环（cx=21）只完成一类数据。 如此就需要4段 代码完成（在一个代码段中） 每一小段通过21次循环，完成一个21年的一类数据（eg：完成21个年份；完成21年各个年份的收入…） ~~~asm1234567891011">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>汇编-实验：寻址方式在结构化数据访问中的应用 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汇编-实验：寻址方式在结构化数据访问中的应用
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-23 18:49:16 / Updated at: 20:12:56" itemprop="dateCreated datePublished" datetime="2019-03-23T18:49:16+08:00">2019-03-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大方向</p>
+<p>用bx，si指向data</p>
+<p>用bp，di指向table</p>
+<p>想过一次循环（cx=21）完成 1年的所有数据，发现有难度，data段的数据要不断跳到不同的一堆数据中去。之后改成一次循环（cx=21）只完成一类数据。</p>
+<p>如此就需要4段 代码完成（在一个代码段中）</p>
+<p>每一小段通过21次循环，完成一个21年的一类数据（eg：完成21个年份；完成21年各个年份的收入…）</p>
+<p>~~~asm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1975&apos;,&apos;1976&apos;,&apos;1977&apos;,&apos;1978&apos;,&apos;1979&apos;,&apos;1980&apos;,&apos;1981&apos;,&apos;1982&apos;,&apos;1983&apos;</span><br><span class="line">    db &apos;1984&apos;,&apos;1985&apos;,&apos;1986&apos;,&apos;1987&apos;,&apos;1988&apos;,&apos;1989&apos;,&apos;1990&apos;,&apos;1991&apos;,&apos;1992&apos;</span><br><span class="line">    db &apos;1993&apos;,&apos;1994&apos;,&apos;1995&apos;  ;表示21年的21个字符串</span><br><span class="line"></span><br><span class="line">    dd 16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514</span><br><span class="line">    dd 345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000</span><br><span class="line">    ;总收入的21个数据</span><br><span class="line">    </span><br><span class="line">    dw 3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226</span><br><span class="line">    dw 11542,14430,15257,17800</span><br><span class="line">datasg ends</span><br><span class="line">tablesg segment</span><br><span class="line">    db 21 dup(&apos;year summ ne ?? &apos;)</span><br><span class="line">tablesg ends</span><br><span class="line">;使用bp时，默认段地址是ss，所以ss：bp+di指向table，ds：bx+si指向数据</span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax   ;data段的段地址</span><br><span class="line">    mov ax,tablesg</span><br><span class="line">    mov ss,ax   ;table段的段地址</span><br><span class="line"></span><br><span class="line">    mov bp,0    ;bp,di表示table的地址</span><br><span class="line">    mov bx,0    ;bx,si表示data放的地址</span><br><span class="line">mov si,0 </span><br><span class="line">mov di,0</span><br><span class="line">    mov cx,21</span><br><span class="line">year:   mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2</span><br><span class="line">    add di,2</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax</span><br><span class="line">    add si,2  ;第一年结束    </span><br><span class="line">    add bp,16</span><br><span class="line">    mov di,0</span><br><span class="line">    loop year           ;至此年份结束</span><br><span class="line"></span><br><span class="line">    mov cx,21</span><br><span class="line">    add bx,84</span><br><span class="line">    mov si,0</span><br><span class="line">    mov bp,0</span><br><span class="line">summ:   mov di,5</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2</span><br><span class="line">    add di,2</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax</span><br><span class="line">    add si,2      ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    </span><br><span class="line">    loop summ ;至此收入结束</span><br><span class="line">    </span><br><span class="line">    mov cx,21</span><br><span class="line">    add bx,84</span><br><span class="line">    mov si,0</span><br><span class="line">    mov bp,0</span><br><span class="line">    mov di,10</span><br><span class="line">people: mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2      ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    loop people</span><br><span class="line">    </span><br><span class="line">    mov cx,21</span><br><span class="line">    mov bp,0</span><br><span class="line">    mov di,0</span><br><span class="line">    </span><br><span class="line">income:</span><br><span class="line">    mov ax,[bp+di+5]        ;被除数的低八位    </span><br><span class="line">    add di,2</span><br><span class="line">    mov dx,[bp+di+5]        ;被除数的高八位    </span><br><span class="line">    add di,3    </span><br><span class="line">    div word ptr [bp+di+5]      ;除数</span><br><span class="line">    add di,3</span><br><span class="line">    mov [bp+di+5],ax        ;ax保存的是商，将商输入到table中</span><br><span class="line">                    ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    mov di,0</span><br><span class="line">    loop income</span><br><span class="line"></span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">assume cs:code,ds:data,ss:stack</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line"></span><br><span class="line">        db  &apos;1975&apos;,&apos;1976&apos;,&apos;1977&apos;,&apos;1978&apos;,&apos;1979&apos;,&apos;1980&apos;,&apos;1981&apos;,&apos;1982&apos;,&apos;1983&apos;</span><br><span class="line">        db  &apos;1984&apos;,&apos;1985&apos;,&apos;1986&apos;,&apos;1987&apos;,&apos;1988&apos;,&apos;1989&apos;,&apos;1990&apos;,&apos;1991&apos;,&apos;1992&apos;</span><br><span class="line">        db  &apos;1993&apos;,&apos;1994&apos;,&apos;1995&apos;</span><br><span class="line">        ;以上是表示21年的21个字符串 year</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        dd  16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514</span><br><span class="line">        dd  345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000</span><br><span class="line">        ;以上是表示21年公司总收入的21个dword数据   sum</span><br><span class="line"></span><br><span class="line">        dw  3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226</span><br><span class="line">        dw  11542,14430,15257,17800</span><br><span class="line"></span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">table segment</span><br><span class="line">            ;0123456789ABCDEF</span><br><span class="line">    db  21 dup (&apos;year summ ne ?? &apos;)</span><br><span class="line">table ends</span><br><span class="line"></span><br><span class="line">stack segment stack</span><br><span class="line">    db  128 dup (0)</span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">    start:  mov ax,stack</span><br><span class="line">        mov ss,ax</span><br><span class="line">        mov sp,128  ;栈</span><br><span class="line">    </span><br><span class="line">        mov ax,data</span><br><span class="line">        mov ds,ax   ;data段的数据  ds</span><br><span class="line">        </span><br><span class="line">        mov ax,table</span><br><span class="line">        mov es,ax   ;tble段的数据 es</span><br><span class="line">        </span><br><span class="line">        mov si,0    ;</span><br><span class="line">        ;mov di,21*4        ;总收入 此处用si+21*4表示了(因为di表示的总收入也是4字节的所以可以用si代替)</span><br><span class="line">        mov bx,21*4 + 21*4 ;员工数  </span><br><span class="line">        mov bp,0        ;tble段的偏移地址bp</span><br><span class="line"></span><br><span class="line">        mov cx,21</span><br><span class="line">inputtable:</span><br><span class="line">        push ds:[si+0]</span><br><span class="line">        pop es:[bp+0]</span><br><span class="line">        push ds:[si+2]</span><br><span class="line">        pop es:[bp+2]</span><br><span class="line">                    ;年份的输入</span><br><span class="line">        </span><br><span class="line">        mov ax,ds:[si+21*4+0]   ;收入的输入</span><br><span class="line">        mov dx,ds:[si+21*4+2]</span><br><span class="line">        mov es:[bp+5],ax</span><br><span class="line">        mov es:[bp+7],dx</span><br><span class="line"></span><br><span class="line">        push ds:[bx]        ;人员数的输入 </span><br><span class="line">        pop es:[bp+0AH]</span><br><span class="line"></span><br><span class="line">        div word ptr ds:[bx]    ;除法 </span><br><span class="line">        mov es:[bp+0Dh],ax  ;人均输入</span><br><span class="line">        </span><br><span class="line">        add si,4</span><br><span class="line">        add bx,2</span><br><span class="line">        add bp,2</span><br><span class="line">        loop inputtable</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        mov ax,4C00H</span><br><span class="line">        int 21H</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/" rel="next" title="汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）">
+                <i class="fa fa-chevron-left"></i> 汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

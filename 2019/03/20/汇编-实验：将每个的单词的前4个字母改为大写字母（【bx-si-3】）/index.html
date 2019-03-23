@@ -96,33 +96,30 @@
 
 
 
-  <meta name="description" content="列类型整数类型tinyint迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255 smallint小整形，系统采用两个字节来保存的整形：能表示0-65535之间 mediumint中整形，采用三个字节来保存数据 int整形（标准整形），采用4个字节来保存数据 bigint大整形，采用八个字节来保存数据  创建数据表 插入合理数据     插入错误数据（超出对应的数据">
+  <meta name="description" content="题目：将每个的单词的前4个字母改为大写字母（ key 两层的循环，用栈来暂存循环次数cx 利用灵活的定位内存方法：  【bx+si+常数】bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址  code 如下：1234567891011121314151617181920212223242526272829303132">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql06-类列表之整数型">
-<meta property="og:url" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/index.html">
+<meta property="og:title" content="汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）">
+<meta property="og:url" content="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="列类型整数类型tinyint迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255 smallint小整形，系统采用两个字节来保存的整形：能表示0-65535之间 mediumint中整形，采用三个字节来保存数据 int整形（标准整形），采用4个字节来保存数据 bigint大整形，采用八个字节来保存数据  创建数据表 插入合理数据     插入错误数据（超出对应的数据">
+<meta property="og:description" content="题目：将每个的单词的前4个字母改为大写字母（ key 两层的循环，用栈来暂存循环次数cx 利用灵活的定位内存方法：  【bx+si+常数】bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址  code 如下：1234567891011121314151617181920212223242526272829303132">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/3.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/无符号.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示1.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示2.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示3.png">
-<meta property="og:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/显示4.png">
-<meta property="og:updated_time" content="2019-02-01T11:51:39.496Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/3.PNG">
+<meta property="og:updated_time" content="2019-03-20T13:58:38.009Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql06-类列表之整数型">
-<meta name="twitter:description" content="列类型整数类型tinyint迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255 smallint小整形，系统采用两个字节来保存的整形：能表示0-65535之间 mediumint中整形，采用三个字节来保存数据 int整形（标准整形），采用4个字节来保存数据 bigint大整形，采用八个字节来保存数据  创建数据表 插入合理数据     插入错误数据（超出对应的数据">
-<meta name="twitter:image" content="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/1.png">
+<meta name="twitter:title" content="汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）">
+<meta name="twitter:description" content="题目：将每个的单词的前4个字母改为大写字母（ key 两层的循环，用栈来暂存循环次数cx 利用灵活的定位内存方法：  【bx+si+常数】bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址  code 如下：1234567891011121314151617181920212223242526272829303132">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/1.PNG">
 
 
 
 
 
 
-  <link rel="canonical" href="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/">
+  <link rel="canonical" href="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/">
 
 
 
@@ -132,7 +129,7 @@
   };
 </script>
 
-  <title>mysql06-类列表之整数型 | Hexo</title>
+  <title>汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】） | Hexo</title>
   
 
 
@@ -365,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql06-类列表之整数型/">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lh">
@@ -382,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql06-类列表之整数型
+          <h1 class="post-title" itemprop="name headline">汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）
 
               
             
@@ -408,7 +405,7 @@
                 
               
 
-              <time title="Post created: 2019-02-01 17:25:33 / Updated at: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
+              <time title="Post created: 2019-03-20 21:07:00 / Updated at: 21:58:38" itemprop="dateCreated datePublished" datetime="2019-03-20T21:07:00+08:00">2019-03-20</time>
             
 
             
@@ -430,7 +427,7 @@
                 <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
 
                 
                 
@@ -464,27 +461,16 @@
       
 
       
-        <h1 id="列类型"><a href="#列类型" class="headerlink" title="列类型"></a>列类型</h1><h2 id="整数类型"><a href="#整数类型" class="headerlink" title="整数类型"></a>整数类型</h2><h3 id="tinyint"><a href="#tinyint" class="headerlink" title="tinyint"></a>tinyint</h3><p>迷你整形，系统采用一个字节来保存的整形：一个字节=8位，最大能表示的数值是0-255</p>
-<h3 id="smallint"><a href="#smallint" class="headerlink" title="smallint"></a>smallint</h3><p>小整形，系统采用两个字节来保存的整形：能表示0-65535之间</p>
-<h3 id="mediumint"><a href="#mediumint" class="headerlink" title="mediumint"></a>mediumint</h3><p>中整形，采用三个字节来保存数据</p>
-<h3 id="int"><a href="#int" class="headerlink" title="int"></a>int</h3><p>整形（标准整形），采用4个字节来保存数据</p>
-<h3 id="bigint"><a href="#bigint" class="headerlink" title="bigint"></a>bigint</h3><p>大整形，采用八个字节来保存数据</p>
-<ol>
-<li>创建数据表<br><img src="/2019/02/01/mysql06-类列表之整数型/1.png" alt=""></li>
-<li>插入合理数据</li>
-</ol>
-<p><img src="/2019/02/01/mysql06-类列表之整数型/2.png" alt=""> </p>
-<ol start="3">
-<li>插入错误数据（超出对应的数据范围）<br><img src="/2019/02/01/mysql06-类列表之整数型/3.png" alt=""> </li>
-<li>错误原因：并不是说tinyint没有这么大的空间，而是因为mysql默认地为整形增加负数 实际区间为： -128~127<br><br><br>实际应用中应该根据对应的数据的范围来选定对应的整形类型，通常使用的比较多的是tinyint和int</li>
-</ol>
-<h3 id="无符号标识设定"><a href="#无符号标识设定" class="headerlink" title="无符号标识设定"></a>无符号标识设定</h3><p>无符号表示存储的数据在当前字段中，没有负数（只有正数，区间为0-255）<br>基本语法：在类型之后，加上一个unsigned<br><img src="/2019/02/01/mysql06-类列表之整数型/无符号.png" alt=""></p>
-<h2 id="显示长度"><a href="#显示长度" class="headerlink" title="显示长度"></a>显示长度</h2><p>显示长度：指数据（整形）在数据显示的时候，到底可以显示多长位</p>
-<p>tinyint（3）：表示最长可以显示3位，unsigned说明只能是正数，0-255永远不会超过3位<br>tinyint（4）：表示最长可以显示4位，-128~127</p>
-<p>显示长度只是代表了数据是否可以到达指定的长度，但是不会自动满足到指定长度；如果想要数据显示的时候，保持最高位（显示长度），那么还需要给字段增加一个 zerofill属性才可以</p>
-<p>zerofill：从左侧开始填充0（左侧不会改变数值大小），所以负数的时候就不能使用zerofill，一旦使用zerofill就相当于确定该字段位unsigned<br><img src="/2019/02/01/mysql06-类列表之整数型/显示1.png" alt=""><br>数据显示的时候，zerofill会在左侧填充0到指定位，如果不足3位，那么填充到3位，如果本身已经够了或者超出，就不再填充</p>
-<p><img src="/2019/02/01/mysql06-类列表之整数型/显示2.png" alt=""><br>显示长度可以自己设定，超出长度但是不超出范围，不会影响，只会对不够显示长度的进行补充（显示长度）</p>
-<p>例如我们使用<br><img src="/2019/02/01/mysql06-类列表之整数型/显示3.png" alt=""><br>查看结果<br><img src="/2019/02/01/mysql06-类列表之整数型/显示4.png" alt=""></p>
+        <h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>将每个的单词的前4个字母改为大写字母（</p>
+<h1 id="key"><a href="#key" class="headerlink" title="key"></a>key</h1><ul>
+<li>两层的循环，用栈来暂存循环次数cx</li>
+<li>利用灵活的定位内存方法：  【bx+si+常数】<br>bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址</li>
+</ul>
+<p>code 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg,ss:stacksg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1. display      &apos;</span><br><span class="line">    db &apos;2. brows        &apos;</span><br><span class="line">    db &apos;3. replace      &apos;</span><br><span class="line">    db &apos;4. modify       &apos;</span><br><span class="line">datasg ends</span><br><span class="line"></span><br><span class="line">stacksg segment</span><br><span class="line">    dw 0,0,0,0,0,0,0,0</span><br><span class="line">stacksg ends</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,stacksg</span><br><span class="line">    mov ss,ax</span><br><span class="line">    mov sp,16</span><br><span class="line">    </span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax</span><br><span class="line"></span><br><span class="line">    mov cx,4</span><br><span class="line">    mov bx,0</span><br><span class="line">s:</span><br><span class="line">    mov si,0</span><br><span class="line">    push cx</span><br><span class="line">    mov cx,3</span><br><span class="line">s0:</span><br><span class="line">    mov al,[bx+si+3]</span><br><span class="line">    and al,11011111b</span><br><span class="line">    mov [bx+si+3],al</span><br><span class="line">    inc si</span><br><span class="line">    loop s0</span><br><span class="line">    </span><br><span class="line">    add bx,16</span><br><span class="line">    pop cx</span><br><span class="line">    loop s</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<p>在设置好ds 之后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/1.PNG" alt=""></p>
+<h1 id="p指令"><a href="#p指令" class="headerlink" title="p指令"></a>p指令</h1><p>我们发现p指令在没遇到loop循环指令时，其实是和t指令没什么不一样的，都是执行一步<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p.PNG" alt=""><br>但是遇到loop时，p指令就会执行完此处循环<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p2.PNG" alt=""><br>此时执行完了一次内层循环，可以看到第一个单词的字母都已经修改完毕<br>这里我们注意下p指令执行的语句<strong>loop 001A</strong><br><br><br>NEXT<br>我们接着运行，此时会遇到一个loop指令（外层的），p指令运行后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p3.PNG" alt=""><br>我们可以看到这次p指令执行后，所有单词都已经修改完成，可见此次p指令完成的是外层循环<br>我们对比此次p指令执行的语句<strong>loop 0013</strong> 和之前的可以发现，这次的p指令执行的循环跳转是<strong>0013</strong>比之前的<strong>001A</strong>小，说明是比上次跳转到的地方更之前的语句，也证实此次p指令一次执行完了外层的循环，而上一次的p指令一次性执行的是内层</p>
+<p><strong>总之，两个p指令，一个一次性执行完了内层，一个一次性执行了外层（当前肯定是要先执行完内循环）</strong><br>注意点：看p 指令执行的是哪个loop执行  loop的地址是关键</p>
+<p>按g一次性执行完程序后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/3.PNG" alt=""></p>
 
       
     </div>
@@ -515,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/01/mysql05-字符集及其设置/" rel="next" title="mysql05-字符集及其设置">
-                <i class="fa fa-chevron-left"></i> mysql05-字符集及其设置
+              <a href="/2019/03/18/Control/" rel="next" title="Sublime Text安装Package Control">
+                <i class="fa fa-chevron-left"></i> Sublime Text安装Package Control
               </a>
             
           </div>
@@ -525,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/01/mysql07-类列表之小数型/" rel="prev" title="mysql07-类列表之小数型">
-                mysql07-类列表之小数型 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/" rel="prev" title="汇编-实验：寻址方式在结构化数据访问中的应用">
+                汇编-实验：寻址方式在结构化数据访问中的应用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -662,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#列类型"><span class="nav-number">1.</span> <span class="nav-text">列类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整数类型"><span class="nav-number">1.1.</span> <span class="nav-text">整数类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tinyint"><span class="nav-number">1.1.1.</span> <span class="nav-text">tinyint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#smallint"><span class="nav-number">1.1.2.</span> <span class="nav-text">smallint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mediumint"><span class="nav-number">1.1.3.</span> <span class="nav-text">mediumint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int"><span class="nav-number">1.1.4.</span> <span class="nav-text">int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bigint"><span class="nav-number">1.1.5.</span> <span class="nav-text">bigint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无符号标识设定"><span class="nav-number">1.1.6.</span> <span class="nav-text">无符号标识设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示长度"><span class="nav-number">1.2.</span> <span class="nav-text">显示长度</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目："><span class="nav-number">1.</span> <span class="nav-text">题目：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#key"><span class="nav-number">2.</span> <span class="nav-text">key</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#p指令"><span class="nav-number">3.</span> <span class="nav-text">p指令</span></a></li></ol></div>
             
 
           </div>
