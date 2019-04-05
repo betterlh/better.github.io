@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="题目最下方有个ssh命令，这是linux的远程连接命令，(host=pwnable.kr , user =fd  password=2222 password=guest)可以打开linux终端，直接输入那行命令进行连接    ssh fd@pwnable.kr -p2222输入那行命令后输入密码，有时候会提示安全性问题，选择Y(yes)，输入密码，输入密码的时候是不会回显的（显示在屏幕上） 密码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwnable.kr1-fd">
+<meta property="og:url" content="http://betterlh.github.io/2019/04/04/pwnable-kr-fd-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题目最下方有个ssh命令，这是linux的远程连接命令，(host=pwnable.kr , user =fd  password=2222 password=guest)可以打开linux终端，直接输入那行命令进行连接    ssh fd@pwnable.kr -p2222输入那行命令后输入密码，有时候会提示安全性问题，选择Y(yes)，输入密码，输入密码的时候是不会回显的（显示在屏幕上） 密码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/04/pwnable-kr-fd-1/t.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/04/pwnable-kr-fd-1/1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/04/pwnable-kr-fd-1/j.PNG">
+<meta property="og:updated_time" content="2019-04-05T14:09:22.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pwnable.kr1-fd">
+<meta name="twitter:description" content="题目最下方有个ssh命令，这是linux的远程连接命令，(host=pwnable.kr , user =fd  password=2222 password=guest)可以打开linux终端，直接输入那行命令进行连接    ssh fd@pwnable.kr -p2222输入那行命令后输入密码，有时候会提示安全性问题，选择Y(yes)，输入密码，输入密码的时候是不会回显的（显示在屏幕上） 密码">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/04/04/pwnable-kr-fd-1/t.PNG">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/04/04/pwnable-kr-fd-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>pwnable.kr1-fd | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/04/pwnable-kr-fd-1/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pwnable.kr1-fd
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-04 21:07:16" itemprop="dateCreated datePublished" datetime="2019-04-04T21:07:16+08:00">2019-04-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-04-05 22:09:22" itemprop="dateModified" datetime="2019-04-05T22:09:22+08:00">2019-04-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2019/04/04/pwnable-kr-fd-1/t.PNG" alt=""><br>题目最下方有个ssh命令，这是linux的远程连接命令，(host=pwnable.kr , user =fd  password=2222 password=guest)<br>可以打开linux终端，直接输入那行命令进行连接<br>    ssh <a href="mailto:fd@pwnable.kr" target="_blank" rel="noopener">fd@pwnable.kr</a> -p2222<br>输入那行命令后输入密码，有时候会提示安全性问题，选择Y(yes)，输入密码，输入密码的时候是不会回显的（显示在屏幕上）</p>
+<p>密码为guest，然后ls（ls命令学习） 查看有什么文件，然后输入cat  fd.c 查看fd.c的文件内容，之后发现有三个文件分别为fd、fd.c 、flag。<br>    fd@ubuntu:~$ ls<br>    fd  fd.c  flag</p>
+<p>显然不能直接查看flag<br>    fd@ubuntu:~$ cat flag<br>    cat: flag: Permission denied<br>我们抓取源码</p>
+<pre><code>fd@ubuntu:~$ cat fd.c
+</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">32</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pass argv[1] a number\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> fd = atoi( argv[<span class="number">1</span>] ) - <span class="number">0x1234</span>;   <span class="comment">//此处设置fd的值，解题时应想办法为0</span></span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">    len = read(fd, buf, <span class="number">32</span>);        <span class="comment">//让fd=0，我们就可以用标准输入（键盘）控制buf（缓存）的值了，</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(<span class="string">"LETMEWIN\n"</span>, buf))&#123;    <span class="comment">//此处告诉我们的目标是让它等于"LETMEWIN\n"</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"good job :)\n"</span>);</span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"learn about Linux file IO\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>随便输入，会出现啥？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fd@ubuntu:~$ ./fd</span><br><span class="line">pass argv[1] a number</span><br><span class="line">fd@ubuntu:~$ ./fd 3</span><br><span class="line">learn about Linux file IO</span><br><span class="line">fd@ubuntu:~$ ./fd 2</span><br><span class="line">learn about Linux file IO</span><br><span class="line">fd@ubuntu:~$ ./fd 1</span><br><span class="line">learn about Linux file IO</span><br></pre></td></tr></table></figure></p>
+<p>那么开始分析</p>
+<h1 id="所需知识："><a href="#所需知识：" class="headerlink" title="所需知识："></a>所需知识：</h1><h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>　　对于内核而言，所有打开的文件都通过文件描述符引用。文件描述符是一个非负整数。当打开一个现有文件或创建一个新文件时，内核向进程返回一个文件描述符。当读或写一个文件时，使用open或create返回的文件描述符表示该文件，将其作为参数传给read或write函数。<br><img src="/2019/04/04/pwnable-kr-fd-1/1.png" alt=""></p>
+<h2 id="read-函数"><a href="#read-函数" class="headerlink" title="read 函数"></a>read 函数</h2><p><a href="https://blog.csdn.net/csdn_logo/article/details/46500065" target="_blank" rel="noopener">read函数———详解</a></p>
+<p>ssize_t read(int filedes, void *buf, size_t nbytes);<br>// 返回：若成功则返回读到的字节数，若已到文件末尾则返回0，若出错则返回-1<br>// filedes：文件描述符[0-标准输入(stdin)，1-标准输出(stdout)，2-标准错误输出(stderr)]<br>// buf:读取数据缓存区<br>// nbytes:要读取的字节数<br>有几种情况可使实际读到的字节数少于要求读的字节数：<br>1）读普通文件时，在读到要求字节数之前就已经达到了文件末端。例如，若在到达文件末端之前还有30个字节，而要求读100个字节，则read返回30，下一次再调用read时，它将返回0（文件末端）。<br>2）当从终端设备读时，通常一次最多读一行。<br>3）当从网络读时，网络中的缓存机构可能造成返回值小于所要求读的字结束。<br>4）当从管道或FIFO读时，如若管道包含的字节少于所需的数量，那么read将只返回实际可用的字节数。<br>5）当从某些面向记录的设备（例如磁带）读时，一次最多返回一个记录。<br>6）当某一个信号造成中断，而已经读取了部分数据。<br>main函数中：</p>
+<h2 id="argc"><a href="#argc" class="headerlink" title="argc"></a>argc</h2><p>argc是命令行参数个数，char <em>argv[]是指所有命令行参数，<br>对于C语言int main(int argc char </em>argv[])来说，argc保存的是命令行总的参数个数(包括程序名)，argv这是传入参数的数组.<br>举个例子，当你执行： ./test 1 2 3 时，argc = 4 而 argv[0] = “test”，argv[1] = 1，argv[2] = 2，argv[3] = 3</p>
+<h2 id="char-envp"><a href="#char-envp" class="headerlink" title="char *envp[]"></a>char *envp[]</h2><p>*envp[]是环境变量（argv[1]位置处存放的是命令行输入的第一个参数） </p>
+<h2 id="atoi"><a href="#atoi" class="headerlink" title="atoi"></a>atoi</h2><p>atoi函数的作用是把字符转化为int型数据。 命令行读入的参数默认是字符型（如：atio（10）=‘10’）</p>
+<h2 id="ssize-t-read（int-fd，void-buf，size-t-count）"><a href="#ssize-t-read（int-fd，void-buf，size-t-count）" class="headerlink" title="ssize_t read（int fd，void * buf，size_t count）;"></a>ssize_t read（int fd，void * buf，size_t count）;</h2><p>函数说明<br>read（）会参数fd所有的文件传送count个字节到buf指针所指的内存中。若参数count为0，则read ）不会有作用并返回0返回值为实际读取到的字节数，如果返回0，表示已到达文件尾或是无可读取的数据，此外文件读写位置会随读取到的字节移动。</p>
+<p>整数值 名称 &lt; unistd.h &gt; 符号常量[1] &lt; stdio.h &gt; 文件流[2]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0   标准输入    STDIN_FILENO    标准输入</span><br><span class="line">1   标准输出    STDOUT_FILENO   标准输出</span><br><span class="line">2   标准错误    STDERR_FILENO   标准错误</span><br></pre></td></tr></table></figure></p>
+<p>推理：read(0,buf,32)表示从键盘读入至多32个字节到buf中</p>
+<p>那么我们只要控制了FD的值为标准输入，那么buf中的值就可以用我们的键盘输入了，<br>目标是使FD为0，那么我们传进去的第一个参数就是为0x1234，即十进制的4660<br>这里要填十进制因为天0x1234中的0x它会读成字符的，然后把后面的字符变成10进制 </p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>0为标准输入，1为标准输出，2为标准错误，而我们看到read(fd, buf, 32);//关键点,这里fd便是关键，若为0，我们自己输入后，变成功得到flag，所以，我们就要推回去，怎么让fd为0，也就是atoiargv[1]大小为0x1234（atoi是c语言的将字符串转化为数字，假设字符串为str =1234，他会转化为数字int=1234),而0x1234是16进制的，用计算器转换下为4660，也就是说我们要使argv[1]为4660，好，整个思路理清了，接下来便是怎么利用了</p>
+<p><img src="/2019/04/04/pwnable-kr-fd-1/j.PNG" alt=""></p>
+<p>//这好像是脚本？蛮放着。。。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> <span class="number">4</span> pwn_ssh=ssh(host=<span class="string">'pwnable.kr'</span>,user=<span class="string">'fd'</span>,password=<span class="string">'guest'</span>,port=<span class="number">2222</span>)<span class="comment">#远程连接</span></span><br><span class="line"> <span class="number">5</span> print(pwn_ssh.connected())<span class="comment">#连接成功判断</span></span><br><span class="line"> <span class="number">6</span> sh=pwn_ssh.process(argv=[<span class="string">'fd'</span>,<span class="string">'4660'</span>],executable=<span class="string">'./fd'</span>)<span class="comment">#加载进程</span></span><br><span class="line"> <span class="number">7</span> sh.sendline(<span class="string">'LETMEWIN'</span>)<span class="comment">#发送一行数据，在末尾加上\n</span></span><br><span class="line"> <span class="number">8</span> print(sh.recvall())<span class="comment">#接受到EOF</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>原文：<a href="https://blog.csdn.net/u010334666/article/details/81192987" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81192987</a><br>原文：<a href="https://blog.csdn.net/qq_38204481/article/details/79711702" target="_blank" rel="noopener">https://blog.csdn.net/qq_38204481/article/details/79711702</a> </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/" rel="next" title="汇编-实验：寻址方式在结构化数据访问中的应用">
+                <i class="fa fa-chevron-left"></i> 汇编-实验：寻址方式在结构化数据访问中的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/05/pwnable-kr2-col/" rel="prev" title="pwnable.kr2-col">
+                pwnable.kr2-col <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#所需知识："><span class="nav-number">1.</span> <span class="nav-text">所需知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件描述符"><span class="nav-number">1.1.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read-函数"><span class="nav-number">1.2.</span> <span class="nav-text">read 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#argc"><span class="nav-number">1.3.</span> <span class="nav-text">argc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-envp"><span class="nav-number">1.4.</span> <span class="nav-text">char *envp[]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#atoi"><span class="nav-number">1.5.</span> <span class="nav-text">atoi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssize-t-read（int-fd，void-buf，size-t-count）"><span class="nav-number">1.6.</span> <span class="nav-text">ssize_t read（int fd，void * buf，size_t count）;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题"><span class="nav-number">2.</span> <span class="nav-text">解题</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

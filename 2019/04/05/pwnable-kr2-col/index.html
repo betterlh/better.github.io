@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="代码123456789101112131415161718192021222324252627282930313233343536#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;unsigned long hashcode = 0x21DD09EC;  //之后要想办法让函数返回的值等于这个unsigned long check_password(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwnable.kr2-col">
+<meta property="og:url" content="http://betterlh.github.io/2019/04/05/pwnable-kr2-col/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="代码123456789101112131415161718192021222324252627282930313233343536#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;unsigned long hashcode = 0x21DD09EC;  //之后要想办法让函数返回的值等于这个unsigned long check_password(">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/05/pwnable-kr2-col/j.dib">
+<meta property="og:updated_time" content="2019-04-05T14:35:45.878Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pwnable.kr2-col">
+<meta name="twitter:description" content="代码123456789101112131415161718192021222324252627282930313233343536#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;unsigned long hashcode = 0x21DD09EC;  //之后要想办法让函数返回的值等于这个unsigned long check_password(">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/04/05/pwnable-kr2-col/j.dib">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/04/05/pwnable-kr2-col/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>pwnable.kr2-col | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/05/pwnable-kr2-col/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pwnable.kr2-col
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-05 20:49:21 / Updated at: 22:35:45" itemprop="dateCreated datePublished" datetime="2019-04-05T20:49:21+08:00">2019-04-05</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> hashcode = <span class="number">0x21DD09EC</span>;  <span class="comment">//之后要想办法让函数返回的值等于这个</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">check_password</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* ip = (<span class="keyword">int</span>*)p;   </span><br><span class="line">    <span class="comment">/*强制类型转换，char转为int。</span></span><br><span class="line"><span class="comment">  注意：char为1字节，int为4字节因此输入5个int累加（即输入的是20字节），</span></span><br><span class="line"><span class="comment">    可以用十六进制表示数，如/x01就是一个字节，</span></span><br><span class="line"><span class="comment">    我们可以让一个int值为/x01/x01/x01/x01  它的值为16843009（10）这个，总之就是凑5个int相加为指定的值</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)&#123;   <span class="comment">//这里循环五次</span></span><br><span class="line">        res += ip[i];    <span class="comment">//将五个数累加</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;         <span class="comment">//返回值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"usage : %s [passcode]\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(argv[<span class="number">1</span>]) != <span class="number">20</span>)&#123;  <span class="comment">//告诉我们输入要为20个字节</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"passcode length should be 20 bytes\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(hashcode == check_password( argv[<span class="number">1</span>] ))&#123;  <span class="comment">//这行给出flag，即想办法让这两个相等</span></span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"wrong passcode.\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先定位到<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(hashcode == check_password( argv[<span class="number">1</span>] ))&#123;  <span class="comment">//这行给出flag，即想办法让这两个相等</span></span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明要想得到flag就要让  你的输入 传入函数后得到一个与hashcode一样的值<br>if(strlen(argv[1]) != 20){   这个if语句也告诉我们输入要为20个字节</p>
+<p>int* ip = (int*)p;<br>这里对p进行了一次强制转化，从原本读出来的char转化为了int<br>char占一个字节，8个比特。int占4个字节，32个比特。 （十六进制0x01就是一个字节了，那么十六进制下01010101就可以表示一个int数了）<br>hashcode == check_password( argv[1] )实现了一个累加<br>这里需要构造5个int类型的数（总共是20字节）相加为0x21DD09EC<br>实际上就是把5<em>4=20个字符，每4个分成一组累加。<br>普遍的一个想法： 0x1DD905E8+0x01010101</em>4=0x21DD09EC 这里用01010101来构造 </p>
+<p>大佬的爬虫脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">hashcode = <span class="number">0x21DD09EC</span></span><br><span class="line"> </span><br><span class="line">a = <span class="number">0x01020304</span></span><br><span class="line">b = hashcode - <span class="number">4</span> * a</span><br><span class="line"> </span><br><span class="line">payload = p32(a) * <span class="number">4</span> + p32(b)</span><br><span class="line"> </span><br><span class="line">target = subprocess.Popen(args=[<span class="string">'/home/col/col'</span>,payload])</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://blog.csdn.net/Jason_ZhouYetao/article/details/80727467" target="_blank" rel="noopener">脚本来源网址及脚本分析</a></p>
+<p>另解<br>    python -c “print ‘\xe8\x05\xd9\x1d’+16*’\x01’”|xargs ./col因为是小端机器需要反序，xargs可以把数据当作命令行参数传给制定的程序。<br><img src="/2019/04/05/pwnable-kr2-col/j.dib" alt=""></p>
+<p>来自<a href="https://blog.csdn.net/u010334666/article/details/81193660" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81193660</a>的python代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> collision.py+                                                      buffers </span><br><span class="line">  1 #!/usr/bin/env python</span><br><span class="line">  2 # coding=utf-8</span><br><span class="line">  3 from pwn import *</span><br><span class="line">  4 pwn_ssh=ssh(host=&apos;pwnable.kr&apos;,user=&apos;col&apos;,password=&apos;guest&apos;,port=2222)</span><br><span class="line">  5 print(pwn_ssh.connected())</span><br><span class="line">  6 sh=pwn_ssh.process(argv=[&apos;collision&apos;,&apos;\xc9\xce\xc5\x06&apos; * 4 + &apos;\xcc\xce\xc5\x06&apos;],executable=&apos;./col&apos;)#那些数字是0x21DD09EC/5计算得到，然后用0x21DD09EC-得到的结果*4</span><br><span class="line">  7 print(sh.recvall())</span><br><span class="line">~                                                                               </span><br><span class="line">~</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>char *p</p>
+<p>char* p和char *p<br>eg:<br>    char *p=”abc123ABC”;//char p[]=”abc123ABC”<br>char* p是一个指针，根本没分配内存，他指向的”abc123ABC” 是只读的，不能改变，你在下面给他赋值肯定是错的<br>而char p[]是一个数组，已经分配内存，是将”abc123ABC” 复制到该内存里面，这个内存是可读写的<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *p; <span class="comment">//*p是const,p可变：const 后面紧跟的是char，所以*p是一个char字符，不可变</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> (<span class="keyword">char</span> *) p;<span class="comment">//p是const,*p可变：const 后面紧跟的是（char *）这个整体，所以p是char*类型，不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p; <span class="comment">//p是const,*p可变:const 后面紧跟的是p,所以p不可变</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p; <span class="comment">//p和*p都是const：第一个const后面紧跟的是char,所以char类型的字符*p不可变；第二个const后面紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span> * p;<span class="comment">// *p是const,p可变：const后面紧跟的是*,但是单独的*不能表明修饰的内容，所以将*p看成一个整体，所以const修饰的是*p,*p不可变。</span></span><br><span class="line"> </span><br><span class="line">(<span class="keyword">char</span>*) <span class="keyword">const</span> p;<span class="comment">//p是const,*p可变：const紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p;<span class="comment">// p是const,*p可变：const紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span>* <span class="keyword">const</span> p;<span class="comment">// p和*p都是const：第一个const紧跟的是*,不能表明修饰的内容，将后面整体的（* const p）看成一个整体，那就说明*p不可变，第二个const后面紧跟的是p,所以p不可变。</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>原文：<a href="https://blog.csdn.net/qq_38204481/article/details/79711702" target="_blank" rel="noopener">https://blog.csdn.net/qq_38204481/article/details/79711702</a><br>原文：<a href="https://blog.csdn.net/jack0201/article/details/75071980" target="_blank" rel="noopener">https://blog.csdn.net/jack0201/article/details/75071980</a><br>原文：<a href="https://blog.csdn.net/u010334666/article/details/81193660" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81193660</a> </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/04/pwnable-kr-fd-1/" rel="next" title="pwnable.kr1-fd">
+                <i class="fa fa-chevron-left"></i> pwnable.kr1-fd
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
