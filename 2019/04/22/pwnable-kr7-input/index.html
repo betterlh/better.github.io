@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="#scp命令这次利用 scp命令直接下载了文件。scp命令学习具体命令要确保 我们本地的文件夹是可以操作的，不然会报权限问题   ls-l 可以查看目录下的文件和文件夹的权限    给权限可以用 chmod -R 777 路径/文件（夹）名命令：scp -r -P 2222 【题目名字】@pwnable.kr:/home/【题目名字】/* /home/linhua/pwn scp -r -P 22">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwnable-kr7-input">
+<meta property="og:url" content="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#scp命令这次利用 scp命令直接下载了文件。scp命令学习具体命令要确保 我们本地的文件夹是可以操作的，不然会报权限问题   ls-l 可以查看目录下的文件和文件夹的权限    给权限可以用 chmod -R 777 路径/文件（夹）名命令：scp -r -P 2222 【题目名字】@pwnable.kr:/home/【题目名字】/* /home/linhua/pwn scp -r -P 22">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/t.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/t2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/t3.PNG">
+<meta property="og:updated_time" content="2019-04-26T11:09:56.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pwnable-kr7-input">
+<meta name="twitter:description" content="#scp命令这次利用 scp命令直接下载了文件。scp命令学习具体命令要确保 我们本地的文件夹是可以操作的，不然会报权限问题   ls-l 可以查看目录下的文件和文件夹的权限    给权限可以用 chmod -R 777 路径/文件（夹）名命令：scp -r -P 2222 【题目名字】@pwnable.kr:/home/【题目名字】/* /home/linhua/pwn scp -r -P 22">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/t.PNG">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>pwnable-kr7-input | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pwnable-kr7-input
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-22 22:35:19" itemprop="dateCreated datePublished" datetime="2019-04-22T22:35:19+08:00">2019-04-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-26 19:09:56" itemprop="dateModified" datetime="2019-04-26T19:09:56+08:00">2019-04-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#scp命令<br>这次利用 scp命令直接下载了文件。<br><a href="http://www.cnblogs.com/peida/archive/2013/03/15/2960802.html" target="_blank" rel="noopener">scp命令学习</a><br>具体命令<br>要确保 我们本地的文件夹是可以操作的，不然会报权限问题   ls-l 可以查看目录下的文件和文件夹的权限    给权限可以用 chmod -R 777 路径/文件（夹）名<br>命令：scp -r -P 2222 【题目名字】@pwnable.kr:/home/【题目名字】/* /home/linhua/pwn</p>
+<pre><code>scp -r -P 2222 input2@pwnable.kr:/home/input2/* /home/linhua/pwn
+</code></pre><p><img src="/2019/04/22/pwnable-kr7-input/t.PNG" alt=""><br>我们用ssh连接试下<br><img src="/2019/04/22/pwnable-kr7-input/t2.PNG" alt=""><br>发现除了flag文件，另外两个都会下载出来。不过也是哈，如果flag都被拉出来了，还解啥题</p>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="fread"><a href="#fread" class="headerlink" title="fread"></a>fread</h2><p>函数原型<br>size_t fread ( void <em>buffer, size_t size, size_t count, FILE </em>stream) ;<br>参 数<br>buffer<br>用于接收数据的内存地址<br>size<br>要读的每个数据项的字节数，单位是字节<br>count<br>要读count个数据项，每个数据项size个字节.<br>stream<br>输入流<br>返回值<br>返回真实读取的项数，若大于count则意味着产生了错误。另外，产生错误后，文件位置指示器是无法确定的。若其他stream或buffer为空指针，或在unicode模式中写入的字节数为奇数，此函数设置errno为EINVAL以及返回0.</p>
+<p>##argv</p>
+<pre><code>argv[&apos;A&apos;] = &quot;\x00&quot;;
+argv[&apos;B&apos;] = &quot;\x20\x0a\x0d&quot;;
+argv[&apos;C&apos;] =&quot;55555&quot;; 
+</code></pre><p>这里可以用’A’作为参数的索引，这是原来没有见过的，默认把字符转换成ASCII码了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome to pwnable.kr\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Let's see if you know how to give input to program\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Just give me correct inputs then you will get the flag :)\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// argv</span></span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">100</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'A'</span>],<span class="string">"\x00"</span>)) <span class="keyword">return</span> <span class="number">0</span>;     <span class="comment">//字符串比较大小</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'B'</span>],<span class="string">"\x20\x0a\x0d"</span>)) <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 1 clear!\n"</span>); </span><br><span class="line"></span><br><span class="line">    <span class="comment">// stdio</span></span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">4</span>];</span><br><span class="line">    read(<span class="number">0</span>, buf, <span class="number">4</span>);    <span class="comment">//这里我们可以输入4个字节给buf</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x0a\x00\xff"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//比较buf与0x000a00ff</span></span><br><span class="line">    read(<span class="number">2</span>, buf, <span class="number">4</span>);   </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x0a\x02\xff"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//比较buf与0x000a02ff</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 2 clear!\n"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// env</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="string">"\xca\xfe\xba\xbe"</span>, getenv(<span class="string">"\xde\xad\xbe\xef"</span>))) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 3 clear!\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// file</span></span><br><span class="line">    FILE* fp = fopen(<span class="string">"\x0a"</span>, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span>(!fp) <span class="keyword">return</span> <span class="number">0</span>;  如果fopen返回<span class="number">0</span>则 return0</span><br><span class="line">    <span class="keyword">if</span>( fread(buf, <span class="number">4</span>, <span class="number">1</span>, fp)!=<span class="number">1</span> ) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//从输入流fread中读取1个4字节的值给buf</span></span><br><span class="line">    <span class="keyword">if</span>( <span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x00\x00\x00"</span>, <span class="number">4</span>) ) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//比较</span></span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 4 clear!\n"</span>); </span><br><span class="line"></span><br><span class="line">    <span class="comment">// network</span></span><br><span class="line">    <span class="keyword">int</span> sd, cd;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">saddr</span>, <span class="title">caddr</span>;</span></span><br><span class="line">    sd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(sd == <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"socket error, tell admin\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    saddr.sin_family = AF_INET;</span><br><span class="line">    saddr.sin_addr.s_addr = INADDR_ANY;</span><br><span class="line">    saddr.sin_port = htons( atoi(argv[<span class="string">'C'</span>]) );</span><br><span class="line">    <span class="keyword">if</span>(bind(sd, (struct sockaddr*)&amp;saddr, <span class="keyword">sizeof</span>(saddr)) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"bind error, use another port\n"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    listen(sd, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> c = <span class="keyword">sizeof</span>(struct sockaddr_in);</span><br><span class="line">    cd = accept(sd, (struct sockaddr *)&amp;caddr, (<span class="keyword">socklen_t</span>*)&amp;c);</span><br><span class="line">    <span class="keyword">if</span>(cd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"accept error, tell admin\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>( recv(cd, buf, <span class="number">4</span>, <span class="number">0</span>) != <span class="number">4</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\xde\xad\xbe\xef"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>;     <span class="comment">//我们的最终目的：让buf=0xdeadbeef</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 5 clear!\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// here's your flag</span></span><br><span class="line">    system(<span class="string">"/bin/cat flag"</span>);    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这题需要的知识点很多</p>
+<p>总共是五个关卡，每完成一个才能下一个<br>题目是为了让解题者满足代码中所需要满足的条件，总共5个，分别包括：参数传递、标准输入输出、环境变量、文件读写以及网络通信方面。<br>1.argv<br>  参数第’A’和’B’位分别为”\x00”和”\x20\x0a\x0d”，也就是第65位和第66位（第0位为可执行文件的路径），但是’\x00’会截断。<br>  于是使用execve运行input文件，execve函数在unistd（unix standard）头文件中：</p>
+<p>int execve(const char path, char const argv[], char *const envp[]);</p>
+<p>以argv参数进行传递相应参数。</p>
+<p>2.stdio<br>ssize_t read(int fildes, void *buf, size_t nbytes);</p>
+<p>摘自 <a href="http://codewiki.wikidot.com/c:system-calls:read" target="_blank" rel="noopener">http://codewiki.wikidot.com/c:system-calls:read</a></p>
+<p>Field   Description<br>int fildes  The file descriptor of where to read the input. You can either use a file descriptor obtained from the open system call, or you can use 0, 1, or 2, to refer to standard input, standard output, or standard error, respectively.<br>const void *buf A character array where the read content will be stored.<br>size_t nbytes   The number of bytes to read before truncating the data. If the data to be read is smaller than nbytes, all data is saved in the buffer.<br>return value    Returns the number of bytes that were read. If value is negative, then the system call returned an error.<br>  可以看到分别需要从stdin和stderr读取相关的数据，但是stderr没法写，于是需要用到c中的叫做管道（pipe）的东西可用于子进程与父进程之间的通讯使用；于是子进程向缓冲区写数据，而父进程先将定义的相应缓冲区分别替换stdin和stderr，之后则可以从缓冲区进行读取。</p>
+<p>3.env<br>  getenv函数获取系统中环境变量，这个同样以execve进行处理，其中的envp参数进行传递。</p>
+<p>4.file<br>  常规操作，自己创建一个文件，然后写”\x00\x00\x00\x00”进去然后再读即可。</p>
+<p>5.network<br>  是以传递的第C个参数作为监听端口，以及socket通信获取传来的消息，采用本地通信。socket网络编程网上一搜就出来的，其实百度百科说的还挺清楚的…中间需要sleep几秒等待接收信息的服务开启，然后传递信息。</p>
+<hr>
+<p>  最后在/tmp目录下面可以创建一个文件xxx，但是由于后面还得创建一个与/home/input2/flag的软链接（因为在/tmp目录下仍然没有权限cat flag），因为在运行input2文件时路径还是相对路径：</p>
+<p>ln -s /home/input2/flag flag</p>
+<p>之后创建一个c文件编译运行即可。</p>
+<p>看大佬 题解：</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p><a href="https://blog.csdn.net/qq_37414405/article/details/84991438" target="_blank" rel="noopener">原文</a><br>这里首先先明确：就是我们很明显这个输入是个很复杂的东西，我们无法在命令行里直接输入参数，当然也可以通过写exp。</p>
+<p>这里我用的是execve函数，其原型如下<br>    int<br>     execve(const char <em>path, char </em>const argv[], char *const envp[]);<br>所以我们通过execve函数来给源文件input传值<br>这里我们需要查看一下input文件的位置<br>-al查看全部文件<br><img src="/2019/04/22/pwnable-kr7-input/t3.PNG" alt=""><br>可以得知我们的path为”/home/input2/input”<br>然后接下来一个问题就是，我们将把我们这个写的文件放在服务器的哪里呢？这个服务器对我们的权限做了很大的限制。我在服务器上没有找到能够创建文件的地方，所以我想到的办法是通过scp将原文件都下载到本地，然后再本地上做～（注意，如果下载到本地的话，这个path就会有变化，这里我就暂且先不做更改）</p>
+<p>所以我们这个文件暂且命名为input_replace.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> **new_agrv;</span><br><span class="line">    <span class="keyword">char</span> **new_envp;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//argv</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//stdio</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//env</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//file</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//network</span></span><br><span class="line"></span><br><span class="line">    execve(<span class="string">"/home/input2/input"</span>,new_argv,new_envp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="然后我们就来逐个击破吧～"><a href="#然后我们就来逐个击破吧～" class="headerlink" title="然后我们就来逐个击破吧～"></a>然后我们就来逐个击破吧～</h2><p>一步步来把</p>
+<h2 id="part1"><a href="#part1" class="headerlink" title="part1"></a>part1</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(argc != <span class="number">100</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'A'</span>],<span class="string">"\x00"</span>)) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//这里可以用’A’作为参数的索引，这是原来没有见过的，默认把字符转换成ASCII码了。</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'B'</span>],<span class="string">"\x20\x0a\x0d"</span>)) <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Stage 1 clear!"</span>);</span><br></pre></td></tr></table></figure>
+<p>我们推断程序必须在以下条件下执行：<br>1.正好100个参数<br>2.第65个参数（A的ascii值为65）必须是空字符串<br>3.第66个参数66（B的ascii值为66）必须是\ x20 \ x0a \ x0d</p>
+<p>这里也就是让我们在命令行参数输入100个参数，由于我们的输入运行程序占一个，所以我们也就输入99个参数就可以了。(请注意，我们总共添加了99个参数，因为程序的名称计为一个。)但是这里我们要注意一下，因为我们是通过input_replace.c来调用input，所以我们的第一个参数是./input_replace，比直接运行input多了这么一个参数,所以实际上我们需要的是101个参数。  </p>
+<p>part1的代码就好了<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> * new_argv[<span class="number">101</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">    new_argv[i] = <span class="string">""</span>;</span><br><span class="line">&#125;</span><br><span class="line">new_argv[<span class="string">'A'</span>] = <span class="string">"\x00"</span>;</span><br><span class="line">new_argv[<span class="string">'B'</span>] = <span class="string">"\x20\x0a\x0d"</span>;</span><br><span class="line">new_argv[<span class="number">100</span>] = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure></p>
+<p>原文：<a href="https://blog.csdn.net/qq_37414405/article/details/84991438" target="_blank" rel="noopener">https://blog.csdn.net/qq_37414405/article/details/84991438</a> </p>
+<p><a href="https://www.cnblogs.com/zUotTe0/p/10125533.html" target="_blank" rel="noopener">https://www.cnblogs.com/zUotTe0/p/10125533.html</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/20/12届全国大学生信息安全竞赛/" rel="next" title="12届全国大学生信息安全竞赛">
+                <i class="fa fa-chevron-left"></i> 12届全国大学生信息安全竞赛
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/27/杂项-bugku-隐写2/" rel="prev" title="杂项-bugku-隐写2">
+                杂项-bugku-隐写2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">65</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fread"><span class="nav-number">1.1.</span> <span class="nav-text">fread</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#然后我们就来逐个击破吧～"><span class="nav-number">2.1.</span> <span class="nav-text">然后我们就来逐个击破吧～</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part1"><span class="nav-number">2.2.</span> <span class="nav-text">part1</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

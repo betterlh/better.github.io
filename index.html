@@ -353,6 +353,725 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/27/杂项-bugku-隐写2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/27/杂项-bugku-隐写2/" class="post-title-link" itemprop="url">杂项-bugku-隐写2</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-27 09:41:02 / Modified: 10:21:33" itemprop="dateCreated datePublished" datetime="2019-04-27T09:41:02+08:00">2019-04-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>项目地址：<br><a href="https://ctf.bugku.com/challenges#%E9%9A%90%E5%86%992" target="_blank" rel="noopener">https://ctf.bugku.com/challenges#%E9%9A%90%E5%86%992</a><br>先是下载一个图片<br><img src="/2019/04/27/杂项-bugku-隐写2/Welcome_.jpg" alt="Welcome_.jpg"></p>
+<p>之后利用winhex  打开之后，没发现隐藏的flag<br>再之后用binwalk看下这个图片里有没有隐藏什么。</p>
+<p>binwalk需要python环境</p>
+<p><a href="https://www.cnblogs.com/zaqzzz/p/9460264.html" target="_blank" rel="noopener">binwalk参考资料</a><br>我们需要在binwalk的目录下打开命令行窗口（也就是cd到binwalk目录下），输入</p>
+<pre><code>python setup.py install
+</code></pre><p><img src="/2019/04/27/杂项-bugku-隐写2/p1.jpg" alt=""><br>安装完成</p>
+<p>之后去到python安转目录下的Script目录，里面有个名字叫做binwalk的文件<br>我一开始找不到，忘记python安装目录在哪了   只好用文件资源管理器里的搜索对着C盘搜（一般这种东西会在C盘）</p>
+<p>找到之后将你要操作的文件放进去（Welcome_.jpg）<br><img src="/2019/04/27/杂项-bugku-隐写2/1.PNG" alt=""><br>在此处打开命令行，输入命令</p>
+<pre><code>python binwalk Welcome_.jpg
+</code></pre><p><img src="/2019/04/27/杂项-bugku-隐写2/2.PNG" alt=""><br>发现有隐藏的东西，包括一个flag 压缩包</p>
+<p>分离出来</p>
+<pre><code>python binwalk -e Welcome_.jpg
+</code></pre><p><img src="/2019/04/27/杂项-bugku-隐写2/3.PNG" alt=""></p>
+<p>之后回到文件夹，发现<br><img src="/2019/04/27/杂项-bugku-隐写2/4.PNG" alt=""></p>
+<p>然后打开<em>Welcome</em>.jpg.extracted  文件夹<br><img src="/2019/04/27/杂项-bugku-隐写2/5.PNG" alt=""><br>之后尝试解压，需要密码。<br>直接用暴力破解工具<br><img src="/2019/04/27/杂项-bugku-隐写2/6.PNG" alt=""></p>
+<p>之后成功打开压缩包，发现一个3.jpg<br>用winhex打开看看<br><img src="/2019/04/27/杂项-bugku-隐写2/7.PNG" alt=""><br>OK差不多就得到flag了<br>f1@g{eTB1IEFyZSBhIGhAY2tlciE=}<br>这flag里的内容经过base64加密了，我们解密搞定<br><img src="/2019/04/27/杂项-bugku-隐写2/8.PNG" alt=""><br>得到</p>
+<pre><code>f1@g{y0u Are a h@cker!}   
+</code></pre><p>即为答案</p>
+<p>网上说要将@改为a填答案，结果试了好久，不行。反而用@可以<br><img src="/2019/04/27/杂项-bugku-隐写2/9.PNG" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/22/pwnable-kr7-input/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/22/pwnable-kr7-input/" class="post-title-link" itemprop="url">pwnable-kr7-input</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-22 22:35:19" itemprop="dateCreated datePublished" datetime="2019-04-22T22:35:19+08:00">2019-04-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-26 19:09:56" itemprop="dateModified" datetime="2019-04-26T19:09:56+08:00">2019-04-26</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#scp命令<br>这次利用 scp命令直接下载了文件。<br><a href="http://www.cnblogs.com/peida/archive/2013/03/15/2960802.html" target="_blank" rel="noopener">scp命令学习</a><br>具体命令<br>要确保 我们本地的文件夹是可以操作的，不然会报权限问题   ls-l 可以查看目录下的文件和文件夹的权限    给权限可以用 chmod -R 777 路径/文件（夹）名<br>命令：scp -r -P 2222 【题目名字】@pwnable.kr:/home/【题目名字】/* /home/linhua/pwn</p>
+<pre><code>scp -r -P 2222 input2@pwnable.kr:/home/input2/* /home/linhua/pwn
+</code></pre><p><img src="/2019/04/22/pwnable-kr7-input/t.PNG" alt=""><br>我们用ssh连接试下<br><img src="/2019/04/22/pwnable-kr7-input/t2.PNG" alt=""><br>发现除了flag文件，另外两个都会下载出来。不过也是哈，如果flag都被拉出来了，还解啥题</p>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="fread"><a href="#fread" class="headerlink" title="fread"></a>fread</h2><p>函数原型<br>size_t fread ( void <em>buffer, size_t size, size_t count, FILE </em>stream) ;<br>参 数<br>buffer<br>用于接收数据的内存地址<br>size<br>要读的每个数据项的字节数，单位是字节<br>count<br>要读count个数据项，每个数据项size个字节.<br>stream<br>输入流<br>返回值<br>返回真实读取的项数，若大于count则意味着产生了错误。另外，产生错误后，文件位置指示器是无法确定的。若其他stream或buffer为空指针，或在unicode模式中写入的字节数为奇数，此函数设置errno为EINVAL以及返回0.</p>
+<p>##argv</p>
+<pre><code>argv[&apos;A&apos;] = &quot;\x00&quot;;
+argv[&apos;B&apos;] = &quot;\x20\x0a\x0d&quot;;
+argv[&apos;C&apos;] =&quot;55555&quot;; 
+</code></pre><p>这里可以用’A’作为参数的索引，这是原来没有见过的，默认把字符转换成ASCII码了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome to pwnable.kr\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Let's see if you know how to give input to program\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Just give me correct inputs then you will get the flag :)\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// argv</span></span><br><span class="line">    <span class="keyword">if</span>(argc != <span class="number">100</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'A'</span>],<span class="string">"\x00"</span>)) <span class="keyword">return</span> <span class="number">0</span>;     <span class="comment">//字符串比较大小</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'B'</span>],<span class="string">"\x20\x0a\x0d"</span>)) <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 1 clear!\n"</span>); </span><br><span class="line"></span><br><span class="line">    <span class="comment">// stdio</span></span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">4</span>];</span><br><span class="line">    read(<span class="number">0</span>, buf, <span class="number">4</span>);    <span class="comment">//这里我们可以输入4个字节给buf</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x0a\x00\xff"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//比较buf与0x000a00ff</span></span><br><span class="line">    read(<span class="number">2</span>, buf, <span class="number">4</span>);   </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x0a\x02\xff"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//比较buf与0x000a02ff</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 2 clear!\n"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// env</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strcmp</span>(<span class="string">"\xca\xfe\xba\xbe"</span>, getenv(<span class="string">"\xde\xad\xbe\xef"</span>))) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 3 clear!\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// file</span></span><br><span class="line">    FILE* fp = fopen(<span class="string">"\x0a"</span>, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span>(!fp) <span class="keyword">return</span> <span class="number">0</span>;  如果fopen返回<span class="number">0</span>则 return0</span><br><span class="line">    <span class="keyword">if</span>( fread(buf, <span class="number">4</span>, <span class="number">1</span>, fp)!=<span class="number">1</span> ) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//从输入流fread中读取1个4字节的值给buf</span></span><br><span class="line">    <span class="keyword">if</span>( <span class="built_in">memcmp</span>(buf, <span class="string">"\x00\x00\x00\x00"</span>, <span class="number">4</span>) ) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//比较</span></span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 4 clear!\n"</span>); </span><br><span class="line"></span><br><span class="line">    <span class="comment">// network</span></span><br><span class="line">    <span class="keyword">int</span> sd, cd;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">saddr</span>, <span class="title">caddr</span>;</span></span><br><span class="line">    sd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(sd == <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"socket error, tell admin\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    saddr.sin_family = AF_INET;</span><br><span class="line">    saddr.sin_addr.s_addr = INADDR_ANY;</span><br><span class="line">    saddr.sin_port = htons( atoi(argv[<span class="string">'C'</span>]) );</span><br><span class="line">    <span class="keyword">if</span>(bind(sd, (struct sockaddr*)&amp;saddr, <span class="keyword">sizeof</span>(saddr)) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"bind error, use another port\n"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    listen(sd, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> c = <span class="keyword">sizeof</span>(struct sockaddr_in);</span><br><span class="line">    cd = accept(sd, (struct sockaddr *)&amp;caddr, (<span class="keyword">socklen_t</span>*)&amp;c);</span><br><span class="line">    <span class="keyword">if</span>(cd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"accept error, tell admin\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>( recv(cd, buf, <span class="number">4</span>, <span class="number">0</span>) != <span class="number">4</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">memcmp</span>(buf, <span class="string">"\xde\xad\xbe\xef"</span>, <span class="number">4</span>)) <span class="keyword">return</span> <span class="number">0</span>;     <span class="comment">//我们的最终目的：让buf=0xdeadbeef</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Stage 5 clear!\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// here's your flag</span></span><br><span class="line">    system(<span class="string">"/bin/cat flag"</span>);    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这题需要的知识点很多</p>
+<p>总共是五个关卡，每完成一个才能下一个<br>题目是为了让解题者满足代码中所需要满足的条件，总共5个，分别包括：参数传递、标准输入输出、环境变量、文件读写以及网络通信方面。<br>1.argv<br>  参数第’A’和’B’位分别为”\x00”和”\x20\x0a\x0d”，也就是第65位和第66位（第0位为可执行文件的路径），但是’\x00’会截断。<br>  于是使用execve运行input文件，execve函数在unistd（unix standard）头文件中：</p>
+<p>int execve(const char path, char const argv[], char *const envp[]);</p>
+<p>以argv参数进行传递相应参数。</p>
+<p>2.stdio<br>ssize_t read(int fildes, void *buf, size_t nbytes);</p>
+<p>摘自 <a href="http://codewiki.wikidot.com/c:system-calls:read" target="_blank" rel="noopener">http://codewiki.wikidot.com/c:system-calls:read</a></p>
+<p>Field   Description<br>int fildes  The file descriptor of where to read the input. You can either use a file descriptor obtained from the open system call, or you can use 0, 1, or 2, to refer to standard input, standard output, or standard error, respectively.<br>const void *buf A character array where the read content will be stored.<br>size_t nbytes   The number of bytes to read before truncating the data. If the data to be read is smaller than nbytes, all data is saved in the buffer.<br>return value    Returns the number of bytes that were read. If value is negative, then the system call returned an error.<br>  可以看到分别需要从stdin和stderr读取相关的数据，但是stderr没法写，于是需要用到c中的叫做管道（pipe）的东西可用于子进程与父进程之间的通讯使用；于是子进程向缓冲区写数据，而父进程先将定义的相应缓冲区分别替换stdin和stderr，之后则可以从缓冲区进行读取。</p>
+<p>3.env<br>  getenv函数获取系统中环境变量，这个同样以execve进行处理，其中的envp参数进行传递。</p>
+<p>4.file<br>  常规操作，自己创建一个文件，然后写”\x00\x00\x00\x00”进去然后再读即可。</p>
+<p>5.network<br>  是以传递的第C个参数作为监听端口，以及socket通信获取传来的消息，采用本地通信。socket网络编程网上一搜就出来的，其实百度百科说的还挺清楚的…中间需要sleep几秒等待接收信息的服务开启，然后传递信息。</p>
+<hr>
+<p>  最后在/tmp目录下面可以创建一个文件xxx，但是由于后面还得创建一个与/home/input2/flag的软链接（因为在/tmp目录下仍然没有权限cat flag），因为在运行input2文件时路径还是相对路径：</p>
+<p>ln -s /home/input2/flag flag</p>
+<p>之后创建一个c文件编译运行即可。</p>
+<p>看大佬 题解：</p>
+<h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><p><a href="https://blog.csdn.net/qq_37414405/article/details/84991438" target="_blank" rel="noopener">原文</a><br>这里首先先明确：就是我们很明显这个输入是个很复杂的东西，我们无法在命令行里直接输入参数，当然也可以通过写exp。</p>
+<p>这里我用的是execve函数，其原型如下<br>    int<br>     execve(const char <em>path, char </em>const argv[], char *const envp[]);<br>所以我们通过execve函数来给源文件input传值<br>这里我们需要查看一下input文件的位置<br>-al查看全部文件<br><img src="/2019/04/22/pwnable-kr7-input/t3.PNG" alt=""><br>可以得知我们的path为”/home/input2/input”<br>然后接下来一个问题就是，我们将把我们这个写的文件放在服务器的哪里呢？这个服务器对我们的权限做了很大的限制。我在服务器上没有找到能够创建文件的地方，所以我想到的办法是通过scp将原文件都下载到本地，然后再本地上做～（注意，如果下载到本地的话，这个path就会有变化，这里我就暂且先不做更改）</p>
+<p>所以我们这个文件暂且命名为input_replace.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> **new_agrv;</span><br><span class="line">    <span class="keyword">char</span> **new_envp;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//argv</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//stdio</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//env</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//file</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//network</span></span><br><span class="line"></span><br><span class="line">    execve(<span class="string">"/home/input2/input"</span>,new_argv,new_envp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="然后我们就来逐个击破吧～"><a href="#然后我们就来逐个击破吧～" class="headerlink" title="然后我们就来逐个击破吧～"></a>然后我们就来逐个击破吧～</h2><p>一步步来把</p>
+<h2 id="part1"><a href="#part1" class="headerlink" title="part1"></a>part1</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(argc != <span class="number">100</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'A'</span>],<span class="string">"\x00"</span>)) <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//这里可以用’A’作为参数的索引，这是原来没有见过的，默认把字符转换成ASCII码了。</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">strcmp</span>(argv[<span class="string">'B'</span>],<span class="string">"\x20\x0a\x0d"</span>)) <span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Stage 1 clear!"</span>);</span><br></pre></td></tr></table></figure>
+<p>我们推断程序必须在以下条件下执行：<br>1.正好100个参数<br>2.第65个参数（A的ascii值为65）必须是空字符串<br>3.第66个参数66（B的ascii值为66）必须是\ x20 \ x0a \ x0d</p>
+<p>这里也就是让我们在命令行参数输入100个参数，由于我们的输入运行程序占一个，所以我们也就输入99个参数就可以了。(请注意，我们总共添加了99个参数，因为程序的名称计为一个。)但是这里我们要注意一下，因为我们是通过input_replace.c来调用input，所以我们的第一个参数是./input_replace，比直接运行input多了这么一个参数,所以实际上我们需要的是101个参数。  </p>
+<p>part1的代码就好了<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> * new_argv[<span class="number">101</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</span><br><span class="line">&#123;</span><br><span class="line">    new_argv[i] = <span class="string">""</span>;</span><br><span class="line">&#125;</span><br><span class="line">new_argv[<span class="string">'A'</span>] = <span class="string">"\x00"</span>;</span><br><span class="line">new_argv[<span class="string">'B'</span>] = <span class="string">"\x20\x0a\x0d"</span>;</span><br><span class="line">new_argv[<span class="number">100</span>] = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure></p>
+<p>原文：<a href="https://blog.csdn.net/qq_37414405/article/details/84991438" target="_blank" rel="noopener">https://blog.csdn.net/qq_37414405/article/details/84991438</a> </p>
+<p><a href="https://www.cnblogs.com/zUotTe0/p/10125533.html" target="_blank" rel="noopener">https://www.cnblogs.com/zUotTe0/p/10125533.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/20/12届全国大学生信息安全竞赛/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/20/12届全国大学生信息安全竞赛/" class="post-title-link" itemprop="url">12届全国大学生信息安全竞赛</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-20 14:31:12 / Modified: 21:04:16" itemprop="dateCreated datePublished" datetime="2019-04-20T14:31:12+08:00">2019-04-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>先大致看了下main函数<br><img src="/2019/04/20/12届全国大学生信息安全竞赛/1.PNG" alt=""><br>gdb运行看看<br><img src="/2019/04/20/12届全国大学生信息安全竞赛/4.PNG" alt=""><br><img src="/2019/04/20/12届全国大学生信息安全竞赛/2.PNG" alt=""><br><img src="/2019/04/20/12届全国大学生信息安全竞赛/3.PNG" alt=""><br>发现在输完名字后，将会重复以下步骤：<br>1.让你指定一个下标，<br>2.它会提示这个标志代表的值<br>3.然后让你输入它新的值，它的值默认为0</p>
+<p>之后回到1  如此循环<br><img src="/2019/04/20/12届全国大学生信息安全竞赛/5.PNG" alt=""></p>
+<p>不知道他想让我干啥<br>卒</p>
+<p># </p>
+<h2 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h2><p>void <em>memset(void </em>s,int c,size_t n)</p>
+<p>总的作用：将已开辟内存空间 s 的首 n 个字节的值设为值 c。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/19/pwnable-kr6-random/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/19/pwnable-kr6-random/" class="post-title-link" itemprop="url">pwnable-kr6-random</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-19 11:05:15" itemprop="dateCreated datePublished" datetime="2019-04-19T11:05:15+08:00">2019-04-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-20 14:12:26" itemprop="dateModified" datetime="2019-04-20T14:12:26+08:00">2019-04-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="rand-函数，"><a href="#rand-函数，" class="headerlink" title="rand()函数，"></a>rand()函数，</h2><p>本题的关键！！！这个函数本身就是一个伪随机函数，每次运行这个程序，初始化后这个值都相同。<br>使用gdb调试<br>看下菜鸟教程中对rand()的解释</p>
+<pre><code>rand() 的内部实现是用线性同余法做的，它不是真的随机数，因其周期特别长，故在一定的范围里可看成是随机的。
+rand()返回一随机数值的范围在 0 至 RAND_MAX间。RAND_MAX的范围最少是在 32767 之间(int)。用unsigned int 双字节是 65535，四字节是 4294967295的整数范围。0~RAND_MAX 每个数字被选中的机率是相同的。
+用户未设定随机数种子时，系统默认的随机数种子为1。
+rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, 用函数srand()初始化它。
+</code></pre><h2 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h2><p>异或函数也是可逆的，a^b = c ,a = c^b.<br>因此，需要输入的key就是0x6b8b4567^0xdeadbeef=0xb526fb88</p>
+<h1 id="题外"><a href="#题外" class="headerlink" title="题外"></a>题外</h1><p>安装了ssh服务器<br>安装ssh-client命令：</p>
+<pre><code>sudo apt-get install openssh-client
+</code></pre><p>安装ssh-server命令：</p>
+<pre><code>sudo apt-get install openssh-server
+</code></pre><p>安装完成以后，先启动服务：</p>
+<pre><code>sudo /etc/init.d/ssh start
+</code></pre><p>启动后，可以通过“ps -e|grep ssh”查看是否正确启动。</p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> random;</span><br><span class="line">    random = rand();    <span class="comment">// random value!</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> key=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;key);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( (key ^ random) == <span class="number">0xdeadbeef</span> )&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Good!\n"</span>);</span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Wrong, maybe you should try 2^32 cases.\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察逻辑,发现需要用户输入一个key，这个key异或random要等于0xdeadbeef,而这个random的值来源于rand()函数，这就牵扯到rand()的知识了。（见上述知识点）<br>用gdb调试，看下random的值（大佬的截图）</p>
+<p><img src="/2019/04/19/pwnable-kr6-random/1.webp" alt=""><br>得到flag<br><img src="/2019/04/19/pwnable-kr6-random/2.PNG" alt="flag"></p>
+<p><a href="https://www.jianshu.com/p/68118fb11ec5" target="_blank" rel="noopener">https://www.jianshu.com/p/68118fb11ec5</a><br><a href="https://www.cnblogs.com/p4nda/p/7122275.html" target="_blank" rel="noopener">https://www.cnblogs.com/p4nda/p/7122275.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/16/pwnable-kr4-flag/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -398,7 +1117,7 @@
                 
               
 
-              <time title="Created: 2019-04-16 14:47:42 / Modified: 14:51:41" itemprop="dateCreated datePublished" datetime="2019-04-16T14:47:42+08:00">2019-04-16</time>
+              <time title="Created: 2019-04-16 14:47:42 / Modified: 14:52:06" itemprop="dateCreated datePublished" datetime="2019-04-16T14:47:42+08:00">2019-04-16</time>
             
 
             
@@ -769,7 +1488,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-16 12:21:05" itemprop="dateModified" datetime="2019-04-16T12:21:05+08:00">2019-04-16</time>
+                <time title="Modified: 2019-04-17 13:06:19" itemprop="dateModified" datetime="2019-04-17T13:06:19+08:00">2019-04-17</time>
               
             
           </span>
@@ -822,9 +1541,33 @@
       
         
           
-            <p>连接过去<br><img src="/2019/04/13/pwnable-kr5-passcode/t.PNG" alt=""><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">login</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> passcode1;</span><br><span class="line">    <span class="keyword">int</span> passcode2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode1 : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode1);       <span class="comment">//注意这里没有取地址</span></span><br><span class="line">    fflush(<span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ha! mommy told me that 32bit is vulnerable to bruteforcing :)</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode2 : "</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode2);     <span class="comment">//同样没有取地址</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"checking...\n"</span>);</span><br><span class="line">    <span class="keyword">if</span>(passcode1==<span class="number">338150</span> &amp;&amp; passcode2==<span class="number">13371337</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login OK!\n"</span>);</span><br><span class="line">                system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login Failed!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter you name : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%100s"</span>, name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome %s!\n"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Toddler's Secure Login System 1.0 beta.\n"</span>);</span><br><span class="line"></span><br><span class="line">    welcome();</span><br><span class="line">    login();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// something after login...</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Now I can safely trust you that you have credential :)\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <h1 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h1><h2 id="连续调用"><a href="#连续调用" class="headerlink" title="连续调用"></a>连续调用</h2><p>连续调用,这就隐含了它们的ebp是相同的（栈底相同）;</p>
+<h2 id="GOT表："><a href="#GOT表：" class="headerlink" title="GOT表："></a>GOT表：</h2><p>概念:每一个外部定义的符号在全局偏移表（Global offset Table）中有相应的条目，GOT位于ELF的数据段中，叫做GOT段。</p>
+<p>作用：把位置无关的地址计算重定位到一个绝对地址。程序首次调用某个库函数时，运行时连接编辑器（rtld）找到相应的符号，并将它重定位到GOT之后每次调用这个函数都会将控制权直接转向那个位置，而不再调用rtld。</p>
+<h2 id="PLT表："><a href="#PLT表：" class="headerlink" title="PLT表："></a>PLT表：</h2><p>过程连接表(Procedure Linkage Table)，一个PLT条目对应一个GOT条目</p>
+<p>当main()函数开始，会请求plt中这个函数的对应GOT地址，如果第一次调用那么GOT会重定位到plt，并向栈中压入一个偏移，程序的执行回到_init()函数，rtld得以调用就可以定位printf的符号地址，第二次运行程序再次调用这个函数时程序跳入plt，对应的GOT入口点就是真实的函数入口地址。</p>
+<p>动态连接器并不会把动态库函数在编译的时候就包含到ELF文件中,仅仅是在这个ELF被加载的时候,才会把那些动态函库数代码加载进来,之前系统只会在ELF文件中的GOT中保留一个调用地址.</p>
+<h2 id="GOT覆写技术："><a href="#GOT覆写技术：" class="headerlink" title="GOT覆写技术："></a>GOT覆写技术：</h2><p>原理：由于GOT表是可写的，把其中的函数地址覆盖为我们shellcode地址，在程序进行调用这个函数时就会执行shellcode。</p>
+<p>以上姿势来源： <a href="http://jing0107.lofter.com/post/1cbc869f_8b3d8a5" target="_blank" rel="noopener">http://jing0107.lofter.com/post/1cbc869f_8b3d8a5</a></p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>连接过去<br><img src="/2019/04/13/pwnable-kr5-passcode/t.PNG" alt=""><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">login</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> passcode1;</span><br><span class="line">    <span class="keyword">int</span> passcode2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode1 : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode1);       <span class="comment">//注意这里没有取地址</span></span><br><span class="line">    fflush(<span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ha! mommy told me that 32bit is vulnerable to bruteforcing :)</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode2 : "</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode2);     <span class="comment">//同样没有取地址</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"checking...\n"</span>);</span><br><span class="line">    <span class="keyword">if</span>(passcode1==<span class="number">338150</span> &amp;&amp; passcode2==<span class="number">13371337</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login OK!\n"</span>);</span><br><span class="line">                system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login Failed!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter you name : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%100s"</span>, name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome %s!\n"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Toddler's Secure Login System 1.0 beta.\n"</span>);</span><br><span class="line"></span><br><span class="line">    welcome();</span><br><span class="line">    login();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// something after login...</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Now I can safely trust you that you have credential :)\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>很明显我们要让passcode1和passcode为指定的值就行了。<br>但是我们尝试输点东西，又发现会报错。看到提示Segmentation Fault<br>段错误应该就是访问了不可访问的内存，这个内存要么是不存在的，要么是受系统保护的。<br><img src="/2019/04/13/pwnable-kr5-passcode/1.PNG" alt=""><br>我们仔细再看下发现，输入passcode1和passcode2时，没有取地址符号，说明这不是平常的赋值。我们输入的是passcode的地址，那么<br>猜想1：我们要知道哪里存放着我们想要的值，把这个值的地址输进去就可以了<br>猜想2：或者有没有可能用什么溢出，我们自己在welcome（）函数执行过程钟，把这两个特定值输进去，然后再指向他们？</p>
-<p>看题解去<br>要查看他看得保护，我们看下</p>
+<p>看题解去<br>猜想都不对，我还是太菜了。</p>
+<p>要查看他的保护，我们看下  有栈溢出保护</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="利用got覆写技术："><a href="#利用got覆写技术：" class="headerlink" title="利用got覆写技术："></a>利用got覆写技术：</h3><p>将一个GOT表中的函数地址写到栈中，用来充当scanf（）取的地址，然后把system(“/bin/cat flag”)这条指令的地址写到这个GOT表中的函数。</p>
+<p>当这个函数被调用时，就会直接执行system(“/bin/cat flag”)</p>
+<h3 id="进一步探讨："><a href="#进一步探讨：" class="headerlink" title="进一步探讨："></a>进一步探讨：</h3><p>password1_addr=ebp-0x10，name和passcode1相差96个字节，所以name后4个字节正好可以覆盖到passcode1。因此可以把passcode1的地址覆盖成fflush或者printf或者exit的地址，然后利用scanf函数把system的地址覆写过去。这样等调用fflush或者printf或者exit的就调用成了system。</p>
+<h2 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h2><p>我们看到scanf处没有加取地址符号(&amp;),而且程序有没有对passcode1和passcode2 进行初始化;但看此时主函数中对welcome()和login()连续调用,这就隐含了它们的ebp是相同的;所以或许我们可以重这里利用;</p>
+<p>我们用objdump -d passcode查看passcode这个可执行文件的汇编代码,这里我们主要看welcome()函数和login()函数的汇编<br><img src="/2019/04/13/pwnable-kr5-passcode/d1.png" alt=""></p>
+<p>我们看到welcome()函数处的0x8048643处的代码,lea -0x70(%ebp),%edx;相当于edx=[ebp-0x70];冲这里我们知道name的地址是保存在ebp-0x70处;而在下图中0x8048586处的前3行处有mov -0x10(%ebp),%edx;可知passcod1在ebp-0x10处,因此在调用welcome处的字符串处我们输入(0x70-0x10)=96个字节,再覆盖四个字节就是passcode1的值,这里如果我们把passcode1的值覆盖为任意地址就可以实现任意地址写了;<br><img src="/2019/04/13/pwnable-kr5-passcode/d2.png" alt=""></p>
+<p>这里我们将passcode1处的值写什么我们才能读到flag呢?<br>scanf(“%d”,passcode1)处的后两句又对printf调用,因此我们想能不能覆盖printf的地址呢,把printf的地址覆盖为</p>
+<p>接下来我们用objdump -R passcode查看printf的地址<br><img src="/2019/04/13/pwnable-kr5-passcode/r.PNG" alt=""><br>我们看到printf的指针保存在0x804a000处</p>
+<p>可以将passcode1的值改为printf的地址(0x804a000)，然后接下来会通过scanf将上面的关键系统命令的地址写进去，改变整个程序的执行过程，当程序调用</p>
+<p>printf函数的时候，由于它的地址已经被改变了，所以会跳到关键系统命令的地方去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">80485e3:    c7 04 24 af 87 04 08     movl   $0x80487af,(%esp)</span><br><span class="line">80485ea:    e8 71 fe ff ff           call   8048460 &lt;system@plt&gt;</span><br></pre></td></tr></table></figure></p>
+<p>将它(printf)的地址改为 0x080485ea这个关键的地方<br>这里使用pwntools这个包来写利用脚本。因为scanf是要求%d输入，所以0x080485ea == 134514154<br><img src="/2019/04/13/pwnable-kr5-passcode/tj.png" alt=""><br><img src="/2019/04/13/pwnable-kr5-passcode/flag2.PNG" alt=""></p>
+<h2 id="答案的分析："><a href="#答案的分析：" class="headerlink" title="答案的分析："></a>答案的分析：</h2><p><img src="/2019/04/13/pwnable-kr5-passcode/flag.PNG" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">"print ('a'*96+'\x00\xa0\x04\x08'+'\n'+'134514147\n')"</span> | ./passcode</span><br></pre></td></tr></table></figure>
+<p>这里主要分析’\x00\xa0\x04\x08’+’\n’+’134514147\n’．<br>0x0804a000是print函数的got表中的地址，在welcome中输入96个a+’\x00\xa0\x04\x08’.结果呢，login中的scanf函数在输入的时候，直接变量的地址就是：0x0804a000，输入的134514147（0x080485e3），将0x0804a000原有的地址给覆写了．这就是got表复写．在执行printf函数的时候，实际上执行的是system函数．<br>简单的说：<br>plt—-&gt;got—-&gt;真地址（printf函数的代码），经过我们覆写之后，<br>plt—-&gt;got—-&gt;假地址（system函数的代码）.<br>这样我们就获得了shell. </p>
+<h2 id="为什么输入的内容刚好覆写printf函数的got表呢？"><a href="#为什么输入的内容刚好覆写printf函数的got表呢？" class="headerlink" title="为什么输入的内容刚好覆写printf函数的got表呢？"></a>为什么输入的内容刚好覆写printf函数的got表呢？</h2><h2 id="原因是-scanf-“-d”-a-无＆符号．听别人讲：如果scanf没加-amp-的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错．"><a href="#原因是-scanf-“-d”-a-无＆符号．听别人讲：如果scanf没加-amp-的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错．" class="headerlink" title="原因是:scanf(“%d”,a);无＆符号．听别人讲：如果scanf没加&amp;的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错． "></a>原因是:scanf(“%d”,a);无＆符号．听别人讲：如果scanf没加&amp;的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错． </h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/smalosnail/article/details/53247502?_t_t_t=0.050024056468489064" target="_blank" rel="noopener">scanf忘记加’&amp;’危害有多大？ 详解GOT表覆写攻击技术</a><br><a href="https://bbs.pediy.com/thread-247956.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-247956.htm</a><br><a href="https://www.cnblogs.com/binlmmhc/p/6189514.html" target="_blank" rel="noopener">https://www.cnblogs.com/binlmmhc/p/6189514.html</a><br><a href="https://blog.csdn.net/qq_33528164/article/details/70505151" target="_blank" rel="noopener">https://blog.csdn.net/qq_33528164/article/details/70505151</a><br>文章<a href="http://jing0107.lofter.com/post/1cbc869f_8b3d8a5" target="_blank" rel="noopener">http://jing0107.lofter.com/post/1cbc869f_8b3d8a5</a></p>
 
           
         
@@ -1525,729 +2268,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/05/pwnable-kr2-col/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/05/pwnable-kr2-col/" class="post-title-link" itemprop="url">pwnable.kr2-col</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-05 20:49:21" itemprop="dateCreated datePublished" datetime="2019-04-05T20:49:21+08:00">2019-04-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-06 22:03:51" itemprop="dateModified" datetime="2019-04-06T22:03:51+08:00">2019-04-06</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> hashcode = <span class="number">0x21DD09EC</span>;  <span class="comment">//之后要想办法让函数返回的值等于这个</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">check_password</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* ip = (<span class="keyword">int</span>*)p;   </span><br><span class="line">    <span class="comment">/*强制类型转换，char转为int。</span></span><br><span class="line"><span class="comment">  注意：char为1字节，int为4字节因此输入5个int累加（即输入的是20字节），</span></span><br><span class="line"><span class="comment">    可以用十六进制表示数，如/x01就是一个字节，</span></span><br><span class="line"><span class="comment">    我们可以让一个int值为/x01/x01/x01/x01  它的值为16843009（10）这个，总之就是凑5个int相加为指定的值</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)&#123;   <span class="comment">//这里循环五次</span></span><br><span class="line">        res += ip[i];    <span class="comment">//将五个数累加</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;         <span class="comment">//返回值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"usage : %s [passcode]\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(argv[<span class="number">1</span>]) != <span class="number">20</span>)&#123;  <span class="comment">//告诉我们输入要为20个字节</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"passcode length should be 20 bytes\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(hashcode == check_password( argv[<span class="number">1</span>] ))&#123;  <span class="comment">//这行给出flag，即想办法让这两个相等</span></span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"wrong passcode.\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先定位到<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(hashcode == check_password( argv[<span class="number">1</span>] ))&#123;  <span class="comment">//这行给出flag，即想办法让这两个相等</span></span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>说明要想得到flag就要让  你的输入 传入函数后得到一个与hashcode一样的值<br>if(strlen(argv[1]) != 20){   这个if语句也告诉我们输入要为20个字节</p>
-<p>int* ip = (int*)p;<br>这里对p进行了一次强制转化，从原本读出来的char转化为了int<br>char占一个字节，8个比特。int占4个字节，32个比特。 （十六进制0x01就是一个字节了，那么十六进制下01010101就可以表示一个int数了）<br>hashcode == check_password( argv[1] )实现了一个累加<br>这里需要构造5个int类型的数（总共是20字节）相加为0x21DD09EC<br>实际上就是把5*4=20个字符，每4个分成一组累加。<br>普遍的一个想法： 0x1DD905E8+0x01010101*4=0x21DD09EC 这里用01010101来构造<br>那么开始操作，实践</p>
-<h2 id="探究数据在内存中的存储方式"><a href="#探究数据在内存中的存储方式" class="headerlink" title="探究数据在内存中的存储方式"></a>探究数据在内存中的存储方式</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">20</span>]=<span class="string">"ABCDEFGHIJKLMNOPQRS"</span>;</span><br><span class="line">    <span class="keyword">int</span> *p=(<span class="keyword">int</span> *)str;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;p[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1145258561</span><br><span class="line">1212630597</span><br><span class="line">1280002633</span><br><span class="line">1347374669</span><br><span class="line">5460561</span><br></pre></td></tr></table></figure>
-<p>转为16进制：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0x44434241</span><br><span class="line">0x48474645</span><br><span class="line">0x4C4B4A49</span><br><span class="line">0x504F4E4D</span><br><span class="line">0x535251</span><br></pre></td></tr></table></figure></p>
-<p>如果我们输入A-T这20个字符，那么会报出一下的错误：<br>[Error] initializer-string for array of chars is too long [-fpermissive]<br>说明数组的限制了，那么推理出应是结束符需要占一个的位子<br>接着测试<br><img src="/2019/04/05/pwnable-kr2-col/C.PNG" alt=""><br>发现输出了一个空行，那么应该是结束符了</p>
-<p>接着进行测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char str[20]=&#123;&apos;\x01&apos;,&apos;\x02&apos;,&apos;\x03&apos;,&apos;\x04&apos;,&apos;\x05&apos;,&apos;\x06&apos;,&apos;\x07&apos;,&apos;\x08&apos;,&apos;\x09&apos;,&apos;\x10&apos;,&apos;\x11&apos;,&apos;\x12&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;&#125;;</span><br><span class="line">    int *p=(int *)str;</span><br><span class="line">    for(int i=0; i&lt;5; i++)&#123;</span><br><span class="line">        cout&lt;&lt;dec&lt;&lt;p[i]&lt;&lt;endl;</span><br><span class="line">        cout&lt;&lt;hex&lt;&lt;p[i]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">67305985</span><br><span class="line">4030201</span><br><span class="line">134678021</span><br><span class="line">8070605</span><br><span class="line">303108105</span><br><span class="line">12111009</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br></pre></td></tr></table></figure></p>
-<h2 id="尝试构造payload"><a href="#尝试构造payload" class="headerlink" title="尝试构造payload"></a>尝试构造payload</h2><p> 0x1DD905E8+0x010101014=0x21DD09EC<br> 我们通过之前的观察发现转换为int时，四个字符是倒过来存储合并的， 0x1DD905E8我们要写成’\xE8’,’\x05’,’\xD9’,’\x1D’才行<br> 那么尝试：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    char str[20]=&#123;'\xE8','\x05','\xD9','\x1D','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01'&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> *p=(<span class="keyword">int</span> *)str;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)&#123; </span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dec&lt;&lt;p[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;hex&lt;&lt;p[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">       </span><br><span class="line">    <span class="keyword">int</span> tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)</span><br><span class="line">        tmp+=p[i];</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;dec&lt;&lt;tmp;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;hex&lt;&lt;tmp;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">500762088</span><br><span class="line">1dd905e8</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">568134124</span><br><span class="line">21dd09ec</span><br></pre></td></tr></table></figure></p>
-<p>发现构造成功，得到我们想要的0x21DD09EC<br><img src="/2019/04/05/pwnable-kr2-col/C2.PNG" alt=""><br>终端输入<br><img src="/2019/04/05/pwnable-kr2-col/flag.PNG" alt=""><br>大佬的爬虫脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">hashcode = <span class="number">0x21DD09EC</span></span><br><span class="line"> </span><br><span class="line">a = <span class="number">0x01020304</span></span><br><span class="line">b = hashcode - <span class="number">4</span> * a</span><br><span class="line"> </span><br><span class="line">payload = p32(a) * <span class="number">4</span> + p32(b)</span><br><span class="line"> </span><br><span class="line">target = subprocess.Popen(args=[<span class="string">'/home/col/col'</span>,payload])</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://blog.csdn.net/Jason_ZhouYetao/article/details/80727467" target="_blank" rel="noopener">脚本来源网址及脚本分析</a></p>
-<p>另解<br>    python -c “print ‘\xe8\x05\xd9\x1d’+16*’\x01’”|xargs ./col因为是小端机器需要反序，xargs可以把数据当作命令行参数传给制定的程序。<br><img src="/2019/04/05/pwnable-kr2-col/j.dib" alt=""></p>
-<p>来自<a href="https://blog.csdn.net/u010334666/article/details/81193660" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81193660</a>的python代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> collision.py+                                                      buffers </span><br><span class="line">  1 #!/usr/bin/env python</span><br><span class="line">  2 # coding=utf-8</span><br><span class="line">  3 from pwn import *</span><br><span class="line">  4 pwn_ssh=ssh(host=&apos;pwnable.kr&apos;,user=&apos;col&apos;,password=&apos;guest&apos;,port=2222)</span><br><span class="line">  5 print(pwn_ssh.connected())</span><br><span class="line">  6 sh=pwn_ssh.process(argv=[&apos;collision&apos;,&apos;\xc9\xce\xc5\x06&apos; * 4 + &apos;\xcc\xce\xc5\x06&apos;],executable=&apos;./col&apos;)#那些数字是0x21DD09EC/5计算得到，然后用0x21DD09EC-得到的结果*4</span><br><span class="line">  7 print(sh.recvall())</span><br><span class="line">~                                                                               </span><br><span class="line">~</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="‘-x’"><a href="#‘-x’" class="headerlink" title="‘\x’"></a>‘\x’</h2><p>\xhh  表示1到2位十六进制所代表的任意字符<br>字符型常量所表示的值是字符型变量所能包含的值。我们可以用ASCII表达式来表示一个字符型常量，或者用单引号内加反斜杠表示转义字符。<br>\x表示后面的字符是十六进制数，\o表示后面的字符是八进制数。例如十进制的17用十六进制表示就是<br>‘\x11’,用八进制表示就是‘\021’;</p>
-<p>所有的ASCII码都可以用“\”加数字（一般是8进制数字）来表示。而C中定义了一些字母前加”\”来表示常见的那些不能显示的ASCII字符，如\0,\t,\n等，就称为转义字符，因为后面的字符，都不是它本来的ASCII字符意思了。</p>
-<h2 id="char-p"><a href="#char-p" class="headerlink" title="char *p"></a>char *p</h2><p>char *p</p>
-<p>char* p和char *p<br>eg:<br>    char *p=”abc123ABC”;//char p[]=”abc123ABC”<br>char* p是一个指针，根本没分配内存，他指向的”abc123ABC” 是只读的，不能改变，你在下面给他赋值肯定是错的<br>而char p[]是一个数组，已经分配内存，是将”abc123ABC” 复制到该内存里面，这个内存是可读写的<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *p; <span class="comment">//*p是const,p可变：const 后面紧跟的是char，所以*p是一个char字符，不可变</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> (<span class="keyword">char</span> *) p;<span class="comment">//p是const,*p可变：const 后面紧跟的是（char *）这个整体，所以p是char*类型，不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p; <span class="comment">//p是const,*p可变:const 后面紧跟的是p,所以p不可变</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p; <span class="comment">//p和*p都是const：第一个const后面紧跟的是char,所以char类型的字符*p不可变；第二个const后面紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span> * p;<span class="comment">// *p是const,p可变：const后面紧跟的是*,但是单独的*不能表明修饰的内容，所以将*p看成一个整体，所以const修饰的是*p,*p不可变。</span></span><br><span class="line"> </span><br><span class="line">(<span class="keyword">char</span>*) <span class="keyword">const</span> p;<span class="comment">//p是const,*p可变：const紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p;<span class="comment">// p是const,*p可变：const紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span>* <span class="keyword">const</span> p;<span class="comment">// p和*p都是const：第一个const紧跟的是*,不能表明修饰的内容，将后面整体的（* const p）看成一个整体，那就说明*p不可变，第二个const后面紧跟的是p,所以p不可变。</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>原文：<a href="https://blog.csdn.net/qq_38204481/article/details/79711702" target="_blank" rel="noopener">https://blog.csdn.net/qq_38204481/article/details/79711702</a><br>原文：<a href="https://blog.csdn.net/jack0201/article/details/75071980" target="_blank" rel="noopener">https://blog.csdn.net/jack0201/article/details/75071980</a><br>原文：<a href="https://blog.csdn.net/u010334666/article/details/81193660" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81193660</a> </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/04/pwnable-kr1-fd/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/04/pwnable-kr1-fd/" class="post-title-link" itemprop="url">pwnable.kr1-fd</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-04-04 21:07:16" itemprop="dateCreated datePublished" datetime="2019-04-04T21:07:16+08:00">2019-04-04</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-04-16 14:46:26" itemprop="dateModified" datetime="2019-04-16T14:46:26+08:00">2019-04-16</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/2019/04/04/pwnable-kr1-fd/t.PNG" alt=""><br>题目最下方有个ssh命令，这是linux的远程连接命令，(host=pwnable.kr , user =fd  password=2222 password=guest)<br>可以打开linux终端，直接输入那行命令进行连接<br>    ssh <a href="mailto:fd@pwnable.kr" target="_blank" rel="noopener">fd@pwnable.kr</a> -p2222<br>输入那行命令后输入密码，有时候会提示安全性问题，选择Y(yes)，输入密码，输入密码的时候是不会回显的（显示在屏幕上）</p>
-<p>密码为guest，然后ls（ls命令学习） 查看有什么文件，然后输入cat  fd.c 查看fd.c的文件内容，之后发现有三个文件分别为fd、fd.c 、flag。<br>    fd@ubuntu:~$ ls<br>    fd  fd.c  flag</p>
-<p>显然不能直接查看flag<br>    fd@ubuntu:~$ cat flag<br>    cat: flag: Permission denied<br>我们抓取源码</p>
-<pre><code>fd@ubuntu:~$ cat fd.c
-</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">32</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pass argv[1] a number\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> fd = atoi( argv[<span class="number">1</span>] ) - <span class="number">0x1234</span>;   <span class="comment">//此处设置fd的值，解题时应想办法为0</span></span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">    len = read(fd, buf, <span class="number">32</span>);        <span class="comment">//让fd=0，我们就可以用标准输入（键盘）控制buf（缓存）的值了，</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(<span class="string">"LETMEWIN\n"</span>, buf))&#123;    <span class="comment">//此处告诉我们的目标是让它等于"LETMEWIN\n"</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"good job :)\n"</span>);</span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"learn about Linux file IO\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>随便输入，会出现啥？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fd@ubuntu:~$ ./fd</span><br><span class="line">pass argv[1] a number</span><br><span class="line">fd@ubuntu:~$ ./fd 3</span><br><span class="line">learn about Linux file IO</span><br><span class="line">fd@ubuntu:~$ ./fd 2</span><br><span class="line">learn about Linux file IO</span><br><span class="line">fd@ubuntu:~$ ./fd 1</span><br><span class="line">learn about Linux file IO</span><br></pre></td></tr></table></figure></p>
-<p>那么开始分析</p>
-<h1 id="所需知识："><a href="#所需知识：" class="headerlink" title="所需知识："></a>所需知识：</h1><h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>　　对于内核而言，所有打开的文件都通过文件描述符引用。文件描述符是一个非负整数。当打开一个现有文件或创建一个新文件时，内核向进程返回一个文件描述符。当读或写一个文件时，使用open或create返回的文件描述符表示该文件，将其作为参数传给read或write函数。<br><img src="/2019/04/04/pwnable-kr1-fd/1.png" alt=""></p>
-<h2 id="read-函数"><a href="#read-函数" class="headerlink" title="read 函数"></a>read 函数</h2><p><a href="https://blog.csdn.net/csdn_logo/article/details/46500065" target="_blank" rel="noopener">read函数———详解</a></p>
-<p>ssize_t read(int filedes, void *buf, size_t nbytes);<br>// 返回：若成功则返回读到的字节数，若已到文件末尾则返回0，若出错则返回-1<br>// filedes：文件描述符[0-标准输入(stdin)，1-标准输出(stdout)，2-标准错误输出(stderr)]<br>// buf:读取数据缓存区<br>// nbytes:要读取的字节数<br>有几种情况可使实际读到的字节数少于要求读的字节数：<br>1）读普通文件时，在读到要求字节数之前就已经达到了文件末端。例如，若在到达文件末端之前还有30个字节，而要求读100个字节，则read返回30，下一次再调用read时，它将返回0（文件末端）。<br>2）当从终端设备读时，通常一次最多读一行。<br>3）当从网络读时，网络中的缓存机构可能造成返回值小于所要求读的字结束。<br>4）当从管道或FIFO读时，如若管道包含的字节少于所需的数量，那么read将只返回实际可用的字节数。<br>5）当从某些面向记录的设备（例如磁带）读时，一次最多返回一个记录。<br>6）当某一个信号造成中断，而已经读取了部分数据。<br>main函数中：</p>
-<h2 id="argc"><a href="#argc" class="headerlink" title="argc"></a>argc</h2><p>argc是命令行参数个数，char <em>argv[]是指所有命令行参数，<br>对于C语言int main(int argc char </em>argv[])来说，argc保存的是命令行总的参数个数(包括程序名)，argv这是传入参数的数组.<br>举个例子，当你执行： ./test 1 2 3 时，argc = 4 而 argv[0] = “test”，argv[1] = 1，argv[2] = 2，argv[3] = 3</p>
-<h2 id="char-envp"><a href="#char-envp" class="headerlink" title="char *envp[]"></a>char *envp[]</h2><p>*envp[]是环境变量（argv[1]位置处存放的是命令行输入的第一个参数） </p>
-<h2 id="atoi"><a href="#atoi" class="headerlink" title="atoi"></a>atoi</h2><p>atoi函数的作用是把字符转化为int型数据。 命令行读入的参数默认是字符型（如：atio（10）=‘10’）</p>
-<h2 id="ssize-t-read（int-fd，void-buf，size-t-count）"><a href="#ssize-t-read（int-fd，void-buf，size-t-count）" class="headerlink" title="ssize_t read（int fd，void * buf，size_t count）;"></a>ssize_t read（int fd，void * buf，size_t count）;</h2><p>函数说明<br>read（）会参数fd所有的文件传送count个字节到buf指针所指的内存中。若参数count为0，则read ）不会有作用并返回0返回值为实际读取到的字节数，如果返回0，表示已到达文件尾或是无可读取的数据，此外文件读写位置会随读取到的字节移动。</p>
-<p>整数值 名称 &lt; unistd.h &gt; 符号常量[1] &lt; stdio.h &gt; 文件流[2]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0   标准输入    STDIN_FILENO    标准输入</span><br><span class="line">1   标准输出    STDOUT_FILENO   标准输出</span><br><span class="line">2   标准错误    STDERR_FILENO   标准错误</span><br></pre></td></tr></table></figure></p>
-<p>推理：read(0,buf,32)表示从键盘读入至多32个字节到buf中</p>
-<p>那么我们只要控制了FD的值为标准输入，那么buf中的值就可以用我们的键盘输入了，<br>目标是使FD为0，那么我们传进去的第一个参数就是为0x1234，即十进制的4660<br>这里要填十进制因为天0x1234中的0x它会读成字符的，然后把后面的字符变成10进制 </p>
-<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>0为标准输入，1为标准输出，2为标准错误，而我们看到read(fd, buf, 32);//关键点,这里fd便是关键，若为0，我们自己输入后，变成功得到flag，所以，我们就要推回去，怎么让fd为0，也就是atoiargv[1]大小为0x1234（atoi是c语言的将字符串转化为数字，假设字符串为str =1234，他会转化为数字int=1234),而0x1234是16进制的，用计算器转换下为4660，也就是说我们要使argv[1]为4660，好，整个思路理清了，接下来便是怎么利用了</p>
-<p><img src="/2019/04/04/pwnable-kr1-fd/j.PNG" alt=""></p>
-<p>//这好像是脚本？蛮放着。。。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> <span class="number">4</span> pwn_ssh=ssh(host=<span class="string">'pwnable.kr'</span>,user=<span class="string">'fd'</span>,password=<span class="string">'guest'</span>,port=<span class="number">2222</span>)<span class="comment">#远程连接</span></span><br><span class="line"> <span class="number">5</span> print(pwn_ssh.connected())<span class="comment">#连接成功判断</span></span><br><span class="line"> <span class="number">6</span> sh=pwn_ssh.process(argv=[<span class="string">'fd'</span>,<span class="string">'4660'</span>],executable=<span class="string">'./fd'</span>)<span class="comment">#加载进程</span></span><br><span class="line"> <span class="number">7</span> sh.sendline(<span class="string">'LETMEWIN'</span>)<span class="comment">#发送一行数据，在末尾加上\n</span></span><br><span class="line"> <span class="number">8</span> print(sh.recvall())<span class="comment">#接受到EOF</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>原文：<a href="https://blog.csdn.net/u010334666/article/details/81192987" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81192987</a><br>原文：<a href="https://blog.csdn.net/qq_38204481/article/details/79711702" target="_blank" rel="noopener">https://blog.csdn.net/qq_38204481/article/details/79711702</a> </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/" class="post-title-link" itemprop="url">汇编-实验：寻址方式在结构化数据访问中的应用</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-23 18:49:16 / Modified: 20:12:56" itemprop="dateCreated datePublished" datetime="2019-03-23T18:49:16+08:00">2019-03-23</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>大方向</p>
-<p>用bx，si指向data</p>
-<p>用bp，di指向table</p>
-<p>想过一次循环（cx=21）完成 1年的所有数据，发现有难度，data段的数据要不断跳到不同的一堆数据中去。之后改成一次循环（cx=21）只完成一类数据。</p>
-<p>如此就需要4段 代码完成（在一个代码段中）</p>
-<p>每一小段通过21次循环，完成一个21年的一类数据（eg：完成21个年份；完成21年各个年份的收入…）</p>
-<p>~~~asm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1975&apos;,&apos;1976&apos;,&apos;1977&apos;,&apos;1978&apos;,&apos;1979&apos;,&apos;1980&apos;,&apos;1981&apos;,&apos;1982&apos;,&apos;1983&apos;</span><br><span class="line">    db &apos;1984&apos;,&apos;1985&apos;,&apos;1986&apos;,&apos;1987&apos;,&apos;1988&apos;,&apos;1989&apos;,&apos;1990&apos;,&apos;1991&apos;,&apos;1992&apos;</span><br><span class="line">    db &apos;1993&apos;,&apos;1994&apos;,&apos;1995&apos;  ;表示21年的21个字符串</span><br><span class="line"></span><br><span class="line">    dd 16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514</span><br><span class="line">    dd 345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000</span><br><span class="line">    ;总收入的21个数据</span><br><span class="line">    </span><br><span class="line">    dw 3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226</span><br><span class="line">    dw 11542,14430,15257,17800</span><br><span class="line">datasg ends</span><br><span class="line">tablesg segment</span><br><span class="line">    db 21 dup(&apos;year summ ne ?? &apos;)</span><br><span class="line">tablesg ends</span><br><span class="line">;使用bp时，默认段地址是ss，所以ss：bp+di指向table，ds：bx+si指向数据</span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax   ;data段的段地址</span><br><span class="line">    mov ax,tablesg</span><br><span class="line">    mov ss,ax   ;table段的段地址</span><br><span class="line"></span><br><span class="line">    mov bp,0    ;bp,di表示table的地址</span><br><span class="line">    mov bx,0    ;bx,si表示data放的地址</span><br><span class="line">mov si,0 </span><br><span class="line">mov di,0</span><br><span class="line">    mov cx,21</span><br><span class="line">year:   mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2</span><br><span class="line">    add di,2</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax</span><br><span class="line">    add si,2  ;第一年结束    </span><br><span class="line">    add bp,16</span><br><span class="line">    mov di,0</span><br><span class="line">    loop year           ;至此年份结束</span><br><span class="line"></span><br><span class="line">    mov cx,21</span><br><span class="line">    add bx,84</span><br><span class="line">    mov si,0</span><br><span class="line">    mov bp,0</span><br><span class="line">summ:   mov di,5</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2</span><br><span class="line">    add di,2</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax</span><br><span class="line">    add si,2      ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    </span><br><span class="line">    loop summ ;至此收入结束</span><br><span class="line">    </span><br><span class="line">    mov cx,21</span><br><span class="line">    add bx,84</span><br><span class="line">    mov si,0</span><br><span class="line">    mov bp,0</span><br><span class="line">    mov di,10</span><br><span class="line">people: mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2      ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    loop people</span><br><span class="line">    </span><br><span class="line">    mov cx,21</span><br><span class="line">    mov bp,0</span><br><span class="line">    mov di,0</span><br><span class="line">    </span><br><span class="line">income:</span><br><span class="line">    mov ax,[bp+di+5]        ;被除数的低八位    </span><br><span class="line">    add di,2</span><br><span class="line">    mov dx,[bp+di+5]        ;被除数的高八位    </span><br><span class="line">    add di,3    </span><br><span class="line">    div word ptr [bp+di+5]      ;除数</span><br><span class="line">    add di,3</span><br><span class="line">    mov [bp+di+5],ax        ;ax保存的是商，将商输入到table中</span><br><span class="line">                    ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    mov di,0</span><br><span class="line">    loop income</span><br><span class="line"></span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">assume cs:code,ds:data,ss:stack</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line"></span><br><span class="line">        db  &apos;1975&apos;,&apos;1976&apos;,&apos;1977&apos;,&apos;1978&apos;,&apos;1979&apos;,&apos;1980&apos;,&apos;1981&apos;,&apos;1982&apos;,&apos;1983&apos;</span><br><span class="line">        db  &apos;1984&apos;,&apos;1985&apos;,&apos;1986&apos;,&apos;1987&apos;,&apos;1988&apos;,&apos;1989&apos;,&apos;1990&apos;,&apos;1991&apos;,&apos;1992&apos;</span><br><span class="line">        db  &apos;1993&apos;,&apos;1994&apos;,&apos;1995&apos;</span><br><span class="line">        ;以上是表示21年的21个字符串 year</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        dd  16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514</span><br><span class="line">        dd  345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000</span><br><span class="line">        ;以上是表示21年公司总收入的21个dword数据   sum</span><br><span class="line"></span><br><span class="line">        dw  3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226</span><br><span class="line">        dw  11542,14430,15257,17800</span><br><span class="line"></span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">table segment</span><br><span class="line">            ;0123456789ABCDEF</span><br><span class="line">    db  21 dup (&apos;year summ ne ?? &apos;)</span><br><span class="line">table ends</span><br><span class="line"></span><br><span class="line">stack segment stack</span><br><span class="line">    db  128 dup (0)</span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">    start:  mov ax,stack</span><br><span class="line">        mov ss,ax</span><br><span class="line">        mov sp,128  ;栈</span><br><span class="line">    </span><br><span class="line">        mov ax,data</span><br><span class="line">        mov ds,ax   ;data段的数据  ds</span><br><span class="line">        </span><br><span class="line">        mov ax,table</span><br><span class="line">        mov es,ax   ;tble段的数据 es</span><br><span class="line">        </span><br><span class="line">        mov si,0    ;</span><br><span class="line">        ;mov di,21*4        ;总收入 此处用si+21*4表示了(因为di表示的总收入也是4字节的所以可以用si代替)</span><br><span class="line">        mov bx,21*4 + 21*4 ;员工数  </span><br><span class="line">        mov bp,0        ;tble段的偏移地址bp</span><br><span class="line"></span><br><span class="line">        mov cx,21</span><br><span class="line">inputtable:</span><br><span class="line">        push ds:[si+0]</span><br><span class="line">        pop es:[bp+0]</span><br><span class="line">        push ds:[si+2]</span><br><span class="line">        pop es:[bp+2]</span><br><span class="line">                    ;年份的输入</span><br><span class="line">        </span><br><span class="line">        mov ax,ds:[si+21*4+0]   ;收入的输入</span><br><span class="line">        mov dx,ds:[si+21*4+2]</span><br><span class="line">        mov es:[bp+5],ax</span><br><span class="line">        mov es:[bp+7],dx</span><br><span class="line"></span><br><span class="line">        push ds:[bx]        ;人员数的输入 </span><br><span class="line">        pop es:[bp+0AH]</span><br><span class="line"></span><br><span class="line">        div word ptr ds:[bx]    ;除法 </span><br><span class="line">        mov es:[bp+0Dh],ax  ;人均输入</span><br><span class="line">        </span><br><span class="line">        add si,4</span><br><span class="line">        add bx,2</span><br><span class="line">        add bp,2</span><br><span class="line">        loop inputtable</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        mov ax,4C00H</span><br><span class="line">        int 21H</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/" class="post-title-link" itemprop="url">汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-03-20 21:07:00 / Modified: 21:58:38" itemprop="dateCreated datePublished" datetime="2019-03-20T21:07:00+08:00">2019-03-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>将每个的单词的前4个字母改为大写字母（</p>
-<h1 id="key"><a href="#key" class="headerlink" title="key"></a>key</h1><ul>
-<li>两层的循环，用栈来暂存循环次数cx</li>
-<li>利用灵活的定位内存方法：  【bx+si+常数】<br>bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址</li>
-</ul>
-<p>code 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg,ss:stacksg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1. display      &apos;</span><br><span class="line">    db &apos;2. brows        &apos;</span><br><span class="line">    db &apos;3. replace      &apos;</span><br><span class="line">    db &apos;4. modify       &apos;</span><br><span class="line">datasg ends</span><br><span class="line"></span><br><span class="line">stacksg segment</span><br><span class="line">    dw 0,0,0,0,0,0,0,0</span><br><span class="line">stacksg ends</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,stacksg</span><br><span class="line">    mov ss,ax</span><br><span class="line">    mov sp,16</span><br><span class="line">    </span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax</span><br><span class="line"></span><br><span class="line">    mov cx,4</span><br><span class="line">    mov bx,0</span><br><span class="line">s:</span><br><span class="line">    mov si,0</span><br><span class="line">    push cx</span><br><span class="line">    mov cx,3</span><br><span class="line">s0:</span><br><span class="line">    mov al,[bx+si+3]</span><br><span class="line">    and al,11011111b</span><br><span class="line">    mov [bx+si+3],al</span><br><span class="line">    inc si</span><br><span class="line">    loop s0</span><br><span class="line">    </span><br><span class="line">    add bx,16</span><br><span class="line">    pop cx</span><br><span class="line">    loop s</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
-<p>在设置好ds 之后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/1.PNG" alt=""></p>
-<h1 id="p指令"><a href="#p指令" class="headerlink" title="p指令"></a>p指令</h1><p>我们发现p指令在没遇到loop循环指令时，其实是和t指令没什么不一样的，都是执行一步<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p.PNG" alt=""><br>但是遇到loop时，p指令就会执行完此处循环<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p2.PNG" alt=""><br>此时执行完了一次内层循环，可以看到第一个单词的字母都已经修改完毕<br>这里我们注意下p指令执行的语句<strong>loop 001A</strong><br><br><br>NEXT<br>我们接着运行，此时会遇到一个loop指令（外层的），p指令运行后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p3.PNG" alt=""><br>我们可以看到这次p指令执行后，所有单词都已经修改完成，可见此次p指令完成的是外层循环<br>我们对比此次p指令执行的语句<strong>loop 0013</strong> 和之前的可以发现，这次的p指令执行的循环跳转是<strong>0013</strong>比之前的<strong>001A</strong>小，说明是比上次跳转到的地方更之前的语句，也证实此次p指令一次执行完了外层的循环，而上一次的p指令一次性执行的是内层</p>
-<p><strong>总之，两个p指令，一个一次性执行完了内层，一个一次性执行了外层（当前肯定是要先执行完内循环）</strong><br>注意点：看p 指令执行的是哪个loop执行  loop的地址是关键</p>
-<p>按g一次性执行完程序后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/3.PNG" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2295,7 +2315,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

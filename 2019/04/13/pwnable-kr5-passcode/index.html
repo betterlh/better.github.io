@@ -96,19 +96,25 @@
 
 
 
-  <meta name="description" content="连接过去12345678910111213141516171819202122232425262728293031323334353637383940414243#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;void login()&amp;#123;    int passcode1;    int passcode2;    printf(&quot;ente">
+  <meta name="description" content="要点连续调用连续调用,这就隐含了它们的ebp是相同的（栈底相同）; GOT表：概念:每一个外部定义的符号在全局偏移表（Global offset Table）中有相应的条目，GOT位于ELF的数据段中，叫做GOT段。 作用：把位置无关的地址计算重定位到一个绝对地址。程序首次调用某个库函数时，运行时连接编辑器（rtld）找到相应的符号，并将它重定位到GOT之后每次调用这个函数都会将控制权直接转向那个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwnable-kr5-passcode">
 <meta property="og:url" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="连接过去12345678910111213141516171819202122232425262728293031323334353637383940414243#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;void login()&amp;#123;    int passcode1;    int passcode2;    printf(&quot;ente">
+<meta property="og:description" content="要点连续调用连续调用,这就隐含了它们的ebp是相同的（栈底相同）; GOT表：概念:每一个外部定义的符号在全局偏移表（Global offset Table）中有相应的条目，GOT位于ELF的数据段中，叫做GOT段。 作用：把位置无关的地址计算重定位到一个绝对地址。程序首次调用某个库函数时，运行时连接编辑器（rtld）找到相应的符号，并将它重定位到GOT之后每次调用这个函数都会将控制权直接转向那个">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/t.PNG">
 <meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/1.PNG">
-<meta property="og:updated_time" content="2019-04-16T04:21:05.053Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/d1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/d2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/r.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/tj.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/flag2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/flag.PNG">
+<meta property="og:updated_time" content="2019-04-17T05:06:19.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pwnable-kr5-passcode">
-<meta name="twitter:description" content="连接过去12345678910111213141516171819202122232425262728293031323334353637383940414243#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;void login()&amp;#123;    int passcode1;    int passcode2;    printf(&quot;ente">
+<meta name="twitter:description" content="要点连续调用连续调用,这就隐含了它们的ebp是相同的（栈底相同）; GOT表：概念:每一个外部定义的符号在全局偏移表（Global offset Table）中有相应的条目，GOT位于ELF的数据段中，叫做GOT段。 作用：把位置无关的地址计算重定位到一个绝对地址。程序首次调用某个库函数时，运行时连接编辑器（rtld）找到相应的符号，并将它重定位到GOT之后每次调用这个函数都会将控制权直接转向那个">
 <meta name="twitter:image" content="http://betterlh.github.io/2019/04/13/pwnable-kr5-passcode/t.PNG">
 
 
@@ -419,7 +425,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-04-16 12:21:05" itemprop="dateModified" datetime="2019-04-16T12:21:05+08:00">2019-04-16</time>
+                <time title="Modified: 2019-04-17 13:06:19" itemprop="dateModified" datetime="2019-04-17T13:06:19+08:00">2019-04-17</time>
               
             
           </span>
@@ -470,9 +476,33 @@
       
 
       
-        <p>连接过去<br><img src="/2019/04/13/pwnable-kr5-passcode/t.PNG" alt=""><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">login</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> passcode1;</span><br><span class="line">    <span class="keyword">int</span> passcode2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode1 : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode1);       <span class="comment">//注意这里没有取地址</span></span><br><span class="line">    fflush(<span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ha! mommy told me that 32bit is vulnerable to bruteforcing :)</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode2 : "</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode2);     <span class="comment">//同样没有取地址</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"checking...\n"</span>);</span><br><span class="line">    <span class="keyword">if</span>(passcode1==<span class="number">338150</span> &amp;&amp; passcode2==<span class="number">13371337</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login OK!\n"</span>);</span><br><span class="line">                system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login Failed!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter you name : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%100s"</span>, name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome %s!\n"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Toddler's Secure Login System 1.0 beta.\n"</span>);</span><br><span class="line"></span><br><span class="line">    welcome();</span><br><span class="line">    login();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// something after login...</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Now I can safely trust you that you have credential :)\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h1 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h1><h2 id="连续调用"><a href="#连续调用" class="headerlink" title="连续调用"></a>连续调用</h2><p>连续调用,这就隐含了它们的ebp是相同的（栈底相同）;</p>
+<h2 id="GOT表："><a href="#GOT表：" class="headerlink" title="GOT表："></a>GOT表：</h2><p>概念:每一个外部定义的符号在全局偏移表（Global offset Table）中有相应的条目，GOT位于ELF的数据段中，叫做GOT段。</p>
+<p>作用：把位置无关的地址计算重定位到一个绝对地址。程序首次调用某个库函数时，运行时连接编辑器（rtld）找到相应的符号，并将它重定位到GOT之后每次调用这个函数都会将控制权直接转向那个位置，而不再调用rtld。</p>
+<h2 id="PLT表："><a href="#PLT表：" class="headerlink" title="PLT表："></a>PLT表：</h2><p>过程连接表(Procedure Linkage Table)，一个PLT条目对应一个GOT条目</p>
+<p>当main()函数开始，会请求plt中这个函数的对应GOT地址，如果第一次调用那么GOT会重定位到plt，并向栈中压入一个偏移，程序的执行回到_init()函数，rtld得以调用就可以定位printf的符号地址，第二次运行程序再次调用这个函数时程序跳入plt，对应的GOT入口点就是真实的函数入口地址。</p>
+<p>动态连接器并不会把动态库函数在编译的时候就包含到ELF文件中,仅仅是在这个ELF被加载的时候,才会把那些动态函库数代码加载进来,之前系统只会在ELF文件中的GOT中保留一个调用地址.</p>
+<h2 id="GOT覆写技术："><a href="#GOT覆写技术：" class="headerlink" title="GOT覆写技术："></a>GOT覆写技术：</h2><p>原理：由于GOT表是可写的，把其中的函数地址覆盖为我们shellcode地址，在程序进行调用这个函数时就会执行shellcode。</p>
+<p>以上姿势来源： <a href="http://jing0107.lofter.com/post/1cbc869f_8b3d8a5" target="_blank" rel="noopener">http://jing0107.lofter.com/post/1cbc869f_8b3d8a5</a></p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>连接过去<br><img src="/2019/04/13/pwnable-kr5-passcode/t.PNG" alt=""><br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">login</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> passcode1;</span><br><span class="line">    <span class="keyword">int</span> passcode2;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode1 : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode1);       <span class="comment">//注意这里没有取地址</span></span><br><span class="line">    fflush(<span class="built_in">stdin</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ha! mommy told me that 32bit is vulnerable to bruteforcing :)</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter passcode2 : "</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, passcode2);     <span class="comment">//同样没有取地址</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"checking...\n"</span>);</span><br><span class="line">    <span class="keyword">if</span>(passcode1==<span class="number">338150</span> &amp;&amp; passcode2==<span class="number">13371337</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login OK!\n"</span>);</span><br><span class="line">                system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Login Failed!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">welcome</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"enter you name : "</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%100s"</span>, name);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome %s!\n"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Toddler's Secure Login System 1.0 beta.\n"</span>);</span><br><span class="line"></span><br><span class="line">    welcome();</span><br><span class="line">    login();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// something after login...</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Now I can safely trust you that you have credential :)\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>很明显我们要让passcode1和passcode为指定的值就行了。<br>但是我们尝试输点东西，又发现会报错。看到提示Segmentation Fault<br>段错误应该就是访问了不可访问的内存，这个内存要么是不存在的，要么是受系统保护的。<br><img src="/2019/04/13/pwnable-kr5-passcode/1.PNG" alt=""><br>我们仔细再看下发现，输入passcode1和passcode2时，没有取地址符号，说明这不是平常的赋值。我们输入的是passcode的地址，那么<br>猜想1：我们要知道哪里存放着我们想要的值，把这个值的地址输进去就可以了<br>猜想2：或者有没有可能用什么溢出，我们自己在welcome（）函数执行过程钟，把这两个特定值输进去，然后再指向他们？</p>
-<p>看题解去<br>要查看他看得保护，我们看下</p>
+<p>看题解去<br>猜想都不对，我还是太菜了。</p>
+<p>要查看他的保护，我们看下  有栈溢出保护</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h3 id="利用got覆写技术："><a href="#利用got覆写技术：" class="headerlink" title="利用got覆写技术："></a>利用got覆写技术：</h3><p>将一个GOT表中的函数地址写到栈中，用来充当scanf（）取的地址，然后把system(“/bin/cat flag”)这条指令的地址写到这个GOT表中的函数。</p>
+<p>当这个函数被调用时，就会直接执行system(“/bin/cat flag”)</p>
+<h3 id="进一步探讨："><a href="#进一步探讨：" class="headerlink" title="进一步探讨："></a>进一步探讨：</h3><p>password1_addr=ebp-0x10，name和passcode1相差96个字节，所以name后4个字节正好可以覆盖到passcode1。因此可以把passcode1的地址覆盖成fflush或者printf或者exit的地址，然后利用scanf函数把system的地址覆写过去。这样等调用fflush或者printf或者exit的就调用成了system。</p>
+<h2 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h2><p>我们看到scanf处没有加取地址符号(&amp;),而且程序有没有对passcode1和passcode2 进行初始化;但看此时主函数中对welcome()和login()连续调用,这就隐含了它们的ebp是相同的;所以或许我们可以重这里利用;</p>
+<p>我们用objdump -d passcode查看passcode这个可执行文件的汇编代码,这里我们主要看welcome()函数和login()函数的汇编<br><img src="/2019/04/13/pwnable-kr5-passcode/d1.png" alt=""></p>
+<p>我们看到welcome()函数处的0x8048643处的代码,lea -0x70(%ebp),%edx;相当于edx=[ebp-0x70];冲这里我们知道name的地址是保存在ebp-0x70处;而在下图中0x8048586处的前3行处有mov -0x10(%ebp),%edx;可知passcod1在ebp-0x10处,因此在调用welcome处的字符串处我们输入(0x70-0x10)=96个字节,再覆盖四个字节就是passcode1的值,这里如果我们把passcode1的值覆盖为任意地址就可以实现任意地址写了;<br><img src="/2019/04/13/pwnable-kr5-passcode/d2.png" alt=""></p>
+<p>这里我们将passcode1处的值写什么我们才能读到flag呢?<br>scanf(“%d”,passcode1)处的后两句又对printf调用,因此我们想能不能覆盖printf的地址呢,把printf的地址覆盖为</p>
+<p>接下来我们用objdump -R passcode查看printf的地址<br><img src="/2019/04/13/pwnable-kr5-passcode/r.PNG" alt=""><br>我们看到printf的指针保存在0x804a000处</p>
+<p>可以将passcode1的值改为printf的地址(0x804a000)，然后接下来会通过scanf将上面的关键系统命令的地址写进去，改变整个程序的执行过程，当程序调用</p>
+<p>printf函数的时候，由于它的地址已经被改变了，所以会跳到关键系统命令的地方去。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">80485e3:    c7 04 24 af 87 04 08     movl   $0x80487af,(%esp)</span><br><span class="line">80485ea:    e8 71 fe ff ff           call   8048460 &lt;system@plt&gt;</span><br></pre></td></tr></table></figure></p>
+<p>将它(printf)的地址改为 0x080485ea这个关键的地方<br>这里使用pwntools这个包来写利用脚本。因为scanf是要求%d输入，所以0x080485ea == 134514154<br><img src="/2019/04/13/pwnable-kr5-passcode/tj.png" alt=""><br><img src="/2019/04/13/pwnable-kr5-passcode/flag2.PNG" alt=""></p>
+<h2 id="答案的分析："><a href="#答案的分析：" class="headerlink" title="答案的分析："></a>答案的分析：</h2><p><img src="/2019/04/13/pwnable-kr5-passcode/flag.PNG" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c <span class="string">"print ('a'*96+'\x00\xa0\x04\x08'+'\n'+'134514147\n')"</span> | ./passcode</span><br></pre></td></tr></table></figure>
+<p>这里主要分析’\x00\xa0\x04\x08’+’\n’+’134514147\n’．<br>0x0804a000是print函数的got表中的地址，在welcome中输入96个a+’\x00\xa0\x04\x08’.结果呢，login中的scanf函数在输入的时候，直接变量的地址就是：0x0804a000，输入的134514147（0x080485e3），将0x0804a000原有的地址给覆写了．这就是got表复写．在执行printf函数的时候，实际上执行的是system函数．<br>简单的说：<br>plt—-&gt;got—-&gt;真地址（printf函数的代码），经过我们覆写之后，<br>plt—-&gt;got—-&gt;假地址（system函数的代码）.<br>这样我们就获得了shell. </p>
+<h2 id="为什么输入的内容刚好覆写printf函数的got表呢？"><a href="#为什么输入的内容刚好覆写printf函数的got表呢？" class="headerlink" title="为什么输入的内容刚好覆写printf函数的got表呢？"></a>为什么输入的内容刚好覆写printf函数的got表呢？</h2><h2 id="原因是-scanf-“-d”-a-无＆符号．听别人讲：如果scanf没加-amp-的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错．"><a href="#原因是-scanf-“-d”-a-无＆符号．听别人讲：如果scanf没加-amp-的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错．" class="headerlink" title="原因是:scanf(“%d”,a);无＆符号．听别人讲：如果scanf没加&amp;的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错． "></a>原因是:scanf(“%d”,a);无＆符号．听别人讲：如果scanf没加&amp;的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错． </h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/smalosnail/article/details/53247502?_t_t_t=0.050024056468489064" target="_blank" rel="noopener">scanf忘记加’&amp;’危害有多大？ 详解GOT表覆写攻击技术</a><br><a href="https://bbs.pediy.com/thread-247956.htm" target="_blank" rel="noopener">https://bbs.pediy.com/thread-247956.htm</a><br><a href="https://www.cnblogs.com/binlmmhc/p/6189514.html" target="_blank" rel="noopener">https://www.cnblogs.com/binlmmhc/p/6189514.html</a><br><a href="https://blog.csdn.net/qq_33528164/article/details/70505151" target="_blank" rel="noopener">https://blog.csdn.net/qq_33528164/article/details/70505151</a><br>文章<a href="http://jing0107.lofter.com/post/1cbc869f_8b3d8a5" target="_blank" rel="noopener">http://jing0107.lofter.com/post/1cbc869f_8b3d8a5</a></p>
 
       
     </div>
@@ -560,8 +590,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -576,7 +615,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -634,6 +673,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#要点"><span class="nav-number">1.</span> <span class="nav-text">要点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连续调用"><span class="nav-number">1.1.</span> <span class="nav-text">连续调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GOT表："><span class="nav-number">1.2.</span> <span class="nav-text">GOT表：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PLT表："><span class="nav-number">1.3.</span> <span class="nav-text">PLT表：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GOT覆写技术："><span class="nav-number">1.4.</span> <span class="nav-text">GOT覆写技术：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题"><span class="nav-number">2.</span> <span class="nav-text">解题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.1.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用got覆写技术："><span class="nav-number">2.1.1.</span> <span class="nav-text">利用got覆写技术：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步探讨："><span class="nav-number">2.1.2.</span> <span class="nav-text">进一步探讨：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题-1"><span class="nav-number">2.2.</span> <span class="nav-text">解题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#答案的分析："><span class="nav-number">2.3.</span> <span class="nav-text">答案的分析：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么输入的内容刚好覆写printf函数的got表呢？"><span class="nav-number">2.4.</span> <span class="nav-text">为什么输入的内容刚好覆写printf函数的got表呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因是-scanf-“-d”-a-无＆符号．听别人讲：如果scanf没加-amp-的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错．"><span class="nav-number">2.5.</span> <span class="nav-text">原因是:scanf(“%d”,a);无＆符号．听别人讲：如果scanf没加&amp;的话，程序会默认从栈中读取4个字节的数据当做scanf取的地址．这个栈应该是变量a的栈．就是说将a的值，16进制化作为地址，将你输入的内容写入这个地址中．如果这个地址不存在或不可写，将会报错． </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

