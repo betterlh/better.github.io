@@ -106,7 +106,7 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/04/30/GOT表和PLT表/1.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/04/30/GOT表和PLT表/2-1.png">
 <meta property="og:image" content="http://betterlh.github.io/2019/04/30/GOT表和PLT表/2-2.png">
-<meta property="og:updated_time" content="2019-05-01T08:24:57.239Z">
+<meta property="og:updated_time" content="2019-05-14T00:35:22.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GOT表和PLT表">
 <meta name="twitter:description" content="GOT(Global Offset Table)：全局偏移表用于记录在ELF文件中所用到的共享库中符号的绝对地址。在程序刚开始运行时GOT表项是空的，当符号第一次被调用时会动态解析符号的绝对地址然后转去执行，并将被解析符号的绝对地址记录在GOT中，第二次调用同一符号时，由于GOT中已经记录了其绝对地址，直接转去执行即可，不用重新解析。PLT(Procedure Linkage Table)：过程链">
@@ -223,7 +223,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Beranda</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -240,7 +240,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Tentang</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -274,7 +274,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategori</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -291,7 +291,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Arsip</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -396,7 +396,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-01 16:24:57" itemprop="dateModified" datetime="2019-05-01T16:24:57+08:00">2019-05-01</time>
+                <time title="Updated at: 2019-05-14 08:35:22" itemprop="dateModified" datetime="2019-05-14T08:35:22+08:00">2019-05-14</time>
               
             
           </span>
@@ -434,7 +434,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -481,7 +481,7 @@
         <p>GOT(Global Offset Table)：全局偏移表用于记录在ELF文件中所用到的共享库中符号的绝对地址。在程序刚开始运行时GOT表项是空的，当符号第一次被调用时会动态解析符号的绝对地址然后转去执行，并将被解析符号的绝对地址记录在GOT中，第二次调用同一符号时，由于GOT中已经记录了其绝对地址，直接转去执行即可，不用重新解析。<br>PLT(Procedure Linkage Table)：过程链接表的作用是将位置无关的符号转移到绝对地址。当一个外部符号被调用时，PLT去引用GOT中的其符号对应的绝对地址，然后转入并执行。<br>GOT位于.got.plt section中，PLT位于.plt section中。<br><img src="/2019/04/30/GOT表和PLT表/1.png" alt=""><br>如果一个elf可执行文件需要调用定义在共享库中的任何函数，那么它就有自己的GOT和PLT(procedure linkage table，过程链接表)．这两个节之间的交互可以实现延迟绑定(lazy binging)，这种方法将过程地址的绑定推迟到第一次调用该函数。<br>为了实现延迟绑定，GOT的头三条表目是特殊的：<br><strong>GOT[0]包含.dynamic段的地址，.dynamic段包含了动态链接器用来绑定过程地址的信息，比如符号的位置和重定位信息;<br>GOT[1]包含动态链接器的标识;<br>GOT[2]包含动态链接器的延迟绑定代码的入口点。</strong></p>
 <p>GOT的其他表目为本模块要引用的一个全局变量或函数的地址。</p>
 <p><strong>其中PLT[0]是一个特殊的表目，它跳转到动态链接器中执行;每个定义在共享库中并被本模块调用的函数在PLT中都有一个表目.</strong><br>从PLT[1]开始．模块对函数的调用会转到相应PLT表目中执行，这些表目由三条指令构成。第一条指令是跳转到相应的GOT存储的地址值中．第二条指令把函数相应的ID压入栈中，第三条指令跳转到PLT[O]中调用动态链接器解析函数地址，并把函数真正地址存入相应的GOT表目中。被调用函数GOT相应表目中存储的最初地址为相应PLT表目中第二条指令的地址值，函数第一次被调用后．GOT表目中的值就为函数的真正地址。因此，第一次调用函数时开销比较大．但是其后的每次调用都只会花费一条指令和一个间接的存储器引用。</p>
-<p><img src="/2019/04/30/GOT表和PLT表/2-1.png" alt=""><br><img src="/2019/04/30/GOT表和PLT表/2-2.png" alt=""><br><a href="https://blog.csdn.net/qq_18661257/article/details/54694748" target="_blank" rel="noopener">GOT表和PLT表知识详解</a><br><a href="https://blog.csdn.net/wangbaochu/article/details/41653571!" target="_blank" rel="noopener">ELF 文件中的 GOT 表和 PLT 表解读</a></p>
+<p><img src="/2019/04/30/GOT表和PLT表/2-1.png" alt=""><br><img src="/2019/04/30/GOT表和PLT表/2-2.png" alt=""><br><a href="https://blog.csdn.net/qq_18661257/article/details/54694748" target="_blank" rel="noopener">GOT表和PLT表知识详解</a><br><a href="https://blog.csdn.net/wangbaochu/article/details/41653571" target="_blank" rel="noopener">ELF 文件中的 GOT 表和 PLT 表解读</a></p>
 <p><a href="https://blog.csdn.net/qq_32400847/article/details/71001693" target="_blank" rel="noopener">通过GDB调试理解GOT/PLT</a></p>
 
       
@@ -586,8 +586,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
-                    <span class="site-state-item-name">posting</span>
+                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -618,7 +618,7 @@
                       
                     
                     <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">kategori</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -670,7 +670,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -678,7 +678,7 @@
 
 
 
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 
