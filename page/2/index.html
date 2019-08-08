@@ -353,6 +353,341 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/19/pwnable-kr6-random/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/19/pwnable-kr6-random/" class="post-title-link" itemprop="url">pwnable-kr6-random</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-19 11:05:15" itemprop="dateCreated datePublished" datetime="2019-04-19T11:05:15+08:00">2019-04-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-04-20 14:12:26" itemprop="dateModified" datetime="2019-04-20T14:12:26+08:00">2019-04-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="rand-函数，"><a href="#rand-函数，" class="headerlink" title="rand()函数，"></a>rand()函数，</h2><p>本题的关键！！！这个函数本身就是一个伪随机函数，每次运行这个程序，初始化后这个值都相同。<br>使用gdb调试<br>看下菜鸟教程中对rand()的解释</p>
+<pre><code>rand() 的内部实现是用线性同余法做的，它不是真的随机数，因其周期特别长，故在一定的范围里可看成是随机的。
+rand()返回一随机数值的范围在 0 至 RAND_MAX间。RAND_MAX的范围最少是在 32767 之间(int)。用unsigned int 双字节是 65535，四字节是 4294967295的整数范围。0~RAND_MAX 每个数字被选中的机率是相同的。
+用户未设定随机数种子时，系统默认的随机数种子为1。
+rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, 用函数srand()初始化它。
+</code></pre><h2 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h2><p>异或函数也是可逆的，a^b = c ,a = c^b.<br>因此，需要输入的key就是0x6b8b4567^0xdeadbeef=0xb526fb88</p>
+<h1 id="题外"><a href="#题外" class="headerlink" title="题外"></a>题外</h1><p>安装了ssh服务器<br>安装ssh-client命令：</p>
+<pre><code>sudo apt-get install openssh-client
+</code></pre><p>安装ssh-server命令：</p>
+<pre><code>sudo apt-get install openssh-server
+</code></pre><p>安装完成以后，先启动服务：</p>
+<pre><code>sudo /etc/init.d/ssh start
+</code></pre><p>启动后，可以通过“ps -e|grep ssh”查看是否正确启动。</p>
+<h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> random;</span><br><span class="line">    random = rand();    <span class="comment">// random value!</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> key=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;key);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( (key ^ random) == <span class="number">0xdeadbeef</span> )&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Good!\n"</span>);</span><br><span class="line">        system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Wrong, maybe you should try 2^32 cases.\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察逻辑,发现需要用户输入一个key，这个key异或random要等于0xdeadbeef,而这个random的值来源于rand()函数，这就牵扯到rand()的知识了。（见上述知识点）<br>用gdb调试，看下random的值（大佬的截图）</p>
+<p><img src="/2019/04/19/pwnable-kr6-random/1.webp" alt=""><br>得到flag<br><img src="/2019/04/19/pwnable-kr6-random/2.PNG" alt="flag"></p>
+<p><a href="https://www.jianshu.com/p/68118fb11ec5" target="_blank" rel="noopener">https://www.jianshu.com/p/68118fb11ec5</a><br><a href="https://www.cnblogs.com/p4nda/p/7122275.html" target="_blank" rel="noopener">https://www.cnblogs.com/p4nda/p/7122275.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/16/pwnable-kr4-flag/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/16/pwnable-kr4-flag/" class="post-title-link" itemprop="url">pwnable-kr4-flag</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-16 14:47:42 / Updated at: 14:52:06" itemprop="dateCreated datePublished" datetime="2019-04-16T14:47:42+08:00">2019-04-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: pwnable-kr4-flag<br>date: 2019-04-12 22:12:02<br>tags:</p>
+<h2 id="categories-pwn"><a href="#categories-pwn" class="headerlink" title="categories: pwn"></a>categories: pwn</h2><p>题目要求是二进制逆向</p>
+<p>先用64位IDA打开，观察<br><img src="/2019/04/16/pwnable-kr4-flag/1.png" alt=""><br>再根据题目中packed关键词推断存在加壳，再根据binary提示，使用winhex打开文件（也可查看IDA中Hex窗口）<br>可见存在UPX加壳，对于脱壳，Windows可以使用UPX Tool工具，Lunix可以使用命令upx -d 文件名</p>
+<p>发现upx压缩了，linux下使用upx -d<br><img src="/2019/04/16/pwnable-kr4-flag/UPX.PNG" alt=""><br>解压缩之后在ida载入，发现关键代码如下：<br><img src="/2019/04/16/pwnable-kr4-flag/2.PNG" alt=""><br>找到后，输入flag<br><img src="/2019/04/16/pwnable-kr4-flag/3.PNG" alt=""><br>发现不对<br>所以是显示不完全<br>双击 进一步查看<br><img src="/2019/04/16/pwnable-kr4-flag/4.PNG" alt=""><br>或者将脱壳后的文件再用WinHex打开，搜索文本UPX得到flag<br><img src="/2019/04/16/pwnable-kr4-flag/tj.png" alt=""></p>
+<p>flag = UPX…? sounds like a delivery service :)</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/16/pwnable-kr3-bof/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1987,323 +2322,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/" class="post-title-link" itemprop="url">汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-20 21:07:00 / Updated at: 21:58:38" itemprop="dateCreated datePublished" datetime="2019-03-20T21:07:00+08:00">2019-03-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>将每个的单词的前4个字母改为大写字母（</p>
-<h1 id="key"><a href="#key" class="headerlink" title="key"></a>key</h1><ul>
-<li>两层的循环，用栈来暂存循环次数cx</li>
-<li>利用灵活的定位内存方法：  【bx+si+常数】<br>bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址</li>
-</ul>
-<p>code 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg,ss:stacksg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1. display      &apos;</span><br><span class="line">    db &apos;2. brows        &apos;</span><br><span class="line">    db &apos;3. replace      &apos;</span><br><span class="line">    db &apos;4. modify       &apos;</span><br><span class="line">datasg ends</span><br><span class="line"></span><br><span class="line">stacksg segment</span><br><span class="line">    dw 0,0,0,0,0,0,0,0</span><br><span class="line">stacksg ends</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,stacksg</span><br><span class="line">    mov ss,ax</span><br><span class="line">    mov sp,16</span><br><span class="line">    </span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax</span><br><span class="line"></span><br><span class="line">    mov cx,4</span><br><span class="line">    mov bx,0</span><br><span class="line">s:</span><br><span class="line">    mov si,0</span><br><span class="line">    push cx</span><br><span class="line">    mov cx,3</span><br><span class="line">s0:</span><br><span class="line">    mov al,[bx+si+3]</span><br><span class="line">    and al,11011111b</span><br><span class="line">    mov [bx+si+3],al</span><br><span class="line">    inc si</span><br><span class="line">    loop s0</span><br><span class="line">    </span><br><span class="line">    add bx,16</span><br><span class="line">    pop cx</span><br><span class="line">    loop s</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
-<p>在设置好ds 之后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/1.PNG" alt=""></p>
-<h1 id="p指令"><a href="#p指令" class="headerlink" title="p指令"></a>p指令</h1><p>我们发现p指令在没遇到loop循环指令时，其实是和t指令没什么不一样的，都是执行一步<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p.PNG" alt=""><br>但是遇到loop时，p指令就会执行完此处循环<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p2.PNG" alt=""><br>此时执行完了一次内层循环，可以看到第一个单词的字母都已经修改完毕<br>这里我们注意下p指令执行的语句<strong>loop 001A</strong><br><br><br>NEXT<br>我们接着运行，此时会遇到一个loop指令（外层的），p指令运行后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p3.PNG" alt=""><br>我们可以看到这次p指令执行后，所有单词都已经修改完成，可见此次p指令完成的是外层循环<br>我们对比此次p指令执行的语句<strong>loop 0013</strong> 和之前的可以发现，这次的p指令执行的循环跳转是<strong>0013</strong>比之前的<strong>001A</strong>小，说明是比上次跳转到的地方更之前的语句，也证实此次p指令一次执行完了外层的循环，而上一次的p指令一次性执行的是内层</p>
-<p><strong>总之，两个p指令，一个一次性执行完了内层，一个一次性执行了外层（当前肯定是要先执行完内循环）</strong><br>注意点：看p 指令执行的是哪个loop执行  loop的地址是关键</p>
-<p>按g一次性执行完程序后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/3.PNG" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/18/Control/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/18/Control/" class="post-title-link" itemprop="url">Sublime Text安装Package Control</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-18 20:27:04 / Updated at: 20:52:02" itemprop="dateCreated datePublished" datetime="2019-03-18T20:27:04+08:00">2019-03-18</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考<br><a href="https://www.cnblogs.com/notemore/p/10354918.html" target="_blank" rel="noopener">https://www.cnblogs.com/notemore/p/10354918.html</a> 这篇文章<br>具体参考上面的文章，以及下载上面的资源<br>以下简单说明情况：<br>由于自动安装失败（主要是<a href="https://packagecontrol.io" target="_blank" rel="noopener">https://packagecontrol.io</a> 这个被墙了 下载不下来导致的错误）手动安装不了package control</p>
-<p>1.我们需要自己去网络上找现成的文件（package control.sublime-package 文件）<br>2.我们下载好文件放到目录后又会出现这个问题<br><img src="/2019/03/18/Control/1.PNG" alt=""><br>因此又需要下载一个channel_v3.json 这个东西<br>弄完之后终于可以使用安装插件的功能了</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2346,7 +2369,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">72</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

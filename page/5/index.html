@@ -353,6 +353,388 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/06/mysql18-高级操作之查询中的运算符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/06/mysql18-高级操作之查询中的运算符/" class="post-title-link" itemprop="url">mysql18-高级操作之查询中的运算符</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-06 20:37:52" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:52+08:00">2019-02-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-02-07 11:19:55" itemprop="dateModified" datetime="2019-02-07T11:19:55+08:00">2019-02-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="高级操作–查询中的运算符"><a href="#高级操作–查询中的运算符" class="headerlink" title="高级操作–查询中的运算符"></a>高级操作–查询中的运算符</h1><p>算术运算符</p>
+<pre><code>+ - * / %
+</code></pre><p>基本算术预算：通常不再条件中使用，而是用于结果运算（select字段中）<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/1.png" alt=""></p>
+<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><blockquote>
+<p>, &gt;=, &lt;, &lt;=, =, &lt;&gt;（不等于）<br>通常是用来在条件中进行限定结果<br>=：在mysql中，没有对应的==比较符号，就是用=进行相等判断<br>&lt;=&gt; ：相等比较<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/2.png" alt=""></p>
+</blockquote>
+<p>特殊应用:就是在字段结果中进行比较运算<br>注：mysql中没有规定select必须有数据表<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/3.png" alt=""></p>
+<p>在条件判断的时候，还会有对应的比较运算符：计算区间<br>between 条件1 and 条件2<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/4.png" alt=""></p>
+<p>between中条件1必须小于条件2，反过来不可以<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/5.png" alt=""></p>
+<p>逻辑运算符</p>
+<p>and、or、not<br>and：逻辑与<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/6.png" alt=""></p>
+<p>or：逻辑或<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/7.png" alt=""><br> <br></p>
+<p>not：逻辑非</p>
+<h2 id="in预算符"><a href="#in预算符" class="headerlink" title="in预算符"></a>in预算符</h2><p>in：在什么里面，是用来代替=，当结果不是一个值，而是一个结果集的时候<br>基本语法： in（结果1，结果2，。。。）只要当前条件在结果集中出现过 ，就成立<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/in.png" alt=""></p>
+<h2 id="is运算符"><a href="#is运算符" class="headerlink" title="is运算符"></a>is运算符</h2><p>is是专门用来判断字段是否为NULL的运算符<br>基本语法：is null/is not null<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/is.png" alt=""></p>
+<h2 id="like运算符"><a href="#like运算符" class="headerlink" title="like运算符"></a>like运算符</h2><p>like运算符：是用来进行模糊匹配的（匹配字符串）<br>基本语法：like‘匹配模式’</p>
+<p>匹配模式中，有两种占位符<br>_：匹配对应的单个字符<br>%:匹配多个字符<br><img src="/2019/02/06/mysql18-高级操作之查询中的运算符/like.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/06/mysql17-高级操作之查询/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/06/mysql17-高级操作之查询/" class="post-title-link" itemprop="url">mysql17-高级操作之查询</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-06 20:37:33 / Updated at: 22:42:04" itemprop="dateCreated datePublished" datetime="2019-02-06T20:37:33+08:00">2019-02-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h1><p>完整查询指令<br>select select选项 字段列表 from 数据源 where 条件 group by 分组 having 条件俺 order by 排序 limit 限制</p>
+<p>select选项：系统如何对待查询得到的结果<br>all：默认的，表示保存所有的记录<br><img src="/2019/02/06/mysql17-高级操作之查询/1.png" alt=""></p>
+<p>distinct：去重，去除重复的记录，只保留一条（所有字段都相同）<br><img src="/2019/02/06/mysql17-高级操作之查询/2.png" alt=""></p>
+<p>字段列表：有的时候需要从多张表获取数据，在获取数据的时候，可能存在不同表中有同名的字段，需要将同名的字段命名成不同名的：  别名 alias</p>
+<p>基本语法 字段列表【as 】别名<br>一个字段可以取两个别名<br><img src="/2019/02/06/mysql17-高级操作之查询/3.png" alt=""><br>如图，显示两个别名</p>
+<h2 id="from数据源"><a href="#from数据源" class="headerlink" title="from数据源"></a>from数据源</h2><p>from是为前面的查询提供数据：数据源只要是一个复合二维表结构的数据即可。</p>
+<h3 id="单表数据"><a href="#单表数据" class="headerlink" title="单表数据"></a>单表数据</h3><p>from 表名<br><img src="/2019/02/06/mysql17-高级操作之查询/from.png" alt=""></p>
+<h3 id="多变数据"><a href="#多变数据" class="headerlink" title="多变数据"></a>多变数据</h3><p>从多张表获取数据：基本语法：from 表1，表2，。。。<br><img src="/2019/02/06/mysql17-高级操作之查询/f2.png" alt=""><br>结果：两张表的记录数相乘，字段数拼接<br>本质：从第一张表去除一条记录，取拼凑第二张表的所有记录，保留所有结果<br>在数学上有一个专业的说法：笛卡儿积，这个结果除了给数据库造成压力，没有其他意义：应该尽量避免出现笛卡儿积</p>
+<h3 id="动态数据"><a href="#动态数据" class="headerlink" title="动态数据"></a>动态数据</h3><p>from 后面跟的数据，不是一个实体表，而是一个从表中查询出来得到的二维结果表（子查询）<br>基本语法：from （select 字段列表 from 表名）as 别名；<br><img src="/2019/02/06/mysql17-高级操作之查询/f3.png" alt=""></p>
+<h2 id="where子句"><a href="#where子句" class="headerlink" title="where子句"></a>where子句</h2><p>where 字句：用来从数据表获取数据的时候，然后进行条件筛选</p>
+<p>数据获取原理：针对表去对应的磁盘处获取所有的记录（一条条获取），where的作用就是在拿到一条结果就开始进行判断，判断是否符合条件，如果符合条件就保存下来，如果不符合直接舍弃(不放到内存中)</p>
+<p>where是通过运算符进行结果比较来判断数据</p>
+<h2 id="group-by-子句"><a href="#group-by-子句" class="headerlink" title="group by 子句"></a>group by 子句</h2><p>group by 表示分组的含义：根据指定的字段s，将数据进行分组：分组的目标是为了分组统计</p>
+<h3 id="分组统计："><a href="#分组统计：" class="headerlink" title="分组统计："></a>分组统计：</h3><p>基本语法：group by 字段名<br><img src="/2019/02/06/mysql17-高级操作之查询/group1.png" alt=""><br>group by 是为了分组后进行数据统计的，如果只是想看数据显示，那么group by 没什么意义：group by 将数据按照指定的字段分组之后，只会保留每组的第一条记录</p>
+<div style="font-size: 20px;">利用统计函数（聚合函数 ）：</div>
+
+<p>count（）:统计每组中的数量，如果统计的目标是字段，那么不统计为空NULL字段，如果为* 代表统计记录<br>avg（）：求平均值<br>sum（）：求和<br>max（）：求最大值<br>min（）：求最小值<br><img src="/2019/02/06/mysql17-高级操作之查询/group2.png" alt=""><br>如果不加group表示在全表范围下统计<br><br><br>group_concat()：为了将分组中指定的字段进行合并（拼接）<br><img src="/2019/02/06/mysql17-高级操作之查询/group3.png" alt=""> </p>
+<h3 id="多分组"><a href="#多分组" class="headerlink" title="多分组"></a>多分组</h3><p>将数据按照某个字段进行分组之后，对已经分组的数据进行再次分组</p>
+<p>基本语法：group by字段1，字段2    // 先按照字段1进行排序，之后将结果再按照字段2进行排序，依次类推<br><img src="/2019/02/06/mysql17-高级操作之查询/group4.png" alt=""></p>
+<h3 id="分组排序"><a href="#分组排序" class="headerlink" title="分组排序"></a>分组排序</h3><p>mysql中分组默认有排序的意义：按照分组字段进行排序，默认是升序<br>基本语法 group by 字段【asc或者desc】， 字段【asc或者desc】<br><img src="/2019/02/06/mysql17-高级操作之查询/group5.png" alt=""></p>
+<h3 id="回溯统计"><a href="#回溯统计" class="headerlink" title="回溯统计"></a>回溯统计</h3><p>当分组进行多分组之后，往上统计的过程中，需要进行层层上报，将这种层层上报统计的过程称之为回溯统计：每一次分组向上统计的过程都会产生一次新的统计数据，而且当前数据对应的分组字段为NULL</p>
+<p>基本语法：group by 字段 [asc或者desc] with rollup<br><img src="/2019/02/06/mysql17-高级操作之查询/group6.png" alt=""></p>
+<p>多分组回溯统计<br><img src="/2019/02/06/mysql17-高级操作之查询/group7.png" alt=""></p>
+<h2 id="having子句"><a href="#having子句" class="headerlink" title="having子句"></a>having子句</h2><p>having 的本质和where一样，是用来进行数据条件筛选<br>1.having是在group by 子句之后：可以针对分组数据进行统计筛选，但是where不行<br>查询班级人数大于四个的班级</p>
+<p>where不能使用聚合函数：聚合函数是用在group by分组的时候，此时where已经运行完毕。where是从表中取数据，别名是在数据进入到内存之后才有的<br><img src="/2019/02/06/mysql17-高级操作之查询/having1.png" alt=""> </p>
+<p><hr><br>having在group by 分组之后，可以使用聚合函数或者字段别名<br><img src="/2019/02/06/mysql17-高级操作之查询/having2.png" alt=""> </p>
+<p>强调：having是在group by之后，group by 是在where之后，where的时候表示将数据从磁盘拿到内存，where之后的所有操作都是内存操作</p>
+<h2 id="order-by-子句"><a href="#order-by-子句" class="headerlink" title="order by 子句"></a>order by 子句</h2><p>order by排序：根据校对规则对数据进行排序<br>基本语法：order by 字段【asc或者desc】   默认asc升序<br><img src="/2019/02/06/mysql17-高级操作之查询/order1.png" alt="">  </p>
+<p>order by可以像group by 一样进行多字段排序：先按照第一个字段进行排序，然后再按照第二个字段进行排序。<br>基本语法：order by 字段1 规则1，字段2 规则2；<br><img src="/2019/02/06/mysql17-高级操作之查询/order2.png" alt=""> </p>
+<h2 id="limit-子句"><a href="#limit-子句" class="headerlink" title="limit 子句"></a>limit 子句</h2><p>limit限制子句：主要是用来限制记录数量获取</p>
+<h3 id="记录数限制"><a href="#记录数限制" class="headerlink" title="记录数限制"></a>记录数限制</h3><p>纯粹的限制获取数量：从第一条到指定的数量，<br>基本语法：limit 数量<br><img src="/2019/02/06/mysql17-高级操作之查询/limit1.png" alt=""> </p>
+<p>limit通常再查询的时候如果限定为1条记录的时候，使用的比较多：有时候获取多条记录并不能解决业务问题，但是会增加服务器的压力</p>
+<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><p>利用limit来限制获取指定区间的数据<br>基本语法  limit offset，length；   //offset偏移量：从哪里开始，length就是具体的获取多少条记录<br>MySQL中记录的数量从0开始，limit 0，2表示获取前两条记录<br><img src="/2019/02/06/mysql17-高级操作之查询/limit2.png" alt=""> </p>
+<p>注意：limit 后面的length表示最多获取对应数量，但是如果不够，系统不会强求<br><img src="/2019/02/06/mysql17-高级操作之查询/limit3.png" alt=""> </p>
+<h2 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h2><p>count（）:统计每组中的数量，如果统计的目标是字段，那么不统计为空NULL字段，如果为* 代表统计记录<br>avg（）：求平均值<br>sum（）：求和<br>max（）：求最大值<br>min（）：求最小值<br>在上面group by子句中已有介绍，不再赘述</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/06/mysql16-高级操作之新增、更新、删除/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1800,388 +2182,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql08-类列表之时间日期类型/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/01/mysql08-类列表之时间日期类型/" class="post-title-link" itemprop="url">mysql07-类列表之时间日期类型</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-01 20:40:58" itemprop="dateCreated datePublished" datetime="2019-02-01T20:40:58+08:00">2019-02-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-02-05 11:34:39" itemprop="dateModified" datetime="2019-02-05T11:34:39+08:00">2019-02-05</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="时间日期类型"><a href="#时间日期类型" class="headerlink" title="时间日期类型"></a>时间日期类型</h1><h2 id="date"><a href="#date" class="headerlink" title="date"></a>date</h2><p>日期类型：系统使用三个字节来存储数据，对应的格式为：YYYY-mm-dd，能表示的范围是从1000-01-01到9999-12-12，初始值为0000-00-00</p>
-<h2 id="time"><a href="#time" class="headerlink" title="time"></a>time</h2><p>时间类型：能表示某个指定的时间，但是系统同样提供3个字节来存储，对应的格式为HH:ii:ss，但是mysql中的time类型能够表示时间范围要大得多，能表示从-838：59：59~839：59：59，在mysql中具体的用处是用来描述时间段</p>
-<h2 id="timedatetime"><a href="#timedatetime" class="headerlink" title="timedatetime"></a>timedatetime</h2><p>日期时间类型：就是将前面的date和time合并起来，表示的时间，使用8个字节存储数据，格式为YYYY-mm-dd HH：ii：ss，能表示的区间1000-01-01 00：00：00 到9999-12-12 23：59：59，其可以为0值：0000-00-00 00：00：00</p>
-<h2 id="timestamp"><a href="#timestamp" class="headerlink" title="timestamp"></a>timestamp</h2><p>时间戳类型：mysql中的时间只是表示从格林威治时间开始，但是其格式依然是YYYY-mm-dd HH：ii：ss</p>
-<h2 id="year"><a href="#year" class="headerlink" title="year"></a>year</h2><p>年类型：占用一个字节来保存，能表示1900-2155年，但是year由两种数据插入方式：0~99和四位数的具体年</p>
-<p><hr></p>
-<ol>
-<li><p>创建对应的时间日期类型的数据表<br><img src="/2019/02/01/mysql08-类列表之时间日期类型/1.png" alt=""></p>
-</li>
-<li><p>插入正常数据<br><img src="/2019/02/01/mysql08-类列表之时间日期类型/2.png" alt=""></p>
-</li>
-<li>year的特殊性：可以采用两位数的数据插入，也可以采用四位数的年份插入<br><img src="/2019/02/01/mysql08-类列表之时间日期类型/3.png" alt=""> </li>
-<li>year进行两位数插入的时候，有一个区间划分，零界点为69和70.<br>当输入69及以下的数，为20xx，当输入70及以上的数，为19xx<br><img src="/2019/02/01/mysql08-类列表之时间日期类型/4.png" alt=""></li>
-<li>timestamp特殊性<br>当对应的数据被修改的时候，会自动更新（这个被修改的数据不是自己）<br><img src="/2019/02/01/mysql08-类列表之时间日期类型/5.png" alt=""></li>
-<li>time类型特殊性：本质是用来表示时间区间，能表示的范围比较大<br><img src="/2019/02/01/mysql08-类列表之时间日期类型/6.png" alt=""></li>
-<li>在进行时间类型录入的时候（time）还可以使用一个简单的日期代替时间，在时间格式之前加一个空格，然后指定一个数字（可以是负数，表示天数），系统会自动将该数字转换成天数*24小时，再加上后面的时间<br><img src="/2019/02/01/mysql08-类列表之时间日期类型/7.png" alt=""><hr>
-
-</li>
-</ol>
-<p>PHP中有着非常强大的时间日期转换函数：date将时间戳转换成想要的格式，strtotime又可以将很多格式转换成对应的时间戳。PHP通常不需要数据库来帮助处理这么复杂的时间日期，所以通常配合PHP使用的时候，时间的保存通常使用真正的时</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql07-类列表之小数型/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/01/mysql07-类列表之小数型/" class="post-title-link" itemprop="url">mysql07-类列表之小数型</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-01 17:26:09 / Updated at: 20:00:55" itemprop="dateCreated datePublished" datetime="2019-02-01T17:26:09+08:00">2019-02-01</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="小数类型"><a href="#小数类型" class="headerlink" title="小数类型"></a>小数类型</h1><p>专门用来存储小数的<br>在mysql中将小数类型又分为两类：浮点型和定点型</p>
-<h2 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h2><p>浮点型又称之为精度类型：是一种有可能丢失精度的数据类型，数据有可能不那么准确（尤其在超出范围的时候）<br>之所以能存储较大的数值（不精确），原因就是利用存储数据的位来存储指数</p>
-<h3 id="float"><a href="#float" class="headerlink" title="float"></a>float</h3><p>float又称之为单精度类型，系统提供四个字节来存储数据，但是能表示的数据范围比整形大的多，大概是10的38次方；只能保证大概7个左右的精度（如果数据在7位数以内，那么基本是准确的，但是如果超过7位数，哪儿买就是不准确的）</p>
-<p><strong>基本语法</strong><br>float：表示不指定小数位的浮点数<br>float（M,D）：表示一共存储M个有效数字，其中小数位占D位<br>例如float（10，2）     整数部分为8位，小数部分为2位<br><br></p>
-<ol>
-<li>创建数据表保存浮点数<br><img src="/2019/02/01/mysql07-类列表之小数型/浮点1.png" alt=""></li>
-<li>插入合理数据<br><img src="/2019/02/01/mysql07-类列表之小数型/浮点2.png" alt=""><br>注意：如果数据精度丢失，那么浮点型是按照四舍五入的方式进行计算</li>
-<li><p>插入超出大小的数据<br><img src="/2019/02/01/mysql07-类列表之小数型/浮点3.png" alt=""> </p>
-</li>
-<li><p>数据长度刚好满足条件，但是精度超出<br><img src="/2019/02/01/mysql07-类列表之小数型/浮点4.png" alt=""></p>
-</li>
-</ol>
-<p>说明用户不能插入数据直接超过指定的整数部分长度，但是如果是系统自动进位导致，系统可以承担<br><br></p>
-<ol start="5">
-<li>浮点数可以采用科学计算法来存储数据<br><img src="/2019/02/01/mysql07-类列表之小数型/浮点5.png" alt=""></li>
-</ol>
-<p>浮点数的应用：通常是用来保存一些数量特别大，大到可以不用那么精确的数据。</p>
-<h3 id="double"><a href="#double" class="headerlink" title="double"></a>double</h3><p>double又称之双精度，系统用8个字节来存储数据，表示的范围更大，10的38次方，但是精度也只有15位左右</p>
-<h2 id="定点数"><a href="#定点数" class="headerlink" title="定点数"></a>定点数</h2><p>定点数，能够保证数据精确的小数（小数部分可能会不精确，超出长度会四舍五入），整数部分会一定精确</p>
-<h3 id="decimal"><a href="#decimal" class="headerlink" title="decimal"></a>decimal</h3><p>decimal定点数，系统自动根据存储的数据来分配存储空间，每大概9个数就会分配四个字节进行存储，同时小数和整数部分是分开的。<br>decimal（M,D）：M表示总长度，最大值不能超过65，D代表小数部分长度，最长不能超过30 </p>
-<ol>
-<li>创建表：与浮点数对比<br><img src="/2019/02/01/mysql07-类列表之小数型/定点1.png" alt=""></li>
-<li>插入正常数据<br><img src="/2019/02/01/mysql07-类列表之小数型/定点2.png" alt=""></li>
-<li>插入最大数据（我们创建时已经设定了最大长度位10位，整数部分为8位）<br><img src="/2019/02/01/mysql07-类列表之小数型/定点3.png" alt=""></li>
-<li>插入最大数据，且让定点型的小数部分超过位数限制四舍五入后，整数部分进位超出限制，此时会报错！<br><img src="/2019/02/01/mysql07-类列表之小数型/定点4.png" alt=""></li>
-</ol>
-<p>定点数的应用：设计金额时使用较多的是定点数</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -2224,7 +2229,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-count">72</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
