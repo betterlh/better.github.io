@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
         
@@ -353,6 +353,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/08/14/pwn解题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/14/pwn解题/" class="post-title-link" itemprop="url">pwn解题</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-08-14 21:15:24 / Modified: 21:39:56" itemprop="dateCreated datePublished" datetime="2019-08-14T21:15:24+08:00">2019-08-14</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考文章：<a href="https://blog.csdn.net/qq_41725312/article/details/90748436" target="_blank" rel="noopener">https://blog.csdn.net/qq_41725312/article/details/90748436</a></p>
+<p>1.通过下断点，在gdb直接使用print 命令查找地址。<img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\print.GIF" alt="print"></p>
+<p>2.通过pattern命令填充数据，来确定填充位数。</p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\pattern.GIF" alt="pattern"></p>
+<p>然后通过找eip的值，确定偏移</p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\pattern1.GIF" alt="pattern1"></p>
+<p>3.通过string和readelf查找<img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\s.GIF" alt="s"></p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\readelf.GIF" alt="readelf"></p>
+<p>4.通过x 命令来查看地址，用来确认地址</p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\x.GIF" alt=""></p>
+<p>5.查看代码</p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\查看.GIF" alt="查看"></p>
+<p>layout 可以显示反汇编代码</p>
+<p>6.ldd 查看libc文件相关信息</p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\ldd.GIF" alt="ldd"></p>
+<p>7.ROP插件查找</p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\ROP插件查找.GIF" alt="ROP插件查找"></p>
+<p>8.pwntool</p>
+<p>例如：</p>
+<p><img src="/2019/08/14/pwn解题/blog\betterlh\source\_posts\pwn解题\pwntool.GIF" alt="pwntool"></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/08/05/docker/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -391,14 +570,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-05 23:41:13" itemprop="dateCreated datePublished" datetime="2019-08-05T23:41:13+08:00">2019-08-05</time>
+              <time title="Created: 2019-08-05 23:41:13" itemprop="dateCreated datePublished" datetime="2019-08-05T23:41:13+08:00">2019-08-05</time>
             
 
             
@@ -415,7 +594,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-06 20:49:37" itemprop="dateModified" datetime="2019-08-06T20:49:37+08:00">2019-08-06</time>
+                <time title="Modified: 2019-08-06 20:49:37" itemprop="dateModified" datetime="2019-08-06T20:49:37+08:00">2019-08-06</time>
               
             
           </span>
@@ -555,14 +734,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
+              <time title="Created: 2019-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
             
 
             
@@ -579,7 +758,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-11 16:46:57" itemprop="dateModified" datetime="2019-08-11T16:46:57+08:00">2019-08-11</time>
+                <time title="Modified: 2019-08-11 16:46:57" itemprop="dateModified" datetime="2019-08-11T16:46:57+08:00">2019-08-11</time>
               
             
           </span>
@@ -593,7 +772,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -740,14 +919,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-07-13 23:34:45" itemprop="dateCreated datePublished" datetime="2019-07-13T23:34:45+08:00">2019-07-13</time>
+              <time title="Created: 2019-07-13 23:34:45" itemprop="dateCreated datePublished" datetime="2019-07-13T23:34:45+08:00">2019-07-13</time>
             
 
             
@@ -764,7 +943,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-14 00:05:06" itemprop="dateModified" datetime="2019-07-14T00:05:06+08:00">2019-07-14</time>
+                <time title="Modified: 2019-07-14 00:05:06" itemprop="dateModified" datetime="2019-07-14T00:05:06+08:00">2019-07-14</time>
               
             
           </span>
@@ -778,7 +957,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -920,14 +1099,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-14 09:03:11" itemprop="dateCreated datePublished" datetime="2019-05-14T09:03:11+08:00">2019-05-14</time>
+              <time title="Created: 2019-05-14 09:03:11" itemprop="dateCreated datePublished" datetime="2019-05-14T09:03:11+08:00">2019-05-14</time>
             
 
             
@@ -944,7 +1123,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-13 23:35:48" itemprop="dateModified" datetime="2019-07-13T23:35:48+08:00">2019-07-13</time>
+                <time title="Modified: 2019-07-13 23:35:48" itemprop="dateModified" datetime="2019-07-13T23:35:48+08:00">2019-07-13</time>
               
             
           </span>
@@ -958,7 +1137,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1099,14 +1278,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-07 14:30:18" itemprop="dateCreated datePublished" datetime="2019-05-07T14:30:18+08:00">2019-05-07</time>
+              <time title="Created: 2019-05-07 14:30:18" itemprop="dateCreated datePublished" datetime="2019-05-07T14:30:18+08:00">2019-05-07</time>
             
 
             
@@ -1123,7 +1302,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-13 21:25:14" itemprop="dateModified" datetime="2019-05-13T21:25:14+08:00">2019-05-13</time>
+                <time title="Modified: 2019-05-13 21:25:14" itemprop="dateModified" datetime="2019-05-13T21:25:14+08:00">2019-05-13</time>
               
             
           </span>
@@ -1137,7 +1316,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1279,14 +1458,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
+              <time title="Created: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
             
 
             
@@ -1303,7 +1482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-11 10:13:33" itemprop="dateModified" datetime="2019-05-11T10:13:33+08:00">2019-05-11</time>
+                <time title="Modified: 2019-05-11 10:13:33" itemprop="dateModified" datetime="2019-05-11T10:13:33+08:00">2019-05-11</time>
               
             
           </span>
@@ -1317,7 +1496,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1452,14 +1631,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-30 20:54:14" itemprop="dateCreated datePublished" datetime="2019-04-30T20:54:14+08:00">2019-04-30</time>
+              <time title="Created: 2019-04-30 20:54:14" itemprop="dateCreated datePublished" datetime="2019-04-30T20:54:14+08:00">2019-04-30</time>
             
 
             
@@ -1476,7 +1655,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-14 08:35:22" itemprop="dateModified" datetime="2019-05-14T08:35:22+08:00">2019-05-14</time>
+                <time title="Modified: 2019-05-14 08:35:22" itemprop="dateModified" datetime="2019-05-14T08:35:22+08:00">2019-05-14</time>
               
             
           </span>
@@ -1490,7 +1669,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1628,14 +1807,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-27 09:41:02" itemprop="dateCreated datePublished" datetime="2019-04-27T09:41:02+08:00">2019-04-27</time>
+              <time title="Created: 2019-04-27 09:41:02" itemprop="dateCreated datePublished" datetime="2019-04-27T09:41:02+08:00">2019-04-27</time>
             
 
             
@@ -1652,7 +1831,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-28 15:49:46" itemprop="dateModified" datetime="2019-04-28T15:49:46+08:00">2019-04-28</time>
+                <time title="Modified: 2019-04-28 15:49:46" itemprop="dateModified" datetime="2019-04-28T15:49:46+08:00">2019-04-28</time>
               
             
           </span>
@@ -1800,14 +1979,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-22 22:35:19" itemprop="dateCreated datePublished" datetime="2019-04-22T22:35:19+08:00">2019-04-22</time>
+              <time title="Created: 2019-04-22 22:35:19" itemprop="dateCreated datePublished" datetime="2019-04-22T22:35:19+08:00">2019-04-22</time>
             
 
             
@@ -1824,7 +2003,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-26 19:09:56" itemprop="dateModified" datetime="2019-04-26T19:09:56+08:00">2019-04-26</time>
+                <time title="Modified: 2019-04-26 19:09:56" itemprop="dateModified" datetime="2019-04-26T19:09:56+08:00">2019-04-26</time>
               
             
           </span>
@@ -1838,7 +2017,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1953,171 +2132,6 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/20/12届全国大学生信息安全竞赛/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/20/12届全国大学生信息安全竞赛/" class="post-title-link" itemprop="url">12届全国大学生信息安全竞赛</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-20 14:31:12 / Updated at: 21:04:16" itemprop="dateCreated datePublished" datetime="2019-04-20T14:31:12+08:00">2019-04-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>先大致看了下main函数<br><img src="/2019/04/20/12届全国大学生信息安全竞赛/1.PNG" alt=""><br>gdb运行看看<br><img src="/2019/04/20/12届全国大学生信息安全竞赛/4.PNG" alt=""><br><img src="/2019/04/20/12届全国大学生信息安全竞赛/2.PNG" alt=""><br><img src="/2019/04/20/12届全国大学生信息安全竞赛/3.PNG" alt=""><br>发现在输完名字后，将会重复以下步骤：<br>1.让你指定一个下标，<br>2.它会提示这个标志代表的值<br>3.然后让你输入它新的值，它的值默认为0</p>
-<p>之后回到1  如此循环<br><img src="/2019/04/20/12届全国大学生信息安全竞赛/5.PNG" alt=""></p>
-<p>不知道他想让我干啥<br>卒</p>
-<p># </p>
-<h2 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h2><p>void <em>memset(void </em>s,int c,size_t n)</p>
-<p>总的作用：将已开辟内存空间 s 的首 n 个字节的值设为值 c。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2165,8 +2179,8 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">72</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -2197,7 +2211,7 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
                       
                     
                     <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -2249,7 +2263,7 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 

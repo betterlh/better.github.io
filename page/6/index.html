@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>About</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
 
   </li>
         
@@ -353,6 +353,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql09-类列表之字符串类型/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/02/mysql09-类列表之字符串类型/" class="post-title-link" itemprop="url">mysql09-类列表之字符串类型</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-02 16:17:16 / Modified: 16:44:20" itemprop="dateCreated datePublished" datetime="2019-02-02T16:17:16+08:00">2019-02-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h1><h2 id="char"><a href="#char" class="headerlink" title="char"></a>char</h2><p>定长字符：指定长度之后，系统一定会分配指定的空间用于存储数据<br>基本语法：  char（L），L代表字符数（中文与英文字母一样），L长度为0-255</p>
+<h2 id="varchar"><a href="#varchar" class="headerlink" title="varchar"></a>varchar</h2><p>变长字符：指定长度之后，系统会根据实际存储的数据来计算长度，分配合适的长度（数据没有超出长度）<br>基本语法：varchar（L） L代表字符集，L的长度理论值为0-65535 </p>
+<p>因为varchar要记录数据长度（系统根据数据长度自动分配空间），所以每个varchar数据产生之后，系统都会在数据后面增加1-2字节的额外开销，使用来保存数据占用的空间长度<br>如果数据本身小于127个字符：额外开销一个字节，如果大于127个，就开销两个字节<br>//百度百科资料显示：、使用额外的1-2字节来存储值长度，列长度&lt;=255使用1字节保存，其它情况使用2字节保存。例如varchar(10)会占用11字节存储空间，varchar(500)会占用502字节存储空间。</p>
+<p><br><br>char和varchar的区别</p>
+<ol>
+<li>char一定会使用指定的空间，varchar是根据数据来指定空间</li>
+<li>char的数据查询效率比varchar高；varchar是需要通过后面的记录数来计算</li>
+<li>如果确定数据一定是占指定长度，那么使用char类型<br>如果不确定数据到底有多少，那么使用varchar类型<br>如果数据长度超过255字符，无论是否固定长度，都会使用text，不再使用char和varchar</li>
+</ol>
+<h2 id="text"><a href="#text" class="headerlink" title="text"></a>text</h2><p>文本类型：本质上mysql提供了两种文本类型<br>text：存储普通的字符文本<br>blob：存储二进制文本（图片，文件），一般都不会使用blob来存储文件本身，通常是使用一个链接来指向对应的文件本身</p>
+<h3 id="text系统中提供的四种text"><a href="#text系统中提供的四种text" class="headerlink" title="text系统中提供的四种text"></a>text系统中提供的四种text</h3><p>tinttext：系统使用一个字节来保存（位置），实际能够存储的数据为2^8+1<br>text：使用两个字节保存，实际存储为;2^16+2<br>mediumtext:使用三个字节保存，实际存储为2^24+3<br>longtext: 使用四个字节保存，实际存储为2^32+4<br><br><br>注意：<br>1.在选择对应的存储文本的时候，不用刻意去选择text类型，系统会自动根据存储的数据长度来选择合适的文本类型（通常用text，让系统去选择）<br>2.在选择字符存储的时候，如果数据超过255字符，那么一定选择text存储</p>
+<h2 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h2><p>枚举类型：在数据插入之前先设定几个项，而这几个项就是最终可能出现的数据结果。<br>如果确定某个字段的数据只有那么几个值；如性别：男、女、保密，系统就可以在设定字段的时候规定当前字段只能存放固定的几个值：使用枚举</p>
+<h3 id="基本语法：-enum（数据值1，数据值2…）"><a href="#基本语法：-enum（数据值1，数据值2…）" class="headerlink" title="基本语法： enum（数据值1，数据值2…）"></a>基本语法： enum（数据值1，数据值2…）</h3><p>系统提供1到2个字节来存储枚举数据：通过计算enum列举的具体指来选择实际的存储空间：如果数据值列表在255以内，那么一个字节就够，如果超过255但是小于65535，那么系统采用两个节字保存</p>
+<h3 id="实际操作及其特性"><a href="#实际操作及其特性" class="headerlink" title="实际操作及其特性"></a>实际操作及其特性</h3><ol>
+<li>创建表<br><img src="/2019/02/02/mysql09-类列表之字符串类型/enum1.png" alt=""></li>
+<li>插入数据：合法数据，字段对应的值必须是设定表的时候所确定的值<br><img src="/2019/02/02/mysql09-类列表之字符串类型/enum2.png" alt=""></li>
+<li>错误数据：enum有规范数据的功能，能够保证插入的数据必须是设定的范围，其他的都不行<br><img src="/2019/02/02/mysql09-类列表之字符串类型/enum3.png" alt=""></li>
+<li>枚举enum的存储原理L实际上字段上所存储的值并不是真正的字符串，而是字符串对应的下标：当系统设定枚举类型的时候，会给枚举中每个元素定义一个下标，这个下标规则从1开始<br>enum（1=&gt;‘男’，2=&gt;‘女’，3=&gt;‘保密’）<br><br><br>特性：在mysql中系统是自动进行类型转换的，如果数据碰到“+-*/”系统会自动把数据转换成数值，而普通字符串转换为数值0<br>select 字段名 +0 from 表名<br><img src="/2019/02/02/mysql09-类列表之字符串类型/enum4.png" alt=""><br>5.既然实际enum字段存储的结果是数值：那么在插入数据的时候就可以使用对应的数值来进行<br><img src="/2019/02/02/mysql09-类列表之字符串类型/enum5.png" alt=""></li>
+</ol>
+<h3 id="枚举的意义："><a href="#枚举的意义：" class="headerlink" title="枚举的意义："></a>枚举的意义：</h3><p>1.规范数据本身，限定只能插入规定的数据项<br>2.节省存储空间</p>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>集合是一种将多个数据选项可以同时保存的数据类型，本质是将指定的项按照对应的二进制来进行控制：1表示该选项被选中，0表示该选项没有被选中</p>
+<h3 id="基本语法：set-（“值1”，“值2”。。。）"><a href="#基本语法：set-（“值1”，“值2”。。。）" class="headerlink" title="基本语法：set （“值1”，“值2”。。。）"></a>基本语法：set （“值1”，“值2”。。。）</h3><p>系统为set提供了多个字节进行保存，但是系统会自动计算来选择具体的存储单元<br>1个字节：set只能有8个选项<br>2个节字：set只能有6选项<br>3个节字：set只能有24选项<br>4个节字：set只能有64选项</p>
+<h3 id="实际操作及其特性-1"><a href="#实际操作及其特性-1" class="headerlink" title="实际操作及其特性"></a>实际操作及其特性</h3><p>set和enum一样最终存储到字段中的依然是数字而不是真实的字符串</p>
+<ol>
+<li>创建表<br><img src="/2019/02/02/mysql09-类列表之字符串类型/set1.png" alt=""></li>
+<li>插入数据：可以插入多个数据，就是在数据插入的字符串中，使用对应的逗号将选项进行隔开<br><img src="/2019/02/02/mysql09-类列表之字符串类型/set2.png" alt=""></li>
+<li>数据选项所在的数据与数据插入的顺序无关，最终都会变成选项对应的顺序<br><img src="/2019/02/02/mysql09-类列表之字符串类型/set3.png" alt=""></li>
+<li>1.分析数据存储的方式：系统将对应的数据选项（设计）按照顺序进行编排：从第一个开始进行占位，每一个对应一个二进制位<br>2.数据在存储的时候，如果被选中为1否则为0<br><img src="/2019/02/02/mysql09-类列表之字符串类型/set4.png" alt=""><br>3.系统在进行存储的时候会自动将得到的最终的二进制颠倒过来，然后再进行转换成十进制存储<br><img src="/2019/02/02/mysql09-类列表之字符串类型/set5.png" alt=""></li>
+<li>查看数据：按照转换成的数值来查看<br><img src="/2019/02/02/mysql09-类列表之字符串类型/set6.png" alt=""></li>
+<li>既然是数值，那么就可以插入数值来代替实际插入数据<br><img src="/2019/02/02/mysql09-类列表之字符串类型/set7.png" alt=""><br><br><br>注意：数字插入的前提是对应的二进制位上对应的数据项，通常不使用插入数值的方式</li>
+</ol>
+<h3 id="集合的意义"><a href="#集合的意义" class="headerlink" title="集合的意义"></a>集合的意义</h3><ol>
+<li>规范数据</li>
+<li>节省存储空间<br><hr><h3 id="enum与set"><a href="#enum与set" class="headerlink" title="enum与set"></a>enum与set</h3>enum单选框<br>set复选框</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql08-类列表之时间日期类型/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -391,14 +585,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 20:40:58" itemprop="dateCreated datePublished" datetime="2019-02-01T20:40:58+08:00">2019-02-01</time>
+              <time title="Created: 2019-02-01 20:40:58" itemprop="dateCreated datePublished" datetime="2019-02-01T20:40:58+08:00">2019-02-01</time>
             
 
             
@@ -415,7 +609,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-05 11:34:39" itemprop="dateModified" datetime="2019-02-05T11:34:39+08:00">2019-02-05</time>
+                <time title="Modified: 2019-02-05 11:34:39" itemprop="dateModified" datetime="2019-02-05T11:34:39+08:00">2019-02-05</time>
               
             
           </span>
@@ -429,7 +623,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -582,14 +776,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 17:26:09 / Updated at: 20:00:55" itemprop="dateCreated datePublished" datetime="2019-02-01T17:26:09+08:00">2019-02-01</time>
+              <time title="Created: 2019-02-01 17:26:09 / Modified: 20:00:55" itemprop="dateCreated datePublished" datetime="2019-02-01T17:26:09+08:00">2019-02-01</time>
             
 
             
@@ -608,7 +802,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -768,14 +962,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 17:25:33 / Updated at: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
+              <time title="Created: 2019-02-01 17:25:33 / Modified: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
             
 
             
@@ -794,7 +988,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -948,14 +1142,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 14:53:36 / Updated at: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
+              <time title="Created: 2019-02-01 14:53:36 / Modified: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
             
 
             
@@ -974,7 +1168,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1122,14 +1316,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 12:49:56" itemprop="dateCreated datePublished" datetime="2019-02-01T12:49:56+08:00">2019-02-01</time>
+              <time title="Created: 2019-02-01 12:49:56" itemprop="dateCreated datePublished" datetime="2019-02-01T12:49:56+08:00">2019-02-01</time>
             
 
             
@@ -1146,7 +1340,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-22 16:19:56" itemprop="dateModified" datetime="2019-02-22T16:19:56+08:00">2019-02-22</time>
+                <time title="Modified: 2019-02-22 16:19:56" itemprop="dateModified" datetime="2019-02-22T16:19:56+08:00">2019-02-22</time>
               
             
           </span>
@@ -1160,7 +1354,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1283,7 +1477,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">Unbenannt</a>
+                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">Untitled</a>
               
             
           </h1>
@@ -1301,14 +1495,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-31 17:38:26 / Updated at: 17:38:54" itemprop="dateCreated datePublished" datetime="2019-01-31T17:38:26+08:00">2019-01-31</time>
+              <time title="Created: 2019-01-31 17:38:26 / Modified: 17:38:54" itemprop="dateCreated datePublished" datetime="2019-01-31T17:38:26+08:00">2019-01-31</time>
             
 
             
@@ -2508,14 +2702,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-31 17:30:32" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
+              <time title="Created: 2019-01-31 17:30:32" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
             
 
             
@@ -2532,7 +2726,7 @@ _:匹配当前位置单个字符<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-25 11:10:37" itemprop="dateModified" datetime="2019-02-25T11:10:37+08:00">2019-02-25</time>
+                <time title="Modified: 2019-02-25 11:10:37" itemprop="dateModified" datetime="2019-02-25T11:10:37+08:00">2019-02-25</time>
               
             
           </span>
@@ -2546,7 +2740,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2702,14 +2896,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-31 17:30:06 / Updated at: 17:42:46" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:06+08:00">2019-01-31</time>
+              <time title="Created: 2019-01-31 17:30:06 / Modified: 17:42:46" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:06+08:00">2019-01-31</time>
             
 
             
@@ -2728,7 +2922,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2872,14 +3066,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-30 20:19:58" itemprop="dateCreated datePublished" datetime="2019-01-30T20:19:58+08:00">2019-01-30</time>
+              <time title="Created: 2019-01-30 20:19:58" itemprop="dateCreated datePublished" datetime="2019-01-30T20:19:58+08:00">2019-01-30</time>
             
 
             
@@ -2896,7 +3090,7 @@ _:匹配当前位置单个字符<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-01 12:48:43" itemprop="dateModified" datetime="2019-02-01T12:48:43+08:00">2019-02-01</time>
+                <time title="Modified: 2019-02-01 12:48:43" itemprop="dateModified" datetime="2019-02-01T12:48:43+08:00">2019-02-01</time>
               
             
           </span>
@@ -2910,7 +3104,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -3036,184 +3230,6 @@ _:匹配当前位置单个字符<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/30/PHP基础11-文件包含/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/30/PHP基础11-文件包含/" class="post-title-link" itemprop="url">PHP基础11-文件包含</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-01-30 07:52:54 / Updated at: 08:07:47" itemprop="dateCreated datePublished" datetime="2019-01-30T07:52:54+08:00">2019-01-30</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>文件包含原理</p>
-<h1 id="文件加载原理"><a href="#文件加载原理" class="headerlink" title="文件加载原理"></a>文件加载原理</h1><h2 id="php代码的执行流程"><a href="#php代码的执行流程" class="headerlink" title="php代码的执行流程"></a>php代码的执行流程</h2><ol>
-<li>读取代码文件（PHP程序）</li>
-<li>编译：将PHP代码转换成字节码（生成opcode）</li>
-<li>zendengine来解析opcode，按照字节码去进行逻辑运算</li>
-<li>转换成对应的html代码<h2 id="文件加载原理-1"><a href="#文件加载原理-1" class="headerlink" title="文件加载原理"></a>文件加载原理</h2></li>
-<li>在文件加载（include或者require）的时候，系统会自动的将被包含文件中的代码相当于嵌入到当前文件中</li>
-<li>加载位置：在哪加载，对应的文件中的代码嵌入的位置，就是对应的include的位置</li>
-<li>在PHP中被包含的文件是单独进行编译的</li>
-</ol>
-<p><strong>php文件在编译的过程中如果出现了语法错误，那么会失败（不会执行）但是如果被包含文件有错误的时候，系统会在执行到include这条语句的才会报错</strong></p>
-<h2 id="include和include-once的区别-require和require-once的区别相同）"><a href="#include和include-once的区别-require和require-once的区别相同）" class="headerlink" title="include和include_once的区别(require和require_once的区别相同）"></a>include和include_once的区别(require和require_once的区别相同）</h2><p>include 系统碰到一次，执行一次；如果对同一个文件进行多次加载，那么系统会执行多次<br><img src="/2019/01/30/PHP基础11-文件包含/文件1.png" alt=""><br>//系统提示常量重名<br><br><br>include_once 系统碰到多次也只会执行一次，如果文件已被包含过，则不在执行<br><img src="/2019/01/30/PHP基础11-文件包含/文件2.png" alt=""><br>系统发现已经被包含过，故不执行包含文件，没有报错</p>
-<h2 id="require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样"><a href="#require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样" class="headerlink" title="require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样"></a>require和include的区别：本质都是包含文件，唯一的区别在于包含不到文件的时候，报错的形式不一样</h2><p>include的错误级别较轻，不会影响后面代码的执行<br><img src="/2019/01/30/PHP基础11-文件包含/文件3.png" alt=""><br><br><br>reqire的错误级别较高，会影响后面代码的执行<br><img src="/2019/01/30/PHP基础11-文件包含/文件4.png" alt=""></p>
-<h2 id="文件加载路径"><a href="#文件加载路径" class="headerlink" title="文件加载路径"></a>文件加载路径</h2><p>文件在加载的时候需要指定文件路径才能保证PHP正确的找到对应的文件<br>文件的加载路径包含两大类</p>
-<h3 id="绝对路径"><a href="#绝对路径" class="headerlink" title="绝对路径"></a>绝对路径</h3><ol>
-<li>从磁盘的根路径开始（本地绝对路径）<br>windows：盘符（如C）:/路径/PHP文件<br>linux：/路径/PHP文件</li>
-<li>从网站的跟目录开始（网络绝对路径）<br>/：相对于网站主机名字对应的路径<br>localhost/index.php-&gt;假设E:/server/apache/htdocs/index.php<br><img src="/2019/01/30/PHP基础11-文件包含/绝对.png" alt=""><h3 id="相对路径：从当前文件所在的目录开始的路径"><a href="#相对路径：从当前文件所在的目录开始的路径" class="headerlink" title="相对路径：从当前文件所在的目录开始的路径"></a>相对路径：从当前文件所在的目录开始的路径</h3>.或者./都表示当前文件夹<br>../表示上级目录（当前文件夹的上一层文件夹）<br><img src="/2019/01/30/PHP基础11-文件包含/相对.png" alt=""><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3>1.绝对路径相对效率偏低，但是相对安全（路径不会出问题）<br>2.相对路径相对效率高些，但是容易出错（相对路径会发生改变）</li>
-</ol>
-<h2 id="文件嵌套包含"><a href="#文件嵌套包含" class="headerlink" title="文件嵌套包含"></a>文件嵌套包含</h2><p>文件嵌套包含：一个文件包含另外一个文件，同时被包含文件又包含了另一个文件<br><img src="/2019/01/30/PHP基础11-文件包含/嵌套1.png" alt=""><br><br><br>嵌套包含的时候容易出现相对路径出错的问题：相对路径会因为文件的包含而改变（./或者../）：windows下，每一个文件夹都有.和 ..的文件夹<br><img src="/2019/01/30/PHP基础11-文件包含/嵌套2.png" alt=""><br><br><br>如果去掉./  就不会出错<br><img src="/2019/01/30/PHP基础11-文件包含/嵌套3.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3261,8 +3277,8 @@ _:匹配当前位置单个字符<br>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">72</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -3293,7 +3309,7 @@ _:匹配当前位置单个字符<br>
                       
                     
                     <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
               
@@ -3345,7 +3361,7 @@ _:匹配当前位置单个字符<br>
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
