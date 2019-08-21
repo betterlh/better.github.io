@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
 
   </li>
         
@@ -353,6 +353,346 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql11-类属性之简单属性/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/02/mysql11-类属性之简单属性/" class="post-title-link" itemprop="url">mysql11-类属性之简单属性</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-02 21:13:49 / Updated at: 21:19:37" itemprop="dateCreated datePublished" datetime="2019-02-02T21:13:49+08:00">2019-02-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="列属性"><a href="#列属性" class="headerlink" title="列属性"></a>列属性</h1><p>列属性又称之为字段属性：在mysql中一共有6个属性，null，默认值，列描述，主键，唯一值和自动增长</p>
+<h2 id="null属性"><a href="#null属性" class="headerlink" title="null属性"></a>null属性</h2><p>null属性：代表字段位空<br><img src="/2019/02/02/mysql11-类属性之简单属性/1.png" alt=""><br>如果对应的值为yes表示该字段可以为null<br>注意：</p>
+<ol>
+<li>在设计表的时候，尽量不要让数据为空</li>
+<li>mysql的记录长度为65535个字节，如果一个表中有字段允许为null，那么系统就会设计保留一个字节来存储NULL，最终有效存储长度为65534个字节</li>
+</ol>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>default：默认值，当字段被设计的时候，如果允许默认条件下，用户不进行数据的插入，那么就可以使用事先准备好的数据来填充：通常填充的是NULL<br><img src="/2019/02/02/mysql11-类属性之简单属性/2.png" alt=""></p>
+<p>测试：不给当前字段提供数据值<br><img src="/2019/02/02/mysql11-类属性之简单属性/3.png" alt=""><br>default关键字的另外一层使用：显式的告知字段使用默认值，在进行数据插入的时候，对字段值直接使用default<br><img src="/2019/02/02/mysql11-类属性之简单属性/4.png" alt=""> </p>
+<h2 id="列描述"><a href="#列描述" class="headerlink" title="列描述"></a>列描述</h2><p>列描述：comment：是专门用于给开发人员进行维护的一个注释说明</p>
+<p>基本语法：comment‘字段描述’；<br><img src="/2019/02/02/mysql11-类属性之简单属性/5.png" alt=""></p>
+<p><br><br>查看comment：必须通过查看创建表语句<br><img src="/2019/02/02/mysql11-类属性之简单属性/6.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql10-类列表之mysql记录长度（varchar长度）/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/02/mysql10-类列表之mysql记录长度（varchar长度）/" class="post-title-link" itemprop="url">mysql10-类列表之mysql记录长度（varchar长度）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-02 17:16:14 / Updated at: 17:18:44" itemprop="dateCreated datePublished" datetime="2019-02-02T17:16:14+08:00">2019-02-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mysql记录长度"><a href="#mysql记录长度" class="headerlink" title="mysql记录长度"></a>mysql记录长度</h1><p>在mysql中，有一项规定：mysql的记录长度（record==行row）总长度不能超过65535个字节<br>varchar能过存储的理论值位65535个字符：字符在不同的字符集下可能占用多个字节</p>
+<ol>
+<li>创建表：证明varchar在mysql中能够达到的理论值（utf8和GBK）<br>varchar除了存储的数据本身要占用空间，还要使用额外的空间来记录长度 </li>
+</ol>
+<p><img src="/2019/02/02/mysql10-类列表之mysql记录长度（varchar长度）/1.png" alt=""></p>
+<ol start="2">
+<li>计算utf8和gbk下对应的varchar能够存储的长度</li>
+</ol>
+<p>utf8下：65535/3=21845如果采用varchar存储：需要2个额外的字节保存长度，所以utf8最多能存储21844个字节</p>
+<p><img src="/2019/02/02/mysql10-类列表之mysql记录长度（varchar长度）/2.png" alt=""><br><br><br>gbk下： 65535/2=32767 余1  如果采用varchar存储：需要额外2两个字节，<br>所以gbk下最多能存储32766个字符</p>
+<p><img src="/2019/02/02/mysql10-类列表之mysql记录长度（varchar长度）/3.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql09-类列表之字符串类型/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -391,14 +731,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-02 16:17:16 / Modified: 16:44:20" itemprop="dateCreated datePublished" datetime="2019-02-02T16:17:16+08:00">2019-02-02</time>
+              <time title="Post created: 2019-02-02 16:17:16 / Updated at: 16:44:20" itemprop="dateCreated datePublished" datetime="2019-02-02T16:17:16+08:00">2019-02-02</time>
             
 
             
@@ -417,7 +757,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -585,14 +925,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-01 20:40:58" itemprop="dateCreated datePublished" datetime="2019-02-01T20:40:58+08:00">2019-02-01</time>
+              <time title="Post created: 2019-02-01 20:40:58" itemprop="dateCreated datePublished" datetime="2019-02-01T20:40:58+08:00">2019-02-01</time>
             
 
             
@@ -609,7 +949,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-05 11:34:39" itemprop="dateModified" datetime="2019-02-05T11:34:39+08:00">2019-02-05</time>
+                <time title="Updated at: 2019-02-05 11:34:39" itemprop="dateModified" datetime="2019-02-05T11:34:39+08:00">2019-02-05</time>
               
             
           </span>
@@ -623,7 +963,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -776,14 +1116,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-01 17:26:09 / Modified: 20:00:55" itemprop="dateCreated datePublished" datetime="2019-02-01T17:26:09+08:00">2019-02-01</time>
+              <time title="Post created: 2019-02-01 17:26:09 / Updated at: 20:00:55" itemprop="dateCreated datePublished" datetime="2019-02-01T17:26:09+08:00">2019-02-01</time>
             
 
             
@@ -802,7 +1142,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -962,14 +1302,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-01 17:25:33 / Modified: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
+              <time title="Post created: 2019-02-01 17:25:33 / Updated at: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
             
 
             
@@ -988,7 +1328,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1142,14 +1482,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-01 14:53:36 / Modified: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
+              <time title="Post created: 2019-02-01 14:53:36 / Updated at: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
             
 
             
@@ -1168,7 +1508,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1316,14 +1656,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-02-01 12:49:56" itemprop="dateCreated datePublished" datetime="2019-02-01T12:49:56+08:00">2019-02-01</time>
+              <time title="Post created: 2019-02-01 12:49:56" itemprop="dateCreated datePublished" datetime="2019-02-01T12:49:56+08:00">2019-02-01</time>
             
 
             
@@ -1340,7 +1680,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-22 16:19:56" itemprop="dateModified" datetime="2019-02-22T16:19:56+08:00">2019-02-22</time>
+                <time title="Updated at: 2019-02-22 16:19:56" itemprop="dateModified" datetime="2019-02-22T16:19:56+08:00">2019-02-22</time>
               
             
           </span>
@@ -1354,7 +1694,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1477,7 +1817,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">Untitled</a>
+                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">Unbenannt</a>
               
             
           </h1>
@@ -1495,14 +1835,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-01-31 17:38:26 / Modified: 17:38:54" itemprop="dateCreated datePublished" datetime="2019-01-31T17:38:26+08:00">2019-01-31</time>
+              <time title="Post created: 2019-01-31 17:38:26 / Updated at: 17:38:54" itemprop="dateCreated datePublished" datetime="2019-01-31T17:38:26+08:00">2019-01-31</time>
             
 
             
@@ -2702,14 +3042,14 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-01-31 17:30:32" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
+              <time title="Post created: 2019-01-31 17:30:32" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:32+08:00">2019-01-31</time>
             
 
             
@@ -2726,7 +3066,7 @@ _:匹配当前位置单个字符<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-25 11:10:37" itemprop="dateModified" datetime="2019-02-25T11:10:37+08:00">2019-02-25</time>
+                <time title="Updated at: 2019-02-25 11:10:37" itemprop="dateModified" datetime="2019-02-25T11:10:37+08:00">2019-02-25</time>
               
             
           </span>
@@ -2740,7 +3080,7 @@ _:匹配当前位置单个字符<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -2843,393 +3183,6 @@ _:匹配当前位置单个字符<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/31/mysql02-数据库基本操作/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/31/mysql02-数据库基本操作/" class="post-title-link" itemprop="url">mysql02-数据库基本操作</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-01-31 17:30:06 / Modified: 17:42:46" itemprop="dateCreated datePublished" datetime="2019-01-31T17:30:06+08:00">2019-01-31</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a>数据库基本操作</h1><p>数据库是数据存储的最外层（最大单元）</p>
-<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>基本语法：creat database数据库名字[库选项]<br><img src="/2019/01/31/mysql02-数据库基本操作/创建1.png" alt=""><br>库选项：数据库的相关属性<br>字符集：charset字符集，代表着当前数据库下的所有表存储的数据默认指定的字符集（如果当前不指定，那么采用DBMS默认的）<br>校对集：collate校对集<br>例如：  create database数据库名字 charset 字符集名称<br><img src="/2019/01/31/mysql02-数据库基本操作/创建2.png" alt=""></p>
-<h2 id="显示数据库"><a href="#显示数据库" class="headerlink" title="显示数据库"></a>显示数据库</h2><p>每当用户通过sql指令创建一个数据库，那么系统就会产生一个对应的存储数据的文件夹（data）<br><img src="/2019/01/31/mysql02-数据库基本操作/show1.png" alt=""></p>
-<p>其实每一个数据库文件夹下面都有一个opt文件，保存的是对应的数据库选项<br><img src="/2019/01/31/mysql02-数据库基本操作/show2.png" alt=""></p>
-<h3 id="显示全部"><a href="#显示全部" class="headerlink" title="显示全部"></a>显示全部</h3><p>基本语法 ：show databases</p>
-<p><img src="/2019/01/31/mysql02-数据库基本操作/显示1.png" alt=""></p>
-<h3 id="显示部分"><a href="#显示部分" class="headerlink" title="显示部分"></a>显示部分</h3><p>基本语法：show database like ‘匹配模式’<br>_:匹配当前位置单个字符<br>%:匹配指定位置多个字符<br>例：<br>获取以my开头的全部数据库：‘my%’<br>获取以m开头，后面第一个字母不确定，最后为database的数据库‘m_database’<br>获取以database结尾的数据库： ‘%database’<br><img src="/2019/01/31/mysql02-数据库基本操作/显示2.png" alt=""></p>
-<h3 id="显示数据库创建语句"><a href="#显示数据库创建语句" class="headerlink" title="显示数据库创建语句"></a>显示数据库创建语句</h3><p>基本语法：show create databases 名字<br><img src="/2019/01/31/mysql02-数据库基本操作/显示创建.png" alt=""></p>
-<h2 id="选择数据库"><a href="#选择数据库" class="headerlink" title="选择数据库"></a>选择数据库</h2><p>为什么要选择数据库？因为数据存储到数据表，表存在数据下。如果要操作数据，那么必须进入到对应的数据库才行<br>基本语法：use 数据库名字；<br><img src="/2019/01/31/mysql02-数据库基本操作/use.png" alt=""></p>
-<h2 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h2><p>修改数据库字符集（库选项）：字符集和校队集<br>基本语法：alter<br><img src="/2019/01/31/mysql02-数据库基本操作/alter1.png" alt=""><br>一旦修改成功那么对应的opt文件中就会体现<br><img src="/2019/01/31/mysql02-数据库基本操作/alter2.png" alt=""><br>是否可以修改数据库名字？mysql 5.5之前是可以修改的：rename命令；但是5.5之后就不可以。</p>
-<h2 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h2><p>基本语法：drop database 数据库名字<br><img src="/2019/01/31/mysql02-数据库基本操作/删除.png" alt=""><br><br><br>删除时，一定要注意安全操作<br>删除数据库之后：对应的文件夹会被删除（opt文件也会被删除）<br><img src="/2019/01/31/mysql02-数据库基本操作/删除2.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/30/mysql01-相关基本概念/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/30/mysql01-相关基本概念/" class="post-title-link" itemprop="url">mysql01-相关基本概念</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2019-01-30 20:19:58" itemprop="dateCreated datePublished" datetime="2019-01-30T20:19:58+08:00">2019-01-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-01 12:48:43" itemprop="dateModified" datetime="2019-02-01T12:48:43+08:00">2019-02-01</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据库分类"><a href="#数据库分类" class="headerlink" title="数据库分类"></a>数据库分类</h1><h2 id="网络数据库"><a href="#网络数据库" class="headerlink" title="网络数据库"></a>网络数据库</h2><h2 id="层级数据库"><a href="#层级数据库" class="headerlink" title="层级数据库"></a>层级数据库</h2><p><strong>有且只有一个根节点</strong></p>
-<h2 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h2><p><strong>是建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据中的数据。</strong><br>数据库的另外一种区分方式：基于存储介质<br>存储介质：磁盘和内存</p>
-<p>关系型数据库：存储在磁盘中</p>
-<p>非关系型数据库，存储在内存中</p>
-<h1 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h1><p>基本概念：<br>关系数据库，是建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据库中的数据。现实世界中的各种实体以及实体之间的各种联系均用关系模型来表示。关系模型是由埃德加·科德于1970年首先提出的，并配合“科德十二定律”。现如今虽然对此模型有一些批评意见，但它还是数据存储的传统标准。标准数据查询语言SQL就是一种基于关系数据库的语言，这种语言执行对关系数据库中数据的检索和操作。 关系模型由关系数据结构、关系操作集合、关系完整性约束三部分组成</p>
-<ul>
-<li>关系数据结构：<br>指的是数据以什么方式来存储是一种二维表的形式存储<br>本质：二维表</li>
-<li>关系操作集合：<br>如何来关联和管理对应的存储数据，sql指令</li>
-<li><p>关系完整性约束：<br>数据内部有对应的关联关系，以及数据与数据之间也有对应的关联关系<br>表内约束：对应的具体列表只能放对应的数据（不能乱放）<br>表间约束：自然界各实体都是有着对应的关联关系（外键）</p>
-</li>
-<li><p>典型关系数据库<br>小型关系型数据库Microsoft Access，sqlite<br>中型关系型数据库 Microsoft SQL serve，MySQL<br>大型关系数据库 Oracle、DB2</p>
-</li>
-</ul>
-<h1 id="sql介绍"><a href="#sql介绍" class="headerlink" title="sql介绍"></a>sql介绍</h1><p>结构化查询语言(Structured Query Language)简称SQL(发音：/ˈes kjuː ˈel/ “S-Q-L”)，是一种特殊目的的编程语言，是一种数据库查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件的扩展名。</p>
-<p>sql就是专门为关系型数据库而设计出来的</p>
-<h3 id="一：数据查询语言（DQL-Data-Query-Language）："><a href="#一：数据查询语言（DQL-Data-Query-Language）：" class="headerlink" title="一：数据查询语言（DQL:Data Query Language）："></a>一：数据查询语言（DQL:Data Query Language）：</h3><p>其语句，也称为“数据检索语句”，用以从表中获得数据，确定数据怎样在应用程序给出。保留字SELECT是DQL（也是所有SQL）用得最多的动词，其他DQL常用的保留字有WHERE，ORDER BY，GROUP BY和HAVING。这些DQL保留字常与其他类型的SQL语句一起使用。</p>
-<p>专门用于查询数据，代表指令为select/show</p>
-<h3 id="二：数据操作语言（DML：Data-Manipulation-Language）："><a href="#二：数据操作语言（DML：Data-Manipulation-Language）：" class="headerlink" title="二：数据操作语言（DML：Data Manipulation Language）："></a>二：数据操作语言（DML：Data Manipulation Language）：</h3><p>其语句包括动词INSERT，UPDATE和DELETE。它们分别用于添加，修改和删除表中的行。也称为动作查询语言。<br>专门用于写数据：代表指令为insert，update和delete</p>
-<h3 id="三：事务处理语言（TPL）："><a href="#三：事务处理语言（TPL）：" class="headerlink" title="三：事务处理语言（TPL）："></a>三：事务处理语言（TPL）：</h3><p>它的语句能确保被DML语句影响的表的所有行及时得以更新。TPL语句包括BEGIN TRANSACTION，COMMIT和ROLLBACK。<br>（不是所有的关系型数据库都提供事务安全处理）<br>专门用于事务安全处理，transaction</p>
-<h3 id="四：数据控制语言（DCL）："><a href="#四：数据控制语言（DCL）：" class="headerlink" title="四：数据控制语言（DCL）："></a>四：数据控制语言（DCL）：</h3><p>它的语句通过GRANT或REVOKE获得许可，确定单个用户和用户组对数据库对象的访问。某些RDBMS可用GRANT或REVOKE控制对表单个列的访问。<br>专门用于权限管理，代表指令为grant和revoke</p>
-<h3 id="五：数据定义语言（DDL）："><a href="#五：数据定义语言（DDL）：" class="headerlink" title="五：数据定义语言（DDL）："></a>五：数据定义语言（DDL）：</h3><p>其语句包括动词CREATE和DROP。在数据库中创建新表或删除表（CREAT TABLE 或 DROP TABLE）；为表加入索引等。DDL包括许多与人数据库目录中获得数据有关的保留字。它也是动作查询的一部分。<br>它是专门用于结构管理：代表指令 create和drop（alter）</p>
-<h3 id="六：指针控制语言（CCL）："><a href="#六：指针控制语言（CCL）：" class="headerlink" title="六：指针控制语言（CCL）："></a>六：指针控制语言（CCL）：</h3><p>它的语句，像DECLARE CURSOR，FETCH INTO和UPDATE WHERE CURRENT用于对一个或多个表单独行的操作</p>
-<h2 id="mysql是一个关系型数据库管理系统"><a href="#mysql是一个关系型数据库管理系统" class="headerlink" title="mysql是一个关系型数据库管理系统"></a>mysql是一个关系型数据库管理系统</h2><p>1.是一种开源免费的数据库产品<br>2.mysql对PHP的支持是最好的（wamp或者lamp）<br>MySQL中用到的操作指令就是sql’指令</p>
-<h2 id="mysql服务端的架构"><a href="#mysql服务端的架构" class="headerlink" title="mysql服务端的架构"></a>mysql服务端的架构</h2><p>mysql服务端架构有以下几层构成</p>
-<ol>
-<li>数据库管理系统（最外层）：DBMS，专门管理服务器端的所有内容</li>
-<li>数据库（第二层）：DB，专门用于存储数据的仓库（可以有很多个）</li>
-<li>二维表（第三层）：table，专门用于存储具体实体的数据</li>
-<li>字段（第四层）：filed，具体存储某种类型的数据（实际存储单元）<br>数据库中常用的几个关键字<br>row：行<br>column：列（filed）<br>ysql是一种C/S结构，客户端和服务器<br>服务器对应的软件：mysqld.exe<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2>命令行方式<br>通过windows下打开cmd控制器，然后使用命令进行管理<br>net.start服务：开启服务<br>net stop mysql：关闭服务<br>前提是：在安装mysql 的时候将mysql添加到windows的服务去了<br>方式1进入服务</li>
-</ol>
-<p><img src="/2019/01/30/mysql01-相关基本概念/服务.png" alt=""><br><br><br>方式2进入服务：通过命令行：services.msc<br><img src="/2019/01/30/mysql01-相关基本概念/服务2.png" alt=""><br>通过服务对mysql服务器进行管理</p>
-<h2 id="登入和提出mysql系统"><a href="#登入和提出mysql系统" class="headerlink" title="登入和提出mysql系统"></a>登入和提出mysql系统</h2><p>通过客户端（mysql.exe）与服务器进行连接认证，就可以进行操作<br>通常，服务端与客户端不在同一台大电脑上</p>
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p>1.找到mysql（通过cmd控制台：如果在安装的时候指定了mysql.exe所在的路径为环境变量就可以直接访问；如果没有，那么就必须进入到mysql所在的安装目录底下的bin）<br>2.输入对应的服务器地址：-h :host   -h[IP地址/域名]<br>3.输入服务器中mysql监听的端口：-P（大写）：post  -P：3306<br>4.提供输入用户名：-u：username   -u：root<br>5.输入密码：-p（小写）：password  -p：root</p>
-<h3 id="连接认证基本语法："><a href="#连接认证基本语法：" class="headerlink" title="连接认证基本语法："></a>连接认证基本语法：</h3><p>mysql.exe/mysql （空格） -h主机地址 （空格） -P端口 （空格） -u用户吗 （空格）-p 密码<br><img src="/2019/01/30/mysql01-相关基本概念/连接1.png" alt=""></p>
-<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><ol>
-<li>通常端口都可以默认：mysql监听的端口通常都是3306</li>
-<li>密码的输入可以先输入-p，直接换行，然后再以密文方式输入密码<br><img src="/2019/01/30/mysql01-相关基本概念/连接2.png" alt=""></li>
-</ol>
-<h2 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h2><p>断开与服务器的连接：通常mysql提供的服务器数量有限，一旦客户端用完，建议就应该断开连接</p>
-<p>建议方式：使用sql提供的指令<br>exit；  //exit带封号<br>\q<br><img src="/2019/01/30/mysql01-相关基本概念/退出.png" alt=""><br>quit</p>
-<h1 id="mysql服务端的架构-1"><a href="#mysql服务端的架构-1" class="headerlink" title="mysql服务端的架构"></a>mysql服务端的架构</h1><h2 id="mysql服务端架构有以下几层构成"><a href="#mysql服务端架构有以下几层构成" class="headerlink" title="mysql服务端架构有以下几层构成"></a>mysql服务端架构有以下几层构成</h2><ol>
-<li>数据库管理系统（最外层）：DBMS，专门管理服务器端的所有内容</li>
-<li>数据库（第二层）：DB，专门用于存储数据的仓库（可以有很多个）</li>
-<li>二维表（第三层）：table，专门用于存储具体实体的数据</li>
-<li>字段（第四层）：filed，具体存储某种类型的数据（实际存储单元）<h2 id="数据库中常用的几个关键字"><a href="#数据库中常用的几个关键字" class="headerlink" title="数据库中常用的几个关键字"></a>数据库中常用的几个关键字</h2>row：行<br>column：列（filed）</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3277,8 +3230,8 @@ _:匹配当前位置单个字符<br>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">73</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -3309,7 +3262,7 @@ _:匹配当前位置单个字符<br>
                       
                     
                     <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -3361,7 +3314,7 @@ _:匹配当前位置单个字符<br>
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 

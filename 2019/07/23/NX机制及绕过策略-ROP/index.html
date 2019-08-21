@@ -98,7 +98,7 @@
 
   <meta name="description" content="NX机制及绕过策略-ROP参考文章一篇文章带你清晰地理解 ROP 绕过 NX 技术NX机制及绕过策略-ROP  参考文章先做个测试1.源码文件名：StackOF.c12345678910111213141516171819#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;void vul(char *msg) &amp;#123;   char buffer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NX机制及绕过策略-ROP">
+<meta property="og:title" content="NX机制及绕过策略-ROP（含无libc）">
 <meta property="og:url" content="http://betterlh.github.io/2019/07/23/NX机制及绕过策略-ROP/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="NX机制及绕过策略-ROP参考文章一篇文章带你清晰地理解 ROP 绕过 NX 技术NX机制及绕过策略-ROP  参考文章先做个测试1.源码文件名：StackOF.c12345678910111213141516171819#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;void vul(char *msg) &amp;#123;   char buffer">
@@ -109,9 +109,9 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/07/23/NX机制及绕过策略-ROP/3.GIF">
 <meta property="og:image" content="http://betterlh.github.io/2019/07/23/NX机制及绕过策略-ROP/栈溢出练习1.webp">
 <meta property="og:image" content="http://betterlh.github.io/2019/07/23/NX机制及绕过策略-ROP/栈溢出练习.GIF">
-<meta property="og:updated_time" content="2019-08-11T08:46:57.437Z">
+<meta property="og:updated_time" content="2019-08-17T09:06:29.967Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NX机制及绕过策略-ROP">
+<meta name="twitter:title" content="NX机制及绕过策略-ROP（含无libc）">
 <meta name="twitter:description" content="NX机制及绕过策略-ROP参考文章一篇文章带你清晰地理解 ROP 绕过 NX 技术NX机制及绕过策略-ROP  参考文章先做个测试1.源码文件名：StackOF.c12345678910111213141516171819#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;string.h&amp;gt;void vul(char *msg) &amp;#123;   char buffer">
 <meta name="twitter:image" content="http://betterlh.github.io/2019/07/23/NX机制及绕过策略-ROP/p.webp">
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>NX机制及绕过策略-ROP | Hexo</title>
+  <title>NX机制及绕过策略-ROP（含无libc） | Hexo</title>
   
 
 
@@ -226,7 +226,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -243,7 +243,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -277,7 +277,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -294,7 +294,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -380,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">NX机制及绕过策略-ROP
+          <h1 class="post-title" itemprop="name headline">NX机制及绕过策略-ROP（含无libc）
 
               
             
@@ -399,14 +399,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
+              <time title="Post created: 2019-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
             
 
             
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-11 16:46:57" itemprop="dateModified" datetime="2019-08-11T16:46:57+08:00">2019-08-11</time>
+                <time title="Updated at: 2019-08-17 17:06:29" itemprop="dateModified" datetime="2019-08-17T17:06:29+08:00">2019-08-17</time>
               
             
           </span>
@@ -437,7 +437,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -486,8 +486,11 @@
 <p><img src="/2019/07/23/NX机制及绕过策略-ROP/p.webp" alt=""><br>参考文章先做个测试<a href="https://www.jianshu.com/p/f3ebf8a360f0" target="_blank" rel="noopener"></a><br>1.源码<br>文件名：StackOF.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vul</span><span class="params">(<span class="keyword">char</span> *msg)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">char</span> buffer[<span class="number">64</span>];</span><br><span class="line">   <span class="built_in">memcpy</span>(buffer,msg,<span class="number">128</span>);</span><br><span class="line">   <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">puts</span>(<span class="string">"So plz give me your shellcode:"</span>);</span><br><span class="line">   <span class="keyword">char</span> buffer[<span class="number">256</span>];</span><br><span class="line">   <span class="built_in">memset</span>(buffer,<span class="number">0</span>,<span class="number">256</span>);</span><br><span class="line">   read(<span class="number">0</span>,buffer,<span class="number">256</span>);</span><br><span class="line">   vul(buffer);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>2.编译<br><img src="/2019/07/23/NX机制及绕过策略-ROP/1.GIF" alt=""><br>3.查看编译及保护<br><img src="/2019/07/23/NX机制及绕过策略-ROP/2.GIF" alt=""></p>
 <p>64位文件，NX开启</p>
-<p>4.查看加载的libc文件及地址</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/2019/07/23/NX机制及绕过策略-ROP/3.GIF" alt=""></h2><h1 id="栈溢出练习"><a href="#栈溢出练习" class="headerlink" title="栈溢出练习"></a>栈溢出练习</h1><p>来自文章:   <a href="https://www.jianshu.com/p/6a1235d99176" target="_blank" rel="noopener">栈溢出练习</a><br>—- c</p>
+<p>4.查看加载的libc文件及地址<br><img src="/2019/07/23/NX机制及绕过策略-ROP/3.GIF" alt=""></p>
+<h2 id="PWN-无libc泄露（XDCTF2015-pwn200）"><a href="#PWN-无libc泄露（XDCTF2015-pwn200）" class="headerlink" title="PWN-无libc泄露（XDCTF2015-pwn200）"></a>PWN-无libc泄露（XDCTF2015-pwn200）</h2><p><a href="https://blog.csdn.net/zszcr/article/details/79659071" target="_blank" rel="noopener">PWN-无libc泄露</a></p>
+<p><a href="https://www.anquanke.com/post/id/85129" target="_blank" rel="noopener">技术分享】借助DynELF实现无libc的漏洞利用小结</a><br><a href="https://sunichi.github.io/2018/01/06/xdctf15-pwn200/" target="_blank" rel="noopener">xdctf 2015 pwn200 writeup</a></p>
+<hr>
+<h1 id="栈溢出练习"><a href="#栈溢出练习" class="headerlink" title="栈溢出练习"></a>栈溢出练习</h1><p>来自文章:   <a href="https://www.jianshu.com/p/6a1235d99176" target="_blank" rel="noopener">栈溢出练习</a><br>—- c</p>
 <p>#include &lt;stdio.h&gt;</p>
 <p>#include &lt;string.h&gt;<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">vul</span><span class="params">(<span class="keyword">char</span> *msg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">64</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(buffer,msg);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"So plz give me your shellcode:"</span>);</span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">256</span>];</span><br><span class="line">    <span class="built_in">memset</span>(buffer,<span class="number">0</span>,<span class="number">256</span>);</span><br><span class="line">    read(<span class="number">0</span>,buffer,<span class="number">256</span>);</span><br><span class="line">    vul(buffer);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>gcc编译：gcc -m32 -no-pie -fno-stack-protector -z execstack -o pwnme StackOF.c<br>最好加一条命令关闭系统的的地址随机化（需要root模式下）<br>echo 0 &gt; /proc/sys/kernel/randomize_va_space</p>
@@ -495,6 +498,7 @@
 <p>如图：<br><img src="/2019/07/23/NX机制及绕过策略-ROP/栈溢出练习.GIF" alt=""></p>
 <p>之前老是不成功，在比对下我发现之后查找出的基地址竟然和我之前写的基地址不一样，改动了之后还是不行。意识到地址在变化，难道是因为没有地址随机化的原因?赶紧参照文章输入命令<br><code>echo 0 &gt; /proc/sys/kernel/randomize_va_space</code><br>发现要特权模式，然后在root下再次查找发现基地址又不一样，再尝试，终于有了上图的成功！</p>
 <hr>
+<p>#ROP之ret2libc<br>参考文章：<br><a href="https://blog.csdn.net/qq_41725312/article/details/90748436" target="_blank" rel="noopener">ROP之ret2libc</a><br><a href="https://www.jianshu.com/p/c90530c910b0" target="_blank" rel="noopener">https://www.jianshu.com/p/c90530c910b0</a></p>
 
       
     </div>
@@ -584,10 +588,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -607,8 +611,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">73</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -639,7 +643,7 @@
                       
                     
                     <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -676,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NX机制及绕过策略-ROP"><span class="nav-number">1.</span> <span class="nav-text">NX机制及绕过策略-ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈溢出练习"><span class="nav-number">2.</span> <span class="nav-text">栈溢出练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NX机制及绕过策略-ROP"><span class="nav-number">1.</span> <span class="nav-text">NX机制及绕过策略-ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PWN-无libc泄露（XDCTF2015-pwn200）"><span class="nav-number">1.1.</span> <span class="nav-text">PWN-无libc泄露（XDCTF2015-pwn200）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#栈溢出练习"><span class="nav-number">2.</span> <span class="nav-text">栈溢出练习</span></a></li></ol></div>
             
 
           </div>
@@ -708,7 +712,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 

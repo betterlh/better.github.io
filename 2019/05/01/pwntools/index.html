@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="Python 编程核心知识体系Exploit利器——PwntoolsPwnTools常见用法pwntools使用简介">
+  <meta name="description" content="连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send send(data): 发送数据 sendline(data) : 发送一行数据，相当于在末尾加\n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwntools">
 <meta property="og:url" content="http://betterlh.github.io/2019/05/01/pwntools/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Python 编程核心知识体系Exploit利器——PwntoolsPwnTools常见用法pwntools使用简介">
+<meta property="og:description" content="连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send send(data): 发送数据 sendline(data) : 发送一行数据，相当于在末尾加\n">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-11T02:13:33.102Z">
+<meta property="og:updated_time" content="2019-08-17T07:56:31.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pwntools">
-<meta name="twitter:description" content="Python 编程核心知识体系Exploit利器——PwntoolsPwnTools常见用法pwntools使用简介">
+<meta name="twitter:description" content="连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send send(data): 发送数据 sendline(data) : 发送一行数据，相当于在末尾加\n">
 
 
 
@@ -219,7 +219,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -236,7 +236,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -270,7 +270,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -287,7 +287,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -392,14 +392,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
+              <time title="Post created: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
             
 
             
@@ -416,7 +416,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-05-11 10:13:33" itemprop="dateModified" datetime="2019-05-11T10:13:33+08:00">2019-05-11</time>
+                <time title="Updated at: 2019-08-17 15:56:31" itemprop="dateModified" datetime="2019-08-17T15:56:31+08:00">2019-08-17</time>
               
             
           </span>
@@ -430,7 +430,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -474,7 +474,35 @@
       
 
       
-        <p><a href="https://woaielf.github.io/2017/06/13/python3-all/#%E6%80%BB%E8%A7%88" target="_blank" rel="noopener">Python 编程核心知识体系</a><br><a href="http://brieflyx.me/2015/python-module/pwntools-intro/" target="_blank" rel="noopener">Exploit利器——Pwntools</a><br><a href="https://www.jianshu.com/p/d3187a63c582" target="_blank" rel="noopener">PwnTools常见用法</a><br><a href="https://blog.csdn.net/qq_29343201/article/details/51337025" target="_blank" rel="noopener">pwntools使用简介
+        <p>连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口<br>数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制<br>IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send</p>
+<pre><code>send(data): 发送数据
+sendline(data) : 发送一行数据，相当于在末尾加\n      
+recv(numb=4096, timeout=default) : 给出接收字节数,timeout指定超时
+recvuntil(delims, drop=False) : 接收到delims的pattern
+（以下可以看作until的特例）
+recvline(keepends=True) : 接收到\n，keepends指定保留\n
+recvall() : 接收到EOF
+recvrepeat(timeout=default) : 接收到EOF或timeout
+interactive() : 与shell交互
+</code></pre><p>ELF模块：获取基地址、获取函数地址（基于符号）、获取函数got地址、获取函数plt地址</p>
+<pre><code>e = ELF(&apos;/bin/cat&apos;)
+print hex(e.address)  # 文件装载的基地址
+0x400000
+print hex(e.symbols[&apos;write&apos;]) # 函数地址
+0x401680
+print hex(e.got[&apos;write&apos;]) # GOT表的地址
+0x60b070
+print hex(e.plt[&apos;write&apos;]) # PLT的地址
+0x401680
+</code></pre><p>解题常用：</p>
+<pre><code>context.arch = &apos;amd64&apos;   //设置架构
+context.log_level = &apos;debug&apos; //显示log详细信息
+libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
+</code></pre><hr>
+<p>作者：SueLyon<br>链接：<a href="https://www.jianshu.com/p/6e528b33e37a" target="_blank" rel="noopener">https://www.jianshu.com/p/6e528b33e37a</a></p>
+<hr>
+<p><a href="https://www.cnblogs.com/Ox9A82/p/5728149.html" target="_blank" rel="noopener">CTF常用python库PwnTools的使用学习</a>  这个博主不错</p>
+<p><a href="https://woaielf.github.io/2017/06/13/python3-all/#%E6%80%BB%E8%A7%88" target="_blank" rel="noopener">Python 编程核心知识体系</a><br><a href="http://brieflyx.me/2015/python-module/pwntools-intro/" target="_blank" rel="noopener">Exploit利器——Pwntools</a><br><a href="https://www.jianshu.com/p/d3187a63c582" target="_blank" rel="noopener">PwnTools常见用法</a><br><a href="https://blog.csdn.net/qq_29343201/article/details/51337025" target="_blank" rel="noopener">pwntools使用简介
 </a></p>
 
       
@@ -579,8 +607,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">73</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -611,7 +639,7 @@
                       
                     
                     <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">categories</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -663,7 +691,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
