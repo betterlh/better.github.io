@@ -96,24 +96,26 @@
 
 
 
-  <meta name="description" content="连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send send(data): 发送数据 sendline(data) : 发送一行数据，相当于在末尾加\n">
+  <meta name="description" content="知识点用命令行传递参数：argparse程序暂停如何让程序实现“按任意键继续这个功能？”raw_input(&amp;quot;按任意键继续&amp;quot;)  这个就可以简单实现input(&amp;quot;按任意键继续&amp;quot;)当然这个也可以，但是他要求输入整数，所以你如果输的不是整数，程序可能会出现报错。所以这哪里是按任意键继续啊！ 字符的时候可以用raw_input()，当然不怕麻烦也可以用input(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pwntools">
-<meta property="og:url" content="http://betterlh.github.io/2019/05/01/pwntools/index.html">
+<meta property="og:title" content="ARP欺骗攻击实战">
+<meta property="og:url" content="http://betterlh.github.io/2019/09/08/ARP欺骗攻击实战/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send send(data): 发送数据 sendline(data) : 发送一行数据，相当于在末尾加\n">
+<meta property="og:description" content="知识点用命令行传递参数：argparse程序暂停如何让程序实现“按任意键继续这个功能？”raw_input(&amp;quot;按任意键继续&amp;quot;)  这个就可以简单实现input(&amp;quot;按任意键继续&amp;quot;)当然这个也可以，但是他要求输入整数，所以你如果输的不是整数，程序可能会出现报错。所以这哪里是按任意键继续啊！ 字符的时候可以用raw_input()，当然不怕麻烦也可以用input(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-17T07:56:31.942Z">
+<meta property="og:image" content="http://betterlh.github.io/2019/09/08/ARP欺骗攻击实战/input.GIF">
+<meta property="og:updated_time" content="2019-09-08T13:46:15.674Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pwntools">
-<meta name="twitter:description" content="连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send send(data): 发送数据 sendline(data) : 发送一行数据，相当于在末尾加\n">
+<meta name="twitter:title" content="ARP欺骗攻击实战">
+<meta name="twitter:description" content="知识点用命令行传递参数：argparse程序暂停如何让程序实现“按任意键继续这个功能？”raw_input(&amp;quot;按任意键继续&amp;quot;)  这个就可以简单实现input(&amp;quot;按任意键继续&amp;quot;)当然这个也可以，但是他要求输入整数，所以你如果输的不是整数，程序可能会出现报错。所以这哪里是按任意键继续啊！ 字符的时候可以用raw_input()，当然不怕麻烦也可以用input(">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/09/08/ARP欺骗攻击实战/input.GIF">
 
 
 
 
 
 
-  <link rel="canonical" href="http://betterlh.github.io/2019/05/01/pwntools/">
+  <link rel="canonical" href="http://betterlh.github.io/2019/09/08/ARP欺骗攻击实战/">
 
 
 
@@ -123,7 +125,7 @@
   };
 </script>
 
-  <title>pwntools | Hexo</title>
+  <title>ARP欺骗攻击实战 | Hexo</title>
   
 
 
@@ -356,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/01/pwntools/">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/09/08/ARP欺骗攻击实战/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lh">
@@ -373,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">pwntools
+          <h1 class="post-title" itemprop="name headline">ARP欺骗攻击实战
 
               
             
@@ -399,46 +401,16 @@
                 
               
 
-              <time title="Post created: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
+              <time title="Post created: 2019-09-08 21:13:06 / Updated at: 21:46:15" itemprop="dateCreated datePublished" datetime="2019-09-08T21:13:06+08:00">2019-09-08</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-08-17 15:56:31" itemprop="dateModified" datetime="2019-08-17T15:56:31+08:00">2019-08-17</time>
               
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -474,36 +446,8 @@
       
 
       
-        <p>连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口<br>数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制<br>IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send</p>
-<pre><code>send(data): 发送数据
-sendline(data) : 发送一行数据，相当于在末尾加\n      
-recv(numb=4096, timeout=default) : 给出接收字节数,timeout指定超时
-recvuntil(delims, drop=False) : 接收到delims的pattern
-（以下可以看作until的特例）
-recvline(keepends=True) : 接收到\n，keepends指定保留\n
-recvall() : 接收到EOF
-recvrepeat(timeout=default) : 接收到EOF或timeout
-interactive() : 与shell交互
-</code></pre><p>ELF模块：获取基地址、获取函数地址（基于符号）、获取函数got地址、获取函数plt地址</p>
-<pre><code>e = ELF(&apos;/bin/cat&apos;)
-print hex(e.address)  # 文件装载的基地址
-0x400000
-print hex(e.symbols[&apos;write&apos;]) # 函数地址
-0x401680
-print hex(e.got[&apos;write&apos;]) # GOT表的地址
-0x60b070
-print hex(e.plt[&apos;write&apos;]) # PLT的地址
-0x401680
-</code></pre><p>解题常用：</p>
-<pre><code>context.arch = &apos;amd64&apos;   //设置架构
-context.log_level = &apos;debug&apos; //显示log详细信息
-libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
-</code></pre><hr>
-<p>作者：SueLyon<br>链接：<a href="https://www.jianshu.com/p/6e528b33e37a" target="_blank" rel="noopener">https://www.jianshu.com/p/6e528b33e37a</a></p>
-<hr>
-<p><a href="https://www.cnblogs.com/Ox9A82/p/5728149.html" target="_blank" rel="noopener">CTF常用python库PwnTools的使用学习</a>  这个博主不错</p>
-<p><a href="https://woaielf.github.io/2017/06/13/python3-all/#%E6%80%BB%E8%A7%88" target="_blank" rel="noopener">Python 编程核心知识体系</a><br><a href="http://brieflyx.me/2015/python-module/pwntools-intro/" target="_blank" rel="noopener">Exploit利器——Pwntools</a><br><a href="https://www.jianshu.com/p/d3187a63c582" target="_blank" rel="noopener">PwnTools常见用法</a><br><a href="https://blog.csdn.net/qq_29343201/article/details/51337025" target="_blank" rel="noopener">pwntools使用简介
-</a></p>
+        <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="用命令行传递参数：argparse"><a href="#用命令行传递参数：argparse" class="headerlink" title="用命令行传递参数：argparse"></a>用命令行传递参数：argparse</h2><h2 id="程序暂停"><a href="#程序暂停" class="headerlink" title="程序暂停"></a>程序暂停</h2><p>如何让程序实现“按任意键继续这个功能？”<br><code>raw_input(&quot;按任意键继续&quot;)</code>  这个就可以简单实现<br><code>input(&quot;按任意键继续&quot;)</code>当然这个也可以，但是他要求输入整数，所以你如果输的不是整数，程序可能会出现报错。<br>所以这哪里是按任意键继续啊！</p>
+<p>字符的时候可以用raw_input()，当然不怕麻烦也可以用input()手动加’’<br>int类型的时候最好用input()<br><img src="/2019/09/08/ARP欺骗攻击实战/input.GIF" alt=""><br>搞了好一会才知道为啥报错，所以还是用raw_input()比较舒服，回车就ok了</p>
 
       
     </div>
@@ -534,8 +478,8 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/30/GOT表和PLT表/" rel="next" title="GOT表和PLT表">
-                <i class="fa fa-chevron-left"></i> GOT表和PLT表
+              <a href="/2019/08/28/ubuntu相关配置/" rel="next" title="ubuntu相关配置">
+                <i class="fa fa-chevron-left"></i> ubuntu相关配置
               </a>
             
           </div>
@@ -543,10 +487,6 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/07/pwnable-kr8-asm/" rel="prev" title="pwnable-asm">
-                pwnable-asm <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -591,8 +531,17 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -665,6 +614,23 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用命令行传递参数：argparse"><span class="nav-number">1.1.</span> <span class="nav-text">用命令行传递参数：argparse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序暂停"><span class="nav-number">1.2.</span> <span class="nav-text">程序暂停</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

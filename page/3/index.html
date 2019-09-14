@@ -353,6 +353,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/12/pwnable-kr4-flag/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/12/pwnable-kr4-flag/" class="post-title-link" itemprop="url">pwnable-kr4-flag</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-12 22:12:02" itemprop="dateCreated datePublished" datetime="2019-04-12T22:12:02+08:00">2019-04-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-08-16 20:07:47" itemprop="dateModified" datetime="2019-08-16T20:07:47+08:00">2019-08-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>题目要求是二进制逆向</p>
+<p>先用64位IDA打开，观察<br><img src="/2019/04/12/pwnable-kr4-flag/1.png" alt=""><br>再根据题目中packed关键词推断存在加壳，再根据binary提示，使用winhex打开文件（也可查看IDA中Hex窗口）<br>可见存在UPX加壳，对于脱壳，Windows可以使用UPX Tool工具，Lunix可以使用命令upx -d 文件名</p>
+<p>发现upx压缩了，linux下使用upx -d<br><img src="/2019/04/12/pwnable-kr4-flag/UPX.PNG" alt=""><br>解压缩之后在ida载入，发现关键代码如下：<br><img src="/2019/04/12/pwnable-kr4-flag/2.PNG" alt=""><br>找到后，输入flag<br><img src="/2019/04/12/pwnable-kr4-flag/3.PNG" alt=""><br>发现不对<br>所以是显示不完全<br>双击 进一步查看<br><img src="/2019/04/12/pwnable-kr4-flag/4.PNG" alt=""><br>或者将脱壳后的文件再用WinHex打开，搜索文本UPX得到flag<br><img src="/2019/04/12/pwnable-kr4-flag/tj.png" alt=""></p>
+<p>flag = UPX…? sounds like a delivery service :)</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/07/gdb/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2057,222 +2232,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/03/18/汇编-debug的基础指令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/18/汇编-debug的基础指令/" class="post-title-link" itemprop="url">Unbenannt</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-03-18 15:20:08 / Updated at: 21:48:03" itemprop="dateCreated datePublished" datetime="2019-03-18T15:20:08+08:00">2019-03-18</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>title: 汇编-debug的基础指令<br>date: 2019-03-18 15:20:08<br>tags:<br>categories: 汇编</p>
-<p>debug的使用：</p>
-<p>可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。</p>
-<p>debug的使用：</p>
-<p>可以使用debug查看CPU各种寄存中的内容，内存的情况和在机器码级跟踪程序的运行。</p>
-<p>debug功能：（常见的六个）</p>
-<p>R命令：查看、改变CPU寄存器的内容</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/r1.png" alt="r1"></p>
-<p> <img src="/2019/03/18/汇编-debug的基础指令/r2.png" alt="r2"></p>
-<p>D命令：查看内存中的内容</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/d1.png" alt="d1"></p>
-<p>左边是内存地址 ，内存地址中的对应的内容 右边是ASCII编码 （数字符号，英语字母，标点符号）</p>
-<p>展示128个字节</p>
-<p>也可以使用下面的指令修改</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/d2.png" alt="d2"></p>
-<p>使用d命令只当查看范围后，接着使用d命令，可列出后续的内容</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/d3.png" alt="d3"></p>
-<p>U命令：将内存中的机器指令翻译成汇编指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/u1.png" alt="u1"></p>
-<p> <img src="/2019/03/18/汇编-debug的基础指令/u2.png" alt="u2"></p>
-<p>A指令：以汇编指令的格式在内存中写入一条机器指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/a1.png" alt="a1"></p>
-<p>可以在指定位置写入</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/a2.png" alt="a2"></p>
-<p>T指令：执行一条及其指令</p>
-<p>执行的位置是cs：ip指向的位置</p>
-<p>例如我们要执行 2000：0 位置的指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/t1.png" alt="t1"></p>
-<p>之后就可以执行</p>
-<p> <img src="/2019/03/18/汇编-debug的基础指令/t2.png" alt="t2"></p>
-<p>E命令：改写内存中的内容</p>
-<p>方式1：</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/e1.png" alt="e1"></p>
-<p>方式2：以提问式的方式</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/e2.png" alt="e2"></p>
-<ol>
-<li><p>输入e 2000：0 之后回车，将显示起始地址（图中为2000：0000）和第一个单元（2000：0000）的原始内容（B8），光标将会出现在“.”的后面，</p>
-</li>
-<li><p>此时输入值然后空格可改写原有的内容；不输入直接空格表示不对当前单元改写。</p>
-</li>
-<li><p>输入空格后将自动跳到下一个单元。</p>
-</li>
-<li><p>改写完毕后回车结束e命令</p>
-</li>
-</ol>
-<p>e指令还可以结合ASCLL码使用</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/e3.png" alt="e3"></p>
-<p>可以看到存到内存中的是字符对应的ASCLL码</p>
-<p>例如 0对应30H（十进制的48） a对应61H（十进制的97）A对应41H（十进制的65）</p>
-<p>小知识： 可以按住alt键打出ASCLL码指对应的符号  </p>
-<p>按住alt 输入48 松开 alt，就打出了0, 写65 可以输出对应A </p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/e4.png" alt="e4"></p>
-<p>我们还可以用e命令向内存中写入字符串</p>
-<p>使用e命令向内存中写入机器码，然后用u指令翻译成汇编指令</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/e5.png" alt="e5"></p>
-<p>补充：</p>
-<p>g命令与p命令</p>
-<p>G命令的使用方法是：G [=起始地址]  [断点地址]，意思是从起始地址开始执行到断点地址。如果不设置断点，则程序一直运行到中止指令才停止。</p>
-<p>例如：g 0012 表示将debug从当前的CS:IP指向的指令执行，一直到(IP)=0012h为止</p>
-<p>实例：</p>
-<p>在设置完内存数据并且输入完程序后运行这些汇编代码。在DEBUG中执行命令G=100，观看运行结果。</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/g1.png" alt="g1"></p>
-<p>汇编程序运行后在屏幕上显示出“ABCD”四个字符。</p>
-<p>接下来在DEBUG中执行G=100 10B，意思是从地址CS：100开始，一直运行到CS：10B停止。观看运行结果。</p>
-<p>命令执行后，不但显示出字符串“ABCD”，而且列出当前寄存器和标志位的值。</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/g2.png" alt="g2"></p>
-<p>g命令在loop中的使用：</p>
-<p>使用loop循环时，如果要运行到跳出循环执行后面的代码，（即不用一次次按t一步步执行循环到循环结束）可以先用u命令查看代码的偏移地址，在用g命令跳转到此偏移到此代码处，如下：</p>
-<p><img src="/2019/03/18/汇编-debug的基础指令/g3.jpg" alt="g3"></p>
-<p>用u命令可以看到循环的命令后的地址位于0b40:000B，所以要跳出循环就用 g 000B 即可</p>
-<p>p指令</p>
-<p>使用p指令，debug就会自动重复执行循环中的指令，直到（cx）=0为止</p>
-<p>转移指令</p>
-<p>jmp</p>
-<p>call  将读取该指令后改变的ip保存下来，并执行跳转  ret从内存中拿回保存的地址</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2320,7 +2279,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">78</span>
+                    <span class="site-state-item-count">79</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

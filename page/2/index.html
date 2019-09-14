@@ -353,6 +353,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/14/pwn入门/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/14/pwn入门/" class="post-title-link" itemprop="url">pwn入门（脚本检测与各类防护技术）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-05-14 09:03:11" itemprop="dateCreated datePublished" datetime="2019-05-14T09:03:11+08:00">2019-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-07-13 23:35:48" itemprop="dateModified" datetime="2019-07-13T23:35:48+08:00">2019-07-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="脚本检测与各类防护技术"><a href="#脚本检测与各类防护技术" class="headerlink" title="脚本检测与各类防护技术"></a>脚本检测与各类防护技术</h2><p>使用checksec，</p>
+<h3 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO:"></a>RELRO:</h3><p>在Linux系统安全领域数据可以写的存储区就会是攻击的目标，尤其是存储函数指针的区域，尽量减少可写的存储区域可使安全系数提高。GCC, GNU linker以及Glibc-dynamic linker一起配合实现了一种叫做relro的技术Relocation Read Only, 重定向只读，实现就是由linker指定binary的一块经过dynamic linker处理过 relocation之后的区域为只读。（参考RELRO技术细节）</p>
+<h3 id="Stack-栈溢出检查，"><a href="#Stack-栈溢出检查，" class="headerlink" title="Stack: 栈溢出检查，"></a>Stack: 栈溢出检查，</h3><p>用Canary金丝雀值是否变化来检测,Canary found表示开启。<br>金丝雀最早指的是矿工曾利用金丝雀来确认是否有气体泄漏，如果金丝雀因为气体泄漏而中毒死亡，可以给矿工预警。这里是一种缓冲区溢出攻击缓解手段：启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉，导致栈保护检查失败而阻止shellcode的执行。在Linux将cookie信息称为Canary。</p>
+<h3 id="NX-No-Execute，栈不可执行，"><a href="#NX-No-Execute，栈不可执行，" class="headerlink" title="NX: No Execute，栈不可执行，"></a>NX: No Execute，栈不可执行，</h3><p>也就是windows上的DEP。<br><img src="/2019/05/14/pwn入门/check1.webp" alt=""></p>
+<p> 分析缓冲区溢出攻击，其根源在于现代计算机对数据和代码没有明确区分这一先天缺陷，就目前来看重新去设计计算机体系结构基本上是不可能的，我们只能靠向前兼容的修补来减少溢出带来的损害，DEP就是用来弥补计算机对数据和代码混淆这一天然缺陷的。</p>
+<p>DEP的基本原理是<strong>将数据所在内存页标识为不可执行，当程序溢出成功转入shellcode时，程序会尝试在数据页面上执行指令，此时CPU就会抛出异常，而不是去执行恶意指令。</strong>DEP的主要作用是阻止数据页（如默认的堆页、各种堆栈页以及内存池页）执行代码。硬件DEP需要CPU的支持，AMD和Intel都为此做了设计，AMD称之为No-Execute Page-Protection（NX），Intel称之为Execute Disable Bit（XD）<br>Linux称为 NX 与 DEP原理相同</p>
+<h3 id="PIE-位置无关"><a href="#PIE-位置无关" class="headerlink" title="PIE: 位置无关"></a>PIE: 位置无关</h3><p>position-independent executables, 位置无关的可执行文件，也就是常说的<strong>ASLR(Address space layout randomization) 地址随机化</strong>，<strong>程序每次启动基址都随机</strong>。</p>
+<p>作者：SueLyon<br>链接：<a href="https://www.jianshu.com/p/6e528b33e37a" target="_blank" rel="noopener">https://www.jianshu.com/p/6e528b33e37a</a><br>来源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/07/pwnable-kr8-asm/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2043,181 +2222,6 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/12/pwnable-kr4-flag/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/12/pwnable-kr4-flag/" class="post-title-link" itemprop="url">pwnable-kr4-flag</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-12 22:12:02" itemprop="dateCreated datePublished" datetime="2019-04-12T22:12:02+08:00">2019-04-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-08-16 20:07:47" itemprop="dateModified" datetime="2019-08-16T20:07:47+08:00">2019-08-16</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>题目要求是二进制逆向</p>
-<p>先用64位IDA打开，观察<br><img src="/2019/04/12/pwnable-kr4-flag/1.png" alt=""><br>再根据题目中packed关键词推断存在加壳，再根据binary提示，使用winhex打开文件（也可查看IDA中Hex窗口）<br>可见存在UPX加壳，对于脱壳，Windows可以使用UPX Tool工具，Lunix可以使用命令upx -d 文件名</p>
-<p>发现upx压缩了，linux下使用upx -d<br><img src="/2019/04/12/pwnable-kr4-flag/UPX.PNG" alt=""><br>解压缩之后在ida载入，发现关键代码如下：<br><img src="/2019/04/12/pwnable-kr4-flag/2.PNG" alt=""><br>找到后，输入flag<br><img src="/2019/04/12/pwnable-kr4-flag/3.PNG" alt=""><br>发现不对<br>所以是显示不完全<br>双击 进一步查看<br><img src="/2019/04/12/pwnable-kr4-flag/4.PNG" alt=""><br>或者将脱壳后的文件再用WinHex打开，搜索文本UPX得到flag<br><img src="/2019/04/12/pwnable-kr4-flag/tj.png" alt=""></p>
-<p>flag = UPX…? sounds like a delivery service :)</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2265,7 +2269,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">78</span>
+                    <span class="site-state-item-count">79</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
