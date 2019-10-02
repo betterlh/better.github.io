@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在线：站长工具的解密网站base密码解密 python3.x中如何使用base64、base32、base16编码解码python3.x中如何使用base64、base32、base16编码解码一、base64加密解密加密：    import base64encode = base64.b64encode(b’I love you’)encodeb’SSBsb3ZlIHlvdQ==’解密：imp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杂项工具及代码">
+<meta property="og:url" content="http://betterlh.github.io/2019/09/30/杂项工具及代码/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在线：站长工具的解密网站base密码解密 python3.x中如何使用base64、base32、base16编码解码python3.x中如何使用base64、base32、base16编码解码一、base64加密解密加密：    import base64encode = base64.b64encode(b’I love you’)encodeb’SSBsb3ZlIHlvdQ==’解密：imp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-30T14:14:36.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="杂项工具及代码">
+<meta name="twitter:description" content="在线：站长工具的解密网站base密码解密 python3.x中如何使用base64、base32、base16编码解码python3.x中如何使用base64、base32、base16编码解码一、base64加密解密加密：    import base64encode = base64.b64encode(b’I love you’)encodeb’SSBsb3ZlIHlvdQ==’解密：imp">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/09/30/杂项工具及代码/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>杂项工具及代码 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/09/30/杂项工具及代码/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">杂项工具及代码
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-09-30 11:09:04 / Updated at: 22:14:36" itemprop="dateCreated datePublished" datetime="2019-09-30T11:09:04+08:00">2019-09-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/misc/" itemprop="url" rel="index"><span itemprop="name">misc</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在线：<br><a href="http://tool.chinaz.com/tools/base64.aspx" target="_blank" rel="noopener">站长工具的解密网站</a><br><a href="https://www.qqxiuzi.cn/bianma/base.php" target="_blank" rel="noopener">base密码解密</a></p>
+<h1 id="python3-x中如何使用base64、base32、base16编码解码"><a href="#python3-x中如何使用base64、base32、base16编码解码" class="headerlink" title="python3.x中如何使用base64、base32、base16编码解码"></a>python3.x中如何使用base64、base32、base16编码解码</h1><p>python3.x中如何使用base64、base32、base16编码解码<br>一、base64加密解密<br>加密：</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import base64<br>encode = base64.b64encode(b’I love you’)<br>encode<br>b’SSBsb3ZlIHlvdQ==’<br>解密：<br>import base64<br>decode = base64.b64decode(b’SSBsb3ZlIHlvdQ==’)<br>decode<br>b’I love you’<br>二、base32加密解密<br>跟base64相似就是将base64.b64encode变成base64.b32encode<br>加密：<br>import base64<br>encode = base64.b32encode(b’I love you’)<br>encode<br>b’JEQGY33WMUQHS33V’<br>解密：<br>import base64<br>decode = base64.b32decode(b’JEQGY33WMUQHS33V’)<br>decode<br>b’I love you’<br>三、base16加密解密<br>类似的将base64.b32encode变成base64.b16encode<br>加密解密过程与base64、base32一样，这里就不在赘述</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>如有错误，欢迎指出！<br>————————————————<br>版权声明：本文为CSDN博主「最后的轻语_dd43」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/pdsu161530247/article/details/74840422" target="_blank" rel="noopener">https://blog.csdn.net/pdsu161530247/article/details/74840422</a></p>
+<h1 id="密码学（Crypto）一些在线解密网站"><a href="#密码学（Crypto）一些在线解密网站" class="headerlink" title="密码学（Crypto）一些在线解密网站"></a>密码学（Crypto）一些在线解密网站</h1><p>密码学（Crypto）一些在线解密网站</p>
+<blockquote>
+<p>xssee:<a href="http://web2hack.org/xssee" target="_blank" rel="noopener">http://web2hack.org/xssee</a></p>
+</blockquote>
+<p>xssee:<a href="http://evilcos.me/lab/xssee" target="_blank" rel="noopener">http://evilcos.me/lab/xssee</a></p>
+<p>程默的博客(DES,3DES,AES,RC,Blowfish,Twofish,Serpent,Gost,Rijndael,Cast,Xtea,RSA):<a href="http://tool.chacuo.net/cryptdes" target="_blank" rel="noopener">http://tool.chacuo.net/cryptdes</a></p>
+<p>在线编码解码(多种并排):<a href="http://bianma.911cha.com" target="_blank" rel="noopener">http://bianma.911cha.com</a></p>
+<p>在线加密解密(多种):<a href="http://encode.chahuo.com" target="_blank" rel="noopener">http://encode.chahuo.com</a></p>
+<p>Unicode转中文:<a href="http://www.bejson.com/convert/unicode_chinese" target="_blank" rel="noopener">http://www.bejson.com/convert/unicode_chinese</a></p>
+<p>栅栏密码 &amp;&amp; 凯撒密码 &amp;&amp; 摩斯电码:<a href="http://heartsnote.com/tools/cipher.htm" target="_blank" rel="noopener">http://heartsnote.com/tools/cipher.htm</a></p>
+<p>Caesar cipher(凯撒密码):<a href="http://planetcalc.com/1434/" target="_blank" rel="noopener">http://planetcalc.com/1434/</a></p>
+<p>Quoted-Printable &amp;&amp; ROT13:<a href="http://www.mxcz.net/tools/QuotedPrintable.aspx" target="_blank" rel="noopener">http://www.mxcz.net/tools/QuotedPrintable.aspx</a></p>
+<p>ROT5/13/18/47编码转换:<a href="http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php" target="_blank" rel="noopener">http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php</a></p>
+<p>Base32/16:<a href="http://pbaseconverter.com/" target="_blank" rel="noopener">http://pbaseconverter.com/</a></p>
+<p>Base32:<a href="https://tools.deamwork.com/crypt/decrypt/base32decode.html" target="_blank" rel="noopener">https://tools.deamwork.com/crypt/decrypt/base32decode.html</a></p>
+<p>quipqiup古典密码自动化爆破(词频分析):<a href="http://quipqiup.com/index.php" target="_blank" rel="noopener">http://quipqiup.com/index.php</a></p>
+<p>词频分析/替换:<a href="http://cryptoclub.org/tools/cracksub_topframe.php" target="_blank" rel="noopener">http://cryptoclub.org/tools/cracksub_topframe.php</a></p>
+<p>‘+.&lt;&gt;[]’ &amp;&amp; ‘!.?’(Brainfuck/Ook!):<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook</a></p>
+<p>‘+-.&lt;&gt;[]’(Brainfuck):<a href="https://www.nayuki.io/page/brainfuck-interpreter-javascript" target="_blank" rel="noopener">https://www.nayuki.io/page/brainfuck-interpreter-javascript</a></p>
+<p>‘+-.&lt;&gt;[]’(Brainfuck):<a href="http://esoteric.sange.fi/brainfuck/impl/interp/i.html" target="_blank" rel="noopener">http://esoteric.sange.fi/brainfuck/impl/interp/i.html</a></p>
+<p>‘()[]!+’JavaScript编码(JSfuck):<a href="http://discogscounter.getfreehosting.co.uk/js-noalnum.php" target="_blank" rel="noopener">http://discogscounter.getfreehosting.co.uk/js-noalnum.php</a></p>
+<p>用 6 个字符’()[]!+’来编写 JavaScript 程序(JSfuck同上):<a href="http://www.jsfuck.com/" target="_blank" rel="noopener">http://www.jsfuck.com/</a></p>
+<p><a href="http://patriciopalladino.com/files/hieroglyphy/" target="_blank" rel="noopener">http://patriciopalladino.com/files/hieroglyphy/</a></p>
+<p>摩斯密码翻译器:<a href="http://www.jb51.net/tools/morse.htm" target="_blank" rel="noopener">http://www.jb51.net/tools/morse.htm</a></p>
+<p>Morse Code摩尔斯电码:<a href="http://rumkin.com/tools/cipher/morse.php" target="_blank" rel="noopener">http://rumkin.com/tools/cipher/morse.php</a></p>
+<p>摩尔斯电码转换器:<a href="http://www.zhongguosou.com/zonghe/moErSiCodeConverter.aspx" target="_blank" rel="noopener">http://www.zhongguosou.com/zonghe/moErSiCodeConverter.aspx</a></p>
+<p>字符串编码，解码，转换(长度,反转,进制转换):<a href="http://www.5ixuexiwang.com/str/" target="_blank" rel="noopener">http://www.5ixuexiwang.com/str/</a></p>
+<p>Cisco Type 7 Reverser:<a href="http://packetlife.net/toolbox/type7" target="_blank" rel="noopener">http://packetlife.net/toolbox/type7</a></p>
+<p>Cisco:<a href="http://www.ifm.net.nz/cookbooks/passwordcracker.html" target="_blank" rel="noopener">http://www.ifm.net.nz/cookbooks/passwordcracker.html</a></p>
+<p>cmd5 &amp;&amp; NTLM &amp;&amp; mysql…:<a href="http://www.cmd5.com" target="_blank" rel="noopener">http://www.cmd5.com</a></p>
+<p>spammimic(字符2一段话):<a href="http://www.spammimic.com/" target="_blank" rel="noopener">http://www.spammimic.com/</a></p>
+<p>js代码在线加密解密:<a href="https://tool.lu/js/" target="_blank" rel="noopener">https://tool.lu/js/</a></p>
+<p>JScript/VBscript脚本解密(#@~^….^#~@):<a href="http://www.dheart.net/decode/index.php" target="_blank" rel="noopener">http://www.dheart.net/decode/index.php</a></p>
+<p>VBScript.Encode解密(tip:Asp encode):<a href="http://adophper.com/encode.html" target="_blank" rel="noopener">http://adophper.com/encode.html</a></p>
+<p>JScript.Encode脚本加密与解密:<a href="http://www.haokuwang.com/jsendecode.htm" target="_blank" rel="noopener">http://www.haokuwang.com/jsendecode.htm</a></p>
+<p>‘+/v+’UTF-7加密:<a href="http://web2hack.org/xssee" target="_blank" rel="noopener">http://web2hack.org/xssee</a></p>
+<p>各种无知密码解密:<a href="http://www.tools88.com" target="_blank" rel="noopener">http://www.tools88.com</a></p>
+<p>uuencode解码 &amp;&amp; xxencode解码(古老的邮件密码):<a href="http://web.chacuo.net/charsetuuencode" target="_blank" rel="noopener">http://web.chacuo.net/charsetuuencode</a></p>
+<p>MIME标准(邮件编码的一种):<a href="http://dogmamix.com/MimeHeadersDecoder/" target="_blank" rel="noopener">http://dogmamix.com/MimeHeadersDecoder/</a></p>
+<p>Binhex编码(邮件编码的一种,常见于MAC机):<a href="http://encoders-decoders.online-domain-tools.com/" target="_blank" rel="noopener">http://encoders-decoders.online-domain-tools.com/</a></p>
+<p>%u8001%u9525非/u的hex，%u编码，只能编码汉字(xssee):<a href="http://web.chacuo.net/charsetescape" target="_blank" rel="noopener">http://web.chacuo.net/charsetescape</a></p>
+<p>猪圈密码:<a href="http://www.simonsingh.net/The_Black_Chamber/pigpen.html" target="_blank" rel="noopener">http://www.simonsingh.net/The_Black_Chamber/pigpen.html</a></p>
+<p>ppencode(把Perl代码转换成只有英文字母的字符串):<a href="http://namazu.org/~takesako/ppencode/demo.html" target="_blank" rel="noopener">http://namazu.org/~takesako/ppencode/demo.html</a></p>
+<p>rrencode(把ruby代码全部转换成符号):挂了</p>
+<p>aaencode(JS代码转换成常用的网络表情，也就是我们说的颜文字js加密):<a href="http://utf-8.jp/public/aaencode.html" target="_blank" rel="noopener">http://utf-8.jp/public/aaencode.html</a></p>
+<p>‘()[]!+’ &amp;&amp; ‘$=~[]+”_.();’jother编码jjencode(JS代码转换成只有符号的字符串):<a href="http://web2hack.org/xssee" target="_blank" rel="noopener">http://web2hack.org/xssee</a></p>
+<p>jother（是一种运用于javascript语言中利用少量字符构造精简的匿名函数方法对于字符串进行的编码方式。其中8个少量字符包括：! + ( ) [ ] { }。只用这些字符就能完成对任意字符串的编码）:<a href="http://tmxk.org/jother/" target="_blank" rel="noopener">http://tmxk.org/jother/</a></p>
+<p>jjencode/aaencode可用xssee &amp;&amp; Chrome的Console模式来直接输出解密。</p>
+<p>Manchester曼彻斯特解密：<a href="http://eleif.net/manchester.html" target="_blank" rel="noopener">http://eleif.net/manchester.html</a></p>
+<p>Vigenère维多利亚解密：<a href="https://www.guballa.de/vigenere-solver" target="_blank" rel="noopener">https://www.guballa.de/vigenere-solver</a></p>
+<p>Vigenère cipher:<a href="http://planetcalc.com/2468/" target="_blank" rel="noopener">http://planetcalc.com/2468/</a></p>
+<p>Hill cipher(希尔密码):<a href="http://planetcalc.com/3327/" target="_blank" rel="noopener">http://planetcalc.com/3327/</a></p>
+<p>Atbash cipher(埃特巴什码):<a href="http://planetcalc.com/4647/" target="_blank" rel="noopener">http://planetcalc.com/4647/</a></p>
+<p>snow(html隐写):<a href="http://fog.misty.com/perry/ccs/snow/snow/snow.html" target="_blank" rel="noopener">http://fog.misty.com/perry/ccs/snow/snow/snow.html</a></p>
+<p>Serpent加密解密:<a href="http://serpent.online-domain-tools.com/" target="_blank" rel="noopener">http://serpent.online-domain-tools.com/</a></p>
+<p>十六进制Hex转文本字符串:<a href="http://www.bejson.com/convert/ox2str/" target="_blank" rel="noopener">http://www.bejson.com/convert/ox2str/</a></p>
+<p>Hex2text:<a href="http://www.convertstring.com/EncodeDecode/HexDecode" target="_blank" rel="noopener">http://www.convertstring.com/EncodeDecode/HexDecode</a></p>
+<p>Binary(二进制)，ACSII,Hex(十六进制),Decimal(十进制):<a href="http://www.binaryhexconverter.com/" target="_blank" rel="noopener">http://www.binaryhexconverter.com/</a></p>
+<p>集合:<a href="http://www.qqxiuzi.cn/daohang.htm" target="_blank" rel="noopener">http://www.qqxiuzi.cn/daohang.htm</a></p>
+<p>集合（各种古典密码）:<a href="http://rumkin.com/tools/cipher/" target="_blank" rel="noopener">http://rumkin.com/tools/cipher/</a></p>
+<p>文本加密为汉字(“盲文”，音符，各种语言，花朵，箭头…):<a href="http://www.qqxiuzi.cn/bianma/wenbenjiami.php" target="_blank" rel="noopener">http://www.qqxiuzi.cn/bianma/wenbenjiami.php</a></p>
+<p>在线繁体字转换器:<a href="http://www.aies.cn" target="_blank" rel="noopener">http://www.aies.cn</a></p>
+<p>在线工具集合:<a href="http://tomeko.net/online_tools/" target="_blank" rel="noopener">http://tomeko.net/online_tools/</a></p>
+<p>二维码/条形码:<a href="https://online-barcode-reader.inliteresearch.com/" target="_blank" rel="noopener">https://online-barcode-reader.inliteresearch.com/</a></p>
+<p>生成二维码:<a href="http://www.wwei.cn/" target="_blank" rel="noopener">http://www.wwei.cn/</a></p>
+<p>在线二维码解密:<a href="http://jiema.wwei.cn/" target="_blank" rel="noopener">http://jiema.wwei.cn/</a></p>
+<p>Image2Base64:<a href="http://www.vgot.net/test/image2base64.php" target="_blank" rel="noopener">http://www.vgot.net/test/image2base64.php</a></p>
+<p>与佛论禅:<a href="http://www.keyfc.net/bbs/tools/tudoucode.aspx" target="_blank" rel="noopener">http://www.keyfc.net/bbs/tools/tudoucode.aspx</a></p>
+<p>在线分解GIF帧图:<a href="http://zh.bloggif.com/gif-extract" target="_blank" rel="noopener">http://zh.bloggif.com/gif-extract</a></p>
+<p>bejson(杂乱):<a href="http://www.bejson.com" target="_blank" rel="noopener">http://www.bejson.com</a></p>
+<p>atool(杂乱):<a href="http://www.atool.org" target="_blank" rel="noopener">http://www.atool.org</a></p>
+<p>Punch Card:<a href="http://www.kloth.net/services/cardpunch.php" target="_blank" rel="noopener">http://www.kloth.net/services/cardpunch.php</a></p>
+<p>分解素数(ESA):<a href="http://www.factordb.com/index.php" target="_blank" rel="noopener">http://www.factordb.com/index.php</a></p>
+<p>文件在线Hash:<a href="http://www.atool.org/file_hash.php" target="_blank" rel="noopener">http://www.atool.org/file_hash.php</a></p>
+<p>链接装载自：<a href="http://hack-0.lofter.com/post/1e5974f4_f81b8fe" target="_blank" rel="noopener">http://hack-0.lofter.com/post/1e5974f4_f81b8fe</a></p>
+<blockquote>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/27/misc-bugku/" rel="next" title="misc刷题">
+                <i class="fa fa-chevron-left"></i> misc刷题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python3-x中如何使用base64、base32、base16编码解码"><span class="nav-number">1.</span> <span class="nav-text">python3.x中如何使用base64、base32、base16编码解码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#密码学（Crypto）一些在线解密网站"><span class="nav-number">2.</span> <span class="nav-text">密码学（Crypto）一些在线解密网站</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
