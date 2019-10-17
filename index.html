@@ -353,6 +353,187 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/10/13/各种简单解密/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/10/13/各种简单解密/" class="post-title-link" itemprop="url">各种简单解密</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-10-13 21:20:13" itemprop="dateCreated datePublished" datetime="2019-10-13T21:20:13+08:00">2019-10-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-10-14 19:42:15" itemprop="dateModified" datetime="2019-10-14T19:42:15+08:00">2019-10-14</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="base？（柳暗花明又一村）"><a href="#base？（柳暗花明又一村）" class="headerlink" title="base？（柳暗花明又一村）"></a>base？（柳暗花明又一村）</h2><p>这题很明显的base64加密。<br>但是解密完不是flag，但是感觉短了一些，而且感觉还是base的样子。那就接着搞。重复几遍就出来了。<br>其实看名字就应该要知道这么做的。<br><img src="/2019/10/13/各种简单解密/base-1.PNG" alt=""></p>
+<h2 id="一名合格的特工"><a href="#一名合格的特工" class="headerlink" title="一名合格的特工"></a>一名合格的特工</h2><p>这个摩斯电码没啥说的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-... .- .- -... -... .- .- -... -... -... .- -... .- .- .- -... .- .- -... .- .- -... .- .- .- -... .- .- -... .- .- .- -... .- -... .- -... .- -... -... .- .- .- .- .- .- .- -... -... .-</span><br></pre></td></tr></table></figure></p>
+<p>转完之后得到的是：<br>BAABBAABBBABAAABAABAABAAABAABAAABABABABBAAAAAAABBA</p>
+<p>这个是培根密码<br><a href="http://tool.bugku.com/peigen/" target="_blank" rel="noopener">http://tool.bugku.com/peigen/</a><br>就出来了</p>
+<h2 id="看不懂的JS"><a href="#看不懂的JS" class="headerlink" title="看不懂的JS"></a>看不懂的JS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(function(p,a,c,k,e,r)&#123;e=String;if(!&apos;&apos;.replace(/^/,String))&#123;while(c--)r[c]=k[c]||c;k=[function(e)&#123;return r[e]&#125;];e=function()&#123;return&apos;\\w+&apos;&#125;;c=1&#125;;while(c--)if(k[c])p=p.replace(new RegExp(&apos;\\b&apos;+e(c)+&apos;\\b&apos;,&apos;g&apos;),k[c]);return p&#125;(&apos;0(&quot;1&quot;)&apos;,2,2,&apos;alert|XSS&apos;.split(&apos;|&apos;),0,&#123;&#125;))</span><br></pre></td></tr></table></figure>
+<p>网站<a href="http://www.atool9.com/jscompression.php" target="_blank" rel="noopener">http://www.atool9.com/jscompression.php</a><br><img src="/2019/10/13/各种简单解密/看不懂的JS.PNG" alt=""></p>
+<h2 id="奇怪的字符"><a href="#奇怪的字符" class="headerlink" title="奇怪的字符"></a>奇怪的字符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ [&apos;_&apos;]; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)=&#123;ﾟΘﾟ: &apos;_&apos; ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +&apos;_&apos;) [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ &apos;_&apos;)[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +&apos;_&apos;)[ﾟｰﾟ] &#125;; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +&apos;_&apos;) [c^_^o];(ﾟДﾟ) [&apos;c&apos;] = ((ﾟДﾟ)+&apos;_&apos;) [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) [&apos;o&apos;] = ((ﾟДﾟ)+&apos;_&apos;) [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) [&apos;c&apos;]+(ﾟДﾟ) [&apos;o&apos;]+(ﾟωﾟﾉ +&apos;_&apos;)[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +&apos;_&apos;) [ﾟｰﾟ] + ((ﾟДﾟ) +&apos;_&apos;) [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ]+((ﾟｰﾟ==3) +&apos;_&apos;) [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) [&apos;c&apos;]+((ﾟДﾟ)+&apos;_&apos;) [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ)[&apos;o&apos;]+((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ];(ﾟДﾟ) [&apos;_&apos;] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+&apos;_&apos;) [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +&apos;_&apos;) [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ]+ (ﾟωﾟﾉ +&apos;_&apos;) [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]=&apos;\\&apos;; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +&apos;_&apos;)[c^_^o];(ﾟДﾟ) [ﾟoﾟ]=&apos;\&quot;&apos;;(ﾟДﾟ) [&apos;_&apos;] ( (ﾟДﾟ) [&apos;_&apos;] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (o^_^o)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (o^_^o)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) (&apos;_&apos;);</span><br></pre></td></tr></table></figure>
+<p>这个是aaencode<br>aaencode使用的表情符号对js代码进编码，可以直接在命令行中继续解码，或者在网站进行解码<br><a href="https://www.qtool.net/decode" target="_blank" rel="noopener">https://www.qtool.net/decode</a></p>
+<h2 id="超简单"><a href="#超简单" class="headerlink" title="超简单"></a>超简单</h2><pre><code>ABABAAABAABBAAA
+</code></pre><p>这个一看就是培根加密<br><a href="http://tool.bugku.com/peigen/" target="_blank" rel="noopener">http://tool.bugku.com/peigen/</a><br>老方法解密完事</p>
+<h2 id="栅栏密码"><a href="#栅栏密码" class="headerlink" title="栅栏密码"></a>栅栏密码</h2><p>密文：yawceoreo@uelm@<br>( 提示：3组)<br>用网站解密了，提交flag不对，不太懂为啥</p>
+<h2 id="曲路密码"><a href="#曲路密码" class="headerlink" title="曲路密码"></a>曲路密码</h2><p>手动画图解决，失败了。不懂哪里错了。<br>不过应该就是按照它的定义解码就可以。</p>
+<h2 id="换位密码"><a href="#换位密码" class="headerlink" title="换位密码"></a>换位密码</h2><h2 id="凯撒密码"><a href="#凯撒密码" class="headerlink" title="凯撒密码"></a>凯撒密码</h2><p><a href="https://aliyunvi.com/caesar" target="_blank" rel="noopener">https://aliyunvi.com/caesar</a></p>
+<p><img src="/2019/10/13/各种简单解密/凯撒密码.PNG" alt=""><br>根据提示输入明文 key 然后解密完事</p>
+<h2 id="培根密码"><a href="#培根密码" class="headerlink" title="培根密码"></a>培根密码</h2><p>解密完事</p>
+<h2 id="诺基亚键盘加密1"><a href="#诺基亚键盘加密1" class="headerlink" title="诺基亚键盘加密1"></a>诺基亚键盘加密1</h2><p>题目：<br><code>密文1（带空格和猜测）：843 0 539 0 47 00 9352663 00 367 00 968</code><br>思考ing。。。</p>
+<h2 id="诺基亚键盘加密2"><a href="#诺基亚键盘加密2" class="headerlink" title="诺基亚键盘加密2"></a>诺基亚键盘加密2</h2><p><img src="/2019/10/13/各种简单解密/洛基亚2.PNG" alt=""><br>对着敲  完事</p>
+<h2 id="JS解密-JSFUCK"><a href="#JS解密-JSFUCK" class="headerlink" title="JS解密-JSFUCK"></a>JS解密-JSFUCK</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+[]]+(![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]]+[+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]]</span><br></pre></td></tr></table></figure>
+<p>网站：<a href="http://discogscounter.getfreehosting.co.uk/js-noalnum.php" target="_blank" rel="noopener">http://discogscounter.getfreehosting.co.uk/js-noalnum.php</a><br><img src="/2019/10/13/各种简单解密/JSFUCK.PNG" alt=""><br>或者用浏览器的f12功能，在命令窗口执行下就可以了<br>（这里用的是谷歌）<br><img src="/2019/10/13/各种简单解密/JSFUCK-2.PNG" alt=""></p>
+<h2 id="JS解密-JOTHER"><a href="#JS解密-JOTHER" class="headerlink" title="JS解密-JOTHER"></a>JS解密-JOTHER</h2><p>F12，控制台完事</p>
+<p><img src="/2019/10/13/各种简单解密/JS解密-JOTHER.PNG" alt=""></p>
+<h2 id="JS解密-aaencode"><a href="#JS解密-aaencode" class="headerlink" title="JS解密-aaencode"></a>JS解密-aaencode</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ [&apos;_&apos;]; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)=&#123;ﾟΘﾟ: &apos;_&apos; ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +&apos;_&apos;) [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ &apos;_&apos;)[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +&apos;_&apos;)[ﾟｰﾟ] &#125;; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +&apos;_&apos;) [c^_^o];(ﾟДﾟ) [&apos;c&apos;] = ((ﾟДﾟ)+&apos;_&apos;) [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) [&apos;o&apos;] = ((ﾟДﾟ)+&apos;_&apos;) [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) [&apos;c&apos;]+(ﾟДﾟ) [&apos;o&apos;]+(ﾟωﾟﾉ +&apos;_&apos;)[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +&apos;_&apos;) [ﾟｰﾟ] + ((ﾟДﾟ) +&apos;_&apos;) [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ]+((ﾟｰﾟ==3) +&apos;_&apos;) [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) [&apos;c&apos;]+((ﾟДﾟ)+&apos;_&apos;) [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ)[&apos;o&apos;]+((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ];(ﾟДﾟ) [&apos;_&apos;] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+&apos;_&apos;) [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +&apos;_&apos;) [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +&apos;_&apos;) [ﾟΘﾟ]+ (ﾟωﾟﾉ +&apos;_&apos;) [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]=&apos;\\&apos;; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +&apos;_&apos;)[c^_^o];(ﾟДﾟ) [ﾟoﾟ]=&apos;\&quot;&apos;;(ﾟДﾟ) [&apos;_&apos;] ( (ﾟДﾟ) [&apos;_&apos;] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (o^_^o)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+((o^_^o) +(o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (o^_^o)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) (&apos;_&apos;);</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.qtool.net/decode" target="_blank" rel="noopener">https://www.qtool.net/decode</a></p>
+<p><img src="/2019/10/13/各种简单解密/JS解密-aaencode.PNG" alt=""><br>上面那个好操作些</p>
+<p><a href="http://utf-8.jp/public/aaencode.html" target="_blank" rel="noopener">http://utf-8.jp/public/aaencode.html</a><br><img src="/2019/10/13/各种简单解密/JS解密-aaencode-2.PNG" alt="">点eval</p>
+<h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>解码完事<br><a href="http://tool.chinaz.com/Tools/Unicode.aspx" target="_blank" rel="noopener">http://tool.chinaz.com/Tools/Unicode.aspx</a><br><img src="/2019/10/13/各种简单解密/Unicode.PNG" alt="">这里要点转中文</p>
+<h2 id="摩斯密码"><a href="#摩斯密码" class="headerlink" title="摩斯密码"></a>摩斯密码</h2><p><code>���ģ�--* ** ***- * -*-- --- **-  - **** *  -*- * -*--</code><br>这里是摩斯电码去掉前面的乱码<br>将   –<em> <strong> </strong></em>- <em> -</em>– — <strong>-  - **</strong> <em>  -</em>- <em> -</em>–<br>这个丢尽解码 （对应的字符要修改一下，比如* 和-，因此用了工具）<br><img src="/2019/10/13/各种简单解密/摩斯密码.PNG" alt=""><br>解出来是 giveyou the key</p>
+<h2 id="JS解密-JS混淆"><a href="#JS解密-JS混淆" class="headerlink" title="JS解密-JS混淆"></a>JS解密-JS混淆</h2><p>丢网站完事<br><a href="http://tool.chinaz.com/js.aspx" target="_blank" rel="noopener">http://tool.chinaz.com/js.aspx</a><br>解出来是：<br>alert(“XSS”)</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/09/30/杂项工具及代码/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -398,12 +579,24 @@
                 
               
 
-              <time title="Post created: 2019-09-30 11:09:04 / Updated at: 22:14:36" itemprop="dateCreated datePublished" datetime="2019-09-30T11:09:04+08:00">2019-09-30</time>
+              <time title="Post created: 2019-09-30 11:09:04" itemprop="dateCreated datePublished" datetime="2019-09-30T11:09:04+08:00">2019-09-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-10-13 20:30:27" itemprop="dateModified" datetime="2019-10-13T20:30:27+08:00">2019-10-13</time>
               
             
           </span>
@@ -456,7 +649,7 @@
       
         
           
-            <p>在线：<br><a href="http://tool.chinaz.com/tools/base64.aspx" target="_blank" rel="noopener">站长工具的解密网站</a><br><a href="https://www.qqxiuzi.cn/bianma/base.php" target="_blank" rel="noopener">base密码解密</a></p>
+            <p>在线：<br>各种密码：<a href="https://aliyunvi.com/" target="_blank" rel="noopener">https://aliyunvi.com/</a><br><a href="http://tool.chinaz.com/tools/base64.aspx" target="_blank" rel="noopener">站长工具的解密网站</a><br><a href="https://www.qqxiuzi.cn/bianma/base.php" target="_blank" rel="noopener">base密码解密</a><br><a href="https://blog.csdn.net/dyw_666666/article/details/89973048" target="_blank" rel="noopener">CTF必备密码编码大全</a></p>
 <h1 id="python3-x中如何使用base64、base32、base16编码解码"><a href="#python3-x中如何使用base64、base32、base16编码解码" class="headerlink" title="python3.x中如何使用base64、base32、base16编码解码"></a>python3.x中如何使用base64、base32、base16编码解码</h1><p>python3.x中如何使用base64、base32、base16编码解码<br>一、base64加密解密<br>加密：</p>
 <blockquote>
 <blockquote>
@@ -466,7 +659,7 @@
 </blockquote>
 </blockquote>
 <p>如有错误，欢迎指出！<br>————————————————<br>版权声明：本文为CSDN博主「最后的轻语_dd43」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/pdsu161530247/article/details/74840422" target="_blank" rel="noopener">https://blog.csdn.net/pdsu161530247/article/details/74840422</a></p>
-<h1 id="密码学（Crypto）一些在线解密网站"><a href="#密码学（Crypto）一些在线解密网站" class="headerlink" title="密码学（Crypto）一些在线解密网站"></a>密码学（Crypto）一些在线解密网站</h1><p>密码学（Crypto）一些在线解密网站</p>
+<h1 id="密码学（Crypto）一些在线解密网站"><a href="#密码学（Crypto）一些在线解密网站" class="headerlink" title="密码学（Crypto）一些在线解密网站"></a>密码学（Crypto）一些在线解密网站</h1><p>密码学（Crypto）一些在线解密网站<br>颜文字aaencode  ：<a href="https://www.qtool.net/decode" target="_blank" rel="noopener">https://www.qtool.net/decode</a></p>
 <blockquote>
 <p>xssee:<a href="http://web2hack.org/xssee" target="_blank" rel="noopener">http://web2hack.org/xssee</a></p>
 </blockquote>
@@ -479,6 +672,7 @@
 <p>Caesar cipher(凯撒密码):<a href="http://planetcalc.com/1434/" target="_blank" rel="noopener">http://planetcalc.com/1434/</a></p>
 <p>Quoted-Printable &amp;&amp; ROT13:<a href="http://www.mxcz.net/tools/QuotedPrintable.aspx" target="_blank" rel="noopener">http://www.mxcz.net/tools/QuotedPrintable.aspx</a></p>
 <p>ROT5/13/18/47编码转换:<a href="http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php" target="_blank" rel="noopener">http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php</a></p>
+<p>base系列： <a href="https://www.qqxiuzi.cn/bianma/base.php" target="_blank" rel="noopener">https://www.qqxiuzi.cn/bianma/base.php</a></p>
 <p>Base32/16:<a href="http://pbaseconverter.com/" target="_blank" rel="noopener">http://pbaseconverter.com/</a></p>
 <p>Base32:<a href="https://tools.deamwork.com/crypt/decrypt/base32decode.html" target="_blank" rel="noopener">https://tools.deamwork.com/crypt/decrypt/base32decode.html</a></p>
 <p>quipqiup古典密码自动化爆破(词频分析):<a href="http://quipqiup.com/index.php" target="_blank" rel="noopener">http://quipqiup.com/index.php</a></p>
@@ -543,229 +737,6 @@
 <p>链接装载自：<a href="http://hack-0.lofter.com/post/1e5974f4_f81b8fe" target="_blank" rel="noopener">http://hack-0.lofter.com/post/1e5974f4_f81b8fe</a></p>
 <blockquote>
 </blockquote>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/09/27/misc-bugku/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/09/27/misc-bugku/" class="post-title-link" itemprop="url">misc刷题</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-09-27 15:58:30" itemprop="dateCreated datePublished" datetime="2019-09-27T15:58:30+08:00">2019-09-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-09-30 23:05:02" itemprop="dateModified" datetime="2019-09-30T23:05:02+08:00">2019-09-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/misc/" itemprop="url" rel="index"><span itemprop="name">misc</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p><a href="https://blog.csdn.net/qq_40836553/article/details/79383488" target="_blank" rel="noopener">CTF密码学常见加解密总结</a><br><a href="https://blog.csdn.net/pdsu161530247/article/details/75667218" target="_blank" rel="noopener">CTF中Crypty（密码类）入门必看</a><br><a href="https://blog.csdn.net/qq_43504939/article/details/93247677" target="_blank" rel="noopener"><br>ctf从零到入门0x04：（转载）ctf中最全的（脑洞大开的加密方法）</a><br><a href="https://blog.csdn.net/qq_42114918/article/details/81459780" target="_blank" rel="noopener">CTF隐写总结！</a><br><a href="https://blog.csdn.net/u012486730/article/details/82016706" target="_blank" rel="noopener">CTF常用隐写套路</a></p>
-<h1 id="bugku"><a href="#bugku" class="headerlink" title="bugku"></a>bugku</h1><h2 id="隐写"><a href="#隐写" class="headerlink" title="隐写"></a>隐写</h2><p>解压得到一张图片，放在winhex里看看<br>89 50 4E 47PE头是png照片的，就是说没有可能照片中嵌入了Exif信息</p>
-<p>在查看PNG文件格式时，IHDR后面的八个字节就是宽高的值<br><img src="/2019/09/27/misc-bugku/隐写-1.png" alt=""><br>将图片放在Linux下，发现是打不开的，说明图片被截了<br>将图片的高改成和宽一样,即将A4改成F4，然后另存为<br><img src="/2019/09/27/misc-bugku/隐写-2.GIF" alt=""><br>打开刚存的图片就可以得到FLAG了<br><img src="/2019/09/27/misc-bugku/隐写-3.png" alt=""></p>
-<h2 id="隐写2"><a href="#隐写2" class="headerlink" title="隐写2"></a>隐写2</h2><p>一样binwalk分离<br>得到一个需要密码的flag.rar，根据提示，密码是纯数字，直接爆破就好了。<br><img src="/2019/09/27/misc-bugku/隐写2-1.GIF" alt=""><br>解压后，得到的图片扔进winhex，发现疑似flag： <code>f1@g{eTB1IEFyZSBhIGhAY2tlciE=}</code><br>还需要再base64解码一下。<br>解码的时候，不能带flag和{}字符<br><img src="/2019/09/27/misc-bugku/隐写2-2.GIF" alt=""></p>
-<h2 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h2><p>解压得到一个后缀是pcap的文件，直接wireshark打开，根据题目提示，直接找telnet，然后点追踪流，ok。<br><img src="/2019/09/27/misc-bugku/telnet.GIF" alt=""></p>
-<h2 id="眼见非实"><a href="#眼见非实" class="headerlink" title="眼见非实"></a>眼见非实</h2><p>放到winhex中，发现有50 4B 03 04这是压缩文件的头，还有.docx格式文件，应该压缩包里有一个文档，改文件后缀为.zip,解压得到文档.<br><img src="/2019/09/27/misc-bugku/眼见非实-1.GIF" alt=""><br>得到眼见非实.docx是打不开的，放到winhex中发现还是zip格式的文件<br>继续改后缀为.zip，然后解压得到一个文件夹<br>然后在word-&gt;document.xml中找到了flag<br><img src="/2019/09/27/misc-bugku/眼见非实-2.GIF" alt=""></p>
-<h2 id="啊哒"><a href="#啊哒" class="headerlink" title="啊哒"></a>啊哒</h2><p>解压后发现一个图片<br><img src="/2019/09/27/misc-bugku/阿达-1.GIF" alt="">，应该是有别的东西，分离试一下。<br><img src="/2019/09/27/misc-bugku/阿达-2.GIF" alt=""><br>分离出压缩包，然而需要密码。又要爆破？但是没有提示啊，扔进winhex看一下，发现<br><img src="/2019/09/27/misc-bugku/阿达-3.GIF" alt=""><br>改成txt试一试，发现什么鬼?<br><img src="/2019/09/27/misc-bugku/阿达-4.GIF" alt=""><br>。。。。原来密码要靠前面的东西。<br>在最开始的图片，查看属性：<br><img src="/2019/09/27/misc-bugku/阿达-5.GIF" alt=""><br>这个东西拿去转一下<br><img src="/2019/09/27/misc-bugku/阿达-6.GIF" alt=""><br>十六进制转文本，发现密码？<br><img src="/2019/09/27/misc-bugku/阿达-7.GIF" alt=""><br>成功了。。。。。。</p>
-<h2 id="又是一张"><a href="#又是一张" class="headerlink" title="又是一张"></a>又是一张</h2><p>放到winhex发现这个  Exif<br>老方法：分离<br>emm不知道为啥分离信息有了，就是没有出现预计的东西。一个都没有。跟着大佬们用kali做一下分离<br>成功了，kali就是厉害啊<br><img src="/2019/09/27/misc-bugku/又是一张-1.GIF" alt=""><br>分离好之后，就出来flag了</p>
-<h2 id="猜"><a href="#猜" class="headerlink" title="猜"></a>猜</h2><p>直接百度搜图<br><img src="/2019/09/27/misc-bugku/猜.GIF" alt=""></p>
-<h2 id="宽带泄露"><a href="#宽带泄露" class="headerlink" title="宽带泄露"></a>宽带泄露</h2><p>提示信息，之后会用到<br><img src="/2019/09/27/misc-bugku/宽带信息泄露-1.GIF" alt=""><br>发现下载的是一个 conf.bin的文件，百度后发现是路由器的备份配置文件，用工具Router_Pass_View可以直接打开</p>
-<p>之后由于提示是宽带用户名，直接 ctrl+F 搜索 username 即可得到 flag<br><img src="/2019/09/27/misc-bugku/宽带信息泄露-2.GIF" alt=""></p>
-<h2 id="多种方法解决"><a href="#多种方法解决" class="headerlink" title="多种方法解决"></a>多种方法解决</h2><p>关键字 image：data:image/jpg;base64,<br>尝试过改成图片格式，不行。<br>查看之后发现，是用解密，然后转图（二维码）<br>转成txt文件，然后解密<br>在线解密转图网站：<a href="http://imgbase64.duoshitong.com/" target="_blank" rel="noopener">http://imgbase64.duoshitong.com/</a><br><img src="/2019/09/27/misc-bugku/多种方式解决-1.GIF" alt=""><br>还是要联系题目提示呀。 这样比较容易想到是利用base64转二维码</p>
-<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>解压后，得到一个flagg文件。但是需要别的程序才能打开。<br>emm，题目提示为linux基础，我可以说是毫无基础咯。<br>竟然可以这样操作。。。。。<br><img src="/2019/09/27/misc-bugku/linux.GIF" alt=""></p>
-<h2 id="linux2"><a href="#linux2" class="headerlink" title="linux2"></a>linux2</h2><p><img src="/2019/09/27/misc-bugku/linux2-1.GIF" alt="">这是提示。</p>
-<p>emm，倒腾了一会。<br>结果竟然只是用winhex查找文本就找到flag。<br>和linux有啥关系噢。这名字取的，感觉在误导。</p>
-<p><img src="/2019/09/27/misc-bugku/linux2-2.GIF" alt=""><br><img src="/2019/09/27/misc-bugku/linux2-3.GIF" alt=""></p>
-<h2 id="隐写3"><a href="#隐写3" class="headerlink" title="隐写3"></a>隐写3</h2><p>emm没分离出来<br>winhex查看，果然比较纯。<br>看到IHDR，结合这个图片，确实有可能下面被隐藏了，改一下大小。<br>ok，看到flag。</p>
-<p>竟然和之前的题一样！！！</p>
-<h2 id="爆照"><a href="#爆照" class="headerlink" title="爆照"></a>爆照</h2><p><img src="/2019/09/27/misc-bugku/爆照.GIF" alt=""></p>
-<p>binwalk分离后，有好多8.<br>而且还有一个提示：排序。<br>打开第一个8文件发现，末尾有flag四个字符，那再去别的文件找找？<br>结果并没有这么简单的拼接flag。别的文件并没有像flag的字符。但是我发现88这个文件有熟悉的几个字符：exif   说明可以再分离。那应该是8这个文件分离一次，88分离两次以此类推！<br>emm，还以为我推理错了，结果只是windows下不太行。<br>kali掏出来，放到kali里面还能看到88这个文件有二维码？可以啊，linux还是很给力的东西啊。<br><img src="/2019/09/27/misc-bugku/爆照-1.GIF" alt=""><br>好的，我推理不太正确。那个88文件，二维码直接扫就好了。<br><img src="/2019/09/27/misc-bugku/爆照-2.GIF" alt=""><br>但是这些文件确实有包含东西。</p>
-<p>发现8888可以分离出压缩包，搞起！解压发现二维码，扫描出东西。<br><img src="/2019/09/27/misc-bugku/爆照-3.GIF" alt=""></p>
-<p>888这个文件原来要看属性。emm看来要养成有事没事看属性的习惯。<br>查看属性，没看到啥。emm果然要改成图片，才能看到有用的信息。</p>
-<p>也有大佬说<br>通过vim查看888文件，包含&lt;?xpacket begin ……，这是图片一些有关图像属性的信息。<br><img src="/2019/09/27/misc-bugku/爆照-4.GIF" alt=""><br>所以改成图片看属性。<br><img src="/2019/09/27/misc-bugku/爆照-5.GIF" alt=""><br>base64搞一下<br><img src="/2019/09/27/misc-bugku/爆照-6.GIF" alt=""><br>然后就开始组合flag了<br>根据提示：flag格式 flag{xxx_xxx_xxx}<br>得：flag{bilibili_silisili_panama}</p>
-<p>可以可以，这题有点东西emm</p>
-<h2 id="想蹭网先解密码"><a href="#想蹭网先解密码" class="headerlink" title="想蹭网先解密码"></a>想蹭网先解密码</h2><p>根据提示，可以补全手机号码。别的我就不知道了。<br><img src="/2019/09/27/misc-bugku/想蹭网先解密码-1.GIF" alt=""><br>题解:<br>首先下载wifi.cap 文件，密码为手机号，给了前7位1391040，电话号码一共11位，用脚本生成一个四位数的密码然后加入前缀就是我们的密码字典文件了。<br>跑脚本：<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">## w 写模式，它是不能读的，如果用w模式打开一个已经存在的文件，会清空以前的文件内容，重新写</span></span><br><span class="line"><span class="comment">## w+ 是读写内容，只要沾上w，肯定会清空原来的文件 </span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'wordlist.txt'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">                <span class="keyword">for</span> h <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">                    f.write(<span class="string">'1391040'</span>+str(i)+str(j)+str(k)+str(h)+<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">f.close</span><br></pre></td></tr></table></figure></p>
-<p>得到我们的字典：wordlist.txt</p>
-<p>大佬说：</p>
-<blockquote>
-<p>首先放到wireshark查找，发现很多802.11协议，然后百度了一下802.11具体是啥，然后wifi认证的话重点是在WPA的四次握手，也就是eapol协议的包，使用规则过滤</p>
-</blockquote>
-<p>然后可以利用wifi.cap专用破解工具aircrack-ng -w “字典文件” “.cap 文件”进行破解 wifi.cap 文件密码。得到 KEY。<br><img src="/2019/09/27/misc-bugku/想蹭网先解密码-2.GIF" alt=""><br>选择第3个，WPA<br><img src="/2019/09/27/misc-bugku/想蹭网先解密码-3.GIF" alt=""></p>
-<h2 id="图穷匕见"><a href="#图穷匕见" class="headerlink" title="图穷匕见"></a>图穷匕见</h2><p>图穷flag见，就是说flag在图片的末尾，找到jpg的文件尾FF D9,发现后面还有很多数据<br>将FF D9和前面的数据删除，将剩余的另存为txt文件，使用Notepad++打开<br><img src="/2019/09/27/misc-bugku/图穷匕见-2.GIF" alt=""></p>
-<p>数据按16进制-&gt;ASCII方式解码，步骤：插件-&gt;Converter-&gt;(HEX-&gt;ASCII)，解码之后得到类似于坐标一样的信息<br><img src="/2019/09/27/misc-bugku/图穷匕见-3.GIF" alt=""><br><img src="/2019/09/27/misc-bugku/图穷匕见-4.GIF" alt=""><br>提示还说了会画图吗，把这些坐标绘成一张图，用gnuplot工具绘图，gnuplot能识别的格式 坐标x 坐标y<br>使用脚本将()和,替换掉<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'1.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> file:</span><br><span class="line">    fw = open(<span class="string">'paintpaintpaint.txt'</span>,<span class="string">'w'</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        lines = file.readlines()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> lines:</span><br><span class="line">            <span class="keyword">break</span>       </span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">            fw.write(line.replace(<span class="string">'('</span>,<span class="string">''</span>).replace(<span class="string">')'</span>,<span class="string">''</span>).replace(<span class="string">','</span>,<span class="string">' '</span>))</span><br><span class="line"></span><br><span class="line">file.close</span><br><span class="line">fw.close</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2019/09/27/misc-bugku/图穷匕见-5.GIF" alt=""><br>然后将paintpaintpaint.txt放在kali中使用gnuplot工具绘图<br><img src="/2019/09/27/misc-bugku/图穷匕见-6.GIF" alt=""><br>扫码得到flag</p>
-<h2 id="细心的大象"><a href="#细心的大象" class="headerlink" title="细心的大象"></a>细心的大象</h2><p>属性明显有信息<br><img src="/2019/09/27/misc-bugku/细心的大象-1.GIF" alt=""><br>base64加密了。<br>TVNEUzQ1NkFTRDEyM3p6   -&gt;MSDS456ASD123zz<br>先留着，可能是密码之类的<br>有exif，分离一下。<br>里面有一个加密的压缩包，果然密码就是前面解密的那一串东西。<br>得到的图片一看就是被截断了，改一下flag就出来了。</p>
-<h2 id="账号被盗了"><a href="#账号被盗了" class="headerlink" title="账号被盗了"></a>账号被盗了</h2><p>跟着writeup做。<br>利用burpsuite抓包，修改cookie值，让我们得到admin身份。<br><img src="/2019/09/27/misc-bugku/盗号-1.GIF" alt=""><br>然后就可以发现它里面有一个软件。下载出来。<br><img src="/2019/09/27/misc-bugku/盗号-2.GIF" alt=""><br>运行程序，账号密码随便写(但也不能太随便，不然会提示输入正确的账号密码，应该是账号密码长度不够，之前随便输了一个123)<br><img src="/2019/09/27/misc-bugku/盗号-3.GIF" alt=""><br>抓包分析，tcp流，盯着 user，pass，拿去解密。<br><code>YmtjdGZ0ZXN0QDE2My5jb20=</code>    -&gt; <a href="mailto:bkctftest@163.com" target="_blank" rel="noopener">bkctftest@163.com</a> </p>
-<p><code>YTEyMzQ1Ng==</code> -&gt;<code>a123456</code><br>拿着账号去登入邮箱<br>得到flag<br><img src="/2019/09/27/misc-bugku/盗号-4.GIF" alt=""></p>
-<h2 id="听首音乐"><a href="#听首音乐" class="headerlink" title="听首音乐"></a>听首音乐</h2><p>使用audacity工具打开，发现是音频+摩斯密码<br><img src="/2019/09/27/misc-bugku/听首歌-1.GIF" alt=""><br>将摩斯电码记录下来(记录的时候一定要看仔细)</p>
-<p>摩斯解码，直接提交就ok<br><a href="http://www.zhongguosou.com/zonghe/moErSiCodeConverter.aspx" target="_blank" rel="noopener">摩斯密码在线解密</a></p>
-<h1 id="攻防世界"><a href="#攻防世界" class="headerlink" title="攻防世界"></a>攻防世界</h1><p>参考：<br><a href="https://www.jianshu.com/p/7f20df275efe" target="_blank" rel="noopener">https://www.jianshu.com/p/7f20df275efe</a></p>
-<h2 id="ext3"><a href="#ext3" class="headerlink" title="ext3"></a>ext3</h2><p>这题用到Linux的知识吧。<br>将linux系统光盘放在linux下，在linux光盘目录下使用strings linux|grep flag，查找与flag相关的文件；root模式下使用mount linux /mnt命令将linux光盘挂载在mnt目录下，切换到mnt目录，使用cat O7avZhikgKgbF/flag.txt命令即可对flag内容进行读取，发现是一个base64编码，解密后得到flag.</p>
-<h2 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h2><p>打开pdf，鼠标在里面晃一晃，就发现图后面疑似有文字。<br>复制出来就是flag。</p>
-<h2 id="give-you-flag"><a href="#give-you-flag" class="headerlink" title="give you flag"></a>give you flag</h2><p>一个动图，他在最后面有一个一闪而过的二维码。<br>用stegsolve的查看帧的功能模块查看，发现一个缺少三个定位部分的二维码，将其补全，扫一扫即可。<br><img src="/2019/09/27/misc-bugku/give you flag.GIF" alt=""><br>懒得补全了，就这样吧。。。</p>
-<h1 id="实验室考核"><a href="#实验室考核" class="headerlink" title="实验室考核"></a>实验室考核</h1><h2 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h2><p>丢进去winhex，发现是压缩包，解出来是一个音频和二维码。<br>二维码扫出来的是一个brianfuck拜编码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+++++ ++[-&gt; +++++ ++&lt;]&gt; +.--. +.+++ +++++ .---- ----- .++.. +++.- --...</span><br><span class="line">+++++ +.&lt;</span><br><span class="line">-------------------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook</a><br>翻译出来是<br>201902252228<br><img src="/2019/09/27/misc-bugku/实验室misc2-1.png" alt=""><br>然后就是处理音频了。<br>用到了<br>得到：<br>&#102;&#108;&#97;&#103;&#123;&#80;&#114;&#69;&#116;&#84;&#121;&#95;&#49;&#83;&#99;&#67;&#57;&#48;&#49;&#50;&#95;&#103;&#79;&#48;&#100;&#125;</p>
-<p>百度一下是<a href="http://www.convertstring.com/zh_CN/EncodeDecode/HtmlDecode" target="_blank" rel="noopener">html编码</a>。解码搞定<br>flag{S022y4orr5}</p>
-<h2 id="misc3"><a href="#misc3" class="headerlink" title="misc3"></a>misc3</h2><p>这题看了没思路。跟着题解做一遍<br>放到winhex里是一堆乱码，不懂。用notepad打开，发现是当铺密码。<br>拿去解密得到一串数字<br>63154302635731623246716034145162324651403206116234541146310711606314115230060154324661406106430631575<br>发现没有比8大的数，应该是八进制，转成16进制是<br><img src="/2019/09/27/misc-bugku/实验室misc3-1.GIF" alt=""><br><a href="https://tool.lu/hexconvert/" target="_blank" rel="noopener">在线解</a><br>666c61677b39353738386539353530343139396133323938666135303036353630623463337d<br>再转成flag就出来了<br>flag{95788e95504199a3298fa5006560b4c3}</p>
-<h2 id="misc4"><a href="#misc4" class="headerlink" title="misc4"></a>misc4</h2><p>按照题解做一遍：<br>看到一串1 0 感觉可以变成摩斯电码。<br><img src="/2019/09/27/misc-bugku/实验室misc4-1.GIF" alt=""><br>摩斯电码解密出来后，是base32.也可以根据提示推断出来。<br><img src="/2019/09/27/misc-bugku/实验室misc4-2.GIF" alt=""><br>得到一串字符串，是栅栏密码，解密一下就好了</p>
-<p><img src="/2019/09/27/misc-bugku/实验室misc4-3.GIF" alt=""><br>每组字数为9时得到flag:<br>flag{41e07a7e714db677cbd22b8d82039cd4}</p>
-<h2 id="misc5"><a href="#misc5" class="headerlink" title="misc5"></a>misc5</h2><p>用winhex发现，既有 PNG文件的开头：89504e47 ，又有类似 ZIP文件的开头：504b01314<br><img src="/2019/09/27/misc-bugku/实验室misc5-1.GIF" alt=""><br>删除 89504e47 ，文件后缀添加为 .zip后尝试解压，但是文件会损坏，<br>但是能解压出一个password。<br>IafFRlviO<br>应该是被加密过的密码<br><img src="/2019/09/27/misc-bugku/实验室misc5-2.GIF" alt=""><br>所以要修改 504b1314 为 504b0304 ，可以成功解压。但是需要密码。<br><img src="/2019/09/27/misc-bugku/实验室misc5-3.GIF" alt=""><br>emm突然发现这样也能看到里面的文件，拿到password.txt，但是拿不到那张图，密码是加刀图上的。<br>好吧，好像这是伪加密。搜索 504b0102 ，将后面 09 改为 00<br>这次解压就不需要密码了，成功得到图片和文本。<br>分析文本，，在末尾发现一串编码</p>
-<p><img src="/2019/09/27/misc-bugku/实验室misc5-4.GIF" alt=""></p>
-<p>我解密不出来，贴学长的了</p>
 
           
         
@@ -1362,7 +1333,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-09-26 16:07:30" itemprop="dateModified" datetime="2019-09-26T16:07:30+08:00">2019-09-26</time>
+                <time title="Updated at: 2019-10-15 20:16:24" itemprop="dateModified" datetime="2019-10-15T20:16:24+08:00">2019-10-15</time>
               
             
           </span>
