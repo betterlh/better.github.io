@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="知识点CTF密码学常见加解密总结CTF中Crypty（密码类）入门必看ctf从零到入门0x04：（转载）ctf中最全的（脑洞大开的加密方法）CTF隐写总结！CTF常用隐写套路 bugku隐写解压得到一张图片，放在winhex里看看89 50 4E 47PE头是png照片的，就是说没有可能照片中嵌入了Exif信息 在查看PNG文件格式时，IHDR后面的八个字节就是宽高的值将图片放在Linux下，发现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="misc刷题">
+<meta property="og:url" content="http://betterlh.github.io/2019/10/24/misc刷题/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="知识点CTF密码学常见加解密总结CTF中Crypty（密码类）入门必看ctf从零到入门0x04：（转载）ctf中最全的（脑洞大开的加密方法）CTF隐写总结！CTF常用隐写套路 bugku隐写解压得到一张图片，放在winhex里看看89 50 4E 47PE头是png照片的，就是说没有可能照片中嵌入了Exif信息 在查看PNG文件格式时，IHDR后面的八个字节就是宽高的值将图片放在Linux下，发现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/隐写-1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/隐写-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/隐写-3.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/隐写2-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/隐写2-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/telnet.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/眼见非实-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/眼见非实-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/阿达-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/阿达-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/阿达-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/阿达-4.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/阿达-5.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/阿达-6.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/阿达-7.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/又是一张-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猜.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/宽带信息泄露-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/宽带信息泄露-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/多种方式解决-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/linux.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/linux2-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/linux2-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/linux2-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/爆照.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/爆照-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/爆照-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/爆照-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/爆照-4.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/爆照-5.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/爆照-6.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/想蹭网先解密码-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/想蹭网先解密码-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/想蹭网先解密码-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/图穷匕见-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/图穷匕见-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/图穷匕见-4.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/图穷匕见-5.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/图穷匕见-6.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/细心的大象-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/盗号-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/盗号-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/盗号-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/盗号-4.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/听首歌-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/坚持60s-0.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/闪的好快-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猫片-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猫片-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猫片-3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猫片-4.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猫片.webp">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猫片-5.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/猫片-6.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/comegame.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/comegame-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/comegame-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/comegame-3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/多彩-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/乌云的邀请码-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/神秘的文件-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/神秘的文件-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/神秘的文件-3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/神秘的文件-4.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/怀疑人生-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/give%20you%20flag.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/stegano-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/stegano-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/SimpleRAR-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/坚持60s-0.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/坚持60s-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/坚持60s-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/gif-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/gif-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/如来十三掌-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/如来十三掌-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/base64stego-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/功夫再高也怕菜刀-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/功夫再高也怕菜刀-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/功夫再高也怕菜刀-3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/Avatar.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/whatisthis-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/whatisthis-0.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/whatisthis.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/Training-Stegano-1-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/getthekey-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/Excaliflag.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/glance50-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/4-2.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc2-1.png">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc3-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc4-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc4-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc4-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc5-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc5-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc5-3.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc刷题/实验室misc5-4.GIF">
+<meta property="og:updated_time" content="2019-10-24T12:09:40.543Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="misc刷题">
+<meta name="twitter:description" content="知识点CTF密码学常见加解密总结CTF中Crypty（密码类）入门必看ctf从零到入门0x04：（转载）ctf中最全的（脑洞大开的加密方法）CTF隐写总结！CTF常用隐写套路 bugku隐写解压得到一张图片，放在winhex里看看89 50 4E 47PE头是png照片的，就是说没有可能照片中嵌入了Exif信息 在查看PNG文件格式时，IHDR后面的八个字节就是宽高的值将图片放在Linux下，发现">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/10/24/misc刷题/隐写-1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/10/24/misc刷题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>misc刷题 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/10/24/misc刷题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">misc刷题
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-10-24 19:48:09 / Updated at: 20:09:40" itemprop="dateCreated datePublished" datetime="2019-10-24T19:48:09+08:00">2019-10-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p><a href="https://blog.csdn.net/qq_40836553/article/details/79383488" target="_blank" rel="noopener">CTF密码学常见加解密总结</a><br><a href="https://blog.csdn.net/pdsu161530247/article/details/75667218" target="_blank" rel="noopener">CTF中Crypty（密码类）入门必看</a><br><a href="https://blog.csdn.net/qq_43504939/article/details/93247677" target="_blank" rel="noopener"><br>ctf从零到入门0x04：（转载）ctf中最全的（脑洞大开的加密方法）</a><br><a href="https://blog.csdn.net/qq_42114918/article/details/81459780" target="_blank" rel="noopener">CTF隐写总结！</a><br><a href="https://blog.csdn.net/u012486730/article/details/82016706" target="_blank" rel="noopener">CTF常用隐写套路</a></p>
+<h1 id="bugku"><a href="#bugku" class="headerlink" title="bugku"></a>bugku</h1><h2 id="隐写"><a href="#隐写" class="headerlink" title="隐写"></a>隐写</h2><p>解压得到一张图片，放在winhex里看看<br>89 50 4E 47PE头是png照片的，就是说没有可能照片中嵌入了Exif信息</p>
+<p>在查看PNG文件格式时，IHDR后面的八个字节就是宽高的值<br><img src="/2019/10/24/misc刷题/隐写-1.png" alt=""><br>将图片放在Linux下，发现是打不开的，说明图片被截了<br>将图片的高改成和宽一样,即将A4改成F4，然后另存为<br><img src="/2019/10/24/misc刷题/隐写-2.GIF" alt=""><br>打开刚存的图片就可以得到FLAG了<br><img src="/2019/10/24/misc刷题/隐写-3.png" alt=""></p>
+<h2 id="隐写2"><a href="#隐写2" class="headerlink" title="隐写2"></a>隐写2</h2><p>一样binwalk分离<br>得到一个需要密码的flag.rar，根据提示，密码是纯数字，直接爆破就好了。<br><img src="/2019/10/24/misc刷题/隐写2-1.GIF" alt=""><br>解压后，得到的图片扔进winhex，发现疑似flag： <code>f1@g{eTB1IEFyZSBhIGhAY2tlciE=}</code><br>还需要再base64解码一下。<br>解码的时候，不能带flag和{}字符<br><img src="/2019/10/24/misc刷题/隐写2-2.GIF" alt=""></p>
+<h2 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h2><p>解压得到一个后缀是pcap的文件，直接wireshark打开，根据题目提示，直接找telnet，然后点追踪流，ok。<br><img src="/2019/10/24/misc刷题/telnet.GIF" alt=""></p>
+<h2 id="眼见非实"><a href="#眼见非实" class="headerlink" title="眼见非实"></a>眼见非实</h2><p>放到winhex中，发现有50 4B 03 04这是压缩文件的头，还有.docx格式文件，应该压缩包里有一个文档，改文件后缀为.zip,解压得到文档.<br><img src="/2019/10/24/misc刷题/眼见非实-1.GIF" alt=""><br>得到眼见非实.docx是打不开的，放到winhex中发现还是zip格式的文件<br>继续改后缀为.zip，然后解压得到一个文件夹<br>然后在word-&gt;document.xml中找到了flag<br><img src="/2019/10/24/misc刷题/眼见非实-2.GIF" alt=""></p>
+<h2 id="啊哒"><a href="#啊哒" class="headerlink" title="啊哒"></a>啊哒</h2><p>解压后发现一个图片<br><img src="/2019/10/24/misc刷题/阿达-1.GIF" alt="">，应该是有别的东西，分离试一下。<br><img src="/2019/10/24/misc刷题/阿达-2.GIF" alt=""><br>分离出压缩包，然而需要密码。又要爆破？但是没有提示啊，扔进winhex看一下，发现<br><img src="/2019/10/24/misc刷题/阿达-3.GIF" alt=""><br>改成txt试一试，发现什么鬼?<br><img src="/2019/10/24/misc刷题/阿达-4.GIF" alt=""><br>。。。。原来密码要靠前面的东西。<br>在最开始的图片，查看属性：<br><img src="/2019/10/24/misc刷题/阿达-5.GIF" alt=""><br>这个东西拿去转一下<br><img src="/2019/10/24/misc刷题/阿达-6.GIF" alt=""><br>十六进制转文本，发现密码？<br><img src="/2019/10/24/misc刷题/阿达-7.GIF" alt=""><br>成功了。。。。。。</p>
+<h2 id="又是一张"><a href="#又是一张" class="headerlink" title="又是一张"></a>又是一张</h2><p>放到winhex发现这个  Exif<br>老方法：分离<br>emm不知道为啥分离信息有了，就是没有出现预计的东西。一个都没有。跟着大佬们用kali做一下分离<br>成功了，kali就是厉害啊<br><img src="/2019/10/24/misc刷题/又是一张-1.GIF" alt=""><br>分离好之后，就出来flag了</p>
+<h2 id="猜"><a href="#猜" class="headerlink" title="猜"></a>猜</h2><p>直接百度搜图<br><img src="/2019/10/24/misc刷题/猜.GIF" alt=""></p>
+<h2 id="宽带泄露"><a href="#宽带泄露" class="headerlink" title="宽带泄露"></a>宽带泄露</h2><p>提示信息，之后会用到<br><img src="/2019/10/24/misc刷题/宽带信息泄露-1.GIF" alt=""><br>发现下载的是一个 conf.bin的文件，百度后发现是路由器的备份配置文件，用工具Router_Pass_View可以直接打开</p>
+<p>之后由于提示是宽带用户名，直接 ctrl+F 搜索 username 即可得到 flag<br><img src="/2019/10/24/misc刷题/宽带信息泄露-2.GIF" alt=""></p>
+<h2 id="多种方法解决"><a href="#多种方法解决" class="headerlink" title="多种方法解决"></a>多种方法解决</h2><p>关键字 image：data:image/jpg;base64,<br>尝试过改成图片格式，不行。<br>查看之后发现，是用解密，然后转图（二维码）<br>转成txt文件，然后解密<br>在线解密转图网站：<a href="http://imgbase64.duoshitong.com/" target="_blank" rel="noopener">http://imgbase64.duoshitong.com/</a><br><img src="/2019/10/24/misc刷题/多种方式解决-1.GIF" alt=""><br>还是要联系题目提示呀。 这样比较容易想到是利用base64转二维码</p>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><p>解压后，得到一个flag文件。但是需要别的程序才能打开。<br>emm，题目提示为linux基础，可以说是毫无基础咯。<br>竟然可以这样操作。。。。。<br><img src="/2019/10/24/misc刷题/linux.GIF" alt=""></p>
+<h2 id="linux2"><a href="#linux2" class="headerlink" title="linux2"></a>linux2</h2><p><img src="/2019/10/24/misc刷题/linux2-1.GIF" alt="">这是提示。</p>
+<p>emm，倒腾了一会。<br>结果竟然只是用winhex查找文本就找到flag。<br>和linux有啥关系噢。这名字取的，感觉在误导。</p>
+<p><img src="/2019/10/24/misc刷题/linux2-2.GIF" alt=""><br><img src="/2019/10/24/misc刷题/linux2-3.GIF" alt=""></p>
+<h2 id="隐写3"><a href="#隐写3" class="headerlink" title="隐写3"></a>隐写3</h2><p>emm没分离出来<br>winhex查看，果然比较纯。<br>看到IHDR，结合这个图片，确实有可能下面被隐藏了，改一下大小。<br>ok，看到flag。</p>
+<p>竟然和之前的题一样！！！</p>
+<h2 id="爆照"><a href="#爆照" class="headerlink" title="爆照"></a>爆照</h2><p><img src="/2019/10/24/misc刷题/爆照.GIF" alt=""></p>
+<p>binwalk分离后，有好多8.<br>而且还有一个提示：排序。<br>打开第一个8文件发现，末尾有flag四个字符，那再去别的文件找找？<br>结果并没有这么简单的拼接flag。别的文件并没有像flag的字符。但是我发现88这个文件有熟悉的几个字符：exif   说明可以再分离。那应该是8这个文件分离一次，88分离两次以此类推！<br>emm，还以为我推理错了，结果只是windows下不太行。<br>kali掏出来，放到kali里面还能看到88这个文件有二维码？可以啊，linux还是很给力的东西啊。<br><img src="/2019/10/24/misc刷题/爆照-1.GIF" alt=""><br>好的，我推理不太正确。那个88文件，二维码直接扫就好了。<br><img src="/2019/10/24/misc刷题/爆照-2.GIF" alt=""><br>但是这些文件确实有包含东西。</p>
+<p>发现8888可以分离出压缩包，搞起！解压发现二维码，扫描出东西。<br><img src="/2019/10/24/misc刷题/爆照-3.GIF" alt=""></p>
+<p>888这个文件原来要看属性。emm看来要养成有事没事看属性的习惯。<br>查看属性，没看到啥。emm果然要改成图片，才能看到有用的信息。</p>
+<p>也有大佬说<br>通过vim查看888文件，包含&lt;?xpacket begin ……，这是图片一些有关图像属性的信息。<br><img src="/2019/10/24/misc刷题/爆照-4.GIF" alt=""><br>所以改成图片看属性。<br><img src="/2019/10/24/misc刷题/爆照-5.GIF" alt=""><br>base64搞一下<br><img src="/2019/10/24/misc刷题/爆照-6.GIF" alt=""><br>然后就开始组合flag了<br>根据提示：flag格式 flag{xxx_xxx_xxx}<br>得：flag{bilibili_silisili_panama}</p>
+<p>可以可以，这题有点东西emm</p>
+<h2 id="想蹭网先解密码"><a href="#想蹭网先解密码" class="headerlink" title="想蹭网先解密码"></a>想蹭网先解密码</h2><p>根据提示，可以补全手机号码。别的我就不知道了。<br><img src="/2019/10/24/misc刷题/想蹭网先解密码-1.GIF" alt=""><br>题解:<br>首先下载wifi.cap 文件，密码为手机号，给了前7位1391040，电话号码一共11位，用脚本生成一个四位数的密码然后加入前缀就是我们的密码字典文件了。<br>跑脚本：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">## w 写模式，它是不能读的，如果用w模式打开一个已经存在的文件，会清空以前的文件内容，重新写</span></span><br><span class="line"><span class="comment">## w+ 是读写内容，只要沾上w，肯定会清空原来的文件 </span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'wordlist.txt'</span>,<span class="string">'w+'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">                <span class="keyword">for</span> h <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">                    f.write(<span class="string">'1391040'</span>+str(i)+str(j)+str(k)+str(h)+<span class="string">'\n'</span>)</span><br><span class="line"></span><br><span class="line">f.close</span><br></pre></td></tr></table></figure>
+<p>得到我们的字典：wordlist.txt</p>
+<p>大佬说：</p>
+<blockquote>
+<p>首先放到wireshark查找，发现很多802.11协议，然后百度了一下802.11具体是啥，然后wifi认证的话重点是在WPA的四次握手，也就是eapol协议的包，使用规则过滤</p>
+</blockquote>
+<p>然后可以利用wifi.cap专用破解工具aircrack-ng -w “字典文件” “.cap 文件”进行破解 wifi.cap 文件密码。得到 KEY。<br><img src="/2019/10/24/misc刷题/想蹭网先解密码-2.GIF" alt=""><br>选择第3个，WPA<br><img src="/2019/10/24/misc刷题/想蹭网先解密码-3.GIF" alt=""></p>
+<h2 id="图穷匕见"><a href="#图穷匕见" class="headerlink" title="图穷匕见"></a>图穷匕见</h2><p>图穷flag见，就是说flag在图片的末尾，找到jpg的文件尾FF D9,发现后面还有很多数据<br>将FF D9和前面的数据删除，将剩余的另存为txt文件，使用Notepad++打开<br><img src="/2019/10/24/misc刷题/图穷匕见-2.GIF" alt=""></p>
+<p>数据按16进制-&gt;ASCII方式解码，步骤：插件-&gt;Converter-&gt;(HEX-&gt;ASCII)，解码之后得到类似于坐标一样的信息<br><img src="/2019/10/24/misc刷题/图穷匕见-3.GIF" alt=""><br><img src="/2019/10/24/misc刷题/图穷匕见-4.GIF" alt=""><br>提示还说了会画图吗，把这些坐标绘成一张图，用gnuplot工具绘图，gnuplot能识别的格式 坐标x 坐标y<br>使用脚本将()和,替换掉</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'1.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> file:</span><br><span class="line">    fw = open(<span class="string">'paintpaintpaint.txt'</span>,<span class="string">'w'</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        lines = file.readlines()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> lines:</span><br><span class="line">            <span class="keyword">break</span>       </span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">            fw.write(line.replace(<span class="string">'('</span>,<span class="string">''</span>).replace(<span class="string">')'</span>,<span class="string">''</span>).replace(<span class="string">','</span>,<span class="string">' '</span>))</span><br><span class="line"></span><br><span class="line">file.close</span><br><span class="line">fw.close</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/10/24/misc刷题/图穷匕见-5.GIF" alt=""><br>然后将paintpaintpaint.txt放在kali中使用gnuplot工具绘图<br><img src="/2019/10/24/misc刷题/图穷匕见-6.GIF" alt=""><br>扫码得到flag</p>
+<h2 id="细心的大象"><a href="#细心的大象" class="headerlink" title="细心的大象"></a>细心的大象</h2><p>属性明显有信息<br><img src="/2019/10/24/misc刷题/细心的大象-1.GIF" alt=""><br>base64加密了。<br>TVNEUzQ1NkFTRDEyM3p6   -&gt;MSDS456ASD123zz<br>先留着，可能是密码之类的<br>有exif，分离一下。<br>里面有一个加密的压缩包，果然密码就是前面解密的那一串东西。<br>得到的图片一看就是被截断了，改一下flag就出来了。</p>
+<h2 id="账号被盗了"><a href="#账号被盗了" class="headerlink" title="账号被盗了"></a>账号被盗了</h2><p>跟着writeup做。<br>利用burpsuite抓包，修改cookie值，让我们得到admin身份。<br><img src="/2019/10/24/misc刷题/盗号-1.GIF" alt=""><br>然后就可以发现它里面有一个软件。下载出来。<br><img src="/2019/10/24/misc刷题/盗号-2.GIF" alt=""><br>运行程序，账号密码随便写(但也不能太随便，不然会提示输入正确的账号密码，应该是账号密码长度不够，之前随便输了一个123)<br><img src="/2019/10/24/misc刷题/盗号-3.GIF" alt=""><br>抓包分析，tcp流，盯着 user，pass，拿去解密。<br><code>YmtjdGZ0ZXN0QDE2My5jb20=</code>    -&gt; <a href="mailto:bkctftest@163.com" target="_blank" rel="noopener">bkctftest@163.com</a> </p>
+<p><code>YTEyMzQ1Ng==</code> -&gt;<code>a123456</code><br>拿着账号去登入邮箱<br>得到flag<br><img src="/2019/10/24/misc刷题/盗号-4.GIF" alt=""></p>
+<h2 id="听首音乐"><a href="#听首音乐" class="headerlink" title="听首音乐"></a>听首音乐</h2><p>使用audacity工具打开，发现是音频+摩斯密码<br><img src="/2019/10/24/misc刷题/听首歌-1.GIF" alt=""><br>将摩斯电码记录下来(记录的时候一定要看仔细)</p>
+<p>摩斯解码，直接提交就ok<br><a href="http://www.zhongguosou.com/zonghe/moErSiCodeConverter.aspx" target="_blank" rel="noopener">摩斯密码在线解密</a></p>
+<h2 id="做个游戏"><a href="#做个游戏" class="headerlink" title="做个游戏"></a>做个游戏</h2><p>这题和攻防世界里面的一题是一样的</p>
+<p>这题是一个java写的程序直接反编译走起。<br><img src="/2019/10/24/misc刷题/坚持60s-0.PNG" alt=""><br>就发现flag了。提交发现不对，可以看到flag后面有一个’=’这个字符。<br>这是base64加密过的，将{}里面的拿去base64解密，就可以了。<br>最后的是解密完是：DajiDali_JinwanChiji</p>
+<h2 id="闪的好快"><a href="#闪的好快" class="headerlink" title="闪的好快"></a>闪的好快</h2><p>这个下载完用工具搞定<br><img src="/2019/10/24/misc刷题/闪的好快-1.GIF" alt=""><br>逐帧扫码就可以了，总共有18个<br>SYC{F1aSh_so_f4sT}</p>
+<h2 id="猫片"><a href="#猫片" class="headerlink" title="猫片"></a>猫片</h2><p>新的知识呀。<br>摘自：<a href="https://www.cnblogs.com/liuzeyu12a/p/10033384.html" target="_blank" rel="noopener">bugkuCTF—杂项—猫片(安恒)</a><br><img src="/2019/10/24/misc刷题/猫片-1.PNG" alt=""><br>然后保存bin<br>winhex打开，看文件头是png格式的。但是PNG (png)的正常的文件头：89504E47，所以们将他前面的FFFF删掉保存退出。然后改后缀名打开，发现只有一半的二维码，改下高度试试。<br>在查看PNG文件格式时，IHDR后面的八个字节就是宽高的值<br><img src="/2019/10/24/misc刷题/猫片-2.PNG" alt=""><br>用手机就扫出来，是百度网盘上的一个flag.rar文件。<br>emmm，用QR扫的时候没出来，老老实实把宽高改成一样，就能扫出来了。<br><img src="/2019/10/24/misc刷题/猫片-3.PNG" alt=""><br>但是看别人的题解发现：</p>
+<blockquote>
+<p>接着我们就得到一个二维码了，但实际上这个是扫不出来的，还需要对这个二维码进行反色处理，才能进行扫码，这里可以使用Q Research工具直接得到一个链接：<a href="https://pan.baidu.com/s/1pLT2J4f" target="_blank" rel="noopener">https://pan.baidu.com/s/1pLT2J4f</a></p>
+</blockquote>
+<p>emm我真是走运，学了一下，用windows自带的画图就可以了<br>画板按“shift”+“ctrl”+“i”进行反色之后再扫码，<br><img src="/2019/10/24/misc刷题/猫片-4.PNG" alt=""></p>
+<p>下载后解压得到一个文本，写着：<code>flag不在这里哦  你猜猜flag在哪里呢？  找找看吧</code><br>那应该是这个压缩包有东西在里面吧，试试放到winhex查看rar文件<br>这里看到这个 pyc 感觉是不是没把这个搞出来呀，试一下分离，没搞出来。</p>
+<p>原来提示：<br>hint:LSB BGR NTFS<br>还有一个NTFS没有用上<br>根据大佬的说法，这是一种流隐写，需要用到工具 ntfstreamseditor，<br>大佬还说这里还有一个坑就是，这压缩文件一定要用winrar来解压才会产生这样的效果<br><img src="/2019/10/24/misc刷题/猫片.webp" alt=""><br>但是我没看到。<br>接着用ntfstreamseditor，查看解压的文件夹里面的数据流，然后把他导出来.<br><img src="/2019/10/24/misc刷题/猫片-5.PNG" alt=""><br>得到一个pyc文件，也就是py编译后的文件，因此需要扔到网上去在线反编译一下<br>（似乎可以用卡里工具？将得到的pyc文件用uncompyle6反编译之后得到py文件）<br><a href="https://tool.lu/pyc/" target="_blank" rel="noopener">网址</a><br><img src="/2019/10/24/misc刷题/猫片-6.PNG" alt=""><br>根据它的加密写出对应的解密脚本<br>脚本跑一下得：</p>
+<p>flag{Y@e_Cl3veR_C1Ever!}<br>完成了。</p>
+<h2 id="白哥的鸽子"><a href="#白哥的鸽子" class="headerlink" title="白哥的鸽子"></a>白哥的鸽子</h2><p>修改文件头，加.jpeg后缀。看到图。 并且在winhex看到熟悉的exif。分离走起，没有东西。<br>再看winhex，结尾好像有点东西<br>当3组的时候，出来了<br>flag{w22_is_v3ry_cool}</p>
+<h2 id="come-game"><a href="#come-game" class="headerlink" title="come_game"></a>come_game</h2><p>一个游戏，随便玩了一下。之后想放到工具里，但是不是jar程序。<br>结合提示应该是只要通关就行了，当然应该不容易过。等会应该要修改数据过的。<br>发现玩了之后，出现文件<br><img src="/2019/10/24/misc刷题/comegame.PNG" alt=""><br>可以发现玩第一关的话会出现一个save1，第2个的时候出现save2，<br><img src="/2019/10/24/misc刷题/comegame-1.PNG" alt=""><br>这里的2应该是值关卡，我们往后调一下它的值<br>我们修改第三个的save3的关卡值为4，进去之后到load那读取一下进度，发现到了下一关。<br>接着改成35代表的第5关<br><img src="/2019/10/24/misc刷题/comegame-2.PNG" alt=""><br>load那读取一下进度，就出来flag了<br><img src="/2019/10/24/misc刷题/comegame-3.PNG" alt=""><br>flag{6E23F259D98DF153}<br>提交之后没有成功，不知道原因，但是看了大佬之后发现。<br>SYC{6E23F259D98DF153}，原来是格式有问题。</p>
+<h2 id="多彩"><a href="#多彩" class="headerlink" title="多彩"></a>多彩</h2><p>看了wp，知道是N1CTF2018 的Lipstick  不简单！！！<br>这道题没啥思路，不太懂。<br>再结合图片的名称lipstick(口红)，百度一下，发现YSL是个化妆品品牌。</p>
+<p>用data extract提取数据，发现<br><img src="/2019/10/24/misc刷题/多彩-1.PNG" alt=""><br>保存bin。并且改成zip。<br>发现文件损坏，丢到winhex发现，文件头有问题，改一下，可以看到里面有flag文件了，但是解压的时候还是会报错。<br>看网上说是要用7z解压，试了下，发现要密码。而且这个不是伪加密，只能从图片中找信息。</p>
+<p>然后。。。。。。。<br>我靠，恶心，这脑洞。。。<br>看wp：<a href="https://www.secpulse.com/archives/69465.html" target="_blank" rel="noopener">https://www.secpulse.com/archives/69465.html</a><br>还要搞口红色号 我醉了，不做了。。</p>
+<h2 id="旋转跳跃"><a href="#旋转跳跃" class="headerlink" title="旋转跳跃"></a>旋转跳跃</h2><p>这题是音频隐写，直接用工具。题目告诉我们key了 key：syclovergeek<br>那就用MP3Stego执行命令：<br><code>Decode.exe  -X sycgeek-mp3.mp3 -P syclovergeek</code><br>得flag：<br>SYC{Mp3_B15b1uBiu_W0W}</p>
+<h2 id="普通的二维码"><a href="#普通的二维码" class="headerlink" title="普通的二维码"></a>普通的二维码</h2><p>扫描二维码后，得到内容是：  哈哈!就不告诉你flag就在这里!<br>那看来flag就是用这个图做文章了。丢尽winhex结尾有一串数字，没有比8大的，应该是8进制，转16进制<br>cc6c3099cf648309d8ca5f3c8c0aa5f281e4be73319c8d2703a17c9e743197ca86f2f950ca6e2f904e663349a4427d<br>再转ascii码的时候是乱码了<br>其实这里要理一下思路，不能用工具乱转。<br>8进制先转成10进制然后再转ascii。但是这里不能惯性思维啊！平时的时候是两个16进制直接转ascii。忘记了其实转ascii的时候都要想一下怎么转才行。<br>别人的思路：<br>16进制的惯性思维，让我以为这里也是两两一对的转换，转换出来自然不正确，一堆乱码，后来发现两位的8进制数据最大077（数字前加0表示8进制），转换成10进制63也表示不完ascii码表上的字符啊，而且126刚好也是3的倍数，所以三个一组来转换，如下脚本：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f=open(<span class="string">"1.txt"</span>,<span class="string">'r'</span>)</span><br><span class="line">res=<span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">42</span>):</span><br><span class="line">    s=eval(<span class="string">'0'</span>+f.read(<span class="number">3</span>))</span><br><span class="line">    res+=chr(int(s))</span><br><span class="line"><span class="keyword">print</span> res   </span><br><span class="line">raw_input()</span><br></pre></td></tr></table></figure>
+<h2 id="乌云的验证码"><a href="#乌云的验证码" class="headerlink" title="乌云的验证码"></a>乌云的验证码</h2><p>这个用stegsolve后，<br>（细心的还可以发现red0，green0，blue0左上角的您好上面好像有什么隐藏的东西）<br>用之前学到的东西试一下，<br><img src="/2019/10/24/misc刷题/乌云的邀请码-1.PNG" alt="">得到flag </p>
+<h2 id="神秘的文件"><a href="#神秘的文件" class="headerlink" title="神秘的文件"></a>神秘的文件</h2><p>解压得到一个flag压缩包，和一张图。压缩包加密了，应该是图上有密码。<br>对图整了一会，没出来。<br>结果是爆破就行？<br><img src="/2019/10/24/misc刷题/神秘的文件-1.PNG" alt="破解Zip加密文件常用的几种方法"><br>参考文章,学到东西，值得一读<br>[]<a href="https://www.cnblogs.com/ECJTUACM-873284962/p/9387711.html" target="_blank" rel="noopener">https://www.cnblogs.com/ECJTUACM-873284962/p/9387711.html</a><br><a href="https://www.cnblogs.com/ECJTUACM-873284962/p/9884416.html" target="_blank" rel="noopener">记一道明文破解的漫长斗争史</a></p>
+<p><img src="/2019/10/24/misc刷题/神秘的文件-2.PNG" alt=""><br>在明文攻击时，要注意压缩成同类型。这题用的是winRAR。<br><img src="/2019/10/24/misc刷题/神秘的文件-3.PNG" alt=""><br>口令解出来是 ‘q1w2e3r4’<br>解压得到flag文件夹后，里面的word没有flag。需要找word隐藏的信息了<br>放winhex，看到PK 字样。 改后缀，解压<br><img src="/2019/10/24/misc刷题/神秘的文件-4.PNG" alt=""><br>找到疑似flag<br>ZmxhZ3tkMGNYXzFzX3ppUF9maWxlfQ==<br>base64 解密</p>
+<p>flag{d0cX_1s_ziP_file}</p>
+<h2 id="论剑"><a href="#论剑" class="headerlink" title="论剑"></a>论剑</h2><h2 id="怀疑人生"><a href="#怀疑人生" class="headerlink" title="怀疑人生"></a>怀疑人生</h2><p>改后缀，解压后。得到三个东西。<br>第三个扫描一下就能出来：<br><code>12580}</code><br>这应该是flag的尾部。因此可以猜测三个东西分别由一部分的flag。<br>第一个压缩包，好像是直接破解。要好久。</p>
+<p>第二个图片的末尾处，有pk字样。修改后缀，得到一个文本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">..... ..... ....! ?!!.? ..... ..... ....? .?!.? ....! .?... ..... .....</span><br><span class="line">..!?! !.?.. ..... ..... ..?.? !.?.. ..... ..... ..... ..... !.?.. .....</span><br><span class="line">..... .!?!! .?!!! !!!!! !!!!? .?!.? !!!!! !!!!! !!!!! .?... ....! ?!!.?</span><br><span class="line">!!!!! !?.?! .?!!! !!!!! !!!!! .!!!. ?.... ..... ..... .!?!! .?... .....</span><br><span class="line">..... .?.?! .?!.? .</span><br></pre></td></tr></table></figure>
+<p>查了一下是Ook加密<br><img src="/2019/10/24/misc刷题/怀疑人生-1.PNG" alt=""><br><a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">解密网站</a>j<br>解出来是3oD54e<br>这个应该是中间部分<br>但这个竟然还是加密过的，而且是base58.。。。<br><a href="https://www.jisuan.mobi/pbHzbBHbzHB6uSJx.html" target="_blank" rel="noopener">在线base58</a><br>解出来是<br>misc</p>
+<p>就等破解完拿到flag的前面部分了</p>
+<h1 id="攻防世界"><a href="#攻防世界" class="headerlink" title="攻防世界"></a>攻防世界</h1><p>参考：<br><a href="https://www.jianshu.com/p/7f20df275efe" target="_blank" rel="noopener">https://www.jianshu.com/p/7f20df275efe</a></p>
+<h2 id="ext3"><a href="#ext3" class="headerlink" title="ext3"></a>ext3</h2><p>这题用到Linux的知识吧。<br>将linux系统光盘放在linux下，在linux光盘目录下使用strings linux|grep flag，查找与flag相关的文件；root模式下使用mount linux /mnt命令将linux光盘挂载在mnt目录下，切换到mnt目录，使用cat O7avZhikgKgbF/flag.txt命令即可对flag内容进行读取，发现是一个base64编码，解密后得到flag.</p>
+<h2 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h2><p>打开pdf，鼠标在里面晃一晃，就发现图后面疑似有文字。<br>复制出来就是flag。</p>
+<h2 id="give-you-flag"><a href="#give-you-flag" class="headerlink" title="give you flag"></a>give you flag</h2><p>一个动图，他在最后面有一个一闪而过的二维码。<br>用stegsolve的查看帧的功能模块查看，发现一个缺少三个定位部分的二维码，将其补全，扫一扫即可。<br><img src="/2019/10/24/misc刷题/give you flag.GIF" alt=""><br>懒得补全了，就这样吧。。。</p>
+<h2 id="stegano"><a href="#stegano" class="headerlink" title="stegano"></a>stegano</h2><p>下载 PDF 在火狐浏览器打开，控制台（ctrl+shift+k）输入：<br>document.documentElement.textContent<br><img src="/2019/10/24/misc刷题/stegano-1.GIF" alt=""><br>看一下内容，会有一串<br>BABA BBB BA BBA ABA AB B AAB ABAA AB B AA BBB BA AAA BBAABB AABA ABAA AB BBA BBBAAA ABBBB BA AAAB ABBBB AAAAA ABBBB BAAA ABAA AAABB BB AAABB AAAAA AAAAA AAAAB BBA AAABB<br>做个可以改成摩斯电码（之前有一题是全部都是0和1，和这题一样的，都是替换完得到摩斯电码）<br><img src="/2019/10/24/misc刷题/stegano-2.GIF" alt=""><br>认真看一下，发现解密后得到flag了<br>根据要求改下flag格式，成功。</p>
+<h2 id="SimpleRAR"><a href="#SimpleRAR" class="headerlink" title="SimpleRAR"></a>SimpleRAR</h2><p>压缩包解压出来，提示损坏，得到flag.txt并没有flag。用winhex查看压缩包。<br>发现里面应该有图片的，因为损坏没解压出来。<br>winhex里面可以看到，txt文件结束之后就是png文件的开始了，这里我已经改过了，原来是A8 3C 7A，<br><img src="/2019/10/24/misc刷题/SimpleRAR-1.PNG" alt=""><br>这个是RAR对png文件头的编码，于是把原来的7A改成74，保存，重新解压；<br>就会多出一个图片，winhex查看是gif格式的，于是改一下后缀<br>还是没有东西，上工具。<br>gif的，逐帧看一下，竟然有二维码，是残缺的。结合提示，应该还有一半需要拼接上去。<br>emm，竟然要用到ps。</p>
+<p>醉了，分离出来，找不到二维码。<br>心态炸裂，弄不出来。<br>放着吧，思路是两个图分离出来得到两个一半的二维码拼接起来。然后再把角给补全下就好了。</p>
+<h2 id="坚持60s"><a href="#坚持60s" class="headerlink" title="坚持60s"></a>坚持60s</h2><p>这题是一个java写的程序直接反编译走起。<br><img src="/2019/10/24/misc刷题/坚持60s-0.PNG" alt=""><br>就发现flag了。提交发现不对，可以看到flag后面有一个’=’这个字符。<br>这是base64加密过的，将{}里面的拿去base64解密，就可以了。<br>最后的是解密完是：DajiDali_JinwanChiji</p>
+<p><img src="/2019/10/24/misc刷题/坚持60s-1.PNG" alt=""><br>要玩的话也可以，直接运行，移动到右边的边界，露出一条缝那样，露出很小很小，它是不会被判断碰到的，但是不能完全移出去，不然回不来。<br>而且根据代码知道，要计算好时间，超过69s也不行。要控制60s-69s，出来自杀就行了。<br><img src="/2019/10/24/misc刷题/坚持60s-2.PNG" alt=""></p>
+<h2 id="gif"><a href="#gif" class="headerlink" title="gif"></a>gif</h2><p>解压得到104张黑白图，应该是白为0黑为1.<br><img src="/2019/10/24/misc刷题/gif-1.PNG" alt=""><br>第一个想到的是摩斯电码，但是没有东西表示空格啊。<br>所以应该是二进制01，拿去转成16进制，再转成ascii码就好了。<br>二进制8个为一组。我直接拿去在线转换了，竟然可以！棒！<br><a href="https://tool.lu/hexconvert/" target="_blank" rel="noopener">在线工具</a><br><img src="/2019/10/24/misc刷题/gif-2.PNG" alt=""></p>
+<h2 id="掀桌子"><a href="#掀桌子" class="headerlink" title="掀桌子"></a>掀桌子</h2><p>网上找的解密代码</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">"c8e9aca0c6f2e5f3e8c4efe7a1a0d4e8e5a0e6ece1e7a0e9f3baa0e8eafae3f9e4eafae2eae4e3eaebfaebe3f5e7e9f3e4e3e8eaf9eaf3e2e4e6f2"</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(string), <span class="number">2</span>):</span><br><span class="line">    s = <span class="string">"0x"</span> + string[i] + string[i+<span class="number">1</span>]</span><br><span class="line">    flag += chr(int(s, <span class="number">16</span>) - <span class="number">128</span>)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<p>每两个一组，将16进制转换为10进制，减去128以后输出 ascii<br>运行后得到：<br>Hi, FreshDog! The flag is: hjzcydjzbjdcjkzkcugisdchjyjsbdfr<br>所以<br>flag: hjzcydjzbjdcjkzkcugisdchjyjsbdfr</p>
+<h2 id="如来十三掌"><a href="#如来十三掌" class="headerlink" title="如来十三掌"></a>如来十三掌</h2><p>发现是一个佛经。用在线工具 <a href="http://www.keyfc.net/bbs/tools/tudoucode.aspx" target="_blank" rel="noopener">与佛论禅</a>解密：<br><img src="/2019/10/24/misc刷题/如来十三掌-1.PNG" alt=""><br>得到疑似base64编码<br>MzkuM3gvMUAwnzuvn3cgozMlMTuvqzAenJchMUAeqzWenzEmLJW9<br>想到题目名为“如来十三掌”，可能需要用到rot13加密</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#简单的说就是通过将输入的原字符串ASCII+13/或者ASCC-13：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Upper</span><span class="params">(ch)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> ch &gt;= <span class="string">'A'</span> <span class="keyword">and</span> ch &lt;= <span class="string">'Z'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Lower</span><span class="params">(ch)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> ch &gt;= <span class="string">'a'</span> <span class="keyword">and</span> ch &lt;= <span class="string">'z'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rot13</span><span class="params">(s)</span>:</span></span><br><span class="line">    flag = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> Upper(i) == <span class="keyword">True</span>:</span><br><span class="line">            <span class="keyword">if</span> i &gt;= <span class="string">'A'</span> <span class="keyword">and</span> i &lt;= <span class="string">'M'</span>:</span><br><span class="line">                flag += chr(ord(i) + <span class="number">13</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                flag += chr(ord(i) - <span class="number">13</span>)</span><br><span class="line">        <span class="keyword">elif</span> Lower(i) == <span class="keyword">True</span>:</span><br><span class="line">            <span class="keyword">if</span> i &gt;= <span class="string">'a'</span> <span class="keyword">and</span> i &lt;= <span class="string">'m'</span>:</span><br><span class="line">                flag += chr(ord(i) + <span class="number">13</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                flag += chr(ord(i) - <span class="number">13</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flag += i</span><br><span class="line">    <span class="keyword">return</span> flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    s = <span class="string">'MzkuM3gvMUAwnzuvn3cgozMlMTuvqzAenJchMUAeqzWenzEmLJW9'</span></span><br><span class="line">    print(rot13(s))</span><br></pre></td></tr></table></figure>
+<p>运行后得到的字符串拿去base64解码就得到flag<br><img src="/2019/10/24/misc刷题/如来十三掌-2.PNG" alt=""></p>
+<p>总结：首先需要找到“与佛论禅”对文字进行解码，很多时候就直接卡在这一步了，然后要根据题目名称联想到rot13，还要观察出是经过base64编码，让后还能将这两个组合起来，才能得到flag。</p>
+<h2 id="base64stego"><a href="#base64stego" class="headerlink" title="base64stego"></a>base64stego</h2><p><a href="https://www.cnblogs.com/R4v3n/articles/8194287.html" target="_blank" rel="noopener">压缩包伪加密</a><br><a href="https://www.jianshu.com/p/05c81a2b4dd9" target="_blank" rel="noopener">zip伪加密破解方法</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">若是遇到压缩包解压需要密码的时候先放在WINHEX中看看是不是伪加密，只要对比两部分的全局方式位标记，若第二部分是09 00，那就把09修改为00就好</span><br><span class="line">或者</span><br><span class="line">使用ZipCenOp去伪加密，解密命令java -jar ZipCenOp.jar r xxxx.zip         加密命令java -jar ZipCenOp.jar e xxxx.zip</span><br><span class="line">正常情况下使用7Z解压或者360解压，</span><br><span class="line">放在linux写可以直接提取，</span><br><span class="line">使用binwalk ，binwalk -e无视密码直接解压</span><br><span class="line">下面看一些真正的加密文件的HEX数据，两部分的全局方式位标记都是0108（奇数是加密）</span><br></pre></td></tr></table></figure>
+<p>这里我直接试了用binwalk分离的方法，果然给力。<br>得到的文本，查了之后知道是base64隐写，用python2通过脚本解密得flag<br>脚本用linux实现了，windows的可能是python3的老报错。<br><img src="/2019/10/24/misc刷题/base64stego-1.PNG" alt=""></p>
+<h2 id="功夫再高也怕菜刀"><a href="#功夫再高也怕菜刀" class="headerlink" title="功夫再高也怕菜刀"></a>功夫再高也怕菜刀</h2><p>下好之后我的360报信息说要解密密码？下的不是流量包嘛？竟然有压缩包，看来不简单。分离试一下。果然有压缩包，但是需要密码，会不会是伪加密，试试直接用foremost分离，不行。老老实实找密码。<br>回到这个流量包，用winshark打开文件，筛选数据，在搜索框搜索flag.txt（快捷键ctrl+F），<br>搜寻包，并进行分析，ctrl+N选择下一个筛选内容。当找到1150这个包时，发现了一个图片，6666.jpg。<br><img src="/2019/10/24/misc刷题/功夫再高也怕菜刀-1.PNG" alt=""><br>通过tcp跟踪流，将图片分离出来<br><img src="/2019/10/24/misc刷题/功夫再高也怕菜刀-2.PNG" alt=""><br>将FFD8FF和FFD9将之间的字符全部复制，然后新建winhex文件，粘贴复制的字符，保存为.jpg文件。（可以先复制下来，再利用nopd++或者sublime找到FFD8FF和FFD9）<br>粘贴到winhex 的时候要注意粘贴类型为hex。<br>之后就可以得到了<br><img src="/2019/10/24/misc刷题/功夫再高也怕菜刀-3.PNG" alt=""></p>
+<p>最后的flag<br>flag{3OpWdJ-JP6FzK-koCMAK-VkfWBq-75Un2z}</p>
+<h2 id="签到题"><a href="#签到题" class="headerlink" title="签到题"></a>签到题</h2><p>base64解密得到<br>一串字符<br>应该是栅栏密码，我去栅栏失败了<br>原来前面还有一层凯撒，我去，以为签到题没这么多层的哎。<br>而且凯撒的时候还要注意到题目是 SSCTF的，所以要选择SSCTF那个去栅栏</p>
+<p>##easycap<br>追踪tcp流，结束</p>
+<h2 id="Avatar"><a href="#Avatar" class="headerlink" title="Avatar"></a>Avatar</h2><p>对图片信息进行破解的命令如下：outguess -r /root/angrybird.jpg -t 1.txt<br>-r是解密(加密是-d) ,后面接文件 1.txt是将解密的内容存放在这个txt文件中，<br><img src="/2019/10/24/misc刷题/Avatar.PNG" alt=""><br>解密前后分别ls查看一下就会发现多了这个文件 ，这里直接cat查看<br>We should blow up the bridge at midnight<br>这个就是flag，直接提交就可以了。不需要加格式</p>
+<h2 id="that-is-this"><a href="#that-is-this" class="headerlink" title="that is this"></a>that is this</h2><p>这题对文件头不熟悉，白忙活半天了。<br>但是下载下来的文件就是gz结尾的，我没关注。<br><img src="/2019/10/24/misc刷题/whatisthis-1.PNG" alt=""></p>
+<p><img src="/2019/10/24/misc刷题/whatisthis-0.PNG" alt=""><br>解压出来的文件要改成gz才行。我对这个文件分析了半天没看成它是gz文件头<br>之后出来两个图，要把它合并就出来flag了<br>新学到了知识！！！<br><img src="/2019/10/24/misc刷题/whatisthis.PNG" alt=""></p>
+<h2 id="Training-Stegano-1"><a href="#Training-Stegano-1" class="headerlink" title="Training-Stegano-1"></a>Training-Stegano-1</h2><p><img src="/2019/10/24/misc刷题/Training-Stegano-1-1.PNG" alt=""><br>用winhex最底下直接就是flag。</p>
+<p>Look what the hex-edit revealed: passwd:steganoI</p>
+<p>我还瞎整了一会</p>
+<h2 id="get-the-key"><a href="#get-the-key" class="headerlink" title="get the key"></a>get the key</h2><p><img src="/2019/10/24/misc刷题/getthekey-1.PNG" alt=""><br>可以看到很多key的文本<br>第一个应该是最全的。每一个应该会少一行。<br>那用第一个的去试试。<br>第一行的就是了<br>SECCON{@]NL7n+-s75FrET]vU=7Z}</p>
+<h2 id="Test-flag-please-ignore"><a href="#Test-flag-please-ignore" class="headerlink" title="Test-flag-please-ignore"></a>Test-flag-please-ignore</h2><p>666c61677b68656c6c6f5f776f726c647d<br>转ascii完事<br>flag{hello_world}</p>
+<h2 id="Excaliflag"><a href="#Excaliflag" class="headerlink" title="Excaliflag"></a>Excaliflag</h2><p>工具完事<br><img src="/2019/10/24/misc刷题/Excaliflag.PNG" alt=""></p>
+<h2 id="glance-50"><a href="#glance-50" class="headerlink" title="glance-50"></a>glance-50</h2><p>这题又是新的东西呀。要逐帧获取图片，然后拼接。<br>原本是用网上的脚本，但是有点问题。。。好像没合并成功，报错了。但是图片都搞出来了</p>
+<p>后面知道可以用kali命令<br><img src="/2019/10/24/misc刷题/glance50-1.PNG" alt=""></p>
+<p>参考：<br>拿到一个gif图片，很窄(宽2px)，无语。</p>
+<p>我们可以先把gif分解开，kali的convert命令可以，也可以用其他的工具：convert glance.gif flag.png</p>
+<p>总共分离出来200个图片。</p>
+<p>这么窄的图，难道要横着拼起来？</p>
+<p> 于是又用到一个工具：montage，这个工具用法很多，也很强大</p>
+<p>用命令：montage flag*.png -tile x1 -geometry +0+0 flag.png</p>
+<p>-tile是拼接时每行和每列的图片数，这里用x1，就是只一行</p>
+<p>-geometry是首选每个图和边框尺寸，我们边框为0，图照原始尺寸即可<br>————————————————<br>原文链接：<a href="https://blog.csdn.net/zz_Caleb/article/details/89490494" target="_blank" rel="noopener">https://blog.csdn.net/zz_Caleb/article/details/89490494</a></p>
+<h2 id="4-2"><a href="#4-2" class="headerlink" title="4-2"></a>4-2</h2><p>这题用到了字频分析<br><a href="https://quipqiup.com/" target="_blank" rel="noopener">网站</a><br><img src="/2019/10/24/misc刷题/4-2.png" alt=""><br>flag{classical-cipher_is_not_security_hs}</p>
+<h2 id="embarrass"><a href="#embarrass" class="headerlink" title="embarrass"></a>embarrass</h2><p>折腾半天没成功，结果是只需要一条指令就可以了<br>strings misc_02.pcapng | grep flag</p>
+<p>notepad++打开搜索flag也能找到</p>
+<h1 id="实验室考核"><a href="#实验室考核" class="headerlink" title="实验室考核"></a>实验室考核</h1><h2 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h2><p>丢进去winhex，发现是压缩包，解出来是一个音频和二维码。<br>二维码扫出来的是一个brianfuck拜编码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+++++ ++[-&gt; +++++ ++&lt;]&gt; +.--. +.+++ +++++ .---- ----- .++.. +++.- --...</span><br><span class="line">+++++ +.&lt;</span><br><span class="line">-------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">https://www.splitbrain.org/services/ook</a><br>翻译出来是<br>201902252228<br><img src="/2019/10/24/misc刷题/实验室misc2-1.png" alt=""><br>然后就是处理音频了。<br>用到了<br>得到：<br>&#102;&#108;&#97;&#103;&#123;&#80;&#114;&#69;&#116;&#84;&#121;&#95;&#49;&#83;&#99;&#67;&#57;&#48;&#49;&#50;&#95;&#103;&#79;&#48;&#100;&#125;</p>
+<p>百度一下是<a href="http://www.convertstring.com/zh_CN/EncodeDecode/HtmlDecode" target="_blank" rel="noopener">html编码</a>。解码搞定<br>flag{S022y4orr5}</p>
+<h2 id="misc3"><a href="#misc3" class="headerlink" title="misc3"></a>misc3</h2><p>这题看了没思路。跟着题解做一遍<br>放到winhex里是一堆乱码，不懂。用notepad打开，发现是当铺密码。<br>拿去解密得到一串数字<br>63154302635731623246716034145162324651403206116234541146310711606314115230060154324661406106430631575<br>发现没有比8大的数，应该是八进制，转成16进制是<br><img src="/2019/10/24/misc刷题/实验室misc3-1.GIF" alt=""><br><a href="https://tool.lu/hexconvert/" target="_blank" rel="noopener">在线解</a><br>666c61677b39353738386539353530343139396133323938666135303036353630623463337d<br>再转成flag就出来了<br>flag{95788e95504199a3298fa5006560b4c3}</p>
+<h2 id="misc4"><a href="#misc4" class="headerlink" title="misc4"></a>misc4</h2><p>按照题解做一遍：<br>看到一串1 0 感觉可以变成摩斯电码。<br><img src="/2019/10/24/misc刷题/实验室misc4-1.GIF" alt=""><br>摩斯电码解密出来后，是base32.也可以根据提示推断出来。<br><img src="/2019/10/24/misc刷题/实验室misc4-2.GIF" alt=""><br>得到一串字符串，是栅栏密码，解密一下就好了</p>
+<p><img src="/2019/10/24/misc刷题/实验室misc4-3.GIF" alt=""><br>每组字数为9时得到flag:<br>flag{41e07a7e714db677cbd22b8d82039cd4}</p>
+<h2 id="misc5"><a href="#misc5" class="headerlink" title="misc5"></a>misc5</h2><p>用winhex发现，既有 PNG文件的开头：89504e47 ，又有类似 ZIP文件的开头：504b01314<br><img src="/2019/10/24/misc刷题/实验室misc5-1.GIF" alt=""><br>删除 89504e47 ，文件后缀添加为 .zip后尝试解压，但是文件会损坏，<br>但是能解压出一个password。<br>IafFRlviO<br>应该是被加密过的密码<br><img src="/2019/10/24/misc刷题/实验室misc5-2.GIF" alt=""><br>所以要修改 504b1314 为 504b0304 ，可以成功解压。但是需要密码。<br><img src="/2019/10/24/misc刷题/实验室misc5-3.GIF" alt=""><br>emm突然发现这样也能看到里面的文件，拿到password.txt，但是拿不到那张图，密码是加刀图上的。<br>好吧，好像这是伪加密。搜索 504b0102 ，将后面 09 改为 00<br>这次解压就不需要密码了，成功得到图片和文本。<br>分析文本，，在末尾发现一串编码</p>
+<p><img src="/2019/10/24/misc刷题/实验室misc5-4.GIF" alt=""></p>
+<p>我解密不出来，贴学长的了</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/13/各种简单解密/" rel="next" title="各种简单解密">
+                <i class="fa fa-chevron-left"></i> 各种简单解密
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bugku"><span class="nav-number">2.</span> <span class="nav-text">bugku</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#隐写"><span class="nav-number">2.1.</span> <span class="nav-text">隐写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐写2"><span class="nav-number">2.2.</span> <span class="nav-text">隐写2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#telnet"><span class="nav-number">2.3.</span> <span class="nav-text">telnet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#眼见非实"><span class="nav-number">2.4.</span> <span class="nav-text">眼见非实</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#啊哒"><span class="nav-number">2.5.</span> <span class="nav-text">啊哒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#又是一张"><span class="nav-number">2.6.</span> <span class="nav-text">又是一张</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#猜"><span class="nav-number">2.7.</span> <span class="nav-text">猜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#宽带泄露"><span class="nav-number">2.8.</span> <span class="nav-text">宽带泄露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多种方法解决"><span class="nav-number">2.9.</span> <span class="nav-text">多种方法解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux"><span class="nav-number">2.10.</span> <span class="nav-text">linux</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux2"><span class="nav-number">2.11.</span> <span class="nav-text">linux2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐写3"><span class="nav-number">2.12.</span> <span class="nav-text">隐写3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爆照"><span class="nav-number">2.13.</span> <span class="nav-text">爆照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#想蹭网先解密码"><span class="nav-number">2.14.</span> <span class="nav-text">想蹭网先解密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图穷匕见"><span class="nav-number">2.15.</span> <span class="nav-text">图穷匕见</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#细心的大象"><span class="nav-number">2.16.</span> <span class="nav-text">细心的大象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#账号被盗了"><span class="nav-number">2.17.</span> <span class="nav-text">账号被盗了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#听首音乐"><span class="nav-number">2.18.</span> <span class="nav-text">听首音乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做个游戏"><span class="nav-number">2.19.</span> <span class="nav-text">做个游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闪的好快"><span class="nav-number">2.20.</span> <span class="nav-text">闪的好快</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#猫片"><span class="nav-number">2.21.</span> <span class="nav-text">猫片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#白哥的鸽子"><span class="nav-number">2.22.</span> <span class="nav-text">白哥的鸽子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#come-game"><span class="nav-number">2.23.</span> <span class="nav-text">come_game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多彩"><span class="nav-number">2.24.</span> <span class="nav-text">多彩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#旋转跳跃"><span class="nav-number">2.25.</span> <span class="nav-text">旋转跳跃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#普通的二维码"><span class="nav-number">2.26.</span> <span class="nav-text">普通的二维码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乌云的验证码"><span class="nav-number">2.27.</span> <span class="nav-text">乌云的验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神秘的文件"><span class="nav-number">2.28.</span> <span class="nav-text">神秘的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论剑"><span class="nav-number">2.29.</span> <span class="nav-text">论剑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怀疑人生"><span class="nav-number">2.30.</span> <span class="nav-text">怀疑人生</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#攻防世界"><span class="nav-number">3.</span> <span class="nav-text">攻防世界</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ext3"><span class="nav-number">3.1.</span> <span class="nav-text">ext3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pdf"><span class="nav-number">3.2.</span> <span class="nav-text">pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#give-you-flag"><span class="nav-number">3.3.</span> <span class="nav-text">give you flag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stegano"><span class="nav-number">3.4.</span> <span class="nav-text">stegano</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleRAR"><span class="nav-number">3.5.</span> <span class="nav-text">SimpleRAR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坚持60s"><span class="nav-number">3.6.</span> <span class="nav-text">坚持60s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gif"><span class="nav-number">3.7.</span> <span class="nav-text">gif</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#掀桌子"><span class="nav-number">3.8.</span> <span class="nav-text">掀桌子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如来十三掌"><span class="nav-number">3.9.</span> <span class="nav-text">如来十三掌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base64stego"><span class="nav-number">3.10.</span> <span class="nav-text">base64stego</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功夫再高也怕菜刀"><span class="nav-number">3.11.</span> <span class="nav-text">功夫再高也怕菜刀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#签到题"><span class="nav-number">3.12.</span> <span class="nav-text">签到题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Avatar"><span class="nav-number">3.13.</span> <span class="nav-text">Avatar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#that-is-this"><span class="nav-number">3.14.</span> <span class="nav-text">that is this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-Stegano-1"><span class="nav-number">3.15.</span> <span class="nav-text">Training-Stegano-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-the-key"><span class="nav-number">3.16.</span> <span class="nav-text">get the key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-flag-please-ignore"><span class="nav-number">3.17.</span> <span class="nav-text">Test-flag-please-ignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excaliflag"><span class="nav-number">3.18.</span> <span class="nav-text">Excaliflag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#glance-50"><span class="nav-number">3.19.</span> <span class="nav-text">glance-50</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2"><span class="nav-number">3.20.</span> <span class="nav-text">4-2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#embarrass"><span class="nav-number">3.21.</span> <span class="nav-text">embarrass</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验室考核"><span class="nav-number">4.</span> <span class="nav-text">实验室考核</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#misc2"><span class="nav-number">4.1.</span> <span class="nav-text">misc2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#misc3"><span class="nav-number">4.2.</span> <span class="nav-text">misc3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#misc4"><span class="nav-number">4.3.</span> <span class="nav-text">misc4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#misc5"><span class="nav-number">4.4.</span> <span class="nav-text">misc5</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
