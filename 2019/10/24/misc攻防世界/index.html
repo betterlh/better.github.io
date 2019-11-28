@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="攻防世界参考：https://www.jianshu.com/p/7f20df275efe ext3这题用到Linux的知识吧。将linux系统光盘放在linux下，在linux光盘目录下使用strings linux|grep flag，查找与flag相关的文件；root模式下使用mount linux /mnt命令将linux光盘挂载在mnt目录下，切换到mnt目录，使用cat O7avZhi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="misc攻防世界">
+<meta property="og:url" content="http://betterlh.github.io/2019/10/24/misc攻防世界/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="攻防世界参考：https://www.jianshu.com/p/7f20df275efe ext3这题用到Linux的知识吧。将linux系统光盘放在linux下，在linux光盘目录下使用strings linux|grep flag，查找与flag相关的文件；root模式下使用mount linux /mnt命令将linux光盘挂载在mnt目录下，切换到mnt目录，使用cat O7avZhi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/give%20you%20flag.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/stegano-1.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/stegano-2.GIF">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/SimpleRAR-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/坚持60s-0.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/坚持60s-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/坚持60s-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/gif-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/gif-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/如来十三掌-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/如来十三掌-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/base64stego-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/功夫再高也怕菜刀-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/功夫再高也怕菜刀-2.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/功夫再高也怕菜刀-3.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/Avatar.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/whatisthis-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/whatisthis-0.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/whatisthis.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/Training-Stegano-1-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/getthekey-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/Excaliflag.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/glance50-1.PNG">
+<meta property="og:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/4-2.png">
+<meta property="og:updated_time" content="2019-11-13T13:30:16.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="misc攻防世界">
+<meta name="twitter:description" content="攻防世界参考：https://www.jianshu.com/p/7f20df275efe ext3这题用到Linux的知识吧。将linux系统光盘放在linux下，在linux光盘目录下使用strings linux|grep flag，查找与flag相关的文件；root模式下使用mount linux /mnt命令将linux光盘挂载在mnt目录下，切换到mnt目录，使用cat O7avZhi">
+<meta name="twitter:image" content="http://betterlh.github.io/2019/10/24/misc攻防世界/give%20you%20flag.GIF">
+
+
+
+
+
+
+  <link rel="canonical" href="http://betterlh.github.io/2019/10/24/misc攻防世界/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>misc攻防世界 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/10/24/misc攻防世界/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">misc攻防世界
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-10-24 19:48:09" itemprop="dateCreated datePublished" datetime="2019-10-24T19:48:09+08:00">2019-10-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-11-13 21:30:16" itemprop="dateModified" datetime="2019-11-13T21:30:16+08:00">2019-11-13</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="攻防世界"><a href="#攻防世界" class="headerlink" title="攻防世界"></a>攻防世界</h1><p>参考：<br><a href="https://www.jianshu.com/p/7f20df275efe" target="_blank" rel="noopener">https://www.jianshu.com/p/7f20df275efe</a></p>
+<h2 id="ext3"><a href="#ext3" class="headerlink" title="ext3"></a>ext3</h2><p>这题用到Linux的知识吧。<br>将linux系统光盘放在linux下，在linux光盘目录下使用strings linux|grep flag，查找与flag相关的文件；root模式下使用mount linux /mnt命令将linux光盘挂载在mnt目录下，切换到mnt目录，使用cat O7avZhikgKgbF/flag.txt命令即可对flag内容进行读取，发现是一个base64编码，解密后得到flag.</p>
+<h2 id="pdf"><a href="#pdf" class="headerlink" title="pdf"></a>pdf</h2><p>打开pdf，鼠标在里面晃一晃，就发现图后面疑似有文字。<br>复制出来就是flag。</p>
+<h2 id="give-you-flag"><a href="#give-you-flag" class="headerlink" title="give you flag"></a>give you flag</h2><p>一个动图，他在最后面有一个一闪而过的二维码。<br>用stegsolve的查看帧的功能模块查看，发现一个缺少三个定位部分的二维码，将其补全，扫一扫即可。<br><img src="/2019/10/24/misc攻防世界/give you flag.GIF" alt=""><br>懒得补全了，就这样吧。。。</p>
+<h2 id="stegano"><a href="#stegano" class="headerlink" title="stegano"></a>stegano</h2><p>下载 PDF 在火狐浏览器打开，控制台（ctrl+shift+k）输入：<br>document.documentElement.textContent<br><img src="/2019/10/24/misc攻防世界/stegano-1.GIF" alt=""><br>看一下内容，会有一串<br>BABA BBB BA BBA ABA AB B AAB ABAA AB B AA BBB BA AAA BBAABB AABA ABAA AB BBA BBBAAA ABBBB BA AAAB ABBBB AAAAA ABBBB BAAA ABAA AAABB BB AAABB AAAAA AAAAA AAAAB BBA AAABB<br>做个可以改成摩斯电码（之前有一题是全部都是0和1，和这题一样的，都是替换完得到摩斯电码）<br><img src="/2019/10/24/misc攻防世界/stegano-2.GIF" alt=""><br>认真看一下，发现解密后得到flag了<br>根据要求改下flag格式，成功。</p>
+<h2 id="SimpleRAR"><a href="#SimpleRAR" class="headerlink" title="SimpleRAR"></a>SimpleRAR</h2><p>压缩包解压出来，提示损坏，得到flag.txt并没有flag。用winhex查看压缩包。<br>发现里面应该有图片的，因为损坏没解压出来。<br>winhex里面可以看到，txt文件结束之后就是png文件的开始了，这里我已经改过了，原来是A8 3C 7A，<br><img src="/2019/10/24/misc攻防世界/SimpleRAR-1.PNG" alt=""><br>这个是RAR对png文件头的编码，于是把原来的7A改成74，保存，重新解压；<br>就会多出一个图片，winhex查看是gif格式的，于是改一下后缀<br>还是没有东西，上工具。<br>gif的，逐帧看一下，竟然有二维码，是残缺的。结合提示，应该还有一半需要拼接上去。<br>emm，竟然要用到ps。</p>
+<p>醉了，分离出来，找不到二维码。<br>心态炸裂，弄不出来。<br>放着吧，思路是两个图分离出来得到两个一半的二维码拼接起来。然后再把角给补全下就好了。</p>
+<h2 id="坚持60s"><a href="#坚持60s" class="headerlink" title="坚持60s"></a>坚持60s</h2><p>这题是一个java写的程序直接反编译走起。<br><img src="/2019/10/24/misc攻防世界/坚持60s-0.PNG" alt=""><br>就发现flag了。提交发现不对，可以看到flag后面有一个’=’这个字符。<br>这是base64加密过的，将{}里面的拿去base64解密，就可以了。<br>最后的是解密完是：DajiDali_JinwanChiji</p>
+<p><img src="/2019/10/24/misc攻防世界/坚持60s-1.PNG" alt=""><br>要玩的话也可以，直接运行，移动到右边的边界，露出一条缝那样，露出很小很小，它是不会被判断碰到的，但是不能完全移出去，不然回不来。<br>而且根据代码知道，要计算好时间，超过69s也不行。要控制60s-69s，出来自杀就行了。<br><img src="/2019/10/24/misc攻防世界/坚持60s-2.PNG" alt=""></p>
+<h2 id="gif"><a href="#gif" class="headerlink" title="gif"></a>gif</h2><p>解压得到104张黑白图，应该是白为0黑为1.<br><img src="/2019/10/24/misc攻防世界/gif-1.PNG" alt=""><br>第一个想到的是摩斯电码，但是没有东西表示空格啊。<br>所以应该是二进制01，拿去转成16进制，再转成ascii码就好了。<br>二进制8个为一组。我直接拿去在线转换了，竟然可以！棒！<br><a href="https://tool.lu/hexconvert/" target="_blank" rel="noopener">在线工具</a><br><img src="/2019/10/24/misc攻防世界/gif-2.PNG" alt=""></p>
+<h2 id="掀桌子"><a href="#掀桌子" class="headerlink" title="掀桌子"></a>掀桌子</h2><p>网上找的解密代码</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">"c8e9aca0c6f2e5f3e8c4efe7a1a0d4e8e5a0e6ece1e7a0e9f3baa0e8eafae3f9e4eafae2eae4e3eaebfaebe3f5e7e9f3e4e3e8eaf9eaf3e2e4e6f2"</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(string), <span class="number">2</span>):</span><br><span class="line">    s = <span class="string">"0x"</span> + string[i] + string[i+<span class="number">1</span>]</span><br><span class="line">    flag += chr(int(s, <span class="number">16</span>) - <span class="number">128</span>)</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<p>每两个一组，将16进制转换为10进制，减去128以后输出 ascii<br>运行后得到：<br>Hi, FreshDog! The flag is: hjzcydjzbjdcjkzkcugisdchjyjsbdfr<br>所以<br>flag: hjzcydjzbjdcjkzkcugisdchjyjsbdfr</p>
+<h2 id="如来十三掌"><a href="#如来十三掌" class="headerlink" title="如来十三掌"></a>如来十三掌</h2><p>发现是一个佛经。用在线工具 <a href="http://www.keyfc.net/bbs/tools/tudoucode.aspx" target="_blank" rel="noopener">与佛论禅</a>解密：<br><img src="/2019/10/24/misc攻防世界/如来十三掌-1.PNG" alt=""><br>得到疑似base64编码<br>MzkuM3gvMUAwnzuvn3cgozMlMTuvqzAenJchMUAeqzWenzEmLJW9<br>想到题目名为“如来十三掌”，可能需要用到rot13加密</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#简单的说就是通过将输入的原字符串ASCII+13/或者ASCC-13：</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Upper</span><span class="params">(ch)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> ch &gt;= <span class="string">'A'</span> <span class="keyword">and</span> ch &lt;= <span class="string">'Z'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Lower</span><span class="params">(ch)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> ch &gt;= <span class="string">'a'</span> <span class="keyword">and</span> ch &lt;= <span class="string">'z'</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rot13</span><span class="params">(s)</span>:</span></span><br><span class="line">    flag = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> Upper(i) == <span class="keyword">True</span>:</span><br><span class="line">            <span class="keyword">if</span> i &gt;= <span class="string">'A'</span> <span class="keyword">and</span> i &lt;= <span class="string">'M'</span>:</span><br><span class="line">                flag += chr(ord(i) + <span class="number">13</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                flag += chr(ord(i) - <span class="number">13</span>)</span><br><span class="line">        <span class="keyword">elif</span> Lower(i) == <span class="keyword">True</span>:</span><br><span class="line">            <span class="keyword">if</span> i &gt;= <span class="string">'a'</span> <span class="keyword">and</span> i &lt;= <span class="string">'m'</span>:</span><br><span class="line">                flag += chr(ord(i) + <span class="number">13</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                flag += chr(ord(i) - <span class="number">13</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flag += i</span><br><span class="line">    <span class="keyword">return</span> flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    s = <span class="string">'MzkuM3gvMUAwnzuvn3cgozMlMTuvqzAenJchMUAeqzWenzEmLJW9'</span></span><br><span class="line">    print(rot13(s))</span><br></pre></td></tr></table></figure>
+<p>运行后得到的字符串拿去base64解码就得到flag<br><img src="/2019/10/24/misc攻防世界/如来十三掌-2.PNG" alt=""></p>
+<p>总结：首先需要找到“与佛论禅”对文字进行解码，很多时候就直接卡在这一步了，然后要根据题目名称联想到rot13，还要观察出是经过base64编码，让后还能将这两个组合起来，才能得到flag。</p>
+<h2 id="base64stego"><a href="#base64stego" class="headerlink" title="base64stego"></a>base64stego</h2><p><a href="https://www.cnblogs.com/R4v3n/articles/8194287.html" target="_blank" rel="noopener">压缩包伪加密</a><br><a href="https://www.jianshu.com/p/05c81a2b4dd9" target="_blank" rel="noopener">zip伪加密破解方法</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">若是遇到压缩包解压需要密码的时候先放在WINHEX中看看是不是伪加密，只要对比两部分的全局方式位标记，若第二部分是09 00，那就把09修改为00就好</span><br><span class="line">或者</span><br><span class="line">使用ZipCenOp去伪加密，解密命令java -jar ZipCenOp.jar r xxxx.zip         加密命令java -jar ZipCenOp.jar e xxxx.zip</span><br><span class="line">正常情况下使用7Z解压或者360解压，</span><br><span class="line">放在linux写可以直接提取，</span><br><span class="line">使用binwalk ，binwalk -e无视密码直接解压</span><br><span class="line">下面看一些真正的加密文件的HEX数据，两部分的全局方式位标记都是0108（奇数是加密）</span><br></pre></td></tr></table></figure>
+<p>这里我直接试了用binwalk分离的方法，果然给力。<br>得到的文本，查了之后知道是base64隐写，用python2通过脚本解密得flag<br>脚本用linux实现了，windows的可能是python3的老报错。<br><img src="/2019/10/24/misc攻防世界/base64stego-1.PNG" alt=""></p>
+<h2 id="功夫再高也怕菜刀"><a href="#功夫再高也怕菜刀" class="headerlink" title="功夫再高也怕菜刀"></a>功夫再高也怕菜刀</h2><p>下好之后我的360报信息说要解密密码？下的不是流量包嘛？竟然有压缩包，看来不简单。分离试一下。果然有压缩包，但是需要密码，会不会是伪加密，试试直接用foremost分离，不行。老老实实找密码。<br>回到这个流量包，用winshark打开文件，筛选数据，在搜索框搜索flag.txt（快捷键ctrl+F），<br>搜寻包，并进行分析，ctrl+N选择下一个筛选内容。当找到1150这个包时，发现了一个图片，6666.jpg。<br><img src="/2019/10/24/misc攻防世界/功夫再高也怕菜刀-1.PNG" alt=""><br>通过tcp跟踪流，将图片分离出来<br><img src="/2019/10/24/misc攻防世界/功夫再高也怕菜刀-2.PNG" alt=""><br>将FFD8FF和FFD9将之间的字符全部复制，然后新建winhex文件，粘贴复制的字符，保存为.jpg文件。（可以先复制下来，再利用nopd++或者sublime找到FFD8FF和FFD9）<br>粘贴到winhex 的时候要注意粘贴类型为hex。<br>之后就可以得到了<br><img src="/2019/10/24/misc攻防世界/功夫再高也怕菜刀-3.PNG" alt=""></p>
+<p>最后的flag<br>flag{3OpWdJ-JP6FzK-koCMAK-VkfWBq-75Un2z}</p>
+<h2 id="签到题"><a href="#签到题" class="headerlink" title="签到题"></a>签到题</h2><p>base64解密得到<br>一串字符</p>
+<p>应该是栅栏密码，我去栅栏失败了<br>原来前面还有一层凯撒，我去，以为签到题没这么多层的哎。<br>而且凯撒的时候还要注意到题目是 SSCTF的，所以要选择SSCTF那个去栅栏</p>
+<p>##easycap<br>追踪tcp流，结束</p>
+<h2 id="Avatar"><a href="#Avatar" class="headerlink" title="Avatar"></a>Avatar</h2><p>对图片信息进行破解的命令如下：outguess -r /root/angrybird.jpg -t 1.txt<br>-r是解密(加密是-d) ,后面接文件 1.txt是将解密的内容存放在这个txt文件中，<br><img src="/2019/10/24/misc攻防世界/Avatar.PNG" alt=""><br>解密前后分别ls查看一下就会发现多了这个文件 ，这里直接cat查看<br>We should blow up the bridge at midnight<br>这个就是flag，直接提交就可以了。不需要加格式</p>
+<h2 id="that-is-this"><a href="#that-is-this" class="headerlink" title="that is this"></a>that is this</h2><p>这题对文件头不熟悉，白忙活半天了。<br>但是下载下来的文件就是gz结尾的，我没关注。<br><img src="/2019/10/24/misc攻防世界/whatisthis-1.PNG" alt=""></p>
+<p><img src="/2019/10/24/misc攻防世界/whatisthis-0.PNG" alt=""><br>解压出来的文件要改成gz才行。我对这个文件分析了半天没看成它是gz文件头<br>之后出来两个图，要把它合并就出来flag了<br>新学到了知识！！！<br><img src="/2019/10/24/misc攻防世界/whatisthis.PNG" alt=""></p>
+<h2 id="Training-Stegano-1"><a href="#Training-Stegano-1" class="headerlink" title="Training-Stegano-1"></a>Training-Stegano-1</h2><p><img src="/2019/10/24/misc攻防世界/Training-Stegano-1-1.PNG" alt=""><br>用winhex最底下直接就是flag。</p>
+<p>Look what the hex-edit revealed: passwd:steganoI</p>
+<p>我还瞎整了一会</p>
+<h2 id="get-the-key"><a href="#get-the-key" class="headerlink" title="get the key"></a>get the key</h2><p><img src="/2019/10/24/misc攻防世界/getthekey-1.PNG" alt=""><br>可以看到很多key的文本<br>第一个应该是最全的。每一个应该会少一行。<br>那用第一个的去试试。<br>第一行的就是了<br>SECCON{@]NL7n+-s75FrET]vU=7Z}</p>
+<h2 id="Test-flag-please-ignore"><a href="#Test-flag-please-ignore" class="headerlink" title="Test-flag-please-ignore"></a>Test-flag-please-ignore</h2><p>666c61677b68656c6c6f5f776f726c647d<br>转ascii完事<br>flag{hello_world}</p>
+<h2 id="Excaliflag"><a href="#Excaliflag" class="headerlink" title="Excaliflag"></a>Excaliflag</h2><p>工具完事<br><img src="/2019/10/24/misc攻防世界/Excaliflag.PNG" alt=""></p>
+<h2 id="glance-50"><a href="#glance-50" class="headerlink" title="glance-50"></a>glance-50</h2><p>这题又是新的东西呀。要逐帧获取图片，然后拼接。<br>原本是用网上的脚本，但是有点问题。。。好像没合并成功，报错了。但是图片都搞出来了</p>
+<p>后面知道可以用kali命令<br><img src="/2019/10/24/misc攻防世界/glance50-1.PNG" alt=""></p>
+<p>参考：<br>拿到一个gif图片，很窄(宽2px)，无语。</p>
+<p>我们可以先把gif分解开，kali的convert命令可以，也可以用其他的工具：convert glance.gif flag.png</p>
+<p>总共分离出来200个图片。</p>
+<p>这么窄的图，难道要横着拼起来？</p>
+<p> 于是又用到一个工具：montage，这个工具用法很多，也很强大</p>
+<p>用命令：montage flag*.png -tile x1 -geometry +0+0 flag.png</p>
+<p>-tile是拼接时每行和每列的图片数，这里用x1，就是只一行</p>
+<p>-geometry是首选每个图和边框尺寸，我们边框为0，图照原始尺寸即可<br>————————————————<br>原文链接：<a href="https://blog.csdn.net/zz_Caleb/article/details/89490494" target="_blank" rel="noopener">https://blog.csdn.net/zz_Caleb/article/details/89490494</a></p>
+<h2 id="4-2"><a href="#4-2" class="headerlink" title="4-2"></a>4-2</h2><p>这题用到了字频分析<br><a href="https://quipqiup.com/" target="_blank" rel="noopener">网站</a><br><img src="/2019/10/24/misc攻防世界/4-2.png" alt=""><br>flag{classical-cipher_is_not_security_hs}</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/13/各种简单解密/" rel="next" title="各种简单解密">
+                <i class="fa fa-chevron-left"></i> 各种简单解密
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/24/misc刷题/" rel="prev" title="misc刷题">
+                misc刷题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#攻防世界"><span class="nav-number">1.</span> <span class="nav-text">攻防世界</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ext3"><span class="nav-number">1.1.</span> <span class="nav-text">ext3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pdf"><span class="nav-number">1.2.</span> <span class="nav-text">pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#give-you-flag"><span class="nav-number">1.3.</span> <span class="nav-text">give you flag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stegano"><span class="nav-number">1.4.</span> <span class="nav-text">stegano</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimpleRAR"><span class="nav-number">1.5.</span> <span class="nav-text">SimpleRAR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坚持60s"><span class="nav-number">1.6.</span> <span class="nav-text">坚持60s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gif"><span class="nav-number">1.7.</span> <span class="nav-text">gif</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#掀桌子"><span class="nav-number">1.8.</span> <span class="nav-text">掀桌子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如来十三掌"><span class="nav-number">1.9.</span> <span class="nav-text">如来十三掌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base64stego"><span class="nav-number">1.10.</span> <span class="nav-text">base64stego</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功夫再高也怕菜刀"><span class="nav-number">1.11.</span> <span class="nav-text">功夫再高也怕菜刀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#签到题"><span class="nav-number">1.12.</span> <span class="nav-text">签到题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Avatar"><span class="nav-number">1.13.</span> <span class="nav-text">Avatar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#that-is-this"><span class="nav-number">1.14.</span> <span class="nav-text">that is this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-Stegano-1"><span class="nav-number">1.15.</span> <span class="nav-text">Training-Stegano-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-the-key"><span class="nav-number">1.16.</span> <span class="nav-text">get the key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Test-flag-please-ignore"><span class="nav-number">1.17.</span> <span class="nav-text">Test-flag-please-ignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Excaliflag"><span class="nav-number">1.18.</span> <span class="nav-text">Excaliflag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#glance-50"><span class="nav-number">1.19.</span> <span class="nav-text">glance-50</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2"><span class="nav-number">1.20.</span> <span class="nav-text">4-2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lh</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
