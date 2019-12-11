@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Beranda</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Tentang</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategori</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Arsip</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
         
@@ -353,6 +353,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/27/windows命令应用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/27/windows命令应用/" class="post-title-link" itemprop="url">windows命令应用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-02-27 22:42:46" itemprop="dateCreated datePublished" datetime="2019-02-27T22:42:46+08:00">2019-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2019-03-02 19:34:55" itemprop="dateModified" datetime="2019-03-02T19:34:55+08:00">2019-03-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="如何用DOS命令查看占用某端口的程序及PID号"><a href="#如何用DOS命令查看占用某端口的程序及PID号" class="headerlink" title="如何用DOS命令查看占用某端口的程序及PID号"></a>如何用DOS命令查看占用某端口的程序及PID号</h1><p>输入命令“ netstat  -aon|findstr  “80” ”后按回车显示如下，可以看到占用80端口对应的程序的PID号为2320：<br><img src="/2019/02/27/windows命令应用/占用某端口的程序1.png" alt=""><br>根据PID号找到对应的程序：继续输入命令“tasklist|findstr “2448””，按回车后显示如下，可以看出2320对应的程序为360tray，这也说明该程序正在使用80端口：<br><img src="/2019/02/27/windows命令应用/占用某端口的程序2.png" alt=""></p>
+<p>若想80端口不被占用，则需要在任务管理器中结束相应的进程，按快捷键“Ctrl+Shift+Esc”调出Windows任务管理器，找到“360tray”，单击下方的结束进程即可！</p>
+<p>结束进程时要注意，若不熟悉的进程最好不要随意结束，否则可能会出现不可预测的错误；</p>
+<h1 id="Windows下如何用命令查看PID进程和杀掉该进程"><a href="#Windows下如何用命令查看PID进程和杀掉该进程" class="headerlink" title="Windows下如何用命令查看PID进程和杀掉该进程"></a>Windows下如何用命令查看PID进程和杀掉该进程</h1><p>1.提供查看PID进程的命令：<br>例如： tasklist|findstr “2396”</p>
+<p>taskkill /f /t /im tor.exe<br>例如： ntsd -c q -p pid 2396或者taskkill/pid 2396<br><img src="/2019/02/27/windows命令应用/占用某端口的程序3.png" alt=""><br>可以用taskkill命令直接结束，后面加/f，表示强制结束，不提示错误。<br><img src="/2019/02/27/windows命令应用/占用某端口的程序4.png" alt=""></p>
+<h1 id="输出重定向（-gt-）和输出追加重定向（-gt-gt-）"><a href="#输出重定向（-gt-）和输出追加重定向（-gt-gt-）" class="headerlink" title="输出重定向（&gt;）和输出追加重定向（&gt;&gt;）"></a>输出重定向（&gt;）和输出追加重定向（&gt;&gt;）</h1><p>echo &gt; 和 echo &gt;&gt;的区别  和Linux 一样<br><img src="/2019/02/27/windows命令应用/输出重定向和输出追加重定向.PNG" alt=""></p>
+<h1 id="windows获取文件夹下所有文件名的方法"><a href="#windows获取文件夹下所有文件名的方法" class="headerlink" title="windows获取文件夹下所有文件名的方法"></a>windows获取文件夹下所有文件名的方法</h1><p>方法一：tree命令</p>
+<p>TREE——显示磁盘目录结构命令</p>
+<p>功能：显示指定驱动器上所有目录路径和这些目录下的所有文件名。</p>
+<p>格式：TREE [盘符：][\目录] [/F] [/A]<br><img src="/2019/02/27/windows命令应用/tree.PNG" alt=""><br>　　使用说明：使用/F参数时显示所有目录及目录下的所有文件，省略时，只显示目录，不显示目录下的文件；</p>
+<p>　　使用/A参数时，不是用Ascii码大于127（NT为255）的字符显示，是用Ascii码小于128的字符显示。<br>还能通过&gt;  将结果保存在一个文本中而不是显示在命令窗口<br><img src="/2019/02/27/windows命令应用/tree2.PNG" alt=""><br>方法二：dir命令<br>/s 是指列出当前目录包含子目录下的所有文件</p>
+<p>/b 是仅列出文件名称，而日期、大小等其它信息则忽略<br><img src="/2019/02/27/windows命令应用/dir.PNG" alt=""><br>同样也可以使用&gt;将结果保存在一个文本中而不是显示在命令窗口<br><img src="/2019/02/27/windows命令应用/dir2.PNG" alt=""><br>dir D: /s/b &gt; E:/contents.xls   这样可以直接把D盘下的文件名都提取出来并创建contents.xls存放到E盘的根目录下。<br><img src="/2019/02/27/windows命令应用/dir3.PNG" alt=""></p>
+<h1 id="查看系统详细信息"><a href="#查看系统详细信息" class="headerlink" title="查看系统详细信息"></a>查看系统详细信息</h1><p>（包含已打补丁、开机运行时间等等）的命令<br>输入“systeminfo”命令，即可看到安装时间。<br><img src="/2019/02/27/windows命令应用/info.png" alt=""><br>运行时间也可以</p>
+<p>1、右键点击桌面底部任务栏，再点击“启动任务管理器”；</p>
+<p>2、在“任务管理器”窗口，点击“性能”选项卡；</p>
+<p>3、在“性能”界面，右下边便可以看见系统运行时间。</p>
+<h1 id="文件（夹）创建与删除"><a href="#文件（夹）创建与删除" class="headerlink" title="文件（夹）创建与删除"></a>文件（夹）创建与删除</h1><h2 id="文件创建"><a href="#文件创建" class="headerlink" title="文件创建"></a>文件创建</h2><p>一般创建空文件用 type  创建非空用echo</p>
+<h3 id="echo创建文件"><a href="#echo创建文件" class="headerlink" title="echo创建文件"></a>echo创建文件</h3><p><img src="/2019/02/27/windows命令应用/echo.PNG" alt=""></p>
+<h3 id="使用type创建一个文本"><a href="#使用type创建一个文本" class="headerlink" title="使用type创建一个文本"></a>使用type创建一个文本</h3><p><img src="/2019/02/27/windows命令应用/type.PNG" alt=""></p>
+<h3 id="使用fsutil-创建一个文件大小为3000比特的文本"><a href="#使用fsutil-创建一个文件大小为3000比特的文本" class="headerlink" title="使用fsutil 创建一个文件大小为3000比特的文本"></a>使用fsutil 创建一个文件大小为3000比特的文本</h3><p>fsutil file createNew D:\new.text\f.text 3000<br>此时为空文件<br>fsutil file createNew  dir D:/ &gt;D:\new.text\fsu.text 3000<br>此时文件内有固定的文字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用法 : fsutil file createNew &lt;filename&gt; &lt;length&gt;</span><br><span class="line">例如 : fsutil file createNew C:\testfile.txt 1000</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/02/27/windows命令应用/f.PNG" alt=""></p>
+<h2 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h2><p>我们可以使用 md <foldername>或mkdir <foldername>命令来创建，其中md和mkdir都是建立新目录make directory的意思，完整命令是md [盘符:][路径]新目录名，<br>比如：md c:\test\myfolder<br><img src="/2019/02/27/windows命令应用/md.PNG" alt=""></foldername></foldername></p>
+<h2 id="删除文件夹"><a href="#删除文件夹" class="headerlink" title="删除文件夹"></a>删除文件夹</h2><p>使用rd或rmdir命令，完整命令rd /s /q [盘符:][路径]新目录名，因为rd只能删除空的文件夹，而如果其中有子文件或子文件夹的时候就会停下来<br><img src="/2019/02/27/windows命令应用/rd.PNG" alt=""><br>这时我们加上/s就可以直接删除，但是删除过程中会提示你是否确定删除<br><img src="/2019/02/27/windows命令应用/rd2.PNG" alt=""><br>对于懒癌患者我们有添加了/q，即quiet，安静模式；所以使用以上命令会完整删除你选中的整个文件夹<br><img src="/2019/02/27/windows命令应用/rd3.PNG" alt=""></p>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p><img src="/2019/02/27/windows命令应用/del.PNG" alt=""></p>
+<h1 id="创建用户，并设置密码"><a href="#创建用户，并设置密码" class="headerlink" title="创建用户，并设置密码"></a>创建用户，并设置密码</h1><p>创建一个backdoor用户，密码为backdoor123，命令是？<br>Net user backdoor backdoor123/add</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/26/mysql注入知识03导入导出相关操作及less7-less8/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -391,7 +587,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -417,7 +613,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
@@ -568,7 +764,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -811,7 +1007,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -849,7 +1045,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
@@ -984,7 +1180,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1022,7 +1218,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/命令/" itemprop="url" rel="index"><span itemprop="name">命令</span></a></span>
@@ -1232,7 +1428,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1258,7 +1454,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
@@ -1407,7 +1603,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1445,7 +1641,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Mysql注入-sqlilabs/" itemprop="url" rel="index"><span itemprop="name">Mysql注入-sqlilabs</span></a></span>
@@ -1606,7 +1802,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1644,7 +1840,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1805,7 +2001,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -1831,7 +2027,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1977,7 +2173,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Diposting di</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
@@ -2003,7 +2199,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Di</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP正则表达式/" itemprop="url" rel="index"><span itemprop="name">PHP正则表达式</span></a></span>
@@ -2233,297 +2429,6 @@ sql语句：^(select|drop|delete|create|update|insert).*$
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/14/PHP正则表达式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/14/PHP正则表达式/" class="post-title-link" itemprop="url">PHP正则表达式</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Diposting di</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-14 19:52:34" itemprop="dateCreated datePublished" datetime="2019-02-14T19:52:34+08:00">2019-02-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-02-23 19:10:41" itemprop="dateModified" datetime="2019-02-23T19:10:41+08:00">2019-02-23</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Di</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/PHP正则表达式/" itemprop="url" rel="index"><span itemprop="name">PHP正则表达式</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="一、-正则表达式介绍"><a href="#一、-正则表达式介绍" class="headerlink" title="一、    正则表达式介绍"></a>一、    正则表达式介绍</h1><p>描述了一类字符串的特征，然后通过这个特征可以配合一些特定的函数，来完成对字符串更加复杂的一系列操作！<br>        普通字符和特殊字符组成的一个字符串</p>
-<pre><code>1. 用途：匹配、查找、替换、分割 
-2. php提供了两套正则表达式函数库 
-    （1）. Perl 兼容正则表达式函数（推荐使用） 
-    （2）. POSIX 扩展正则表达式函数
-</code></pre><h1 id="二、语法规则"><a href="#二、语法规则" class="headerlink" title="二、语法规则"></a>二、语法规则</h1><pre><code>表达式的格式： &quot;/表达式/[修正符]&quot; 
-</code></pre><p>其中修正符是可选的，表示对表达式做额外的修饰。<br>我们一般习惯使用正斜线”/“作为定界的字符,前后一致<br>注意：定界符不可以是字母、数字和斜线\。<br>                像“#”、“|”、“!”等都可以的<br>                如：/…/   #…#  |….| </p>
-<h1 id="三、-正则表达式的组成部分："><a href="#三、-正则表达式的组成部分：" class="headerlink" title="三、 正则表达式的组成部分："></a>三、 正则表达式的组成部分：</h1><h2 id="1-基本单位-原子"><a href="#1-基本单位-原子" class="headerlink" title="1. 基本单位(原子)"></a>1. 基本单位(原子)</h2><p>原子是组成正则表达式的基本单位,在分析正则表达式时，应作为一个整体。<br>       原子包括以下内容: </p>
-<pre><code>* 单个字符、数字，如a-z，A-Z，0-9。 
-* 模式单元，如（ABC）可以理解为由多个原子组成的大的原子。 
-* 原子表，如 [ABC]。 
-* 重新使用的模式单元，如：\\1 
-* 普通转义字符，如：\d， \D， \w 
-* 转义元字符，如：\*，\. 
-* 元字符
-</code></pre><h2 id="2-元字符（具有特殊意义字符）："><a href="#2-元字符（具有特殊意义字符）：" class="headerlink" title="2. 元字符（具有特殊意义字符）："></a>2. 元字符（具有特殊意义字符）：</h2><h3 id="各个字符含义"><a href="#各个字符含义" class="headerlink" title="各个字符含义"></a>各个字符含义</h3><pre><code>[] 表示单个字符的原子表 
-    例如：[aoeiu] 表示任意一个元音字母 
-          [0-9] 表示任意一位数字 
-          [a-z][0-9]表示小写字和一位数字构成的两位字符 
-          [a-zA-Z0-9] 表示任意一位大小字母或数字 
-[^] 表示除中括号内原子之外的任何字符 是[]的取反 
-    例如：[^0-9] 表示任意一位非数字字符 
-          [^a-z] 表示任意一位非小写字母 
-{m}    表示对前面原子的数量控制，表示是m次 
-    例如：[0-9]{4} 表示4为数字 
-          [1][3-8][0-9]{9} 手机号码 
-{m,} 表示对前面原子的数量控制，表示是至少m次          
-    例如： [0-9]{2,} 表示两位及以上的数字 
-{m,n}表示对前面原子的数量控制，表示是m到n次 
-    例如： [a-z]{6,8} 表示6到8位的小写字母 
-* 表示对前面原子的数量控制，表示是任意次，等价于{0,} 
-+ 表示对前面原子的数量控制，表示至少1次，等价于{1,} 
-? 表示对前面原子的数量控制，表示0次或1次（可有可无） 等价于{0,1} 
-    例如：正整数：[1-9][0-9]* 
-            整数：[\-]?[0-9]+ 
-() 表示一个整体原子，还有一个子存储单元的作用【使用\\数字或$数字来代表圆括号部分所匹配到的内容】。 
-        也可以使用?:来拒绝子存储。 （?:.*?） 
-    例如：（red） 字串red 
-           (rea|blue) 字串red或blue 
-           (abc){2} 表示两个abc 
-|  表示或的意思 
-        (rea|blue) 字串red或blue 
-^  用在正则单元块的开头处，表示必须以指定的开头 
-$  用在正则单元块的结尾处，表示必须以指定的结尾 
-.  表示任意一个除换行符之外的字符 
-</code></pre><h3 id="（）的使用："><a href="#（）的使用：" class="headerlink" title="（）的使用："></a>（）的使用：</h3><p>如果使用对应的\\数字或$数字来代表圆括号部分所匹配到的内容，那么要注意匹配完整</p>
-<p>由于没用匹配到\\1对应的e，匹配失败<br><img src="/2019/02/14/PHP正则表达式/元1.png" alt=""><br>只有对应的内容都匹配到了才是匹配成功。array数组中分别保存了匹配的完整字符串，和（）所匹配到的字符<br><img src="/2019/02/14/PHP正则表达式/元2.png" alt=""></p>
-<p><br></p>
-<h3 id="常用组合（贪婪匹配问题）"><a href="#常用组合（贪婪匹配问题）" class="headerlink" title="常用组合（贪婪匹配问题）"></a>常用组合（贪婪匹配问题）</h3><p>.与{n}配合  中间有n个非空<br>.与*配合   默认是贪婪匹配（尽可能多的去匹配字符） 中间有任意个非空<br><img src="/2019/02/14/PHP正则表达式/元3.png" alt=""><br>.*?  可以解决贪婪匹配（表示最小匹配所有字符）<br><img src="/2019/02/14/PHP正则表达式/元4.png" alt=""><br>也可以使用模式修正符来解决：  m</p>
-<h2 id="3-普通转义字符"><a href="#3-普通转义字符" class="headerlink" title="3. 普通转义字符:"></a>3. 普通转义字符:</h2><p>\d    匹配一个数字；等价于[0-9]<br>\D    匹配除数字以外任何一个字符；等价于[^0-9]<br>\w    匹配一个英文字母、数字或下划线；等价于[0-9a-zA-Z_]<br>\W    匹配除英文字母、数字和下划线以外任何一个字符；等价于[^0-9a-zA-Z_]<br>\s    匹配一个空白字符；等价于[\f\n\r\t\v]<br>\S    匹配除空白字符以外任何一个字符；等价于[^\f\n\r\t\v]<br>\f    匹配一个换页符等价于 \x0c 或 \cL<br>\n    匹配一个换行符；等价于 \x0a 或 \cJ<br>\r    匹配一个回车符等价于\x0d 或 \cM<br>\t    匹配一个制表符；等价于 \x09\或\cl<br>\v    匹配一个垂直制表符；等价于\x0b或\ck<br>\oNN    匹配一个八进制数字<br>\xNN    匹配一个十六进制数字<br>\cC    匹配一个控制字符 </p>
-<h2 id="4-常见模式修正符"><a href="#4-常见模式修正符" class="headerlink" title="4. 常见模式修正符"></a>4. 常见模式修正符</h2><h3 id="常见四种"><a href="#常见四种" class="headerlink" title="常见四种"></a>常见四种</h3><pre><code>i    在和模式进行匹配时不区分大小写&quot;/[a-zA-Z]/&quot; &lt;==&gt;&quot;/[a-z]/i&quot; 
-m    多行匹配，如果目标字符串 中没有&quot;\n&quot;字符, 或者模式中没有出现^或$, 设置这个修饰符不产生任何影响
-s    如果设定了此修正符，那么.将匹配所有的字符包括换行符（表示匹配视为单行：就是可以让点.支持换行） 
-U    禁止贪婪匹配
-</code></pre><h3 id="U-禁止贪婪匹配"><a href="#U-禁止贪婪匹配" class="headerlink" title="U 禁止贪婪匹配"></a>U 禁止贪婪匹配</h3><p><img src="/2019/02/14/PHP正则表达式/修1.png" alt=""></p>
-<h3 id="i-不区分大小写"><a href="#i-不区分大小写" class="headerlink" title="i 不区分大小写"></a>i 不区分大小写</h3><p>如果设置了这个修饰符，模式中的字母会进行大小写不敏感匹配。</p>
-<h3 id="m-多行匹配"><a href="#m-多行匹配" class="headerlink" title="m 多行匹配"></a>m 多行匹配</h3><p><strong>（如果目标字符串中没用“\n”字符，或者模式中没用出现^或$，设置这个修饰符不产生任何影响）</strong><br>使用条件</p>
-<ol>
-<li>目标字符串必须包含换行符“\n”  字符串中出现\n就表示新的一行开始</li>
-<li>正则表达式中必须要出现^或者$<br>未使用修正符时：<br><img src="/2019/02/14/PHP正则表达式/修2.png" alt=""><br><br></li>
-</ol>
-<p>此时使用模式修正符，发现没用改动！<br><img src="/2019/02/14/PHP正则表达式/修3.png" alt=""></p>
-<p>为什么？<br>因为在单引号里面不识别转义\n，它认为是普通的字符，而不是换行！！！</p>
-<p>因此，我们将单引号换成双引号（我们可以发现\n有了高亮，实现了转义）<br><img src="/2019/02/14/PHP正则表达式/修4.png" alt=""><br>此时发现，m 模式修饰符起到了作用<br>换成以test结束试试（使用$）<br><img src="/2019/02/14/PHP正则表达式/修5.png" alt=""><br>依旧可以</p>
-<p>\n代表着换行那么，我们手动换行试试？<br><img src="/2019/02/14/PHP正则表达式/修6.png" alt=""><br>只能匹配一个，此时匹配的是最后一个<br>为什么？<br>解释：<br><strong>在windows操作系统中，我们所看到的换行（肉眼看到的换行现象），其实是通过两个字符来完成的（\r\n）<br>在linux操作系统中看，我们所看到的换行（肉眼看到的换行现象），是通过\n来完成的</strong></p>
-<p>如果是这样，我们修改匹配规则：  $pattern=’/test\r$/m’;<br><img src="/2019/02/14/PHP正则表达式/修7.png" alt=""><br>发现匹配到了三个，此时应为前三个匹配到</p>
-<p>那么我们如何在windows如何匹配到四个呢？我们可以使用*来使得\r出不出现都能匹配到<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$pattern=<span class="string">'/test\r*$/m'</span>;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2019/02/14/PHP正则表达式/修8.png" alt=""><br>此时成功匹配到四个</p>
-<h3 id="s-让点-支持换行"><a href="#s-让点-支持换行" class="headerlink" title="s  让点.支持换行"></a>s  让点.支持换行</h3><p>如果设置了这个修饰符，模式中的点号元字符匹配所有字符，包含换行符。如果没有这个 修饰符，点号不匹配换行符<br>不使用s 修正符时<br><img src="/2019/02/14/PHP正则表达式/修9.png" alt=""><br>使用s修正符：<br><img src="/2019/02/14/PHP正则表达式/修10.png" alt=""><br>使用手动回车代替\n时：<br><img src="/2019/02/14/PHP正则表达式/修11.png" alt=""><br>发现：<strong>同样我们在使用模式修正符s时，如果我们不是写\n而是手动回车也会发生同样的错误</strong></p>
-<p><hr><br>补充：<br>\r 回车符<br>\n 换行符<br>两者区别<br>以下代码摘自网络：本帖最后由 rossini23 于 2011-05-26 23:48 编辑<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"this is\ra test\r\n"</span>); <span class="comment">//1</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"this is\na test\r\n"</span>); <span class="comment">//2</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"this is\r\na test\r\n"</span>); <span class="comment">//3</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a tests</span><br><span class="line"><span class="keyword">this</span> is</span><br><span class="line">a test</span><br><span class="line"><span class="keyword">this</span> is</span><br><span class="line">a test</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>	<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="number">2.</span>	</span><br><span class="line"><span class="number">3.</span>	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">4.	&#123;</span><br><span class="line"><span class="number">5.</span>	        <span class="built_in">printf</span>(<span class="string">"this is\ra test\r\n"</span>); <span class="comment">//1</span></span><br><span class="line"><span class="number">6.</span>	        <span class="built_in">printf</span>(<span class="string">"this is\na test\r\n"</span>); <span class="comment">//2</span></span><br><span class="line"><span class="number">7.</span>	        <span class="built_in">printf</span>(<span class="string">"this is\r\na test\r\n"</span>); <span class="comment">//3</span></span><br><span class="line"><span class="number">8.</span>	        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="number">9.</span>	&#125;</span><br><span class="line">上面这一小段代码在Linux、windows下的输出如下：</span><br><span class="line"><span class="number">1.</span>	a tests</span><br><span class="line"><span class="number">2.</span>	<span class="keyword">this</span> is</span><br><span class="line"><span class="number">3.</span>	a test</span><br><span class="line"><span class="number">4.</span>	<span class="keyword">this</span> is</span><br><span class="line"><span class="number">5.</span>	a test</span><br></pre></td></tr></table></figure>
-<pre><code>第一条打印语句，\r使光标移动到本行行首，然后打印a test覆盖this i，变成a tests
-第二条打印语句，\n使光标移动到下一行行首，然后打印a test
-第三条打印语句，\r\n使光标移动到本行行首，然后移动到下一行行首，然后打印a test
-
-然后在linux下，用stty设置关闭ONLCR转换:
-stty -onlcr
-发现输出变为：
-1.    a tests
-2.    this is
-3.             a test
-4.    this is
-5.    a test
-看起来，第二条打印语句的\n行为是“将光标移动到下一行当前位置”
-在linux系统下，onlcr是控制nl转换到cr nl。
-也就是说正常情况下\n被转换成了\r\n，然后送到屏幕上显示，所以第二个输出语句看到的效果是回到下一行行首。
-
-stty -onlcr也就是关闭nl转换到cr nl，这时候送到屏幕上的只有\n，看到结果是移动到下一行当前位置。
-
-
-\r\n是一个让人郁闷的问题，windows和我们的嵌入式系统之间交互总是有问题，所以想搞明白这个问题。
-网络上搜\r\n也可以看到很多OS之间、协议之间交互的问题。
-</code></pre><h1 id="四、-正则表达式的函数："><a href="#四、-正则表达式的函数：" class="headerlink" title="四、 正则表达式的函数："></a>四、 正则表达式的函数：</h1><pre><code>preg_grep --  返回与模式匹配的数组单元 
-**preg_match_all** -- 进行全局正则表达式匹配 , 返回共计匹配的个数。 
-    和下面的一样，不同的是匹配到最后（全局匹配） 
-**preg_match** -- 进行正则表达式匹配，只匹配一次，返回1，否则0， 
-    格式：preg_match(&quot;正则表达式&quot;,&quot;被匹配的字串&quot;,存放结果的变量名,PREG_OFFSET_CAPTURE,起始偏移量) 
-    其中：PREG_OFFSET_CAPTURE表示获取匹配索引位置 
-          起始偏移量：从指定位置开始匹配 
-preg_quote -- 转义正则表达式字符 
-preg_split -- 用正则表达式分割字符串 
-**preg_replace** -- 执行正则表达式的搜索和替换
-</code></pre><h2 id="preg-match-all-执行多次"><a href="#preg-match-all-执行多次" class="headerlink" title="preg_match_all 执行多次"></a>preg_match_all 执行多次</h2><p><strong>执行一个全局正则表达式匹配</strong><br>搜索subject中所有匹配pattern给定正则表达式的匹配结果并且将它们以flag指定顺序输出到matches中<br>在第一个匹配找到后, 子序列继续从最后一次匹配位置搜索</p>
-<p>int preg_match_all ( string $pattern , string $subject [, array &amp;$matches [, int $flags = PREG_PATTERN_ORDER [, int $offset = 0 ]]] )<br>参数 说明：</p>
-<h3 id="1-pattern"><a href="#1-pattern" class="headerlink" title="1.pattern"></a>1.pattern</h3><p>要搜索的模式，字符串形式。 </p>
-<h3 id="2-subject"><a href="#2-subject" class="headerlink" title="2.subject"></a>2.subject</h3><p>输入字符串。 </p>
-<h3 id="3-matches"><a href="#3-matches" class="headerlink" title="3.matches"></a>3.matches</h3><p>多维数组，作为输出参数输出所有匹配结果, 数组排序通过flags指定。 </p>
-<h3 id="4-flags"><a href="#4-flags" class="headerlink" title="4.flags"></a>4.flags</h3><p>可以结合下面标记使用(注意不能同时使用PREG_PATTERN_ORDER和 PREG_SET_ORDER)： </p>
-<h4 id="PREG-PATTERN-ORDER（默认）"><a href="#PREG-PATTERN-ORDER（默认）" class="headerlink" title="PREG_PATTERN_ORDER（默认）"></a>PREG_PATTERN_ORDER（默认）</h4><p>结果排序为$matches[0]保存完整模式的所有匹配, $matches[1] 保存第一个子组的所有匹配，以此类推。<br><img src="/2019/02/14/PHP正则表达式/函数1.png" alt=""> </p>
-<h4 id="PREG-SET-ORDER"><a href="#PREG-SET-ORDER" class="headerlink" title="PREG_SET_ORDER"></a>PREG_SET_ORDER</h4><p>结果排序为$matches[0]包含第一次匹配得到的所有匹配(包含子组)， $matches[1]是包含第二次匹配到的所有匹配(包含子组)的数组，以此类推。<br><img src="/2019/02/14/PHP正则表达式/函数2.png" alt=""></p>
-<h4 id="PREG-OFFSET-CAPTURE"><a href="#PREG-OFFSET-CAPTURE" class="headerlink" title="PREG_OFFSET_CAPTURE"></a>PREG_OFFSET_CAPTURE</h4><p>如果这个标记被传递，每个发现的匹配返回时会增加它相对目标字符串的偏移量。 注意这会改变matches中的每一个匹配结果字符串元素，使其 成为一个第0个元素为匹配结果字符串，第1个元素为 匹配结果字符串在subject中的偏移量<br><img src="/2019/02/14/PHP正则表达式/函数3.png" alt=""></p>
-<h3 id="5-offset"><a href="#5-offset" class="headerlink" title="5.offset"></a>5.offset</h3><p>通常， 查找时从目标字符串的开始位置开始。可选参数offset用于 从目标字符串中指定位置开始搜索(单位是字节)。 </p>
-<h2 id="preg-match-执行一次"><a href="#preg-match-执行一次" class="headerlink" title="preg_match  执行一次"></a>preg_match  执行一次</h2><pre><code>mixed preg_replace ( mixed $pattern , mixed $replacement , mixed $subject [, int $limit = -1 [, int &amp;$count ]] )
-</code></pre><p>第一个参数：正则表达式：pattern<br>pattern：要搜索的模式。可以使一个字符串或字符串数组。<br>第二个参数：要替换的字符串：replacement</p>
-<p>第三个参数：目标字符串：subject<br>要进行搜索和替换的字符串或字符串数组。<br>如果subject是一个数组，搜索和替换回在subject 的每一个元素上进行, 并且返回值也会是一个数组。<br><img src="/2019/02/14/PHP正则表达式/函数4.png" alt=""></p>
-<p>如何使中间部分不变，只将div标签替换成a标签？<br>联系正则表达式中的（）和\\  由于\\指的使（）中的内容，所以我们可以使用\\保留原来的字符串<br><img src="/2019/02/14/PHP正则表达式/函数5.png" alt=""><br>也可以同时替换多个<br><img src="/2019/02/14/PHP正则表达式/函数6.png" alt=""><br>replacement中可以包含反向引用\\n 或$n，语法上首选后者。<br><img src="/2019/02/14/PHP正则表达式/函数7.png" alt=""></p>
-<p>我们还能在标签内部也使用（）和对应的反斜杠或$ 来保留标签样式<br><img src="/2019/02/14/PHP正则表达式/函数8.png" alt=""></p>
-<p>第四个参数limit（可选）<br>每个模式在每个subject上进行替换的最大次数。默认是 -1(无限)。 </p>
-<p>第五个参数count（可选）<br>如果指定，将会被填充为完成的替换次数。 </p>
-<p>和str_replace一样，第一个参数和第二个参数都可以是数组<br>如果pattern（第一个参数）和replacement（第二个参数） 都是数组，每个pattern使用replacement中对应的 元素进行替换。如果replacement中的元素比pattern中的少， 多出来的pattern使用空字符串进行替换。<br><img src="/2019/02/14/PHP正则表达式/函数9.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2571,8 +2476,8 @@ preg_split -- 用正则表达式分割字符串
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
-                    <span class="site-state-item-name">posting</span>
+                    <span class="site-state-item-count">87</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -2606,8 +2511,10 @@ preg_split -- 用正则表达式分割字符串
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
-                    <span class="site-state-item-name">kategori</span>
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">Kategorien</span>
                   </a>
                 </div>
               
@@ -2659,7 +2566,7 @@ preg_split -- 用正则表达式分割字符串
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -2667,7 +2574,7 @@ preg_split -- 用正则表达式分割字符串
 
 
 
-  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 
