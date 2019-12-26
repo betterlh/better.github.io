@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>Informazioni su</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>Categorie</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>Archivi</a>
 
   </li>
         
@@ -301,7 +301,7 @@
 
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br/>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br/>Programma</a>
 
   </li>
 
@@ -337,6 +337,414 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础07-字符串/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/29/PHP基础07-字符串/" class="post-title-link" itemprop="url">PHP基础07-字符串</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-01-29 15:43:54" itemprop="dateCreated datePublished" datetime="2019-01-29T15:43:54+08:00">2019-01-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Post modificato: 2019-01-30 07:53:54" itemprop="dateModified" datetime="2019-01-30T07:53:54+08:00">2019-01-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><div style="font-size:40px;"><center>字符串</center> </div></strong></p>
+<h1 id="字符串定义语法"><a href="#字符串定义语法" class="headerlink" title="字符串定义语法"></a>字符串定义语法</h1><ol>
+<li>单引号字符串</li>
+<li>双引号字符串<br><br><br><strong>比较适合定义那些比较短（不超过一行）或者没有结构要求的字符串，<br>如果有结构要求或者内容超过一行，可以使用以下两种结构定义</strong></li>
+<li>nowdoc字符串：没有单引号的单引号字符串<br>$str=&lt;&lt;&lt;’边界符’<br>字符串内容<br>边界符</li>
+<li>heredoc字符串：没有双引号的双引号字符串<br>$str=&lt;&lt;&lt;边界符<br>字符串内容<br>边界符</li>
+</ol>
+<p><img src="/2019/01/29/PHP基础07-字符串/定义1.png" alt=""><br><img src="/2019/01/29/PHP基础07-字符串/定义2.png" alt=""><br>结构不会发生变化<br><br></p>
+<h1 id="结构化定义字符串变量的规则"><a href="#结构化定义字符串变量的规则" class="headerlink" title="结构化定义字符串变量的规则"></a>结构化定义字符串变量的规则</h1><ul>
+<li>结构化定义字符串对应的边界符有条件：</li>
+</ul>
+<ol>
+<li>上边界符后面不能有任何内容（包括注释，空格）</li>
+<li>下边界符必须顶格：最左边</li>
+<li>下边界符同样后面只能跟分号，不能跟任何内容</li>
+</ol>
+<ul>
+<li>结构化定义字符串的内部（边界符之间）的所有内容都是字符串本身<br><img src="/2019/01/29/PHP基础07-字符串/结构化定义.png" alt=""></li>
+</ul>
+<h1 id="字符串转义"><a href="#字符串转义" class="headerlink" title="字符串转义"></a>字符串转义</h1><p>转义的含义：在计算机通用协议中，有一些特定的方式定义的字母，系统会特定处理；通常这种方式都是使用反斜杠+字母（单词）的特性<br>\r    \n:回车换行<br>PHP在识别转义字符的时候也是使用同样的模式：反斜杠+字母<br>在PHP中系统常用的转义符号<br>\’  在单引号字符串中显示单引号<br>\”在双引号字符串中显示双引号<br>\r代表回车（理论上回到当前行的首位置）<br>\n代表新一行          （\r与\n配合就可以表示换行）<br>\t 类似TAB键，输出四个空格<br>\$ 在PHP中使用$符号作为变量符号，因此需要特定识别<br>单引号与双引号区别：</p>
+<ol>
+<li>单引号中能识别\‘（因为在单引号中出现没有转义的’会有误解，发生错误），而双引号仅不能识别\’（因为在双引号中‘能正确使用不会有误解）<br><img src="/2019/01/29/PHP基础07-字符串/转义1.png" alt=""><br><center>因为单引号中$没有变量意义，所以/$ 原样输出</center><br><center>因为双引号中$有变量意义，所以能识别/$转义成没有意义的$输出</center><br><br></li>
+<li>双引号中因为能够识别$符号，所以双引号中可以解析变量，而单引号不可以。（故）<br><img src="/2019/01/29/PHP基础07-字符串/转义2.png" alt=""></li>
+</ol>
+<p><strong>双引号中变量识别的规则</strong></p>
+<ol>
+<li>变量本身能与后面的内容区分：应该保证变量的独立性，不要让系统难以区分，给变量加上一组大括号</li>
+<li>使用变量专业标识符（区分）<br><img src="/2019/01/29/PHP基础07-字符串/转义3.png" alt=""></li>
+</ol>
+<h1 id="字符串转义-1"><a href="#字符串转义-1" class="headerlink" title="字符串转义"></a>字符串转义</h1><h1 id="字符串长度问题"><a href="#字符串长度问题" class="headerlink" title="字符串长度问题"></a>字符串长度问题</h1><ol>
+<li>基本函数strlen（）：得到字符串的长度（字节为单位）<br><img src="/2019/01/29/PHP基础07-字符串/长度1.png" alt=""></li>
+<li>多字节字符串的长度问题：包含中文的长度</li>
+<li>多字节字符串扩展模块：mbstring扩展（mb：Multi Byte）<br>首先需要加载PHP的mbstring扩展<br><img src="/2019/01/29/PHP基础07-字符串/长度2.png" alt=""> </li>
+</ol>
+<p>可以使用mb扩展带来很多函数<br>mb_string扩展针对的是一些关于字符统计<br><br><br>strlen（）只是针对标准交换码ASCII，mbstring针对不同的字符集<br><img src="/2019/01/29/PHP基础07-字符串/长度3.png" alt=""></p>
+<h1 id="字符串相关函数"><a href="#字符串相关函数" class="headerlink" title="字符串相关函数"></a>字符串相关函数</h1><h2 id="转化函数：implode-explode-str-split"><a href="#转化函数：implode-explode-str-split" class="headerlink" title="转化函数：implode(),explode(),str_split"></a>转化函数：implode(),explode(),str_split</h2><p>implode(连接方式，数组)将数组中的元素按照某个规则连接成一个字符串<br>explode(分割字符，目标字符串)将字符串按照某个格式进行分割，变成数组<br>str_split(字符串，字符长度)：按照指定长度拆分字符串得到数组</p>
+<h2 id="截取函数-trim-ltrim-rtrim"><a href="#截取函数-trim-ltrim-rtrim" class="headerlink" title="截取函数 trim(),ltrim(),rtrim()"></a>截取函数 trim(),ltrim(),rtrim()</h2><p>trim（str，【去除的内容】）本身默认去除两边的空格（中间不行），但是也可以指定要去除的内容,是按指定的内容循环去除两边的内容，碰到一个不是目标字符为止<br>ltrim() 去除左边的   rtrim（）去除右边的</p>
+<h2 id="截取函数"><a href="#截取函数" class="headerlink" title="截取函数"></a>截取函数</h2><p>substr(字符串，起始位置从0开始，【长度】)：指定位置开始截取字符串，可以截取指定长度（不指定表示到最后）<br>strstr（字符串，匹配字符）：从指定字符开始截取，到最后（strrchr() - 查找指定字符在字符串中的最后一次出现，可以用来取文件后缀名：利用.）</p>
+<p><img src="/2019/01/29/PHP基础07-字符串/相关函数1.png" alt=""></p>
+<center>该函数区分大小写。如果想要不区分大小写，请使用 stristr()</center>
+
+<h2 id="大小转换函数"><a href="#大小转换函数" class="headerlink" title="大小转换函数"></a>大小转换函数</h2><p>strtolower — 将字符串转化为小写<br>strtoupper 将字符串转化为大写<br>Ucfirst（）首字母大写<br><img src="/2019/01/29/PHP基础07-字符串/相关函数2.png" alt=""><br>ucwords() - 将字符串中每个单词的首字母转换为大写</p>
+<h2 id="查找函数"><a href="#查找函数" class="headerlink" title="查找函数"></a>查找函数</h2><p>strpos（字符串，指定字符，起始位置）查找首次出现的位置</p>
+<ul>
+<li>起始位置如果是负数，搜索会从字符串结尾指定字符数开始。</li>
+<li>同时注意字符串位置是从0开始，而不是从1开始的。 如果没找到 needle，将返回 FALSE。 </li>
+</ul>
+<h2 id="替换函数"><a href="#替换函数" class="headerlink" title="替换函数"></a>替换函数</h2><p>str_replace(匹配目标，替换的内容，字符串):将目标字符串中部分字符串进行替换<br>str_ireplace — str_replace() 的忽略大小写版本</p>
+<h2 id="格式化函数"><a href="#格式化函数" class="headerlink" title="格式化函数"></a>格式化函数</h2><p>printf（） / sprintf（输出字符串有占位符，若干占位符）<br><img src="/2019/01/29/PHP基础07-字符串/相关函数3.png" alt=""></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>str_repeat(字符串，次数)<br>重复一个字符串（必须大于等于 0。如果 multiplier 被设置为 0，函数返回空字符串）<br>str_shuffle()随机打乱字符串</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/01/29/PHP基础06-错误处理相关/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.gif"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/29/PHP基础06-错误处理相关/" class="post-title-link" itemprop="url">PHP基础06-错误处理相关（简）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-01-29 15:27:33 / Post modificato: 15:44:27" itemprop="dateCreated datePublished" datetime="2019-01-29T15:27:33+08:00">2019-01-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong><div style="font-size:40px;"><center>错误处理</center> </div><br>错误处理：指的是系统（用户）在对某些错误代码进行执行的时候，发现有错误，就会通过错误处理的形式告知程序员</strong></p>
+<h1 id="错误分类"><a href="#错误分类" class="headerlink" title="错误分类"></a>错误分类</h1><ol>
+<li>语法错误：用户书写的代码不复合PHP规范，语法错误会导致代码在编译过程中不通过，所以代码不会执行（parse error）</li>
+<li>运行时错误：代码编译通过，但是代码在执行的过程中会出现一些条件不满足导致的错误（runtime error）</li>
+<li>逻辑错误：程序员在写代码的时候不够规范，出现了一些逻辑性的错误，导致代码正常执行，但是得不到想要的结果</li>
+</ol>
+<h1 id="错误代号"><a href="#错误代号" class="headerlink" title="错误代号"></a>错误代号</h1><p>所有看到的错误代码在PHP中都定义成了系统 常量（可以直接使用）<br>1.系统错误<br>E_PARSE：编译错误，代码不会执行<br>E_ERROR：fatal error，致命错误，会导致代码不能正确继续执行（出错的位置断掉）<br>E_WARNING：warning，警告错误，不会影响代码执行，但是可能得到意想不到的结果<br>E_NOTIE：notice，通知错误，不会影响代码执行<br>2.用户错误：<br>E_USER_ERROR ，E_USER_WARNING，E_USER_NOTICE<br>用户在使用自定义错误触发的时候，会使用到的错误代号（系统不会用到）</p>
+<ol start="4">
+<li>其他：E_ALL，代表着所有错误（通常在进行错误控制的时候用比较多，）建议在开发过程中（开发环境）使用<br>所有E开头的错误常量(代号)其实都是由一个字节存储，然后每一种错误占据一个对应的位，如果想进行一些错误的控制，可以使用位运算进行操作<br>排除通知级别notice：E_ALL&amp;~E_NOTICE<br>只要警告和通知： E_WARNING|E_NOTICE</li>
+</ol>
+<h1 id="错误触发"><a href="#错误触发" class="headerlink" title="错误触发"></a>错误触发</h1><p>程序运行时触发：系统自动根据错误发生后，对比对应的错误信息，输出给用户：主要针对代码的语法错误和运行时错误<br>人为触发：知道某些逻辑可能会出错，从而使用对应的判断代码来触发响应的错误提示。trigger_error（错误提示）：<br>可以通过第二个参数进行严格性控制    （是否在往下运行）<br><img src="/2019/01/29/PHP基础06-错误处理相关/错误触发.png" alt=""><br><br></p>
+<h1 id="错误显示设置：哪些错误该显示，以及该如何显示"><a href="#错误显示设置：哪些错误该显示，以及该如何显示" class="headerlink" title="错误显示设置：哪些错误该显示，以及该如何显示"></a>错误显示设置：哪些错误该显示，以及该如何显示</h1><p>在PHP中，有两种方式来设置当前脚本的错误处理<br>1.在PHP配置文件：全局配置：php.ini文件<br>display_errors:是否显示错误<br>error_reporting:显示什么级别的错误<br>2可以在运行的PHP脚本中设置(在脚本中定义的配置级别比配置文件高，通常在开发中都会在代码中去进行控制和配置)<br>error_reporting()设置对应的错误显示级别<br>ini_set(‘配置文件中的配置项’，配置值)<br>    ini_set(‘error_reporting’,E_ALL);<br>    ini_set(‘display_errors’,1);</p>
+<h1 id="错误日志设置"><a href="#错误日志设置" class="headerlink" title="错误日志设置"></a>错误日志设置</h1><p>在实际生产环境中，不会直接让错误赤裸裸的展示给用户</p>
+<ol>
+<li>不友好</li>
+<li>不安全：错误会暴露网站很多信息（路劲，文件名）</li>
+</ol>
+<p>所以生产环境中，一般不显示错误（错误也比较少），但是不可能避免会出现错误（测试的时候不会发现所有的问题）这个时候不希望看到，但是又希望捕捉到可以让后台程序员去修改：需要保存到日志文件中，需要在PHP配置文件中或者代码中（ini_set）设置对应的error_logo</p>
+<ol>
+<li>开启日志功能<br><img src="/2019/01/29/PHP基础06-错误处理相关/日志功能.png" alt=""></li>
+<li>指定路径<br><img src="/2019/01/29/PHP基础06-错误处理相关/指定路径.png" alt=""><h1 id="自定义错误处理"><a href="#自定义错误处理" class="headerlink" title="自定义错误处理"></a>自定义错误处理</h1>最简单的错误处理：trigger_error（）但是该函数不会阻止系统报错<br>php系统提供了一种用户处理错误的机制：用户自定义错误处理函数，然后将该函数增加到系统错误处理的句柄中，然后系统会在碰到错误之后，使用用户定义的错误函数。</li>
+<li>如何将用户定义的函数放到系统中？set_error_handler()</li>
+<li>自定义错误处理函数，系统有要求<br><img src="/2019/01/29/PHP基础06-错误处理相关/自定义错误.png" alt=""></li>
+</ol>
+<p>代码实现:</p>
+<ol>
+<li>自定义错误函数，注意参数<br><img src="/2019/01/29/PHP基础06-错误处理相关/代码1.png" alt=""><br>2.注册自定义函数，修改错误处理机制<br><img src="/2019/01/29/PHP基础06-错误处理相关/代码2.png" alt=""></li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -391,14 +799,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-29 13:05:27 / Updated at: 15:16:50" itemprop="dateCreated datePublished" datetime="2019-01-29T13:05:27+08:00">2019-01-29</time>
+              <time title="Post creato: 2019-01-29 13:05:27 / Post modificato: 15:16:50" itemprop="dateCreated datePublished" datetime="2019-01-29T13:05:27+08:00">2019-01-29</time>
             
 
             
@@ -417,7 +825,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -617,14 +1025,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-27 20:05:03" itemprop="dateCreated datePublished" datetime="2019-01-27T20:05:03+08:00">2019-01-27</time>
+              <time title="Post creato: 2019-01-27 20:05:03" itemprop="dateCreated datePublished" datetime="2019-01-27T20:05:03+08:00">2019-01-27</time>
             
 
             
@@ -641,7 +1049,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-01-28 14:45:15" itemprop="dateModified" datetime="2019-01-28T14:45:15+08:00">2019-01-28</time>
+                <time title="Post modificato: 2019-01-28 14:45:15" itemprop="dateModified" datetime="2019-01-28T14:45:15+08:00">2019-01-28</time>
               
             
           </span>
@@ -655,7 +1063,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -801,14 +1209,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-27 17:19:53 / Updated at: 19:35:52" itemprop="dateCreated datePublished" datetime="2019-01-27T17:19:53+08:00">2019-01-27</time>
+              <time title="Post creato: 2019-01-27 17:19:53 / Post modificato: 19:35:52" itemprop="dateCreated datePublished" datetime="2019-01-27T17:19:53+08:00">2019-01-27</time>
             
 
             
@@ -827,7 +1235,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -991,14 +1399,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-26 20:21:39" itemprop="dateCreated datePublished" datetime="2019-01-26T20:21:39+08:00">2019-01-26</time>
+              <time title="Post creato: 2019-01-26 20:21:39" itemprop="dateCreated datePublished" datetime="2019-01-26T20:21:39+08:00">2019-01-26</time>
             
 
             
@@ -1015,7 +1423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-01-27 15:55:02" itemprop="dateModified" datetime="2019-01-27T15:55:02+08:00">2019-01-27</time>
+                <time title="Post modificato: 2019-01-27 15:55:02" itemprop="dateModified" datetime="2019-01-27T15:55:02+08:00">2019-01-27</time>
               
             
           </span>
@@ -1029,7 +1437,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -1175,7 +1583,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/26/markdown/" class="post-title-link" itemprop="url">Unbenannt</a>
+                <a href="/2019/01/26/markdown/" class="post-title-link" itemprop="url">Senza titolo</a>
               
             
           </h1>
@@ -1193,14 +1601,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-26 19:35:59" itemprop="dateCreated datePublished" datetime="2019-01-26T19:35:59+08:00">2019-01-26</time>
+              <time title="Post creato: 2019-01-26 19:35:59" itemprop="dateCreated datePublished" datetime="2019-01-26T19:35:59+08:00">2019-01-26</time>
             
 
             
@@ -2416,14 +2824,14 @@ categories: markdown</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-26 15:42:18 / Updated at: 20:19:46" itemprop="dateCreated datePublished" datetime="2019-01-26T15:42:18+08:00">2019-01-26</time>
+              <time title="Post creato: 2019-01-26 15:42:18 / Post modificato: 20:19:46" itemprop="dateCreated datePublished" datetime="2019-01-26T15:42:18+08:00">2019-01-26</time>
             
 
             
@@ -2442,7 +2850,7 @@ categories: markdown</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/PHP基础/" itemprop="url" rel="index"><span itemprop="name">PHP基础</span></a></span>
@@ -2595,14 +3003,14 @@ categories: markdown</p>
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-01-26 14:20:00" itemprop="dateCreated datePublished" datetime="2019-01-26T14:20:00+08:00">2019-01-26</time>
+              <time title="Post creato: 2019-01-26 14:20:00" itemprop="dateCreated datePublished" datetime="2019-01-26T14:20:00+08:00">2019-01-26</time>
             
 
             
@@ -2619,7 +3027,7 @@ categories: markdown</p>
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-21 16:54:18" itemprop="dateModified" datetime="2019-02-21T16:54:18+08:00">2019-02-21</time>
+                <time title="Post modificato: 2019-02-21 16:54:18" itemprop="dateModified" datetime="2019-02-21T16:54:18+08:00">2019-02-21</time>
               
             
           </span>
@@ -2633,7 +3041,7 @@ categories: markdown</p>
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a></span>
@@ -2781,8 +3189,8 @@ categories: markdown</p>
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">87</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">89</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -2819,7 +3227,7 @@ categories: markdown</p>
                       
                     
                     <span class="site-state-item-count">12</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categorie</span>
                   </a>
                 </div>
               
@@ -2871,7 +3279,7 @@ categories: markdown</p>
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -2879,7 +3287,7 @@ categories: markdown</p>
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 

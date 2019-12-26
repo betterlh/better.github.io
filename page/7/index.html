@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Informazioni su</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorie</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivi</a>
 
   </li>
         
@@ -301,7 +301,7 @@
 
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Programma</a>
 
   </li>
 
@@ -337,6 +337,384 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/03/mysql15-表关系/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/03/mysql15-表关系/" class="post-title-link" itemprop="url">mysql15-表关系</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-02-03 20:13:39" itemprop="dateCreated datePublished" datetime="2019-02-03T20:13:39+08:00">2019-02-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Post modificato: 2019-02-05 11:31:27" itemprop="dateModified" datetime="2019-02-05T11:31:27+08:00">2019-02-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>表关系</p>
+<p>表关系：表与表之间（实体）有什么样的关系，每种关系应该如何设计表结构</p>
+<h2 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h2><p>一张表中的一条记录与另外一张表中最多有一条明确的关系，通常，此设计方案保证两张表中使用相同的主键即可<br>表的使用过程中：常用的信息会经常去查询，而不常用的信息会偶尔才会用到</p>
+<p>解决方案：将两张表拆分，常见的放一张表，不常见的放一张表<br><img src="/2019/02/03/mysql15-表关系/1.png" alt=""> </p>
+<h2 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h2><p>一对多，通常也叫多对一的关系。通常一对多的关系设计的方案，在“多”关系的表中去维护一个字段，这个字段是“一”关系的主键</p>
+<p><img src="/2019/02/03/mysql15-表关系/2.png" alt=""> </p>
+<h2 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h2><p>多对多：一张表中的一条记录在另外一张表中可以匹配到多条记录，反过来也一样</p>
+<p>多对多的关系如果按照多对一的关系维护：就会出现一个字段中有多个其他表的主键，在访问的时候就会带来不便</p>
+<p>既然通过两张表自己增加字段解决问题，那么就通过第三表来解决。</p>
+<p>从中间设计一张表：维护两张表对应的联系，每一种联系都包含</p>
+<p>例如：师生关系</p>
+<ol>
+<li>一个老师教过多个班级的学生</li>
+<li>一个学生听过多个老师讲的课</li>
+</ol>
+<p><img src="/2019/02/03/mysql15-表关系/3.png" alt=""><br>多对多解决方案：增加一个中间表，让中间表与对应的其他表形成两个多对一的关系：多对一的解决方案是在“多”表中增加“一”表对应的主键字段</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/02/mysql14-类属性之唯一键/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/02/mysql14-类属性之唯一键/" class="post-title-link" itemprop="url">mysql14-类属性之唯一键</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-02-02 21:14:33" itemprop="dateCreated datePublished" datetime="2019-02-02T21:14:33+08:00">2019-02-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Post modificato: 2019-02-05 11:31:30" itemprop="dateModified" datetime="2019-02-05T11:31:30+08:00">2019-02-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="唯一键"><a href="#唯一键" class="headerlink" title="唯一键"></a>唯一键</h1><p>唯一键：uniqe key：用来保证对应的字段中的数据唯一的。<br>主键也可以用来保证字段数据唯一性，但是一张表只有一个主键。唯一键在一张表中可以有多个。</p>
+<ol>
+<li>唯一键在一张表中可以有多个</li>
+<li>唯一键允许字段数据为null，null可以有多个（null不参与比较）</li>
+</ol>
+<h2 id="创建唯一键"><a href="#创建唯一键" class="headerlink" title="创建唯一键"></a>创建唯一键</h2><p>创建唯一键与创建主键非常类似</p>
+<ol>
+<li>直接在表字段之后增加唯一键标识符：unique【key】<br><img src="/2019/02/02/mysql14-类属性之唯一键/创建1.png" alt=""> </li>
+<li>在所以的字段之后使用unique key（字段列表）；<br><img src="/2019/02/02/mysql14-类属性之唯一键/创建2.png" alt=""> </li>
+<li>在创建完表之后，也可以增加唯一键<br><img src="/2019/02/02/mysql14-类属性之唯一键/创建3.png" alt="">  </li>
+</ol>
+<h2 id="查看唯一键"><a href="#查看唯一键" class="headerlink" title="查看唯一键"></a>查看唯一键</h2><p>唯一键时属性，可以查看表结构来实现<br><img src="/2019/02/02/mysql14-类属性之唯一键/查看1.png" alt=""> </p>
+<p>唯一键效果：在不为空的情况下，不允许重复<br><img src="/2019/02/02/mysql14-类属性之唯一键/查看2.png" alt=""> </p>
+<pre><code>//id字段 触发自增长为1，2，3
+</code></pre><p><br><br>在查看表创建语句的时候会看到与主键不同的一点：会多出一个“名字”<br> <img src="/2019/02/02/mysql14-类属性之唯一键/查看3.png" alt=""> </p>
+<h2 id="删除唯一键"><a href="#删除唯一键" class="headerlink" title="删除唯一键"></a>删除唯一键</h2><p>一个表中允许存在多个唯一键，假设命令为主键一样：alter table 表名 drop unique key此时系统不知道删除哪一个唯一键，出错</p>
+<p>index关键字：索引，唯一键是索引的一种（提升查询效率）</p>
+<p>删除的基本语法：alter table 表名 drop index 唯一键名字<br><img src="/2019/02/02/mysql14-类属性之唯一键/删除.png" alt=""> </p>
+<p>//修改唯一键：删除后增加</p>
+<h2 id="复合唯一键"><a href="#复合唯一键" class="headerlink" title="复合唯一键"></a>复合唯一键</h2><p>唯一键与主键一样可以使用多个字段来共同保证唯一性：<br>一般主键都是单一字段（逻辑字段），而其他需要唯一性的内容都是由唯一键来处理</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -391,14 +769,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-02 21:14:21" itemprop="dateCreated datePublished" datetime="2019-02-02T21:14:21+08:00">2019-02-02</time>
+              <time title="Post creato: 2019-02-02 21:14:21" itemprop="dateCreated datePublished" datetime="2019-02-02T21:14:21+08:00">2019-02-02</time>
             
 
             
@@ -415,7 +793,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-25 10:40:45" itemprop="dateModified" datetime="2019-02-25T10:40:45+08:00">2019-02-25</time>
+                <time title="Post modificato: 2019-02-25 10:40:45" itemprop="dateModified" datetime="2019-02-25T10:40:45+08:00">2019-02-25</time>
               
             
           </span>
@@ -429,7 +807,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -584,14 +962,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-02 21:14:11 / Updated at: 21:38:24" itemprop="dateCreated datePublished" datetime="2019-02-02T21:14:11+08:00">2019-02-02</time>
+              <time title="Post creato: 2019-02-02 21:14:11 / Post modificato: 21:38:24" itemprop="dateCreated datePublished" datetime="2019-02-02T21:14:11+08:00">2019-02-02</time>
             
 
             
@@ -610,7 +988,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -759,14 +1137,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-02 21:13:49 / Updated at: 21:19:37" itemprop="dateCreated datePublished" datetime="2019-02-02T21:13:49+08:00">2019-02-02</time>
+              <time title="Post creato: 2019-02-02 21:13:49 / Post modificato: 21:19:37" itemprop="dateCreated datePublished" datetime="2019-02-02T21:13:49+08:00">2019-02-02</time>
             
 
             
@@ -785,7 +1163,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -929,14 +1307,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-02 17:16:14 / Updated at: 17:18:44" itemprop="dateCreated datePublished" datetime="2019-02-02T17:16:14+08:00">2019-02-02</time>
+              <time title="Post creato: 2019-02-02 17:16:14 / Post modificato: 17:18:44" itemprop="dateCreated datePublished" datetime="2019-02-02T17:16:14+08:00">2019-02-02</time>
             
 
             
@@ -955,7 +1333,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1099,14 +1477,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-02 16:17:16 / Updated at: 16:44:20" itemprop="dateCreated datePublished" datetime="2019-02-02T16:17:16+08:00">2019-02-02</time>
+              <time title="Post creato: 2019-02-02 16:17:16 / Post modificato: 16:44:20" itemprop="dateCreated datePublished" datetime="2019-02-02T16:17:16+08:00">2019-02-02</time>
             
 
             
@@ -1125,7 +1503,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1293,14 +1671,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 20:40:58" itemprop="dateCreated datePublished" datetime="2019-02-01T20:40:58+08:00">2019-02-01</time>
+              <time title="Post creato: 2019-02-01 20:40:58" itemprop="dateCreated datePublished" datetime="2019-02-01T20:40:58+08:00">2019-02-01</time>
             
 
             
@@ -1317,7 +1695,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-02-05 11:34:39" itemprop="dateModified" datetime="2019-02-05T11:34:39+08:00">2019-02-05</time>
+                <time title="Post modificato: 2019-02-05 11:34:39" itemprop="dateModified" datetime="2019-02-05T11:34:39+08:00">2019-02-05</time>
               
             
           </span>
@@ -1331,7 +1709,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1484,14 +1862,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 17:26:09 / Updated at: 20:00:55" itemprop="dateCreated datePublished" datetime="2019-02-01T17:26:09+08:00">2019-02-01</time>
+              <time title="Post creato: 2019-02-01 17:26:09 / Post modificato: 20:00:55" itemprop="dateCreated datePublished" datetime="2019-02-01T17:26:09+08:00">2019-02-01</time>
             
 
             
@@ -1510,7 +1888,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1670,14 +2048,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-02-01 17:25:33 / Updated at: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
+              <time title="Post creato: 2019-02-01 17:25:33 / Post modificato: 19:51:39" itemprop="dateCreated datePublished" datetime="2019-02-01T17:25:33+08:00">2019-02-01</time>
             
 
             
@@ -1696,7 +2074,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
@@ -1797,359 +2175,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql05-字符集及其设置/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/01/mysql05-字符集及其设置/" class="post-title-link" itemprop="url">mysql05-字符集及其设置</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-01 14:53:36 / Updated at: 15:06:56" itemprop="dateCreated datePublished" datetime="2019-02-01T14:53:36+08:00">2019-02-01</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h1><h2 id="字符编码概念"><a href="#字符编码概念" class="headerlink" title="字符编码概念"></a>字符编码概念</h2><p>字符是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。<br>在计算机中所看到的任何内容都是字符构成的。<br>字符编码是计算机针对各种符号，在计算机中的一种二进制存储代号</p>
-<h2 id="字符集概念"><a href="#字符集概念" class="headerlink" title="字符集概念"></a>字符集概念</h2><p>字符(Character)是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等。字符集(Character set)是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同，常见字符集名称：<strong>ASCII字符集</strong>、<strong>GB2312字符集</strong>、BIG5字符集、 GB18030字符集、<strong>Unicode字符集</strong>等。计算机要准确的处理各种字符集文字，就需要进行字符编码，以便计算机能够识别和存储各种文字。中文文字数目大，而且还分为简体中文和繁体中文两种不同书写规则的文字，而计算机最初是按英语单字节字符设计的，因此，对中文字符进行编码，是中文信息交流的技术基础。</p>
-<h2 id="设置客户端所有字符集"><a href="#设置客户端所有字符集" class="headerlink" title="设置客户端所有字符集"></a>设置客户端所有字符集</h2><p>如果直接通过cmd下的mysql.exe进行中文数据插入，那么可能会出错<br><img src="/2019/02/01/mysql05-字符集及其设置/1.png" alt=""></p>
-<h3 id="出错原因-："><a href="#出错原因-：" class="headerlink" title="出错原因 ："></a>出错原因 ：</h3><ol>
-<li>用户是通过mysql.exe来操作mysqld.exe</li>
-<li>真正的sql执行是mysqld.exe来执行</li>
-<li>mysql.exe将数据传入mysqld.exe的时候，没有告知其对应的符号规则（字符集），而mysql也没有能力自己判断，就会使用自己默认的（字符集）<br><br></li>
-</ol>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>mysql.exe客户端在进行数据操作之前将自己所使用的字符集告诉mysqld<br>cmd下的mysql.exe默认都只有一个字符集：GBK<br><img src="/2019/02/01/mysql05-字符集及其设置/2.png" alt=""><br>mysql如何告知mysql.exe对应的字符集类型为gbk？<br>快捷方式：set name 字符集<br>让mysql.exe告知mysqld.exe自己的字符集规则<br><img src="/2019/02/01/mysql05-字符集及其设置/3.png" alt=""></p>
-<p>重新进行数据插入：中文（GBK）<br><img src="/2019/02/01/mysql05-字符集及其设置/4.png" alt=""><br><br></p>
-<h3 id="深层原理：客户端，服务器，连接层"><a href="#深层原理：客户端，服务器，连接层" class="headerlink" title="深层原理：客户端，服务器，连接层"></a>深层原理：客户端，服务器，连接层</h3><p>mysql.exe与mysqld.exe之间的处理关系一共分为三层<br>客户端传入数据给服务器：client:character_set_client<br>服务器返回数据给客户端：server:character_set_results<br>客户端与服务器之间的连接：connection: character_set_connection</p>
-<p>set names字符集的本质就是一次性打通三层关系的字符集，变得一致</p>
-<p>在系统中有三个变量来记录着这三个关系对应的字符集：<br>show variable like ‘char actor_set%’<br><img src="/2019/02/01/mysql05-字符集及其设置/5.png" alt=""><br>查看一个新的客户端的对应的字符集关系<br><img src="/2019/02/01/mysql05-字符集及其设置/6.png" alt=""><br>对比如图</p>
-<p>修改服务器端变量的值<br>set 变量名=值<br><img src="/2019/02/01/mysql05-字符集及其设置/7.png" alt=""><br><br><br>我们可以发现插入可以完成，输出时乱码<br><img src="/2019/02/01/mysql05-字符集及其设置/8.png" alt=""><br><br><br>此时，修改结果字符集为gdk<br><img src="/2019/02/01/mysql05-字符集及其设置/9.png" alt=""><br>发现已经能正确识别中文<br><br><br>connection只是为了更方便客户端进行字符集转换而设</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><div style="font-size: 20px;text-align: center;">总结</div></h3><p>set names gbk<br>等价于<br>set character_set_client = gbk   //为了让服务器识别客户端发来的数据<br>set character_set_connection = gbk   //更好的帮助客户端与服务端之间进行字符集转换<br>set character_set_results= gbk      //为了告诉客户端服务器所有的返回的数据字符集</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/02/01/mysql04-数据操作/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/01/mysql04-数据操作/" class="post-title-link" itemprop="url">mysql04-数据操作</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-02-01 12:49:56" itemprop="dateCreated datePublished" datetime="2019-02-01T12:49:56+08:00">2019-02-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-02-22 16:19:56" itemprop="dateModified" datetime="2019-02-22T16:19:56+08:00">2019-02-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h1><h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><h3 id="本质含义：将数据以SQL的形式，存储到指定的数据表（字段）里面"><a href="#本质含义：将数据以SQL的形式，存储到指定的数据表（字段）里面" class="headerlink" title="本质含义：将数据以SQL的形式，存储到指定的数据表（字段）里面"></a>本质含义：将数据以SQL的形式，存储到指定的数据表（字段）里面</h3><h3 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h3><p>基本语法：<br>insert into 表名[(字段列表) ]values(对应字段列表)<br><img src="/2019/02/01/mysql04-数据操作/插入操作.png" alt=""><br><br></p>
-<p>注意：</p>
-<p>1.后面（values中）对应的值列表只需要与前面的字段列表相对应即可（不一定与表结构完全一致）<br><img src="/2019/02/01/mysql04-数据操作/插入操作2.png" alt=""><br>2.字段列表不一定非要由所有的表中字段<br><img src="/2019/02/01/mysql04-数据操作/插入操作3.png" alt=""><br><br><br>以上两点说明：只要前后对应好就可以了</p>
-<h3 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h3><p>基本语法： 向表中所有字段插入数据  //此时值列表必须与字段列表一致<br>insert into 表名 values（对应表结构）<br><img src="/2019/02/01/mysql04-数据操作/插入操作4.png" alt=""></p>
-<h2 id="查询操作"><a href="#查询操作" class="headerlink" title="查询操作"></a>查询操作</h2><p>查询表中全部数据：select * from 表名；   //<em>表示匹配所有字段<br><img src="/2019/02/01/mysql04-数据操作/查询.png" alt=""><br>查询表中部分字段： select字段列表 from 表名；  //字段列表使用逗号“，”隔开<br><img src="/2019/02/01/mysql04-数据操作/查询2.png" alt=""><br>简单条件查询数据 select 字段列表/</em> from 表名 where 字段名=值<br>//MySQL中没有==符号表示相等<br><img src="/2019/02/01/mysql04-数据操作/查询3.png" alt=""></p>
-<h2 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h2><p>基本语法：delete from 表名 【where 条件】；<br>如果没有where条件，会自动删除该表所有数据（慎用）<br><img src="/2019/02/01/mysql04-数据操作/删除.png" alt=""></p>
-<h2 id="更新操作"><a href="#更新操作" class="headerlink" title="更新操作"></a>更新操作</h2><p>更新：将数据进行修改（通常是修改部分字段数据）<br>基本语法：update 表名 set字段名 =新值【where 条件】<br>如果没有where条件，那么所有的表中对应的那个字段都会被修改成统一值</p>
-<p><img src="/2019/02/01/mysql04-数据操作/更新.png" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2197,8 +2222,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">87</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">89</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -2235,7 +2260,7 @@
                       
                     
                     <span class="site-state-item-count">12</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categorie</span>
                   </a>
                 </div>
               
@@ -2287,7 +2312,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -2295,7 +2320,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 

